@@ -1,5 +1,7 @@
 package spring.bao.mapper;
 
-public interface dealIf {
+import spring.bao.beans.RequestBean;
 
+public interface dealIf {
+	public int isBidder(RequestBean request);
 }

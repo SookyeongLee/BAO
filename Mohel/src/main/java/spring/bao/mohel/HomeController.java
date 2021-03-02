@@ -134,6 +134,7 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav = bid.entrance();
+		System.out.println();
 		return mav;
 	}
 	

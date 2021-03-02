@@ -1,13 +1,10 @@
 package spring.bao.beans;
 
+import lombok.Data;
+
+@Data
 public class RequestBean {
 	private String sCode;
-	public String getsCode() {
-		return sCode;
-	}
-	public void setsCode(String sCode) {
-		this.sCode = sCode;
-	}
 	private String rqCode;
 	private String rqId;
 	private String rqTitle;
