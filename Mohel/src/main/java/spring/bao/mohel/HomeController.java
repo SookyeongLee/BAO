@@ -71,7 +71,7 @@ public class HomeController {
 	//	System.out.println(request.getRequestURI().substring(1));
 		
 	//	mav = auth.entrance();
-		mav.setViewName("join");
+		mav.setViewName("main");
 		return mav;
 	}
 	
