@@ -70,7 +70,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 	//	System.out.println(request.getRequestURI().substring(1));
 		
-		mav = auth.entrance();
+	//	mav = auth.entrance();
+		mav.setViewName("join");
 		return mav;
 	}
 	
