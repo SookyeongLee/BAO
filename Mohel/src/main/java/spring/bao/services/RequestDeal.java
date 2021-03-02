@@ -1,22 +1,23 @@
 package spring.bao.services;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.RequestBean;
+
 @Service
 public class RequestDeal {
 
 	public RequestDeal() {}
-	@Autowired
-	private HttpServletRequest request;
+	
 
-	public ModelAndView entrance() {
+	public ModelAndView entrance(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 		
-		switch(request.getRequestURI().substring(1)) {
+		switch(request.getsCode()) {
 		
 		case "DealForm":
 			this.dealFormCtl();

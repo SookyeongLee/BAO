@@ -1,6 +1,13 @@
 package spring.bao.beans;
 
 public class RequestBean {
+	private String sCode;
+	public String getsCode() {
+		return sCode;
+	}
+	public void setsCode(String sCode) {
+		this.sCode = sCode;
+	}
 	private String rqCode;
 	private String rqId;
 	private String rqTitle;
@@ -13,6 +20,4 @@ public class RequestBean {
 	private String rqDeadLine;
 	private String rqDate;
 	private String rqStatus;
-	private String rdCode;
-	private String rdComment;
 }

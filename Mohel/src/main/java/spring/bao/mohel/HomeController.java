@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.MemberBean;
+import spring.bao.beans.RequestBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -51,6 +52,8 @@ public class HomeController {
 	private RequestDeal rqd;
 	@Autowired
 	private Messages msg;
+	
+	ModelAndView mav = null;
 
 
 	/**
@@ -99,10 +102,10 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/delete"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView RequestDeal() {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView RequestDeal(@ModelAttribute RequestBean request ) {
 		
-		mav = rqd.entrance();
+		
+		mav = rqd.entrance(request);
 		return mav;
 	}
 	
