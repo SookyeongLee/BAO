@@ -1,5 +1,6 @@
 package spring.bao.mohel;
 
+import java.security.MessageDigestSpi;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -20,6 +21,7 @@ import spring.bao.beans.MemberBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
+import spring.bao.services.Messages;
 import spring.bao.services.Profiles;
 import spring.bao.services.RequestDeal;
 import spring.bao.services.Review;
@@ -47,6 +49,8 @@ public class HomeController {
 	private Bid bid;
 	@Autowired
 	private RequestDeal rqd;
+	@Autowired
+	private Messages msg;
 
 
 	/**
@@ -127,6 +131,15 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav = bid.entrance();
+		return mav;
+	}
+	
+	@RequestMapping(value = {"/RecBox","/Profile","/Title","/SendBox","/Reply","/Send"},
+			method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView Messages() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav = msg.entrance();
 		return mav;
 	}
 

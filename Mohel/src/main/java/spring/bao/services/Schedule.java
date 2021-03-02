@@ -69,7 +69,7 @@ public class Schedule {
 	
 	private ModelAndView updateScheduleCtl() {
 		ModelAndView mav = new ModelAndView();
-		
+//		this.updateSchedule();
 		return mav;		
 	}
 	
