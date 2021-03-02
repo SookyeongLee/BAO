@@ -90,7 +90,7 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/MyDeal","/Detail","/Waiting","/Ing","/End","/Search","/Filter"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Deal() {
+	public ModelAndView Deal( ) {
 		ModelAndView mav = new ModelAndView();
 		
 		mav = deal.entrance();
