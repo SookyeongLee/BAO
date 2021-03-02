@@ -16,5 +16,5 @@ public class RequestBean {
 	private String rqSubName;
 	private String rqDeadLine;
 	private String rqDate;
-	private String rqStatus;
+	private String rqStcode;
 }

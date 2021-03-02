@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.mapper.dealIf;
 import spring.bao.beans.RequestBean;
 
 
@@ -15,6 +16,8 @@ public class RequestDeal {
 
 	@Autowired
 	private PlatformTransactionManager tran;
+	@Autowired
+	private dealIf dealIf;
 	
 	public RequestDeal() {}
 	
@@ -25,54 +28,55 @@ public class RequestDeal {
 		switch(request.getSCode()) {
 		
 		case "DealForm":
-			this.dealFormCtl();
+			this.dealFormCtl(request);
 			break;
 		case "ReqSend":
-			this.reqSendCtl();
+			this.reqSendCtl(request);
 			break;
 		case "ModifyForm":
-			this.modifyFormCtl();
+			this.modifyFormCtl(request);
 			break;
 		case "Modify":
-			this.modifyCtl();
+			this.modifyCtl(request);
 			break; 
 		case "Delete":
-			this.deleteCtl();
+			this.deleteCtl(request);
 			break;
 		}
 		return mav;
 	}
 
-	private ModelAndView deleteCtl() {
+	private ModelAndView deleteCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 //		this.deleteReqDetail();
 		System.out.println();
 		return mav;
 	}
 	
-	private ModelAndView modifyCtl() {
+	private ModelAndView modifyCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 //		this.updateReqDetail();
 		return mav;
 	}
 	
-	private ModelAndView modifyFormCtl() {
+	private ModelAndView modifyFormCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
-//		if(this.isBidder()) {
-//			
-//		}else {
-//			this.getReqDetail();
-//		}
+		if(this.isBidder(request)) {
+			
+			mav.setViewName("Request");
+		}else {
+			this.getReqDetail(request);
+}
 		return mav;
 	}
 	
-	private ModelAndView reqSendCtl() {
+	private ModelAndView reqSendCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 //		this.insReqSend();
 		return mav;
 	}
 	
-	private ModelAndView dealFormCtl() {
+	private ModelAndView dealFormCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 		
 		
@@ -80,4 +84,22 @@ public class RequestDeal {
 		
 		return mav;
 	}	
+	private boolean convetToBoolean(int data) {
+		return data == 1 ? true : false;
+	}
+	private boolean isBidder(RequestBean request) {
+		return this.convetToBoolean(dealIf.isBidder(request));
+	}
+	private RequestBean getReqDetail(RequestBean request) {
+		return dealIf.getReqDetail(request);
+	}
+	private boolean insReqSend(RequestBean request) {
+		return this.convetToBoolean(dealIf.insReqSend(request));
+	}
+	private boolean updateReqDetail(RequestBean request) {
+		return this.convetToBoolean(dealIf.updateReqDetail(request));
+	}
+	private boolean deleteReqDetail(RequestBean request) {
+		return this.convetToBoolean(dealIf.deleteReqDetail(request));
+	}
 }

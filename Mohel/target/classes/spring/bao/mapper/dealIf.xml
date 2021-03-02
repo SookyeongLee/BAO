@@ -4,6 +4,16 @@
 
 <mapper namespace="spring.bao.mapper.dealIf">
 <select id="isBidder" resultType="int">
-		
+		SELECT COUNT(*) FROM BI WHERE BI_MMID = #{mId}
 	</select>
+	
+	<select id="insReqSend" resultType="int">
+		INSERT INTO RQ(RQ_CODE, RQ_MMID, RQ_TITLE, RQ_COMMENT, RQ_FILTERCODE, RQ_SUBCODE, RQ_PERIOD, RQ_SYSDATE, RQ_STCODE)
+		VALUES(#{rqCode},#{mId},#{rqTitle},#{rqCommnet},#{rqFilterCode},#{rqSubCode},#{rqPeriod},#{sysdate},#{rqStCode});
+	</select>
+	
+	<select id="getReqDetail" resultType="spring.bao.beans.RequestBean">
+		SELECT 
+	</select>
+	
 </mapper>
