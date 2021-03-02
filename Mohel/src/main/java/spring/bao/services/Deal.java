@@ -25,10 +25,10 @@ public class Deal {
 			this.detailCtl();
 			break;
 		case "Waiting":
-			this.waiting();
+			this.waitingCtl();
 			break;
 		case "Ing":
-			this.ing();
+			this.ingCtl();
 			break;
 		case "EndDate":
 			this.endCtl();
@@ -60,13 +60,13 @@ public class Deal {
 //		this.getEndList();
 		return mav;
 	}
-	private ModelAndView ing() {
+	private ModelAndView ingCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getIngList();
 		return mav;
 	}
 
-	private ModelAndView waiting() {
+	private ModelAndView waitingCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getWaitingList();
 		return mav;
