@@ -29,7 +29,7 @@ public class RequestDeal {
 			break;
 		case "Modify":
 			this.modifyCtl();
-			break;
+			break; 
 		case "Delete":
 			this.deleteCtl();
 			break;
@@ -40,6 +40,7 @@ public class RequestDeal {
 	private ModelAndView deleteCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.deleteReqDetail();
+		System.out.println();
 		return mav;
 	}
 	
