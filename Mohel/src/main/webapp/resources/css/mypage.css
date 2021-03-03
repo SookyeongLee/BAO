@@ -5,6 +5,7 @@
   --color-white: #ffffff;
   --color-dark-white: #e5e5e5;
   --color-light-grey: #bfbfbf;
+  --color-bright-grey: #7c7979;
   --color-blue: #0277bd;
   --color-skyblue: #93b4ee;
   --color-black: #000000;
@@ -37,6 +38,7 @@
 
 body {
   margin: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
@@ -61,6 +63,10 @@ input {
 }
 
 textarea {
+  outline: none;
+}
+
+select {
   outline: none;
 }
 /* Navbar */
@@ -127,6 +133,29 @@ textarea {
   margin-right: 30px;
 }
 
+.navbar-click {
+  position: relative;
+}
+/* .navbar-click:hover .navbar__list {
+  display: block;
+} */
+.navbar__list {
+  position: absolute;
+  width: 95px;
+  margin-top: 15px;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-dark-white);
+  /* display block해줘야 함 */
+  display: none;
+}
+.navbar__list__item {
+  padding: 8px 0;
+}
+.navbar__list__btn {
+  padding: 0;
+  font-weight: var(--weight-semi-bold);
+  font-size: var(--font-micro);
+}
 /* common */
 .mypage {
   max-width: var(--size-width-max);
@@ -289,3 +318,33 @@ textarea {
   border: 1px solid var(--color-light-grey);
   margin-top: 10px;
 }
+
+/* Request enrollment(거래등록) */
+.list-label {
+  margin: 30px 0 10px;
+  font-size: var(--font-micro);
+  font-weight: var(--weight-bold);
+}
+#list-region,
+#list-mainCtg,
+#list-subCtg,
+#request-term-start,
+#request-term-end {
+  width: 250px;
+  height: 25px;
+  border: 1px solid var(--color-light-grey);
+}
+#list-mainCtg {
+  margin-right: 12px;
+}
+#request-title {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--color-light-grey);
+}
+#request-comment {
+  width: 100%;
+  border: 1px solid var(--color-light-grey);
+}
+
+/* waiting-helper */
