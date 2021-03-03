@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.MemberBean;
+
 
 @Service
 public class Authentication {
@@ -17,23 +19,27 @@ public class Authentication {
 	
 	
 
-		public ModelAndView entrance() {
+		public ModelAndView entrance(MemberBean member) {
 			
-			ModelAndView mav = new ModelAndView();
+			ModelAndView mav = null;
 		//	System.out.println("들어옴"+request.getRequestURI().substring(1));
-			switch(request.getRequestURI().substring(1)) {
-			
+			switch(member.getSCode()) {
+				
+				case "":
+					mav = this.mainCtl();
+					break;
 				case "Main":
-					this.mainCtl();
+					System.out.println("하위");
+					mav = this.mainCtl();
 					break;
 				case "LoginForm":
-					this.loginFormCtl();
+					mav = this.loginFormCtl();
 					break;
 				case "Login":
 					this.loginCtl();
 					break;
 				case "JoinForm":
-					this.joinFormCtl();
+					mav = this.joinFormCtl();
 					break;
 				case "Join":
 					this.joinCtl();
@@ -42,6 +48,7 @@ public class Authentication {
 					this.logoutCtl();
 					break;
 			}
+			
 			return mav;
 		}
 	
@@ -69,7 +76,7 @@ public class Authentication {
 		private ModelAndView joinFormCtl() {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("joinFormCtl");
-			mav.setViewName("home");
+			mav.setViewName("join");
 			return mav;			
 		}
 		private ModelAndView loginCtl() {
@@ -89,15 +96,16 @@ public class Authentication {
 		private ModelAndView loginFormCtl() {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("loginFormCtl");
-			mav.setViewName("home");
+			mav.setViewName("login");
 			return mav;			
 		}
 
 		private ModelAndView mainCtl() {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("mainCtl");
+			
 		//	this.getRecentList();
-			mav.setViewName("home");
+			mav.setViewName("main");		
 			return mav;
 		}
 

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.MemberBean;
+
 @Service
 public class Profiles {
 	
@@ -13,7 +15,7 @@ public class Profiles {
 	@Autowired
 	private HttpServletRequest request;
 	
-	public ModelAndView entrance() {
+	public ModelAndView entrance(MemberBean member) {
 		
 	
 		ModelAndView mav = new ModelAndView();
@@ -21,7 +23,7 @@ public class Profiles {
 		switch(request.getRequestURI().substring(1)) {
 		
 		case "MyProfile":
-			this.myProfileCtl();
+			mav = this.myProfileCtl();
 			break;
 		case "ModifyProfile":
 			this.modifyProfileCtl();
@@ -61,8 +63,8 @@ public class Profiles {
 //		}else {
 //			//로그인창 이동  
 //		}
-		mav.setViewName("home");
-		return null;			
+		mav.setViewName("myProfile");
+		return mav;			
 	
 	}
 }

@@ -17,4 +17,5 @@ public class RequestBean {
 	private String rqDeadLine;
 	private String rqDate;
 	private String rqStcode;
+	private String rqRegion;
 }

@@ -52,6 +52,8 @@ public class HomeController {
 	private RequestDeal rqd;
 	@Autowired
 	private Messages msg;
+	@Autowired
+	private HttpServletRequest hsr;
 	
 	ModelAndView mav = null;
 
@@ -70,24 +72,25 @@ public class HomeController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout",
-			"/DealForm"},
+	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Auth() {
+		public ModelAndView Auth(@ModelAttribute MemberBean member) {
 		ModelAndView mav = new ModelAndView();
-	//	System.out.println(request.getRequestURI().substring(1));
+		member.setSCode(hsr.getRequestURI().substring(1));
 		
-	//	mav = auth.entrance();
-		mav.setViewName("join");
+		mav = auth.entrance(member);
+		
+		
+		
 		return mav;
 	}
 	
 	@RequestMapping(value = {"/MyProfile","/ModifyProfile","/UpdateProfile"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Profile() {
+	public ModelAndView Profile(@ModelAttribute MemberBean member) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav = pro.entrance();
+		member.setSCode(hsr.getRequestURI().substring(1));
+		mav = pro.entrance(member);
 		return mav;
 	}
 	
@@ -103,8 +106,9 @@ public class HomeController {
 	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/delete"},
 			method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView RequestDeal(@ModelAttribute RequestBean request ) {
-		
-		
+		ModelAndView mav = new ModelAndView();
+		request.setSCode(hsr.getRequestURI().substring(1));
+		System.out.println(hsr.getRequestURI().substring(1));
 		mav = rqd.entrance(request);
 		return mav;
 	}
