@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.MemberBean;
+import spring.bao.beans.MessageBean;
+import spring.bao.beans.ScheduleBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -51,7 +53,8 @@ public class HomeController {
 	private RequestDeal rqd;
 	@Autowired
 	private Messages msg;
-
+	@Autowired
+	private HttpServletRequest request;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -67,17 +70,18 @@ public class HomeController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout",
-			"/DealForm"},
+	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Auth() {
+	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
-	//	System.out.println(request.getRequestURI().substring(1));
 		
-	//	mav = auth.entrance();
-		mav.setViewName("join");
+	//	System.out.println(request.getRequestURI().substring(1));
+		 memberbean.setSCode(request.getRequestURI().substring(1));
+		System.out.println(request.getRequestURI().substring(1));
+		 mav = auth.entrance(memberbean);
 		return mav;
 	}
+	
 	
 	@RequestMapping(value = {"/MyProfile","/ModifyProfile","/UpdateProfile"},
 			method = {RequestMethod.GET,RequestMethod.POST})
@@ -109,14 +113,16 @@ public class HomeController {
 	@RequestMapping(value = {"/MovePro","/InsSchedule","/UpdateSchedule","/MoveUser",
 			"/AcceptSchedule","/RejectSchedule","/OkClick"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Schedule() {
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean schedulebean) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav = schedule.entrance();
+		 
+		schedulebean.setScCode(request.getRequestURI().substring(1));
+	
+		mav = schedule.entrance(schedulebean);
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/Review"},
+	@RequestMapping(value = {"/writeReviewForm" , "/Review" ,"showReview"},
 			method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView Review() {
 		ModelAndView mav = new ModelAndView();
@@ -131,13 +137,13 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav = bid.entrance();
-		System.out.println();
+		
 		return mav;
 	}
 	
 	@RequestMapping(value = {"/RecBox","/Profile","/Title","/SendBox","/Reply","/Send"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Messages() {
+	public ModelAndView Messages(@ModelAttribute MessageBean message) {
 		ModelAndView mav = new ModelAndView();
 		
 		mav = msg.entrance();

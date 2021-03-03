@@ -24,7 +24,7 @@
                 <input type="password" class="contents-pw" maxlength="16" placeholder="비밀번호" title="비밀번호 입력" required>
             </div>            
             <div class="contents__submit">
-                <button type="submit" class="contents__submit__click">로그인</button>
+                <button type="submit" class="contents__submit__click" id = "Login" onclick="login(this)">로그인</button>
             </div>
         </form>
         <div class="contents__line">
@@ -46,4 +46,15 @@
 </body>
 </html>
 </body>
+
+<script>
+function login(obj){
+alert(obj.id);
+var form = document.createElement("form");
+form.action = obj.id;
+form.method = "post";
+document.body.appendChild(form);
+form.submit();
+}
+</script>
 </html>

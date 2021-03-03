@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.MemberBean;
+
 
 @Service
 public class Authentication {
@@ -17,39 +19,42 @@ public class Authentication {
 	
 	
 
-		public ModelAndView entrance() {
+		public ModelAndView entrance(MemberBean memberbean) {
 			
 			ModelAndView mav = new ModelAndView();
-		//	System.out.println("들어옴"+request.getRequestURI().substring(1));
-			switch(request.getRequestURI().substring(1)) {
 			
+			switch(memberbean.getSCode()) {
+				
+				case "" : 
+					mav= this.mainCtl();
+					break;
 				case "Main":
-					this.mainCtl();
+					mav = this.mainCtl();
 					break;
 				case "LoginForm":
-					this.loginFormCtl();
+					mav = this.loginFormCtl();
 					break;
 				case "Login":
-					this.loginCtl();
+					mav = this.loginCtl();
 					break;
 				case "JoinForm":
-					this.joinFormCtl();
+					mav = this.joinFormCtl();
 					break;
 				case "Join":
-					this.joinCtl();
+					mav =this.joinCtl();
 					break;
 				case "Logout":
-					this.logoutCtl();
+					mav =this.logoutCtl();
 					break;
 			}
 			return mav;
 		}
 	
-		
+
 		private ModelAndView logoutCtl() {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("logoutCtl");
-			mav.setViewName("home");
+			mav.setViewName("main");
 //			if(this.isSession()) {
 //				this.insAccess()
 //			}
@@ -62,7 +67,7 @@ public class Authentication {
 //			if(this.isMember()) {
 //				this.insMember()
 //			}
-			mav.setViewName("home");
+			mav.setViewName("join");
 			return mav;			
 		}
 		
@@ -74,7 +79,7 @@ public class Authentication {
 		}
 		private ModelAndView loginCtl() {
 			ModelAndView mav = new ModelAndView();
-			System.out.println("loginCtl");
+			System.out.println("main");
 //			if(this.isSession()) {
 //				if(this.isMember()) {
 //					if(this.isAccess()) {
@@ -82,7 +87,7 @@ public class Authentication {
 //					}
 //				}
 //			}
-			mav.setViewName("home");
+			mav.setViewName("main");
 			return mav;			
 		}
 
@@ -95,9 +100,10 @@ public class Authentication {
 
 		private ModelAndView mainCtl() {
 			ModelAndView mav = new ModelAndView();
-			System.out.println("mainCtl");
+			System.out.println("asfdasdf");
 		//	this.getRecentList();
-			mav.setViewName("home");
+			mav.setViewName("main");
+			
 			return mav;
 		}
 

@@ -1,5 +1,8 @@
 package spring.bao.beans;
 
+import lombok.Data;
+
+@Data
 public class ScheduleBean {
 	private String scCode;
 	private String scHelper;

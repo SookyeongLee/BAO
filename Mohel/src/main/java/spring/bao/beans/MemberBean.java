@@ -1,6 +1,8 @@
 package spring.bao.beans;
 
+import lombok.Data;
 
+@Data
 public class MemberBean {
 	private String sCode;
 	private String mId;
