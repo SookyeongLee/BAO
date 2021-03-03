@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.MemberBean;
+import spring.bao.beans.RequestBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -51,6 +52,8 @@ public class HomeController {
 	private RequestDeal rqd;
 	@Autowired
 	private Messages msg;
+	@Autowired
+	private HttpServletRequest request;
 
 
 	/**
@@ -90,10 +93,10 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/MyDeal","/Detail","/Waiting","/Ing","/End","/Search","/Filter"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Deal( ) {
-		ModelAndView mav = new ModelAndView();
-		
-		mav = deal.entrance();
+	public ModelAndView Deal(@ModelAttribute RequestBean requestbean) {
+		ModelAndView mav;
+	    requestbean.setaCode(request.getRequestURI().substring(1));
+		mav = deal.entrance(requestbean);
 		return mav;
 	}
 	

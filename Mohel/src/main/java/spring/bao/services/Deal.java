@@ -1,43 +1,53 @@
 package spring.bao.services;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+
+import spring.bao.beans.RequestBean;
+import spring.bao.mohel.DealIf;
 
 @Service
 public class Deal {
 
 	public Deal() {}
+	
 	@Autowired
-	private HttpServletRequest request;
+	private DealIf mapper;
+	@Autowired
+	private PlatformTransactionManager tran;
+	@Autowired
+	private Gson gson;
 
-	public ModelAndView entrance() {
+	public ModelAndView entrance(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 		
-		switch(request.getRequestURI().substring(1)) {
+		switch(request.getaCode()) {
 		
 		case "MyDeal":
-			this.myDealCtl();
+			mav = this.myDealCtl();
 			break;
 		case "Detail":
-			this.detailCtl();
+			mav = this.detailCtl();
 			break;
 		case "Waiting":
-			this.waitingCtl();
+			mav = this.waitingCtl();
 			break;
 		case "Ing":
-			this.ingCtl();
+			mav = this.ingCtl();
 			break;
 		case "EndDate":
-			this.endCtl();
+			mav = this.endCtl();
 			break;
 		case "Search":
-			this.searchCtl();
+			mav = this.searchCtl();
 			break;
 		case "Filter":
-			this.filterCtl();
+			mav = this.filterCtl();
 			break;
 		}
 		return mav;
@@ -46,12 +56,14 @@ public class Deal {
 	private ModelAndView filterCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getFilterList();
+		mav.setViewName("main");
 		return mav;
 	}
 	
 	private ModelAndView searchCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getSearchList();
+		mav.setViewName("join");
 		return mav;
 	}
 	
@@ -77,13 +89,16 @@ public class Deal {
 	private ModelAndView detailCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getDetail();
+		
 		return mav;
 	}
 
 	private ModelAndView myDealCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getMyDealList();
+		mav.setViewName("join");
 		return mav;
+	
 	}
 	
 }
