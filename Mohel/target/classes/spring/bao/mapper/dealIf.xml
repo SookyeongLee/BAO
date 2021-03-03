@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="getReqDetail" resultType="spring.bao.beans.RequestBean">
-		SELECT * FROM MSRR
+		SELECT * FROM MSRR WHERE RQCODE = '5000210303092450'
 	</select>
 	
 </mapper>
