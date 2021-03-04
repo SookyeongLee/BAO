@@ -65,11 +65,13 @@ public class Authentication {
 		private ModelAndView logoutCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("logoutCtl");
-			mav.setViewName("main");
-//			if(this.isSession()) {
-//				this.insAccess()
-//			}
-			return mav;			
+			
+			//if(this.isSession()) {
+				this.insAccess(member);
+			
+				mav.setViewName("main");
+			
+				return mav;			
 		}
 		
 		private ModelAndView joinCtl(MemberBean member) {

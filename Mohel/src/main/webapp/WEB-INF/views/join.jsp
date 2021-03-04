@@ -20,8 +20,8 @@
     <section id="contents">
         <form action="Join" name="joinInfo" id="joinInfo" method="post">
             <div class="contents__join">
-                <input type="text" class="contents-id" maxlength="41" name="mName" placeholder="이름" title="이름 입력" required>
-                <input type="text" class="contents-id" maxlength="41" name="mId" placeholder="아이디" title="아이디 입력" required>
+                <input type="text" class="contents-id" maxlength="41" id="joinInfo" name="mId" placeholder="이름" title="이름 입력" required>
+                <input type="text" class="contents-id" maxlength="41" id="joinInfo" name="mName" placeholder="아이디" title="아이디 입력" required>
                 <input type="password" class="contents-pw" maxlength="16" name="mPw" placeholder="비밀번호" title="비밀번호 입력" required>
                 <input type="password" class="contents-pwck" maxlength="16" name= "mPwd" placeholder="비밀번호 재확인" title="비밀번호 재확인 입력" required>
             </div>            
@@ -40,7 +40,7 @@ function joinClick(){
 	var mId = document.getElementsByName('mId')[0];
 	var mName = document.getElementsByName('mName')[0];
 	var mPw = document.getElementsByName('mPw')[0];
-	alert(mId.value);
+	//alert(mId.value);
 	
 	
 	var form = document.createElement('form');
@@ -57,13 +57,15 @@ function joinClick(){
 }
 
 function pwCheck(){
-	var mPw = document.getElementsByName("mPw");
-	var mPwCopy = document.getElementByName("mPwd");
+	var mPw = document.getElementByName('mPw')[0];
+	var mPwCopy = document.getElementByName('mPwd');
+	
+	
 	
 	if(mPw.value != mPwCopy.value){
-		mPw.value="";
-		mPwCopy.value="";
-		mPw.placeholder = "비밀번호가 일치하지않습니다 다시입력해주세요";
+		mPw.value='';
+		mPwCopy.value='';
+		mPw.placeholder = '비밀번호가 일치하지않습니다 다시입력해주세요';
 		mpw.focus();
 	}
 }
