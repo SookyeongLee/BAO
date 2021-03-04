@@ -5,13 +5,16 @@
   --color-white: #ffffff;
   --color-dark-white: #e5e5e5;
   --color-light-grey: #bfbfbf;
+  --color-bright-grey: #7c7979;
+  --color-grey: #616161;
+  --color-dark-grey: #4d4d4d;
   --color-blue: #0277bd;
   --color-skyblue: #93b4ee;
   --color-black: #000000;
 
   /* Font size */
-  /* --font-large: 48px;
-    --font-medium: 28px; */
+  /* --font-large: 48px; */
+  /* --font-medium: 28px; */
   --font-regular: 18px;
   --font-small: 16px;
   --font-micro: 14px;
@@ -37,6 +40,7 @@
 
 body {
   margin: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
@@ -61,6 +65,10 @@ input {
 }
 
 textarea {
+  outline: none;
+}
+
+select {
   outline: none;
 }
 /* Navbar */
@@ -127,6 +135,29 @@ textarea {
   margin-right: 30px;
 }
 
+.navbar-click {
+  position: relative;
+}
+/* .navbar-click:hover .navbar__list {
+  display: block;
+} */
+.navbar__list {
+  position: absolute;
+  width: 95px;
+  margin-top: 15px;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-dark-white);
+  /* display block해줘야 함 */
+  display: none;
+}
+.navbar__list__item {
+  padding: 8px 0;
+}
+.navbar__list__btn {
+  padding: 0;
+  font-weight: var(--weight-semi-bold);
+  font-size: var(--font-micro);
+}
 /* common */
 .mypage {
   max-width: var(--size-width-max);
@@ -163,6 +194,7 @@ textarea {
   width: 78%;
   padding: 20px 20px;
   border-top: 1px solid var(--color-dark-white);
+  font-size: var(--font-micro);
 }
 .profile__input {
   border: 1px solid var(--color-light-grey);
@@ -288,4 +320,129 @@ textarea {
 #sendMsg-contents {
   border: 1px solid var(--color-light-grey);
   margin-top: 10px;
+}
+
+/* Request enrollment(거래등록) */
+.list-label {
+  margin: 30px 0 10px;
+  font-size: var(--font-micro);
+  font-weight: var(--weight-bold);
+}
+#list-region,
+#list-mainCtg,
+#list-subCtg,
+#request-term-start,
+#request-term-end {
+  width: 250px;
+  height: 25px;
+  border: 1px solid var(--color-light-grey);
+}
+#list-mainCtg {
+  margin-right: 12px;
+}
+#request-title {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--color-light-grey);
+}
+#request-comment {
+  width: 100%;
+  border: 1px solid var(--color-light-grey);
+}
+
+/* waiting-helper */
+.dealList__container {
+  display: flex;
+  padding-top: 31px;
+  padding-bottom: 124px;
+}
+.dealList__account {
+  margin: 0 40px 0 0;
+  width: 15%;
+  background-color: #f3f4f7;
+}
+.dealList__list__container {
+  width: 85%;
+  padding-top: 36px;
+}
+.dealList__account__member {
+  height: 64px;
+  text-align: center;
+}
+.dealList__account__member:hover {
+  background-color: var(--color-dark-white);
+}
+.dealList__account__btn {
+  font-size: var(--font-small);
+  font-weight: var(--weight-semi-bold);
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+.dealList__member {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-bold);
+  padding-left: 35px;
+}
+
+.dealList__list__item {
+  padding: 32px 0 32px 35px;
+  border-top: 1px solid var(--color-dark-white);
+  display: flex;
+}
+.list__item__img {
+  border-radius: var(--size-border-radius);
+  cursor: pointer;
+}
+.dealList__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 28px;
+}
+.dealList-term,
+.dealList-btn {
+  font-size: var(--font-micro);
+  margin-bottom: 8px;
+  color: #9e9e9e;
+}
+.dealList-subCtg {
+  font-size: var(--font-micro);
+  margin-bottom: 12px;
+}
+.dealList-title {
+  font-size: var(--font-small);
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.dealList-situation {
+  font-size: var(--font-micro);
+  padding-top: 12px;
+  border-top: 1px solid var(--color-dark-white);
+  font-weight: var(--weight-semi-bold);
+}
+.dealList-btn {
+  padding: 0;
+  font-weight: var(--weight-bold);
+}
+.dealList-btn:hover {
+  text-decoration: underline;
+}
+.dealList-uncontacted {
+  font-size: var(--font-micro);
+  margin-bottom: 8px;
+  color: #9e9e9e;
+  font-weight: var(--weight-semi-bold);
+}
+.dealList__list__item__more {
+  margin-left: 35px;
+  padding: 0;
+  height: 52px;
+  border: 1px solid var(--color-dark-white);
+  background-color: #efefef;
+}
+.dealList__more__btn {
+  font-size: var(--font-micro);
+  padding: 0;
+  width: 100%;
 }

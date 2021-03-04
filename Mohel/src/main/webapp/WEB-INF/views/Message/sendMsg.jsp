@@ -10,7 +10,8 @@
     <meta name="description" content="메시지 보내는 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/resources/css/mypage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/common.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -22,13 +23,13 @@
             <div class="navbar__right">
                 <div class="navbar__search">
                     <input type="text" name="search" id="search">
-                    <button class="search__btn">
+                    <button type="button" class="search__btn">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
                 <ul class="navbar__menu">
                     <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">거래등록</li>                    
+                    <li class="navbar__menu__item">경매등록</li>                    
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -38,14 +39,14 @@
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item"><a href="#">거래내역</a></li>                    
+            <li class="mypage__menu__item"><a href="#">경매내역</a></li>                    
             <li class="mypage__menu__item"><a href="#">메시지</a></li> 
         </ul>
     </nav> 
     <!-- Send Message -->
     <section class="sendMsg mypage">
         <h2 class="mypage__title">메시지 쓰기</h2>
-        <form name="" action="" method="POST">
+        <form name="sendInfo" id="sendInfo" action="Send" method="POST">
             <table class="sendMsg__info"> 
                 <tbody>
                     <tr class="sendMsg__list">
@@ -62,9 +63,9 @@
                 <textarea id="sendMsg-contents" name="sendMsg-contents" cols="139" rows="25"></textarea>            
             </div>
             <div class="mypage__bottom">
-                <button type="submit" class="mypage__btn">보내기</button>
+                <button type="button" class="mypage__btn">보내기</button>
             </div>
         </form>
-    </div>
+    </section>
 </body>
 </html>
