@@ -16,7 +16,6 @@ public class Schedule {
 	private HttpServletRequest request;
 	
 	public ModelAndView entrance(ScheduleBean schedulebean) {
-		
 		ModelAndView mav = new ModelAndView();
 		
 		switch(schedulebean.getScCode()) {

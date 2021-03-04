@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.bao.beans.MemberBean;
 import spring.bao.beans.MessageBean;
 import spring.bao.beans.ScheduleBean;
+import spring.bao.mapper.AuthenticationIF;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -70,14 +71,14 @@ public class HomeController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout"},
+	@RequestMapping(value = {"/","/Main","/LogInForm","/Login","/JoinForm","/Join","/Logout"},
 			method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
 		
 	//	System.out.println(request.getRequestURI().substring(1));
 		 memberbean.setSCode(request.getRequestURI().substring(1));
-		System.out.println(request.getRequestURI().substring(1));
+		
 		 mav = auth.entrance(memberbean);
 		return mav;
 	}
