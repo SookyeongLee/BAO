@@ -127,21 +127,21 @@
                 <h1 class="list__title">인기 경매</h1>
                 <ul class="list__items">
                     <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/main/delete.png">
+                        <img class="list__item__img" src="/resources/imgs/common/1000.jpg">
                         <div class="list__item__description">
                             <h4 class="list__item-mainCtg">외국어</h4>
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
                         </div>
                     </li>
                     <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/main/delete.png">
+                        <img class="list__item__img" src="/resources/imgs/common/2000.jpg">
                         <div class="list__item__description">
                             <h4 class="list__item-mainCtg">외국어</h4>
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
                         </div>
                     </li>
                     <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/main/delete.png">
+                        <img class="list__item__img" src="/resources/imgs/common/3000.jpg">
                         <div class="list__item__description">
                             <h4 class="list__item-mainCtg">외국어</h4>
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
@@ -150,21 +150,21 @@
                 </ul>
                 <ul class="list__items">
                     <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/main/delete.png">
+                        <img class="list__item__img" src="/resources/imgs/common/4000.jpg">
                         <div class="list__item__description">
                             <h4 class="list__item-mainCtg">외국어</h4>
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
                         </div>
                     </li>
                     <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/main/delete.png">
+                        <img class="list__item__img" src="/resources/imgs/common/5000.jpg">
                         <div class="list__item__description">
                             <h4 class="list__item-mainCtg">외국어</h4>
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
                         </div>
                     </li>
                     <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/main/delete.png">
+                        <img class="list__item__img" src="/resources/imgs/common/6000.jpg">
                         <div class="list__item__description">
                             <h4 class="list__item-mainCtg">외국어</h4>
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
