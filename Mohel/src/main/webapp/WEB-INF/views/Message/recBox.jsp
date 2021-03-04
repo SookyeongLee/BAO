@@ -29,7 +29,7 @@
                 </div>
                 <ul class="navbar__menu">
                     <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">경매등록</li>                    
+                    <li class="navbar__menu__item">역경매등록</li>                    
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -40,11 +40,11 @@
         <ul class="mypage__menu">
             <li class="mypage__menu__item"><a href="#">프로필</a></li>
             <li class="mypage__menu__item navbar-click">
-                <a href="#">경매내역</a>
+                <a href="#">거래상태</a>
                 <ul class="navbar__list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">경매진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">경매진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">경매완료</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">완료</button></li>
                 </ul>
             </li>                    
             <li class="mypage__menu__item navbar-click">

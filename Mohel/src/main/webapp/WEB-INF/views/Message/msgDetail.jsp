@@ -29,7 +29,7 @@
                 </div>
                 <ul class="navbar__menu">
                     <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">경매등록</li>                    
+                    <li class="navbar__menu__item">역경매등록</li>                    
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>

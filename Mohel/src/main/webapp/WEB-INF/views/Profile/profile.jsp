@@ -29,7 +29,7 @@
                 </div>
                 <ul class="navbar__menu">
                     <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">경매등록</li>                    
+                    <li class="navbar__menu__item">역경매등록</li>                    
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -39,7 +39,7 @@
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item"><a href="#">경매내역</a></li>                    
+            <li class="mypage__menu__item"><a href="#">거래상태</a></li>                    
             <li class="mypage__menu__item"><a href="#">메시지</a></li> 
         </ul>
     </nav>

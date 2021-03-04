@@ -21,7 +21,7 @@
         </div>
         <ul class="navbar__menu">
             <li class="navbar__menu__item">마이페이지</li>
-            <li class="navbar__menu__item">경매등록</li>                    
+            <li class="navbar__menu__item">역경매등록</li>                    
             <li class="navbar__menu__item">로그인</li>
         </ul>
     </nav>
@@ -74,7 +74,7 @@
         <div class="list">
             <!-- 최신순 -->
             <div class="list__container">
-                <h1 class="list__title">새로운 경매</h1>
+                <h1 class="list__title">새로운 역경매</h1>
                 <ul class="list__items">
                     <li class="list__item">
                         <img class="list__item__img" src="/resources/imgs/common/1000.jpg">
@@ -124,7 +124,7 @@
             </div>
             <!-- 인기순 -->
             <div class="list__container">
-                <h1 class="list__title">인기 경매</h1>
+                <h1 class="list__title">인기 역경매</h1>
                 <ul class="list__items">
                     <li class="list__item">
                         <img class="list__item__img" src="/resources/imgs/common/1000.jpg">
