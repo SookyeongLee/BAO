@@ -8,17 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 거래등록</title>
     <meta name="description" content="거래등록 페이지">
-    <link rel="icon" type="image/png" href="imgs/common/logo-m.png">
+    <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/mypage.css">
+    <link rel="stylesheet" href="/resources/css/common.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
             <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="imgs/common/logo-white.png"></a>
+                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
             </div>
             <div class="navbar__right">
                 <div class="navbar__search">
@@ -61,7 +61,7 @@
     <!-- Request enrollment -->
     <section class="request mypage">
         <h2 class="mypage__title">거래등록</h2>
-        <form name="" action="" method="POST">
+        <form name="reqSendInfo" id="reqSendInfo" action="ReqSend" method="POST">
             <ul>
                 <li class="request__list">
                     <div class="list-label"><label for="request-region">지역</label></div>
@@ -91,16 +91,16 @@
                 <li class="request__list">
                     <div class="list-label">분야</div>
                     <div class="list-value">
-                        <select name="list-mainCtg" id="list-mainCtg">
+                        <select name="rqFilterCode" id="list-mainCtg">
                             <option value="select">Select</option>
-                            <option value="lesson">레슨</option>
-                            <option value="living">홈/리빙</option>
-                            <option value="business">비즈니스</option>
-                            <option value="design">디자인</option>
-                            <option value="it">IT/프로그래밍</option>
-                            <option value="health">건강/미용</option>
+                            <option value="1000">레슨</option>
+                            <option value="2000">홈/리빙</option>
+                            <option value="3000">비즈니스</option>
+                            <option value="4000">디자인</option>
+                            <option value="5000">IT/프로그래밍</option>
+                            <option value="6000">건강/미용</option>
                         </select>
-                        <select name="list-subCtg" id="list-subCtg">
+                        <select name="rqSubCode" id="list-subCtg">
                             <option value="select">Select</option>
                             <option value="study">학업</option>
                             <option value="language">외국어</option>
@@ -137,4 +137,3 @@
     </section>
 </body>
 </html>
-    

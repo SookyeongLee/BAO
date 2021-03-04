@@ -8,17 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 로그인</title>
     <meta name="description" content="로그인 페이지">
-    <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
-    <link rel="stylesheet" href="/resources/css/account.css">
+    <link rel="icon" type="image/png" href="../../resources/imgs/common/logo-m.png">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../resources/css/account.css">
 </head>
 <body>
     <!-- Header -->
     <header id="head">
-        <a href="#"><img src="imgs/common/logo.png" class="head__logo" alt="logo image"></a>
+        <a href="#"><img src="../../resources/imgs/common/logo.png" class="head__logo" alt="logo image"></a>
     </header>
     <!-- Secion -->
     <section id="contents">
-        <form action="" method="post">
+        <form action="Login" method="post" name="loginInfo" id="loginInfo">
             <div class="contents__login">
                 <input type="text" class="contents-id" maxlength="41" placeholder="아이디" title="아이디 입력" required>
                 <input type="password" class="contents-pw" maxlength="16" placeholder="비밀번호" title="비밀번호 입력" required>
