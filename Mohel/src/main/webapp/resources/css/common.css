@@ -130,33 +130,41 @@ select {
   padding: 15px 0;
 }
 .mypage__menu__item {
-  font-size: var(--font-micro);
-  font-weight: var(--weight-semi-bold);
-  margin-right: 30px;
-}
-
-.navbar-click {
+  margin-right: 42px;
   position: relative;
 }
-/* .navbar-click:hover .navbar__list {
-  display: block;
-} */
+.mypage__menu__item button {
+  font-size: var(--font-micro);
+  padding: 0;
+}
 .navbar__list {
   position: absolute;
-  width: 95px;
   margin-top: 15px;
   background-color: var(--color-white);
-  border-top: 1px solid var(--color-dark-white);
-  /* display block해줘야 함 */
+  border: 1px solid var(--color-dark-white);
   display: none;
 }
+.deal-list {
+  width: 80px;
+}
+.message-list {
+  width: 120px;
+}
+.navbar__list.show {
+  display: block;
+  border-top: 4px solid var(--color-blue);
+}
 .navbar__list__item {
-  padding: 8px 0;
+  padding: 12px 8px;
 }
 .navbar__list__btn {
   padding: 0;
   font-weight: var(--weight-semi-bold);
   font-size: var(--font-micro);
+  width: 100%;
+}
+.navbar__list__btn:hover {
+  text-decoration: underline;
 }
 /* common */
 .mypage {
