@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.MemberBean;
+
 
 @Service
 public class Authentication {
@@ -17,29 +19,33 @@ public class Authentication {
 	
 	
 
-		public ModelAndView entrance() {
+		public ModelAndView entrance(MemberBean memberbean) {
 			
 			ModelAndView mav = new ModelAndView();
 		//	System.out.println("들어옴"+request.getRequestURI().substring(1));
 			switch(request.getRequestURI().substring(1)) {
-			
+					case  "":
+					mav = this.mainCtl();
+					System.out.println("ddd");
+					break;
 				case "Main":
-					this.mainCtl();
+					mav = this.mainCtl();
+					System.out.println();
 					break;
 				case "LoginForm":
-					this.loginFormCtl();
+					mav = this.loginFormCtl();
 					break;
 				case "Login":
-					this.loginCtl();
+					mav = this.loginCtl();
 					break;
 				case "JoinForm":
-					this.joinFormCtl();
+					mav = this.joinFormCtl();
 					break;
 				case "Join":
-					this.joinCtl();
+					mav = this.joinCtl();
 					break;
 				case "Logout":
-					this.logoutCtl();
+					mav = this.logoutCtl();
 					break;
 			}
 			return mav;
@@ -97,8 +103,9 @@ public class Authentication {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("mainCtl");
 		//	this.getRecentList();
-			mav.setViewName("home");
+			mav.setViewName("main");
+			System.out.println("왜안들어가냐 여기까지 왔는데도");
 			return mav;
 		}
-
+		
 }

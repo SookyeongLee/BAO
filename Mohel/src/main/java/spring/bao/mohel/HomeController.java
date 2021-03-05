@@ -1,17 +1,11 @@
 package spring.bao.mohel;
 
-import java.security.MessageDigestSpi;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,6 +45,8 @@ public class HomeController {
 	private RequestDeal rqd;
 	@Autowired
 	private Messages msg;
+	@Autowired
+	private HttpServletRequest request;
 
 
 	/**
@@ -67,24 +63,26 @@ public class HomeController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout",
-			"/DealForm"},
+	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout","/DealForm"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Auth() {
+	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
-	//	System.out.println(request.getRequestURI().substring(1));
-		
+	//	System.out.println(request.getRequestURI().substring(1));		
 	//	mav = auth.entrance();
-		mav.setViewName("join");
+	//	memberbean.setSCode(request.getRequestURI().substring(1));
+	//	mav = auth.entrance(memberbean);
+		mav.setViewName("main");
 		return mav;
 	}
 	
 	@RequestMapping(value = {"/MyProfile","/ModifyProfile","/UpdateProfile"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Profile() {
+	public ModelAndView Profile(@ModelAttribute MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav = pro.entrance();
+		memberbean.setMId("PPP");
+		memberbean.setSCode(request.getRequestURI().substring(1));
+		mav = pro.entrance(memberbean);
 		return mav;
 	}
 	

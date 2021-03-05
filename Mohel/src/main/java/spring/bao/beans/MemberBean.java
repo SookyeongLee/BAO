@@ -1,5 +1,8 @@
 package spring.bao.beans;
 
+import lombok.Data;
+
+@Data
 
 public class MemberBean {
 	private String sCode;
@@ -7,10 +10,14 @@ public class MemberBean {
 	private String mName;
 	private String mPw;
 	private String mEmail;
-	private String mCarrer;
+	private String mCareer;
 	private String mDivision;
 	private String mStatus;
 	private String mAccess;
 	private String mRegionCode;
 	private String mRegionName;
+	
+	
+	//추가
+	private String mRcName;
 }

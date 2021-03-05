@@ -19,8 +19,8 @@
 		<bean id="BAO" class="com.zaxxer.hikari.HikariConfig">
 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 			<property name="jdbcUrl" value="jdbc:oracle:thin:@db.bao.hoonzzang.com:7041:xe"/>
-			<property name="username" value="user"/>
-			<property name="password" value="pw"/>
+			<property name="username" value="BAO"/>
+			<property name="password" value="1234"/>
 		</bean>
 	
 	<!-- DBCP 정보 -->
@@ -40,7 +40,7 @@
 		</bean>
 		
 	<!-- mybatis base-package 정보 -->
-		<mybatis-spring:scan base-package="icia.kotlin.mapper"/>
+		<mybatis-spring:scan base-package="spring.bao.mapper"/>
 		<!-- 인터페이가 있는 패키지를 경로로 잡아줘야 한다. -->
 		<!-- 이부분은 매퍼 생성시 패키지이름 재설정  하면됨 -->
 		
