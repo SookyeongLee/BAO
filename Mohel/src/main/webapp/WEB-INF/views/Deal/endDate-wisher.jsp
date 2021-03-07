@@ -74,7 +74,7 @@
                     <li class="dealList__list__item">
                         <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/2000.jpg"></div>
                         <ul class="dealList__description">
-                            <li><button type="button" class="dealList-btn dealList-writeReview">리뷰쓰기</button></li>
+                            <li><button type="button" class="dealList-btn dealList-writeReview">리뷰작성</button></li>
                             <li class="dealList-subCtg">인테리어</li>
                             <li class="dealList-title">거실 인테리어 요청</li>
                         </ul>

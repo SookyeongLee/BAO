@@ -68,8 +68,8 @@
                 </tr>
             </table>
         </div>
-    <!-- Review -->
     </section>
+    <!-- Review -->
     <section class="profile__review">
         <div class="profile__review__container">
             <div class="review__score">
@@ -86,106 +86,6 @@
                 </div>
             </div>
             <ul class="review__list">
-                <li class="review__item">
-                    <div class="review__comments">
-                        <div class="review__comments__text">
-                            목적에 맞는 로고가 나왔어요. 수정사항들도 계속 반영해주셨어요. 너무 감사합니다.
-                        </div>
-                    </div>
-                    <div class="review__info">
-                        <div class="review__info__item">
-                            <span class="review-id">soo</span>
-                            <span class="review-date">2021.03.02</span>
-                        </div>
-                        <div class="review__info__item">
-                            <ul class="review-percent">
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="review__info__item">
-                            <div class="review-subCtg">제품 디자인</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="review__item">
-                    <div class="review__comments">
-                        <div class="review__comments__text">
-                            목적에 맞는 로고가 나왔어요. 수정사항들도 계속 반영해주셨어요. 너무 감사합니다.
-                        </div>
-                    </div>
-                    <div class="review__info">
-                        <div class="review__info__item">
-                            <span class="review-id">soo</span>
-                            <span class="review-date">2021.03.02</span>
-                        </div>
-                        <div class="review__info__item">
-                            <ul class="review-percent">
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="review__info__item">
-                            <div class="review-subCtg">제품 디자인</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="review__item">
-                    <div class="review__comments">
-                        <div class="review__comments__text">
-                            목적에 맞는 로고가 나왔어요. 수정사항들도 계속 반영해주셨어요. 너무 감사합니다.
-                        </div>
-                    </div>
-                    <div class="review__info">
-                        <div class="review__info__item">
-                            <span class="review-id">soo</span>
-                            <span class="review-date">2021.03.02</span>
-                        </div>
-                        <div class="review__info__item">
-                            <ul class="review-percent">
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="far fa-star"></i></li>
-                                <li class="review-star"><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="review__info__item">
-                            <div class="review-subCtg">제품 디자인</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="review__item">
-                    <div class="review__comments">
-                        <div class="review__comments__text">
-                            목적에 맞는 로고가 나왔어요. 수정사항들도 계속 반영해주셨어요. 너무 감사합니다.
-                        </div>
-                    </div>
-                    <div class="review__info">
-                        <div class="review__info__item">
-                            <span class="review-id">soo</span>
-                            <span class="review-date">2021.03.02</span>
-                        </div>
-                        <div class="review__info__item">
-                            <ul class="review-percent">
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                                <li class="review-star"><i class="fas fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="review__info__item">
-                            <div class="review-subCtg">제품 디자인</div>
-                        </div>
-                    </div>
-                </li>
                 <li class="review__item">
                     <div class="review__comments">
                         <div class="review__comments__text">
