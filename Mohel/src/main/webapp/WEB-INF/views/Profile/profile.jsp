@@ -9,7 +9,7 @@
     <title>모헬: 모두의 헬퍼 - 프로필</title>
     <meta name="description" content="프로필 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
-    <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/301043e4a8.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
     <script src="/resources/src/main.js" defer></script>
@@ -64,39 +64,37 @@
     <section class="profile mypage">
         <div class="profile__container">
             <h2 class="mypage__title profile__h2">프로필</h2>
-            <form name="modifyProfileInfo" id="modifyProfileInfo" action="ModifyProfile" method="POST">
-                <table class="profile__info"> 
-                    <tr class="profile__list">
-                        <th class="profile__title">아이디</th>
-                        <td class="profile__contents">soo</td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title">E-mail</th>
-                        <td class="profile__contents">mohel@naver.com</td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title">사는곳</th>
-                        <td class="profile__contents">인천광역시 미추홀구 매소홀로488번길 6-32 태승빌딩 5층</td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title">소속</th>
-                        <td class="profile__contents">YBM 회화 강사</td>
-                    <tr/>
-                    <tr class="profile__list">
-                        <th class="profile__title">경력</th>
-                        <td class="profile__contents">
-                            - GQ Korea 프리랜서 번역가<br>
-                            - Pagoda One 전임 회화 강사<br>
-                            - 인터파크 Paedea Plus<br>
-                            - 크몽 튜터 1년차
-                        <td/>
-                    </tr>
-                </table>
-                <div class="mypage__bottom">
-                    <button type="button" class="mypage__btn">수정하기</button>
-                </div>
-            </form>
+            <table class="profile__info"> 
+                <tr class="profile__list">
+                    <th class="profile__title">아이디</th>
+                    <td class="profile__contents">soo</td>
+                </tr>
+                <tr class="profile__list">
+                    <th class="profile__title">E-mail</th>
+                    <td class="profile__contents">mohel@naver.com</td>
+                </tr>
+                <tr class="profile__list">
+                    <th class="profile__title">사는곳</th>
+                    <td class="profile__contents">인천광역시 미추홀구 매소홀로488번길 6-32 태승빌딩 5층</td>
+                </tr>
+                <tr class="profile__list">
+                    <th class="profile__title">소속</th>
+                    <td class="profile__contents">YBM 회화 강사</td>
+                </tr>
+                <tr class="profile__list">
+                    <th class="profile__title">경력</th>
+                    <td class="profile__contents">
+                        - GQ Korea 프리랜서 번역가<br>
+                        - Pagoda One 전임 회화 강사<br>
+                        - 인터파크 Paedea Plus<br>
+                        - 크몽 튜터 1년차
+                    </td>
+                </tr>
+            </table>
+            <div class="mypage__bottom">
+                <button type="button" class="mypage__btn">수정하기</button>
+            </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>

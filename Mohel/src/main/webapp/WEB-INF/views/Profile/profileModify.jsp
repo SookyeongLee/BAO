@@ -104,6 +104,6 @@
                 </div>
             </form>
         </div>
-    </div>
+    </section>
 </body>
 </html>
