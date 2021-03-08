@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ScheduleBean {
+	private String sCode;
 	private String scCode;
 	private String scHelper;
 	private String scStep;

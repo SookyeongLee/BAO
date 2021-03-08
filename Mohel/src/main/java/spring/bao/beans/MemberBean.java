@@ -11,7 +11,7 @@ public class MemberBean {
 	private String mEmail;
 	private String mCarrer;
 	private String mDivision;
-	private String mStatus;
+	private String mStCode;
 	private String mAccess;
 	private String mRegionCode;
 	private String mRegionName;

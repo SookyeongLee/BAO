@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="spring.bao.mapper.authenticationIf">
+	
+	<select id="isMember" resultType="Int">
+		SELECT COUNT(*) FROM MM WHERE MM_ID = #{mId}
+	</select>
+
+	<insert id ="insMember" >
+		INSERT INTO MM(MM_ID,MM_NAME,MM_PW,MM_EMAIL,MM_CAREER,MM_DIVISION) VALUES(#{mId},#{mName},#{mPw},'','','')
+	</insert>
+	
+	<select id="isAccess" resultType="Int">
+		SELECT COUNT(*) FROM MM WHERE MM_ID = #{mId} AND MM_PW = #{mPw}
+	</select>
+	
+	<insert id ="insAccess" >
+		INSERT INTO AL(AL_MMID, AL_STCODE, AL_ACCESS) VALUES(#{mId},#{mStCode},SYSDATE)
+	</insert>
+	
+	
+</mapper>

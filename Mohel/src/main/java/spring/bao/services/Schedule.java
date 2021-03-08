@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.ScheduleBean;
+
 @Service
 public class Schedule {
 	
@@ -13,10 +15,13 @@ public class Schedule {
 	@Autowired
 	private HttpServletRequest request;
 	
-	public ModelAndView entrance() {
-		switch(request.getRequestURI().substring(1)) {
+	public ModelAndView entrance(ScheduleBean sc) {
+		
+		ModelAndView mav = new ModelAndView();
+		switch(sc.getSCode()) {
 		case "MovePro":
-			this.moveProCtl();
+			System.out.println("hi");
+			mav = this.moveProCtl();
 			break;
 		case "InsSchedule":
 			this.insScheduleCtl();
@@ -37,7 +42,7 @@ public class Schedule {
 			this.okCtl();
 			break;
 		}
-		return null;
+		return mav;
 	}
 	private ModelAndView okCtl() {
 		ModelAndView mav = new ModelAndView();
@@ -82,6 +87,8 @@ public class Schedule {
 	private ModelAndView moveProCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getSchedule();
+		System.out.println("moveProCtl");
+		mav.setViewName("main");
 		return mav;
 	}
 	

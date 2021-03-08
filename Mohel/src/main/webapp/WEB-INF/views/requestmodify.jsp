@@ -12,8 +12,9 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/mypage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onLoad="zz()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -67,7 +68,7 @@
                     <div class="list-label"><label for="request-region">지역</label></div>
                     <div class="list-value">
                         <select name='rqRcCode'>
-                            <option value="select">Select</option>
+                            <option value="00">Select</option>
                             <option value="01">서울</option>
                             <option value="02">인천</option>
                             <option value="03">부산</option>
@@ -86,26 +87,20 @@
                             <option value="16">경남</option>
                             <option value="17">제주</option>
                         </select>
+                        <input type="hidden" id = "rqRccodez">
                     </div>
                 </li>
                 <li class="request__list">
                     <div class="list-label">분야</div>
                     <div class="list-value">
                    <form name=rqFilter method=post>
-                                          대분류: 
-                   <select name='rqFilterCode' onchange="change(this.selectedIndex);"  class=input >
-                     		<option value="select">선택</option>
-                            <option value="1000">레슨</option>
-                            <option value="2000">홈/리빙</option>
-                            <option value="3000">비즈니스</option>
-                            <option value="4000">디자인</option>
-                            <option value="5000">IT/프로그래밍</option>
-                            <option value="6000">건강/미용</option>
-                    </select>                                                  
-                                                  소분류: 
-                    <select name='rqSubName'  class=select>
-                       <option value=''>전체</option>
-                    </select>
+                                           
+                   	대분류:  <span id='rqFilterName' style="margin-right:130px;"></span>
+                     		
+                                                                   
+				소분류: 
+                    <span id='rqSubName'></span>
+                      
 </form> 
                     </div>
                 </li>
@@ -113,105 +108,144 @@
                     <div class="list-label">기간</div>
                     <div class="list-value">
                         <input type="date" id="request-term-start" name="rqPeriod">
+                        <input type="hidden" id="rqPeriodz">
                        
                     </div>
                 </li>
                 <li class="request__list">
                     <div class="list-label"><label for="request-title">제목</label></div>
                     <div class="list-value">
-                        <input type="text" name="rqTitle" id="request-title">
+                        <input type="text" name="rqTitle" id="rqTitle" style="width: 700px;">
                     </div>
                 </li>
                 <li class="request__list">
                     <div class="list-label"><label for="request-comment">내용을 적어주세요</label></div>
                     <div class="list-value">
-                        <textarea name="rqComment" id="request-comment" rows="15"></textarea>
+                      <textarea name="rqComment" id="rqComment"></textarea>
+                        
                     </div>
                 </li>
             </ul>
             <div class="mypage__bottom">
-                <button type="button" class="mypage__btn" onclick="zz()">전송하기</button>
+                <button type="button" class="mypage__btn" onclick="send()">전송하기</button>
+            	<button type="button" onclick="deletez()" class="mypage__btn">삭제하기</button>
             </div>
        
     </section>
-    ${rqd }
 </body>
 <script>
-	function send(){
-		
-		
-		let optV = document.getElementById("region").value;
-		
-		
-		alert(optV);
-		
-		
-			
-	      
-	       var form = document.createElement("form");
-	       
-	       form.action ="ReqSend";
-	       form.method ="post"
-	       
-	    
-	       
-	       document.body.appendChild(form);
+	function deletez(){
+		var form = document.createElement("form");
+        form.action="Delete";
+        form.post="post";
+        
+        document.body.appendChild(form);
 	       
 	       
 	       form.submit();
-	       
+	       alert("삭제가 완료되었습니다.");
 	}
-	
-	var cnt = new Array();
-    cnt[0] = new Array('선택해주세요');
-    cnt[1] = new Array('학업','외국어','음악','미술','스포츠','자격증');
-    cnt[2] = new Array('인테리어','이사','청소업체','야외시공','수리','가구');
-    cnt[3] = new Array('번역','통역','마케팅','컨설팅','문서','인쇄');
-    cnt[4] = new Array('일러스트 디자인','인쇄물 디자인','웹/모바일 디자인','제품디자인','공간디자인','브랜딩');
-    cnt[5] = new Array('게임','데이터베이스','웹사이트개발','모바일웹','AI개발','보안');
-    cnt[6] = new Array('영양/식단관리','심리상담','심리치료','헤어','메이크업','피부관리');
-    function change(add) {
-    select=document.rqFilter.rqSubName
-      /* 옵션메뉴삭제 */
-      for (i=select.length-1; i>=0; i--){
-   	   select.options[i] = null;
-        }
-      /* 옵션박스추가 */
-      for (i=0; i < cnt[add].length;i++){                     
-   	   select.options[i] = new Option(cnt[add][i], cnt[add][i]);
-        }         
-      
-    }
-    function zz(){
-   	    var rqFilterCode = document.getElementsByName("rqFilterCode")[0];
-        var rqSubName = document.getElementsByName("rqSubName")[0];
+	function send(){
+		
 		var rqRcCode = document.getElementsByName("rqRcCode")[0];
 		var rqPeriod = document.getElementsByName("rqPeriod")[0];
 		var rqTitle = document.getElementsByName("rqTitle")[0];
 		var rqComment = document.getElementsByName("rqComment")[0];
       
       
-        alert(rqFilterCode.value);
-        alert(rqSubName.value);
-        alert(rqRcCode.value);
-        alert(rqPeriod.value);
-        alert(rqTitle.value);
-        alert(rqComment.value);
+        
+       
+        var b = rqRcCode.value;
+        if(b == "00"){
+        	alert("지역을 선택해주세요");
+        	
+        }else{
+        	
         
         var form = document.createElement("form");
-        form.action="ReqSend";
+        form.action="Modify";
         form.post="post";
         
-        form.appendChild(rqFilterCode);
-        form.appendChild(rqSubName);
+        
         form.appendChild(rqRcCode);
         form.appendChild(rqPeriod);
         form.appendChild(rqTitle);
         form.appendChild(rqComment);
+        
         document.body.appendChild(form);
         
+        
         form.submit();
+        alert("수정이 완료되었습니다.")
+        } 
+	}
+	
+	
+    function dd(){
+    	var a = $("select[name=rqRcCode]").val();
+     	
+     	alert(a);
     }
+    
+    function zz(){
+   	 
+ 	let json = JSON.parse('${rqd}');
+ 	
+ 	
+ 	
+ 	
+ 	let rqTitle = json[0].rqTitle;
+ 	
+ 	
+ 	$('#rqTitle').val(rqTitle);
+ 	
+         
+//     $('input[name=rqTitle]').attr('value',getTitle.innerText);
+//------------------------------------------------------------------------------
+    let rqComment = json[0].rqComment;
+    
+    
+ 	$('#rqComment').append(rqComment);
+	
+//------------------------------------------------------------------------------
+	let getDate = document.getElementById("rqPeriodz"); 	
+    
+	let rqPeriod = document.createElement("hidden");
+	rqPeriod.textContent = json[0].rqPeriod;
+	getDate.appendChild(rqPeriod);
+	
+	$('input[name="rqPeriod"]').attr('value',getDate.innerText);
+	
+// let rqPeriod = json[0].rqPeriod;
+ 	
+//  	alert(rqPeriod);
+//  	$('#rqPeriod').append(rqPeriod);
+ 	
+//------------------------------------------------------------------------------
+// 	let getRegion = document.getElementById("rqRccodez"); 	
+    
+// 	let rqRccode = document.createElement("hidden");
+// 	rqRccode.textContent = json[0].rqRccode;
+// 	getRegion.appendChild(rqRccode);
+ 	
+	   
+// 	$('select[name="rqRccode"]').attr('value',getRegion.innerText);
+	
+	let rqFilterName = json[0].rqFilterName;
+	
+	
+ 	$('#rqFilterName').append(rqFilterName);
+	
+ 	let rqSubName = json[0].rqSubName;
+ 	
+ 	
+ 	$('#rqSubName').append(rqSubName);
+    
+ 	
+
+
+    }
+   
 </script>
 </html>
     

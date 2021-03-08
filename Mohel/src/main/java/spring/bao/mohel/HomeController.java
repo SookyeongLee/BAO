@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.BidBean;
 import spring.bao.beans.MemberBean;
 import spring.bao.beans.RequestBean;
+import spring.bao.beans.ScheduleBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -72,7 +74,7 @@ public class HomeController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout"},
+	@RequestMapping(value = {"/","/Main","/LogInForm","/Login","/JoinForm","/Join","/Logout"},
 			method = {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView Auth(@ModelAttribute MemberBean member) {
 		ModelAndView mav = new ModelAndView();
@@ -103,23 +105,24 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/delete"},
+	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/Delete"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView RequestDeal(@ModelAttribute RequestBean request ) {
+	public ModelAndView RequestDeal(@ModelAttribute RequestBean request, BidBean bid) {
 		ModelAndView mav = new ModelAndView();
 		request.setSCode(hsr.getRequestURI().substring(1));
 		System.out.println(hsr.getRequestURI().substring(1));
-		mav = rqd.entrance(request);
+		mav = rqd.entrance(request, bid);
 		return mav;
 	}
 	
 	@RequestMapping(value = {"/MovePro","/InsSchedule","/UpdateSchedule","/MoveUser",
 			"/AcceptSchedule","/RejectSchedule","/OkClick"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Schedule() {
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean sc) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav = schedule.entrance();
+		sc.setSCode(hsr.getRequestURI().substring(1));
+		System.out.println(hsr.getRequestURI().substring(1));
+		mav = schedule.entrance(sc);
 		return mav;
 	}
 	

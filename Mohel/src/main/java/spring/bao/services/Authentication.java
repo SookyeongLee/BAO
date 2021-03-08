@@ -4,9 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import spring.bao.beans.MemberBean;
+import spring.bao.mapper.authenticationIf;
 
 
 @Service
@@ -15,98 +21,145 @@ public class Authentication {
 	public Authentication() {}
 	@Autowired
 	private HttpServletRequest request;
-	
+	@Autowired
+	private authenticationIf mapper;
+	@Autowired
+	private PlatformTransactionManager tran;
+	@Autowired
+	private Gson gson;
 	
 	
 
-		public ModelAndView entrance(MemberBean member) {
+		public ModelAndView entrance(MemberBean memberbean) {
 			
-			ModelAndView mav = null;
-		//	System.out.println("들어옴"+request.getRequestURI().substring(1));
-			switch(member.getSCode()) {
+			ModelAndView mav = new ModelAndView();
+			
+			switch(memberbean.getSCode()) {
 				
-				case "":
-					mav = this.mainCtl();
+				case "" : 
+					mav= this.mainCtl(memberbean);
 					break;
 				case "Main":
-					System.out.println("하위");
-					mav = this.mainCtl();
+					mav = this.mainCtl(memberbean);
 					break;
-				case "LoginForm":
-					mav = this.loginFormCtl();
+				case "LogInForm":
+					mav = this.loginFormCtl(memberbean);
 					break;
 				case "Login":
-					this.loginCtl();
+					mav = this.loginCtl(memberbean);
 					break;
 				case "JoinForm":
-					mav = this.joinFormCtl();
+					mav = this.joinFormCtl(memberbean);
 					break;
 				case "Join":
-					this.joinCtl();
+					mav =this.joinCtl(memberbean);
 					break;
 				case "Logout":
-					this.logoutCtl();
+					mav =this.logoutCtl(memberbean);
 					break;
 			}
-			
 			return mav;
 		}
 	
-		
-		private ModelAndView logoutCtl() {
+
+		private ModelAndView logoutCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("logoutCtl");
-			mav.setViewName("home");
+			mav.setViewName("main");
 //			if(this.isSession()) {
 //				this.insAccess()
 //			}
 			return mav;			
 		}
 		
-		private ModelAndView joinCtl() {
+		private ModelAndView joinCtl(MemberBean member) {
+			TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
+			
 			ModelAndView mav = new ModelAndView();
-			System.out.println("joinCtl");
-//			if(this.isMember()) {
-//				this.insMember()
-//			}
-			mav.setViewName("home");
+			//System.out.println("joinCtl");
+			if(this.isMember(member)) {
+				mav.setViewName("login"); //로그인폼 화면 
+			}else {
+				this.insMember(member);
+				mav.setViewName("login");
+				tran.commit(status);
+				
+			}
+			
 			return mav;			
 		}
-		
-		private ModelAndView joinFormCtl() {
+	
+
+
+		private boolean convetToBoolean(int data) {
+			return data ==1 ? true : false;
+		}
+		private boolean insMember(MemberBean member) {
+			
+			return this.convetToBoolean(mapper.insMember(member));
+		}
+
+
+		private boolean isMember(MemberBean member) {
+			
+			return this.convetToBoolean(mapper.isMember(member));
+		}
+
+
+		private ModelAndView joinFormCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("joinFormCtl");
 			mav.setViewName("join");
 			return mav;			
 		}
-		private ModelAndView loginCtl() {
+		private ModelAndView loginCtl(MemberBean member) {
+			TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
+			
 			ModelAndView mav = new ModelAndView();
-			System.out.println("loginCtl");
-//			if(this.isSession()) {
-//				if(this.isMember()) {
-//					if(this.isAccess()) {
-//						this.insAccess()
-//					}
-//				}
-//			}
-			mav.setViewName("home");
+			System.out.println("main");
+
+				if(this.isMember(member)) {
+					if(this.isAccess(member)) {
+						member.setMStCode("1");
+						this.insAccess(member);
+						mav.setViewName("main");
+						tran.commit(status);
+					
+					}
+				}
 			return mav;			
 		}
 
-		private ModelAndView loginFormCtl() {
+		private boolean insAccess(MemberBean member) {
+			return this.convetToBoolean(mapper.insAccess(member));
+			
+		}
+
+
+		private boolean isAccess(MemberBean member) {
+			return this.convetToBoolean(mapper.isAccess(member));
+		}
+
+
+		private ModelAndView loginFormCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("loginFormCtl");
 			mav.setViewName("login");
 			return mav;			
 		}
 
-		private ModelAndView mainCtl() {
+		private ModelAndView mainCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
-			System.out.println("mainCtl");
+//			this.getRecentList();
+			Gson gson = new Gson();
+//			String jsonData = gson.toJson(mapper.getRecentList(member));
 			
-		//	this.getRecentList();
-			mav.setViewName("main");		
+			mav.setViewName("main");
+			
 			return mav;
 		}
 
+
+
 }
+	
