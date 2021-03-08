@@ -97,8 +97,6 @@
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
                         </div>
                     </li>
-                </ul>
-                <ul class="list__items">
                     <li class="list__item">
                         <img class="list__item__img" src="/resources/imgs/common/4000.jpg">
                         <div class="list__item__description">
@@ -147,8 +145,6 @@
                             <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
                         </div>
                     </li>
-                </ul>
-                <ul class="list__items">
                     <li class="list__item">
                         <img class="list__item__img" src="/resources/imgs/common/4000.jpg">
                         <div class="list__item__description">

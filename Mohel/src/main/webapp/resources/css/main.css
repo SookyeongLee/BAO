@@ -112,11 +112,12 @@ button {
 }
 .list__items {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .list__item {
-  width: 378px;
+  width: 372px;
   height: 280px;
+  margin-right: 18px;
 }
 .list__item__img {
   width: 100%;

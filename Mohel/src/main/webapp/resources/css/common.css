@@ -434,8 +434,7 @@ select {
 #list-region,
 #list-mainCtg,
 #list-subCtg,
-#request-term-start,
-#request-term-end {
+#request-term {
   width: 250px;
   height: 25px;
   border: 1px solid var(--color-light-grey);
@@ -445,7 +444,7 @@ select {
 }
 #request-title {
   width: 100%;
-  height: 40px;
+  height: 25px;
   border: 1px solid var(--color-light-grey);
 }
 #request-comment {
@@ -600,4 +599,94 @@ select {
 }
 .review__list__score-star .fas {
   cursor: default;
+}
+
+/* dealList */
+/* Request */
+.deal {
+  padding-bottom: 100px;
+}
+.deal__container {
+  display: flex;
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+.deal__img {
+  margin-right: 32px;
+}
+.deal-img {
+  border-radius: var(--size-border-radius);
+}
+.deal__info {
+  border-bottom: 1px solid var(--color-dark-white);
+}
+.deal__title {
+  width: 20%;
+  text-align: left;
+  padding: 20px;
+  border-top: 1px solid var(--color-dark-white);
+  border-right: 1px solid var(--color-dark-white);
+  font-size: var(--font-nano);
+  background-color: #f9f9f9;
+}
+.deal__contents {
+  width: 80%;
+  padding: 20px;
+  border-top: 1px solid var(--color-dark-white);
+  font-size: var(--font-micro);
+}
+.deal__button {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.deal__btn1,
+.deal__btn2 {
+  color: var(--color-white);
+  padding: 12px 45px;
+  font-size: var(--font-nano);
+  border-radius: var(--size-border-radius);
+}
+.deal__btn1 {
+  background-color: #b3a586;
+  margin-right: 32px;
+}
+.deal__btn2 {
+  background-color: var(--color-blue);
+}
+
+/* Bidding */
+.bidding {
+  width: 80%;
+  margin: auto;
+  border-top: 1px solid var(--color-black);
+}
+.bidding__title {
+  font-size: 20px;
+  font-weight: var(--weight-semi-bold);
+  margin-bottom: 20px;
+}
+.bidding__head {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid var(--color-dark-white);
+  padding: 16px;
+}
+.bidding__data {
+  border-bottom: 1px solid var(--color-dark-white);
+  text-align: center;
+  font-size: var(--font-micro);
+  padding: 10px;
+}
+.right {
+  border-right: 1px solid var(--color-dark-white);
+}
+.bidding__data__id {
+  font-size: var(--font-micro);
+}
+.bidding__data__choice {
+  font-size: var(--font-micro);
+  border: 1px solid var(--color-dark-white);
+  border-radius: var(--size-border-radius);
+  color: var(--color-blue);
+  padding: 4px 8px;
 }
