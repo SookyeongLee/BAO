@@ -82,7 +82,7 @@ public class RequestDeal {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		request.setRqId("DOYOUNG");
-		request.setRqCode("4000210305090309");
+		request.setRqCode("5000210305090319");
 		System.out.println(request.getRqRcCode());
 		System.out.println(request.getRqPeriod());
 		System.out.println(request.getRqTitle());
@@ -105,11 +105,7 @@ public class RequestDeal {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('수정을 실패하였습니다.'); </script>");
 			out.flush();
-			
-			String jsonData = gson.toJson(this.getReqDetail(request));
-			System.out.println("???"+jsonData);
-			mav.addObject("rqd", jsonData);        
-			
+
 			mav.setViewName("requestmodify");
 			
 		}
@@ -121,7 +117,7 @@ public class RequestDeal {
 		System.out.println("들어왔다");
 		bid.setBiHelper("JUN");
 		bid.setBiCode("4000220305090348");
-		request.setRqCode("4000210305090309");
+		request.setRqCode("5000210305090319");
 		request.setRqId("DOYOUNG");
 		if(this.isBidder(bid)) {
 			System.out.println("안돼~");

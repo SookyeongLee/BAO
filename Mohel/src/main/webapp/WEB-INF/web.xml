@@ -17,7 +17,7 @@
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
    </listener>
 
-<<<<<<< HEAD
+
    <!-- Processes application requests -->
    <!-- 서버 가동후 문제가 생긴다면 appServlet이 문제-->
    <servlet>
@@ -49,35 +49,7 @@
       <url-pattern>/*</url-pattern>
    </filter-mapping>
 </web-app>
-=======
-	<!-- Processes application requests -->
-	<servlet>
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+
+
 		
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	
-	<!-- CharcterSet Filter : UTF-8 -->
-   <filter>
-      <filter-name>encodeFilter</filter-name>
-      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-      <init-param>
-         <param-name>encoding</param-name>
-         <param-value>UTF-8</param-value>
-      </init-param>
-   </filter>
-   <filter-mapping>
-      <filter-name>encodeFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping>
-</web-app>
->>>>>>> refs/remotes/origin/DOYOUNG
+

@@ -81,15 +81,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		member.setSCode(hsr.getRequestURI().substring(1));
 		
-<<<<<<< HEAD
-		mav = auth.entrance(member);
-		
-		
-		
-=======
-	//	mav = auth.entrance();
-		mav.setViewName("Profile/profileClick");
->>>>>>> refs/remotes/origin/DOYOUNG
+	mav.setViewName("Profile/profileClick");
+
 		return mav;
 	}
 	
