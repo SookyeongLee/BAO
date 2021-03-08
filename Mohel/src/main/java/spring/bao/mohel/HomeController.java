@@ -1,5 +1,6 @@
 package spring.bao.mohel;
 
+import java.io.IOException;
 import java.security.MessageDigestSpi;
 import java.text.DateFormat;
 import java.util.Date;
@@ -107,7 +108,7 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/Delete"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView RequestDeal(@ModelAttribute RequestBean request, BidBean bid) {
+	public ModelAndView RequestDeal(@ModelAttribute RequestBean request, BidBean bid) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		request.setSCode(hsr.getRequestURI().substring(1));
 		System.out.println(hsr.getRequestURI().substring(1));

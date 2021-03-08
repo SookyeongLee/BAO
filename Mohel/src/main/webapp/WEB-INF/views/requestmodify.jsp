@@ -121,7 +121,7 @@
                 <li class="request__list">
                     <div class="list-label"><label for="request-comment">내용을 적어주세요</label></div>
                     <div class="list-value">
-                      <textarea name="rqComment" id="rqComment"></textarea>
+                      <textarea name="rqComment" id="rqComment" style="width:700px; height:130px;"></textarea>
                         
                     </div>
                 </li>
@@ -176,7 +176,7 @@
         
         
         form.submit();
-        alert("수정이 완료되었습니다.")
+        
         } 
 	}
 	
@@ -191,7 +191,7 @@
    	 
  	let json = JSON.parse('${rqd}');
  	
- 	
+ 	alert('${rqd}');
  	
  	
  	let rqTitle = json[0].rqTitle;

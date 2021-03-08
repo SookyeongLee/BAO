@@ -2,7 +2,11 @@ package spring.bao.services;
 
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +24,9 @@ import spring.bao.beans.RequestBean;
 
 @Service
 public class RequestDeal {
+	
 
+	
 	@Autowired
 	private PlatformTransactionManager tran;
 	@Autowired
@@ -28,9 +34,10 @@ public class RequestDeal {
 	@Autowired
 	private Gson gson;
 	public RequestDeal() {}
+	@Autowired
+	HttpServletResponse response;
 	
-	
-	public ModelAndView entrance(RequestBean request, BidBean bid) {
+	public ModelAndView entrance(RequestBean request, BidBean bid) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		
 		switch(request.getSCode()) {
@@ -57,7 +64,7 @@ public class RequestDeal {
 	private ModelAndView deleteCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-		request.setRqCode("3000210308040306");
+		request.setRqCode("4000210305090309");
 		request.setRqId("DOYOUNG");
 		if(this.deleteReqDetail(request)) {
 			System.out.println("삭제완료");
@@ -71,11 +78,11 @@ public class RequestDeal {
 		return mav;
 	}
 	// 요청글 수정
-	private ModelAndView modifyCtl(RequestBean request) {
+	private ModelAndView modifyCtl(RequestBean request) throws IOException  {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		request.setRqId("DOYOUNG");
-		request.setRqCode("3000210308040306");
+		request.setRqCode("4000210305090309");
 		System.out.println(request.getRqRcCode());
 		System.out.println(request.getRqPeriod());
 		System.out.println(request.getRqTitle());
@@ -84,12 +91,28 @@ public class RequestDeal {
 		if(this.updateReqDetail(request)){
 			System.out.println("수정 완료");
 			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('수정 완료하였습니다.'); </script>");
+			out.flush();
+			
 			mav.setViewName("main");
+			tran.commit(status);
 		}else {
 			System.out.println("수정 실패");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('수정을 실패하였습니다.'); </script>");
+			out.flush();
+			
+			String jsonData = gson.toJson(this.getReqDetail(request));
+			System.out.println("???"+jsonData);
+			mav.addObject("rqd", jsonData);        
+			
 			mav.setViewName("requestmodify");
+			
 		}
-		tran.commit(status);
 		return mav;
 	}
 	//수정 페이지 이동
@@ -98,7 +121,7 @@ public class RequestDeal {
 		System.out.println("들어왔다");
 		bid.setBiHelper("JUN");
 		bid.setBiCode("4000220305090348");
-		request.setRqCode("3000210308040306");
+		request.setRqCode("4000210305090309");
 		request.setRqId("DOYOUNG");
 		if(this.isBidder(bid)) {
 			System.out.println("안돼~");
@@ -261,6 +284,7 @@ public class RequestDeal {
 		return this.convetToBoolean(dealIf.isBidder(bid));
 	}
 	private ArrayList<RequestBean> getReqDetail(RequestBean request) {
+		System.out.println("Hi Detail");
 		return dealIf.getReqDetail(request);
 	}
 	private boolean insReqSend(RequestBean request) {
