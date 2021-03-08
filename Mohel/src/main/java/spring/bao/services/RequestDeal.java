@@ -57,11 +57,17 @@ public class RequestDeal {
 	private ModelAndView deleteCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-		request.setRqCode("5000210308030358");
+		request.setRqCode("1000210305010309");
 		request.setRqId("DOYOUNG");
-		this.deleteReqDetail(request);
-		tran.commit(status);
-		mav.setViewName("main");
+		if(this.deleteReqDetail(request)) {
+			System.out.println("삭제완료");
+			mav.setViewName("main");
+			tran.commit(status);
+		}else {
+			System.out.println("삭제 실패");
+			mav.setViewName("main");
+		}
+		
 		return mav;
 	}
 	// 요청글 수정
@@ -69,7 +75,7 @@ public class RequestDeal {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		request.setRqId("DOYOUNG");
-		request.setRqCode("1000210305010309");
+		request.setRqCode("2000210308040313");
 		System.out.println(request.getRqRcCode());
 		System.out.println(request.getRqPeriod());
 		System.out.println(request.getRqTitle());
@@ -77,13 +83,13 @@ public class RequestDeal {
 		
 		if(this.updateReqDetail(request)){
 			System.out.println("수정 완료");
-			tran.commit(status);
+			
 			mav.setViewName("main");
 		}else {
 			System.out.println("수정 실패");
 			mav.setViewName("requestmodify");
 		}
-		
+		tran.commit(status);
 		return mav;
 	}
 	//수정 페이지 이동
