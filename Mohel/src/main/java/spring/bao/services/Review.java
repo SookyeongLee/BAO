@@ -54,6 +54,7 @@ public class Review {
 			Gson gson = new Gson();
 			String jsonData = gson.toJson(this.getReview(rev));
 			System.out.println(jsonData);
+			//mav.addObject(jsonData,jsonData);
 				
 				
 			mav.setViewName("review");
