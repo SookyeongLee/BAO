@@ -20,7 +20,7 @@
         </div>
         <ul class="navbar__menu">
             <li class="navbar__menu__item">마이페이지</li>
-            <li class="navbar__menu__item">거래등록</li>                    
+            <li class="navbar__menu__item" onclick="dealForm()">거래등록</li>                    
             <li class="navbar__menu__item">로그인</li>
         </ul>
     </nav>
@@ -173,5 +173,20 @@
             </div>
         </div>        
     </section>
+    <script>
+    function dealForm(){
+    	 var form = document.createElement("form");
+	       
+	       form.action ="DealForm";
+	       form.method ="post"
+	       
+	    
+	       
+	       document.body.appendChild(form);
+	       
+	       
+	       form.submit();
+    }
+    </script>
 </body>
 </html>

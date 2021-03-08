@@ -57,7 +57,7 @@ public class RequestDeal {
 	private ModelAndView deleteCtl(RequestBean request) {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-		request.setRqCode("1000210305010309");
+		request.setRqCode("3000210308040306");
 		request.setRqId("DOYOUNG");
 		if(this.deleteReqDetail(request)) {
 			System.out.println("삭제완료");
@@ -75,7 +75,7 @@ public class RequestDeal {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		request.setRqId("DOYOUNG");
-		request.setRqCode("2000210308040313");
+		request.setRqCode("3000210308040306");
 		System.out.println(request.getRqRcCode());
 		System.out.println(request.getRqPeriod());
 		System.out.println(request.getRqTitle());
@@ -98,7 +98,7 @@ public class RequestDeal {
 		System.out.println("들어왔다");
 		bid.setBiHelper("JUN");
 		bid.setBiCode("4000220305090348");
-		request.setRqCode("1000210305010309");
+		request.setRqCode("3000210308040306");
 		request.setRqId("DOYOUNG");
 		if(this.isBidder(bid)) {
 			System.out.println("안돼~");
