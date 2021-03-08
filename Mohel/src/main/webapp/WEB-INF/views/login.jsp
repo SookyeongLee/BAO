@@ -32,6 +32,7 @@
         </div>
         <!-- sns login-->
         <div class="contents__sns">
+        	<a href="javascript:kakaoLogin();"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFQOJtNpYFKTS1T5QdhIDFFgLzQO93BuFjFw&usqp=CAU"></a>
             <div class="sns-naver"></div>
             <div class="sns-kakao"></div>
             <div class="sns-google"></div>
@@ -46,7 +47,8 @@
 </body>
 </html>
 </body>
-
+<!-- <a href="javascript:kakaoLogin();"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFQOJtNpYFKTS1T5QdhIDFFgLzQO93BuFjFw&usqp=CAU"></a> -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 
 function login(){
@@ -57,7 +59,7 @@ function login(){
 	
 	
 	var form = document.createElement('form');
-	form.action = 'Login';
+	form.action = 'Main';
 	form.method = 'post';
 	
 	form.appendChild(mId);
@@ -88,5 +90,25 @@ function join(){
 	form.submit();
 	
 }
+
+window.Kakao.init("4efa9804c7a6a6b23c3f03f63e44aa5b");
+
+function kakaoLogin() {
+	window.Kakao.Auth.login({
+	scope:'profile, account_email',
+	success: function(authObj){
+		console.log(authObj);
+		window.Kakao.API.request({
+			url:'/v2/user/me',
+			success : res => {
+				const kakao_account = res.kakao_account;
+				console.log(kakao_account);
+			}
+		});
+	}
+});
+}
+
+
 </script>
 </html>

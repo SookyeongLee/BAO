@@ -5,20 +5,38 @@
 <mapper namespace="spring.bao.mapper.AuthenticationIF">
 	
 	<select id="isMember" resultType="Int">
+	<![CDATA[
 		SELECT COUNT(*) FROM MM WHERE MM_ID = #{mId}
+	]]>
 	</select>
 
 	<insert id ="insMember" >
+	<![CDATA[
 		INSERT INTO MM(MM_ID,MM_NAME,MM_PW,MM_EMAIL,MM_CAREER,MM_DIVISION) VALUES(#{mId},#{mName},#{mPw},'','','')
+	]]>
 	</insert>
 	
 	<select id="isAccess" resultType="Int">
+	<![CDATA[
 		SELECT COUNT(*) FROM MM WHERE MM_ID = #{mId} AND MM_PW = #{mPw}
+	]]>
 	</select>
 	
 	<insert id ="insAccess" >
+	<![CDATA[
 		INSERT INTO AL(AL_MMID, AL_STCODE, AL_ACCESS) VALUES(#{mId},#{mStCode},SYSDATE)
+	]]>
 	</insert>
 	
+	
+	<select id="getRecentList" resultType="spring.bao.beans.RequestBean">
+	<![CDATA[
+		SELECT SG.SG_SUBNAME AS RQSUBNAME,
+		RQ.RQ_TITLE AS RQTITLE,
+		MG.MG_IMG AS RQIMAGE
+		FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
+       			INNER JOIN SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
+    ]]>
+	</select>
 	
 </mapper>

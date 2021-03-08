@@ -1,11 +1,19 @@
 package spring.bao.services;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
+import spring.bao.beans.ReviewBean;
+import spring.bao.mapper.ReviewIF;
 
 @Service
 public class Review {
@@ -14,48 +22,72 @@ public class Review {
 	
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private Gson gson;
+	@Autowired
+	private ReviewIF mapper;
 	
 	
-	public ModelAndView entrance() {
+	
+	public ModelAndView entrance(ReviewBean rev) {
 		ModelAndView mav = new ModelAndView();
-		switch(request.getRequestURI().substring(1)) {
+		switch(rev.getRvCode()) {
 		
 		case "writeReviewForm":
-			this.writeReviewFormCtl();
+			mav = this.writeReviewFormCtl();
 			break;
 		case "Review":
-			this.reviewCtl();
+			mav = this.reviewCtl(rev);
 			break;
 		case "showReview":
-			this.showReviewCtl();
+			mav = this.showReviewCtl(rev);
 			break;
 		
-		//mav = this.reviewCtl();
 		}
 			return mav;
 	}
 
-	private void showReviewCtl() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-	private void writeReviewFormCtl() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private ModelAndView reviewCtl() {
+	private ModelAndView showReviewCtl(ReviewBean rev) {
 		ModelAndView mav = new ModelAndView();
-//		if(this.isReview()) {
-//			this.getReview();
+		
+//		this.getReview()
+			Gson gson = new Gson();
+			String jsonData = gson.toJson(this.getReview(rev));
+			System.out.println(jsonData);
+				
+				
+			mav.setViewName("review");
+		
+		return mav;
+	}
+	
+
+
+
+	private ArrayList<ReviewBean> getReview(ReviewBean rev) {
+		return mapper.getReview(rev);
+	}
+
+	private ModelAndView writeReviewFormCtl() {
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("writeReviewFormCtl");
+		
+		mav.setViewName("review");
+		
+		return mav;
+		
+	}
+
+
+	private ModelAndView reviewCtl(ReviewBean rev) {
+		ModelAndView mav = new ModelAndView();
+//		if(this.isReview(rev)) {
+//			mav.setViewName("review");
+//			this.getReview(rev);
 //		}else {
 //			if(로그인 == ㄱ요청글쓴사람) {
-//				this.writeReviewForm();
+//				this.writeReviewForm(rev);
 //			}esle{
 //				//등록된 리뷰 없
 //			}

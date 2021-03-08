@@ -6,7 +6,7 @@ import lombok.Data;
 import spring.bao.beans.ScheduleBean;
 
 
-public interface ScheduleIf {
+public interface ScheduleIF {
 	
 	//public ArrayList<ScheduleBean> getSchedule(ScheduleBean sch);
 

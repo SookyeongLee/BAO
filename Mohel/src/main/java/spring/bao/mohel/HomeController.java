@@ -19,11 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.MemberBean;
 import spring.bao.beans.MessageBean;
+import spring.bao.beans.RequestBean;
+import spring.bao.beans.ReviewBean;
 import spring.bao.beans.ScheduleBean;
 import spring.bao.mapper.AuthenticationIF;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
+import spring.bao.services.Home;
 import spring.bao.services.Messages;
 import spring.bao.services.Profiles;
 import spring.bao.services.RequestDeal;
@@ -56,6 +59,8 @@ public class HomeController {
 	private Messages msg;
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private Home home;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -71,7 +76,7 @@ public class HomeController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value = {"/","/Main","/LogInForm","/Login","/JoinForm","/Join","/Logout"},
+	@RequestMapping(value = {"/LogInForm","/Login","/JoinForm","/Join","/Logout"},
 			method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
@@ -80,6 +85,18 @@ public class HomeController {
 		 memberbean.setSCode(request.getRequestURI().substring(1));
 		
 		 mav = auth.entrance(memberbean);
+		return mav;
+	}
+	
+	@RequestMapping(value = {"/","/Main"},
+			method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView Main(@ModelAttribute RequestBean req) {
+		ModelAndView mav = new ModelAndView();
+		
+	//	System.out.println(request.getRequestURI().substring(1));
+		 req.setRqCode(request.getRequestURI().substring(1));
+		
+		 mav = home.entrance(req);
 		return mav;
 	}
 	
@@ -125,10 +142,12 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/writeReviewForm" , "/Review" ,"showReview"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Review() {
+	public ModelAndView Review(@ModelAttribute ReviewBean rev) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav = review.entrance();
+		rev.setRvCode(request.getRequestURI().substring(1));
+		
+		mav = review.entrance(rev);
 		return mav;
 	}
 	
