@@ -53,20 +53,9 @@ public class Profiles {
 	private ModelAndView updateProfileCtl(MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-
-		System.out.println("updateProfileCtl");
-		
-		System.out.println(memberbean.getMId());
-		System.out.println(memberbean.getMEmail());
-		System.out.println(memberbean.getMDivision());
-		System.out.println(memberbean.getMRcCode());
-		System.out.println(memberbean.getMCareer());
-	
-		
 		
 		try {
 			if (this.updateProfile(memberbean)) {
-				System.out.println("업데이트 프로필1");
 					String json = gson.toJson(this.getProfile(memberbean));
 					mav.addObject("getProfile", json);
 					tran.commit(status);
@@ -81,12 +70,9 @@ public class Profiles {
 
 	private ModelAndView modifyProfileCtl(MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
-		// this.getProfile(memberbean); //myProfileCtl 세션 체크후 프로필 정보 가져오기 || //수정하기 누르면
-		// 프로필 정보 불러오면서 수정가능한 상태로 가능 이때 select update 두개가 있어야하는가 ?
 
 		String json = gson.toJson(this.getProfile(memberbean));
 		mav.addObject("getProfile", json);
-		System.out.println("ModifyCtl 진입  Json " + json);
 
 		mav.setViewName("Profile/profileModify");
 		return mav;
@@ -94,19 +80,15 @@ public class Profiles {
 	}
 
 	private ModelAndView myProfileCtl(MemberBean memberbean) {
-		System.out.println("진입");
+		
 		ModelAndView mav = new ModelAndView();
 		if(this.isRgNameCheck(memberbean)) {
 			String json = gson.toJson(this.getProfile(memberbean));
-			
 			mav.addObject("getProfile", json);
-			System.out.println("마이프로필1" + json);
 			mav.setViewName("Profile/profile");
 		}else {
 		String json = gson.toJson(this.getProfile(memberbean));
-		
 		mav.addObject("getProfile", json);
-		System.out.println("마이프로필2" + json);
 		mav.setViewName("Profile/profile");
 
 		// if(this.isSession) {

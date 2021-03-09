@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.BidBean;
 import spring.bao.beans.MemberBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
@@ -92,6 +93,7 @@ public class HomeController {
 	public ModelAndView Deal() {
 		ModelAndView mav = new ModelAndView();
 		
+		
 		mav = deal.entrance();
 		return mav;
 	}
@@ -126,11 +128,12 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Bid() {
+	public ModelAndView Bid(@ModelAttribute BidBean bidbean ) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav = bid.entrance();
-		System.out.println();
+		bidbean.setBidScode(request.getRequestURI().substring(1));
+		System.out.println(request.getRequestURI().substring(1));
+		mav = bid.entrance(bidbean);
 		return mav;
 	}
 	

@@ -80,21 +80,19 @@
             </form>
         </div>
     </section>
-    ${getProfile}
      <section id="pro"></section>
 </body>
 <script>
 function init(){
 	
-	alert('${getProfile}');
 	
 	let json = JSON.parse('${getProfile}');
 	
     
 
-    let proInfomId = document.getElementById("mId"); //영역 위에 id 이름 값       
+    let proInfomId = document.getElementById("mId"); 
     let mId = document.createElement('Div');              
-    mId.textContent = json[0].mId; //innerhtml이랑비슷 삽입하다     json0번째 mid값 mId에 넣겠ek
+    mId.textContent = json[0].mId;
     proInfomId.appendChild(mId);
     
     
@@ -123,25 +121,6 @@ function init(){
     mCareer.textContent = json[0].mCareer; 
     proInfomCareer.appendChild(mCareer);
     
-    
-    
-    
-    
-    
-//     let va = document.getElementById("mDivision");     
-//     $('input[name=division]').attr('value',va.innerText);//
-   
-//     let division = document.getElementsByName("division");    
-//     division.setAttribute = ("value","1234");
-     
-    
- 
-    
-    
-// 	$('.id').append(json[0].mId);   jquery 문
-// 	$('.email').append(json[0].mEmail);
-
-
 	
 }
 

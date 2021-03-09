@@ -111,18 +111,16 @@
                 </div>
             </form>
         </div>
-    ${getProfile}
 </body>
 <script>
 
 function init(){
 	
-	alert('${getProfile}');
 	let json = JSON.parse('${getProfile}');
 		
-    let proInfomId = document.getElementById("mId"); //영역 위에 id 이름 값       
+    let proInfomId = document.getElementById("mId"); 
     let mId = document.createElement('Div');              
-    mId.textContent = json[0].mId; //innerhtml이랑비슷 삽입하다     json0번째 mid값 mId에 넣겠ek    
+    mId.textContent = json[0].mId;  
     proInfomId.appendChild(mId);
     
     
@@ -143,11 +141,6 @@ function init(){
     mDivision.textContent = json[0].mDivision; 
     proInfomDivision.appendChild(mDivision);
    
-    
-//     let proInfomCareer = document.getElementById("mCareerz");
-//     let mCareer = document.createElement('Div');
-//     mCareer.textContent = json[0].mCareer; 
-//     proInfomCareer.appendChild(mCareer);
 
     let proInfommPw = document.getElementById("mPwz");
     let mPw = document.createElement('hidden');
@@ -167,7 +160,6 @@ function init(){
     let d = document.getElementById("mPwz");     
     $('input[name=mPw]').attr('value',d.innerText);
     
-   // alert(json[0].mCareer);
     
     let mCareer = json[0].mCareer;
     $('#mCareer').append(mCareer);
@@ -181,13 +173,11 @@ function UpdateProfile(){
 	let json = JSON.parse('${getProfile}');
 	
 	let jsonmPw = json[0].mPw;
-	alert(jsonmPw);
 	  let mPw =document.getElementsByName("mPw")[0];
 	  let mPw2 =document.getElementsByName("mPw2")[0];
 	  let mPw3 = document.getElementsByName("mPw")[0];
 	  let mPwC =document.getElementsByName("mPwC")[0];    	  
 	  let mEmail =document.getElementsByName("mEmail")[0]; 
-	  //let mRcName = document.getElementsByName("mRcName")[0];
 	  let mDivision = document.getElementsByName("mDivision")[0];
 	  let mCareer = document.getElementsByName("mCareer")[0];
 	  let mRcCode = document.getElementsByName("mRcCode")[0];
@@ -198,29 +188,29 @@ function UpdateProfile(){
   form.method ="POST"; 
   
    
-  //json 에서 넘어온 pw값이랑 mPw 밸류랑 비교 일치하면 mPw밸류랑 mPw2밸류ㅗ 비교 이거 성공하면 비번 업뎃 가능 안되면 else 에는 업뎃안된거ㅏㄹ로 간다  
   
   if(mPw.value == jsonmPw){
 	  if(mPw.value == mPw2.value){
-		  alert("비번 정상적으로 성공합니다");
-		//form.appendChild(mPw);
+  				alert("비밀번호 변경 완료");
 		  form.appendChild(mPwC);
 		  form.appendChild(mEmail);
-		  //form.appendChild(mRcName);
 		  form.appendChild(mDivision);
 		  form.appendChild(mCareer);
 		  form.appendChild(mRcCode);
 		  document.body.appendChild(form);
 		  form.submit();
-	  }	  
-	  alert("비번이 일치하지않거나 아무튼 틀립니다."); 
-  }else{ 
-	  alert("비번이 일치하지않거나 아무튼 틀립니다."); 
+	  }else {
+		  alert("기존비밀번호와 확인비밀번호가 일치하지 않습니다.");
+		  return form;
+	  }
   
-  
-  }
+ 
+	}else{
+		alert("기존비밀번호가 일치하지 않습니다");
+		return false;
+		
+	}
 }
-
 
 </script>
 </html>
