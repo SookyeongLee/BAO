@@ -2,12 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace = "spring.bao.mapper.ProfileIf">
- <update id = "updateProfile" >
-	
-	 	UPDATE MM 
-        SET MM_PW  =#{mPw} 
-        WHERE MM_ID ='PPP'
+ <update id= "updateProfile" >
+	<![CDATA[
+  UPDATE MM SET  
+  		 MM_PW = #{mPwC},
+		 MM_EMAIL = #{mEmail},    
+		 MM_DIVISION = #{mDivision},  
+		 MM_CAREER = #{mCareer} ,
+		 MM_RCCODE = #{mRcCode}		 
+		WHERE MM_ID =#{mId}	
+          ]]>
 	 </update>
+
+
+
 	 
 	 <select id = "getProfile" resultType="spring.bao.beans.MemberBean">
 	 <![CDATA[
@@ -15,15 +23,26 @@
 		 MM_EMAIL AS mEmail, 
 		 RC_NAME AS mRcname,
 		 MM_DIVISION AS mDivision, 
-		 MM_CAREER AS mCareer
-		 		 
+		 MM_CAREER AS mCareer , 
+		 MM_PW as mPw		 
 		 		 
 		FROM MM INNER JOIN RG ON MM.MM_ID = RG.RG_MMID
 		INNER JOIN RC ON RG.RG_RCCODE = RC.RC_CODE
-		WHERE MM_ID = #{mId}		
+		WHERE MM_ID =  #{mId}		
 		  ]]>
 		
 	 </select>
+	
+	 
+	 
+	  <select id = "isRgNameCheck" resultType="int">
+	 <![CDATA[
+	SELECT COUNT (*) RG_CODE FROM RG  WHERE RG_MMID= #{mId}	
+		  ]]>
+		
+	 </select>
+	 
+	
 	 
 	 
 </mapper>

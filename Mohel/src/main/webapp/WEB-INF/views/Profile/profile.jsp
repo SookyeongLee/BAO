@@ -59,19 +59,19 @@
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title">E-mail</th>
-                        <td class="profile__contents"><div id="mEmail"></td>
+                        <td class="profile__contents"><div id="mEmail"></div></td>
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title">지역</th>
-                        <td class="profile__contents"><div id="mRcName"></td>
+                        <td class="profile__contents"><div id="mRcName"></div></td>
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title">소속</th>
-                        <td class="profile__contents"><input type="text" name="division"><div id="mDivision"></td>     <!-- ${getProfile}[0] -->
+                        <td class="profile__contents"><div id="mDivision"></div></td>     <!-- ${getProfile}[0] -->
                     <tr/>
                     <tr class="profile__list">
                         <th class="profile__title">경력</th>
-                        <td class="profile__contents"><div id="mCareer"><td/>
+                        <td class="profile__contents"><div id="mCareer"></div><td/>
                     </tr>
                 </table>
                 <div class="mypage__bottom">
@@ -80,6 +80,7 @@
             </form>
         </div>
     </section>
+    ${getProfile}
      <section id="pro"></section>
 </body>
 <script>
@@ -88,10 +89,12 @@ function init(){
 	alert('${getProfile}');
 	
 	let json = JSON.parse('${getProfile}');
-    let proInfomId = document.getElementById("mId"); //영역 위에 id 이름 값       
+	
     
+
+    let proInfomId = document.getElementById("mId"); //영역 위에 id 이름 값       
     let mId = document.createElement('Div');              
-    mId.textContent = json[0].mId; //innerhtml이랑비슷 삽입하다     json0번째 mid값 mId에 넣겠ek    
+    mId.textContent = json[0].mId; //innerhtml이랑비슷 삽입하다     json0번째 mid값 mId에 넣겠ek
     proInfomId.appendChild(mId);
     
     
@@ -125,8 +128,8 @@ function init(){
     
     
     
-    let va = document.getElementById("mDivision");     
-    $('input[name=division]').attr('value',va.innerText);//
+//     let va = document.getElementById("mDivision");     
+//     $('input[name=division]').attr('value',va.innerText);//
    
 //     let division = document.getElementsByName("division");    
 //     division.setAttribute = ("value","1234");
@@ -143,7 +146,6 @@ function init(){
 }
 
 function ModifyProfile(){
-	alert("ddd");
 	
 	var form = document.createElement("form");
 	 form.action = "ModifyProfile";

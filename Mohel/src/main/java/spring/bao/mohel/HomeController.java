@@ -81,6 +81,7 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		
 		memberbean.setMId("PPP");
+		
 		memberbean.setSCode(request.getRequestURI().substring(1));
 		mav = pro.entrance(memberbean);
 		return mav;

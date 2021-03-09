@@ -3,7 +3,6 @@ package spring.bao.beans;
 import lombok.Data;
 
 @Data
-
 public class MemberBean {
 	private String sCode;
 	private String mId;
@@ -14,10 +13,12 @@ public class MemberBean {
 	private String mDivision;
 	private String mStatus;
 	private String mAccess;
-	private String mRegionCode;
+	private String mRgRcCode;
 	private String mRegionName;
 	
 	
 	//추가
 	private String mRcName;
+	private String mRcCode;
+	private String mPwC;
 }
