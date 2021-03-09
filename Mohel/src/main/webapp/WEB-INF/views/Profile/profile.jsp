@@ -67,7 +67,7 @@
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title">소속</th>
-                        <td class="profile__contents"><div id="mDivision"></div></td>     <!-- ${getProfile}[0] -->
+                        <td class="profile__contents"><div id="mDivision"></div></td>     
                     <tr/>
                     <tr class="profile__list">
                         <th class="profile__title">경력</th>

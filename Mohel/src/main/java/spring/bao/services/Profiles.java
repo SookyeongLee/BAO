@@ -104,17 +104,14 @@ public class Profiles {
 	}
 
 	private boolean convertToBoolean(int data) {
-		System.out.println(data);
 		return data == 1 ? true : false;
 	}
 
 	private boolean updateProfile(MemberBean memberbean) {
-		System.out.println("updateprofile mapper 진입");
 		return convertToBoolean(mapper.updateProfile(memberbean));
 	}
 
 	private ArrayList<MemberBean> getProfile(MemberBean memberbean) {
-		System.out.println("getProfile mapper 진입");
 		return mapper.getProfile(memberbean);
 	}
 
@@ -122,7 +119,6 @@ public class Profiles {
 
 	
 	private boolean isRgNameCheck(MemberBean memberbean) {
-		System.out.println("isRgNameCheck mapper 진입");
 		return convertToBoolean(mapper.isRgNameCheck(memberbean));
 	}
 	

@@ -10,8 +10,6 @@ public interface ProfileIf {
 
 	public ArrayList<MemberBean> getProfile(MemberBean memberbean);
 
-
-
 	public int isRgNameCheck(MemberBean memberbean);
 
 
