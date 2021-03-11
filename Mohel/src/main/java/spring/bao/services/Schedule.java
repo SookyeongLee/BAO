@@ -15,13 +15,15 @@ public class Schedule {
 	@Autowired
 	private HttpServletRequest request;
 	
+
 	public ModelAndView entrance(ScheduleBean schedulebean) {
 		ModelAndView mav = new ModelAndView();
 		
-		switch(schedulebean.getScCode()) {
-		
+		switch(request.getRequestURI().substring(1)) {
+
 		case "MovePro":
-			this.moveProCtl();
+			System.out.println("hi");
+			mav = this.moveProCtl();
 			break;
 		case "InsSchedule":
 			this.insScheduleCtl();
@@ -87,6 +89,8 @@ public class Schedule {
 	private ModelAndView moveProCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getSchedule();
+		System.out.println("moveProCtl");
+		mav.setViewName("main");
 		return mav;
 	}
 	

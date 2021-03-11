@@ -88,15 +88,36 @@
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title"><label for="region">사는곳</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="text" id="region" name="region"></td>
+                        <td class="profile__contents">
+                            <select name="region" id="region" class="profile__input">
+                                <option value="select">Select</option>
+                                <option value="01">서울</option>
+                                <option value="02">인천</option>
+                                <option value="03">부산</option>
+                                <option value="04">대구</option>
+                                <option value="05">광주</option>
+                                <option value="06">대전</option>
+                                <option value="07">울산</option>
+                                <option value="08">세종</option>
+                                <option value="09">경기</option>
+                                <option value="10">강원</option>
+                                <option value="11">충북</option>
+                                <option value="12">충남</option>
+                                <option value="13">전북</option>
+                                <option value="14">전남</option>
+                                <option value="15">경북</option>
+                                <option value="16">경남</option>
+                                <option value="17">제주</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title"><label for="division">소속</label></th>
                         <td class="profile__contents"><input class="profile__input" type="text" id="division" name="division"></td>
-                    <tr/>
+                    </tr>
                     <tr class="profile__list">
                         <th class="profile__title"><label for="career">경력</label></th>
-                        <td class="profile__contents"><textarea class="profile__textarea" id="career" name="career" cols="60" rows="6"></textarea><td/>
+                        <td class="profile__contents"><textarea class="profile__textarea" id="career" name="career" cols="60" rows="6"></textarea></td>
                     </tr>
                 </table>
                 <div class="mypage__bottom">

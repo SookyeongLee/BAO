@@ -114,9 +114,9 @@
                     </div>
                 </li>
                 <li class="request__list">
-                    <div class="list-label">기간</div>
+                    <div class="list-label"><label for="request-term">기간</label></div>
                     <div class="list-value">
-                        <input type="date" id="request-term-start"> ~ <input type="date" id="request-term-end">
+                        <input type="date" name="request-term" id="request-term">
                     </div>
                 </li>
                 <li class="request__list">

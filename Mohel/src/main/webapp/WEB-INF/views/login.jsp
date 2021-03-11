@@ -32,6 +32,7 @@
         </div>
         <!-- sns login-->
         <div class="contents__sns">
+<<<<<<< HEAD
 <!--         	<a href="javascript:kakaoLogin();"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFQOJtNpYFKTS1T5QdhIDFFgLzQO93BuFjFw&usqp=CAU"></a> -->
             <div class="sns-naver"></div>
             <div class="sns-kakao"></div>
@@ -102,5 +103,63 @@ function join(){
 // }
 
 
+=======
+            <div class="sns-naver"></div>
+            <div class="sns-kakao"></div>
+            <div class="sns-google"></div>
+        </div>
+        <!-- 회원가입하기 -->
+        <p class="contents__account">아직 회원이 아니세요?<a href="#" class="contents__account-link" id="Join" onClick="join()"> 회원가입</a></p>
+    </section>
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="footer__rights">Copyright 2021 BAO. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+</body>
+
+<script>
+
+function login(){
+	var mId = document.getElementsByName('mId')[0];
+	var mPw = document.getElementsByName('mPw')[0];
+	mId.name = 'mId';
+	mPw.name = 'mPw';
+	
+	
+	var form = document.createElement('form');
+	form.action = 'Login';
+	form.method = 'post';
+	
+	form.appendChild(mId);
+	form.appendChild(mPw);
+	document.body.appendChild(form);
+	
+	form.submit();
+	
+}
+// function login(obj){
+// alert(obj.id);
+// var form = document.createElement("form");
+// form.action = obj.id;
+// form.method = "post";
+// document.body.appendChild(form);
+// form.submit();
+// }
+
+function join(){
+	alert('넘어가나 ?');
+	var form = document.createElement("form");
+	
+	form.action = 'JoinForm';
+	form.method = "post";
+	
+	document.body.appendChild(form);
+	
+	form.submit();
+	
+}
+>>>>>>> refs/remotes/origin/DOYOUNG
 </script>
 </html>

@@ -1,8 +1,11 @@
 package spring.bao.mohel;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+=======
+>>>>>>> refs/remotes/origin/DOYOUNG
 import java.security.MessageDigestSpi;
 import java.text.DateFormat;
 import java.util.Date;
@@ -21,12 +24,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.BidBean;
 import spring.bao.beans.MemberBean;
+<<<<<<< HEAD
 import spring.bao.beans.MessageBean;
 import spring.bao.beans.RequestBean;
 import spring.bao.beans.ReviewBean;
 import spring.bao.beans.ScheduleBean;
 import spring.bao.mapper.AuthenticationIF;
+=======
+import spring.bao.beans.RequestBean;
+import spring.bao.beans.ScheduleBean;
+>>>>>>> refs/remotes/origin/DOYOUNG
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -62,9 +71,16 @@ public class HomeController {
 	@Autowired
 	private Messages msg;
 	@Autowired
+<<<<<<< HEAD
 	private HttpServletRequest request;
 	@Autowired
 	private Home home;
+=======
+	private HttpServletRequest hsr;
+	
+	ModelAndView mav = null;
+
+>>>>>>> refs/remotes/origin/DOYOUNG
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -81,16 +97,33 @@ public class HomeController {
 //		return mav;
 //	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = {"/LogInForm","/Login","/JoinForm","/Join","/Logout"},
+=======
+	@RequestMapping(value = {"/","/Main","/LogInForm","/Login","/JoinForm","/Join","/Logout"},
+>>>>>>> refs/remotes/origin/DOYOUNG
 			method = {RequestMethod.GET,RequestMethod.POST})
+<<<<<<< HEAD
 	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) throws IOException {
+=======
+		public ModelAndView Auth(@ModelAttribute MemberBean member) {
+>>>>>>> refs/remotes/origin/DOYOUNG
 		ModelAndView mav = new ModelAndView();
+<<<<<<< HEAD
+=======
+		member.setSCode(hsr.getRequestURI().substring(1));
+>>>>>>> refs/remotes/origin/DOYOUNG
 		
+<<<<<<< HEAD
 
 	//	System.out.println(request.getRequestURI().substring(1));
 		 memberbean.setSCode(request.getRequestURI().substring(1));
 		
 		 mav = auth.entrance(memberbean);
+=======
+	mav.setViewName("Profile/profileClick");
+
+>>>>>>> refs/remotes/origin/DOYOUNG
 		return mav;
 	}
 	
@@ -108,10 +141,10 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/MyProfile","/ModifyProfile","/UpdateProfile"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Profile() {
+	public ModelAndView Profile(@ModelAttribute MemberBean member) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav = pro.entrance();
+		member.setSCode(hsr.getRequestURI().substring(1));
+		mav = pro.entrance(member);
 		return mav;
 	}
 	
@@ -124,24 +157,35 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/delete"},
+	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/Delete"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView RequestDeal() {
+	public ModelAndView RequestDeal(@ModelAttribute RequestBean request, BidBean bid) throws IOException {
 		ModelAndView mav = new ModelAndView();
-		
-		mav = rqd.entrance();
+		request.setSCode(hsr.getRequestURI().substring(1));
+		System.out.println(hsr.getRequestURI().substring(1));
+		mav = rqd.entrance(request, bid);
 		return mav;
 	}
 	
 	@RequestMapping(value = {"/MovePro","/InsSchedule","/UpdateSchedule","/MoveUser",
 			"/AcceptSchedule","/RejectSchedule","/OkClick"},
 			method = {RequestMethod.GET,RequestMethod.POST})
+<<<<<<< HEAD
 	public ModelAndView Schedule(@ModelAttribute ScheduleBean schedulebean) {
+=======
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean sc) {
+>>>>>>> refs/remotes/origin/DOYOUNG
 		ModelAndView mav = new ModelAndView();
+<<<<<<< HEAD
 		 
 		schedulebean.setScCode(request.getRequestURI().substring(1));
 	
 		mav = schedule.entrance(schedulebean);
+=======
+		sc.setSCode(hsr.getRequestURI().substring(1));
+		System.out.println(hsr.getRequestURI().substring(1));
+		mav = schedule.entrance(sc);
+>>>>>>> refs/remotes/origin/DOYOUNG
 		return mav;
 	}
 	
