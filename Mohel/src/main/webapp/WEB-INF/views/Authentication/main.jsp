@@ -17,8 +17,8 @@
 <body onLoad="main()">
     <!-- Navbar -->
     <nav id="navbar">
-        <div class="navbar__logo">
-            <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo.png"></a>
+        <div class="navbar__logo" > 
+            <a href="Main"><img class="navbar__logo__img" src="/resources/imgs/common/logo.png"></a>
         </div>
         <ul class="navbar__menu">
             <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
@@ -35,7 +35,7 @@
                 <div class="home__description__title">도움이 필요할 땐, 모헬</div>
             </div>              
             <div class="home__search">
-                <input type="text" class="home__search__input">
+                <input type="text" class="home__search__input" name="wordValue">
                 <button onClick="searchClick()" class="home__search__btn"><i class="fas fa-search"></i></button>            
             </div>
         </div>
@@ -46,11 +46,11 @@
         <div class="category">
             <ul class="category__menu">
                 <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(1)"><i class="fas fa-palette"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(4)"><i class="fas fa-palette"></i></div>
                     <div class="category__menu-name">디자인</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(2)"><i class="fas fa-laptop-code"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(5)"><i class="fas fa-laptop-code"></i></div>
                     <div class="category__menu-name">IT/프로그래밍</div>
                 </li>
                 <li class="category__menu__item">
@@ -58,11 +58,11 @@
                     <div class="category__menu-name">비즈니스</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(4)"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(1)"><i class="fas fa-chalkboard-teacher"></i></div>
                     <div class="category__menu-name">레슨</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(5)"><i class="fas fa-house-user"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(2)"><i class="fas fa-house-user"></i></div>
                     <div class="category__menu-name">홈/리빙</div>
                 </li>
                 <li class="category__menu__item">
@@ -88,7 +88,7 @@
        <%--    ${requestData}
       ${searchData} --%>
 </body>
-
+<section id="search"></section>
 <script>
 //최신순
 if(JSON.parse('${requestData}').length != 0){
@@ -101,15 +101,33 @@ if(JSON.parse('${requestBestData}').length != 0){
 //온로드 
 function main(){
 
-   
+	  let json = JSON.parse('${jsonData}');
 //    if(!=로그인 x??){
 //       document.getElementById("logCk").innerHTML ="로그인";
 //    }else{
 //       document.getElementById("logCk").innerHTML ="로그아웃";
 //    }
 
-   searchScreen();
-   BestsearchScreen();
+//    searchScreen();
+//    BestsearchScreen();
+   
+   for(let i=0; i<6;i++){
+       
+	   let insertTr= " ";
+	   insertTr += "<li class='list__item' onClick='mainclick()'>";
+	       
+	   insertTr += "<img class='list__item__img' src='/resources/imgs/common/"+json[i].rqImage+"'>";
+	   insertTr += "<div class='list__item__description'>";
+	   insertTr += "<h4 class='list__item-mainCtg'>"+json[i].rqSubName+"</h4>";
+	   insertTr += "<div class='list__item-title'>"+json[i].rqTitle+"</div>";
+	   insertTr += "</div>";
+	   insertTr += "</li>";
+	    
+	   $("#newRequestList").append(insertTr);
+	   $("#topRequestList").append(insertTr);
+	  
+   }
+   
    
 }
 //최신순 
@@ -135,7 +153,7 @@ function filterScreen(){
 function filterBestScreen(){ 
   
  let requestList = JSON.parse('${requestBestData}');
- for(let index=0 ; index<6 ; index++){
+ for(let index=0 ; index<6; index++){
    
      let rqCode = requestList[index].rqCode;    
     let insertTr = " ";
@@ -153,38 +171,46 @@ function filterBestScreen(){
 
 //대분류 클릭 
 function filterClick(num){
-    let filterCode = (num*1000);       
+    let rqFilterCode = (num*1000);     
 
-    for(i = 1; i < 7; i++){
-         if(num == i){
+//     for(i = 1; i < 7; i++){
+//          if(num == i){
+	let rqFilterName = rqFilterCode ==1000?"레슨":
+					rqFilterCode ==2000?"홈/리빙":
+						rqFilterCode ==3000?"비즈니스":
+							rqFilterCode ==4000?"디자인":
+								rqFilterCode ==5000?"IT/프로그래밍":
+									rqFilterCode ==6000?"건강/미용":"";
+	
               let form = document.createElement("form");
-              form.action = "Filter";
+              let input = document.createElement("input");
+              input.type = "hidden";
+              input.name = "rqFilterCode";
+              input.value = rqFilterCode;
+              form.appendChild(input);
+                  
+              form.action = "Filter?rqFilterName="+rqFilterName;
               form.method = "Post";
-              
-                    let input = document.createElement("input");
-                    input.type = "hidden";
-                    input.name = "rqFilterCode";
-                    input.value = filterCode;
-                    form.appendChild(input);
-                        
+           
               document.body.appendChild(form);
               form.submit();
-           }
-    }
+//            }
+    
     
  }    
  //검색클릭 
 function searchClick(){
     
     let form = document.createElement("form");
-    let word = document.getElementsByName("wordValue")[0].value;
-    form.action = "Search";
+    let rqWord = document.getElementsByName("wordValue")[0].value;
+    alert(rqWord);
+    form.action = "Search?rqWord="+rqWord;
     form.method = "Post";          
     
     let input = document.createElement("input");
    input.type = "hidden";
    input.name = "rqWord";
-   input.value = word;
+   input.value = rqWord;
    form.appendChild(input);
     
     document.body.appendChild(form);
@@ -195,7 +221,7 @@ function searchClick(){
  //검색 리스트 
 function searchScreen(){
     
-    let searchList = JSON.parse('${searchData}');
+    let searchList = JSON.parse('${requestData}');
  for(let index=0 ; index<searchList.length ; index++){
       
      let rqCode = searchList[index].rqCode;    
@@ -208,13 +234,13 @@ function searchScreen(){
     insertTr += "</div>";
     insertTr += "</li>";
     
-    $("#searchData").append(insertTr);
+    $("#search").append(insertTr);
   }
  } 
  //검색 인기 리스트 
  function BestsearchScreen(){
     
-    let searchList = JSON.parse('${searchBestData}');
+    let searchList = JSON.parse('${requestBestData}');
  for(let index=0 ; index<6 ; index++){
       
      let rqCode = searchList[index].rqCode;    
@@ -227,7 +253,7 @@ function searchScreen(){
     insertTr += "</div>";
     insertTr += "</li>";
     
-    $("#TopsearchData").append(insertTr);
+    $("#topRequestList").append(insertTr);
   }
  } 
  //경매 클릭 

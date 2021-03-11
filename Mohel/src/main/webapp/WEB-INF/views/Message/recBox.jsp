@@ -13,8 +13,10 @@
     <script src="/resources/src/main.js" defer></script>
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+     <script src="/resources/src/main.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onLoad="init()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -40,7 +42,7 @@
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item">
-                <button type="button">프로필</button>
+                <button type="button" onClick="pro()">프로필</button>
             </li>
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
@@ -53,9 +55,9 @@
             <li class="mypage__menu__item">
                 <button type="button" class="message-btn">메시지</button>
                 <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
                 </ul>
             </li> 
         </ul>
@@ -79,97 +81,8 @@
                         <th class="message__head">전송시간</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
+                <tbody id="recDiv">
+                   
                 </tbody>                      
             </table>
             <div class="message__move">
@@ -186,4 +99,79 @@
         </div>
     </section>
 </body>
+
+<script>
+function init(){
+	let rec = JSON.parse('${recList}');
+	
+	for(let i=0;i<rec.length;i++){
+	
+		    	
+	let insertTr= " ";
+	insertTr += "<tr>";
+	insertTr += "<td class='message__data'><i class='fas fa-envelope'></i></td>";
+	insertTr += "<td class='message__data pointer' onClick='showPop()'>"+ rec[i].msSender +"</td>";
+	insertTr += "<td class='message__data message__title pointer' onClick='msgDetail("+i+")'>"+rec[i].msTitle+"</td>";
+	insertTr += "<td class='message__data'>"+rec[i].msDate+"</td>";
+	insertTr += "</tr>";
+   
+    $("#recDiv").append(insertTr);
+		
+    
+	}
+	
+}
+function showPop(){
+	window.open("Profile","a", "width=600, height=800, left=100, top=50");	
+	
+}
+
+function msgDetail(i){
+	//서버전송 
+	let rec = JSON.parse('${recList}');
+	let sendData = "msRecipient="+rec[i].msRecipient+"&msSender="+rec[i].msSender+"&msDate="+rec[i].msDate+"&msTitle="+rec[i].msTitle+"&msComment="+rec[i].msComment+"&msStatus="+rec[i].msStatus;
+	alert(sendData);
+	
+	let form = document.createElement("form");
+	form.action="Title?"+sendData;
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+	
+}
+
+function recBox(){
+	let form = document.createElement("form");
+	form.action="RecBox";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+
+function sendBox(){
+	let form = document.createElement("form");
+	form.action="SendBox";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+
+
+function msgForm(){
+	let form = document.createElement("form");
+	form.action="MsgForm?msSender=&msRecipient=&msTitle=&msComment=&msDate=&msStatus=";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+
+function pro(){
+	
+	let form = document.createElement("form");
+	form.action="Profile";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+</script>
 </html>

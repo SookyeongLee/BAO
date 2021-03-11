@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import spring.bao.beans.RequestBean;
-import spring.bao.mapper.DealIf;
+import spring.bao.mapper.AuthenticationIf;
 
 @Service
 
@@ -19,7 +19,7 @@ public class Home {
 	@Autowired
 	private Gson gson;
 	@Autowired
-	private DealIf mapper;
+	private AuthenticationIf mapper;
 	
 	public ModelAndView entrance(RequestBean requestBean) {
 		ModelAndView mav = new ModelAndView();
@@ -33,11 +33,9 @@ public class Home {
 	private ModelAndView mainCtl(RequestBean requestBean) {
 		ModelAndView mav = new ModelAndView();
 
-		String json = gson.toJson(this.getFilterList(requestBean));
-	    String json2 = gson.toJson(this.getBestFilterList(requestBean));		
+	    String json = gson.toJson(this.getRecentList(requestBean));		
 
-	    mav.addObject("requestData", json);
-	    mav.addObject("requestBestData", json2);
+	    mav.addObject("jsonData", json);
 		
 		
 		mav.setViewName("Authentication/main");
@@ -46,12 +44,10 @@ public class Home {
 	}
 
 
-	  private ArrayList<RequestBean> getBestFilterList(RequestBean reqBean) {
-	      return mapper.BestFilterList(reqBean);
-	   }
+	  
 
-	   private ArrayList<RequestBean> getFilterList(RequestBean reqBean) {
-	      return mapper.filterList(reqBean);
+	   private ArrayList<RequestBean> getRecentList(RequestBean reqBean) {
+	      return mapper.getRecentList(reqBean);
 	   }
 }
 

@@ -17,7 +17,9 @@ public class RequestBean {
 	private String rqSubName;
 	private String rqPeriod;
 	private String rqDate;
-	private String rqStCode;
+	private String rqStatus;
 	private String rqRcCode;	
+	private String rqWord;
 	private String img;
+	private int rqBest;
 }

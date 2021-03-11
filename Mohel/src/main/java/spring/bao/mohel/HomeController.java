@@ -27,7 +27,6 @@ import spring.bao.beans.MessageBean;
 import spring.bao.beans.RequestBean;
 import spring.bao.beans.ReviewBean;
 import spring.bao.beans.ScheduleBean;
-import spring.bao.mapper.AuthenticationIf;
 
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
@@ -45,7 +44,6 @@ import spring.bao.services.Schedule;
 @Controller
 public class HomeController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private Authentication auth;
 	@Autowired
@@ -94,15 +92,14 @@ public class HomeController {
 		
 		return mav;
 	}
+	@RequestMapping(value = { "/Detail", "/WaitingHelper","/WaitingWisher", "/IngHelper","/IngWisher", "/EndHelper","/EndWisher", "/Search", "/Filter" }, method = {
+	         RequestMethod.GET, RequestMethod.POST })
+	   public ModelAndView Deal(@ModelAttribute RequestBean reqBean) throws UnsupportedEncodingException {
+	      ModelAndView mav = new ModelAndView();
+	      mav = deal.entrance(reqBean);
+	      return mav;
+	   }
 
-	@RequestMapping(value = { "/MyDeal", "/Detail", "/Waiting", "/Ing", "/End", "/Search", "/Filter" }, method = {RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Deal(@ModelAttribute RequestBean requestBean) {
-		ModelAndView mav = new ModelAndView();
-		
-		mav = deal.entrance(requestBean);
-		
-		return mav;
-	}
 
 	@RequestMapping(value = { "/DealForm", "/ReqSend", "/ModifyForm", "/Modify", "/Delete" }, method = {
 			RequestMethod.GET, RequestMethod.POST })
@@ -113,6 +110,7 @@ public class HomeController {
 		
 		return mav;
 	}
+
 
 	@RequestMapping(value = { "/MovePro", "/InsSchedule", "/UpdateSchedule", "/MoveUser", "/AcceptSchedule",
 			"/RejectSchedule", "/OkClick" }, method = { RequestMethod.GET, RequestMethod.POST })

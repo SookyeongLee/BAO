@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="spring.bao.mapper.dealIf">
+<mapper namespace="spring.bao.mapper.RequestDealIf">
 <select id="isBidder" resultType="int">
 		<![CDATA[
 		SELECT COUNT(*) FROM BI WHERE BI_MMHELPER = #{biHelper} AND BI_RQCODE = #{biCode}

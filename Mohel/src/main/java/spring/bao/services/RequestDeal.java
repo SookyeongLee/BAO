@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-import spring.bao.mapper.requestDealIf;
+import spring.bao.mapper.RequestDealIf;
 import spring.bao.beans.BidBean;
 import spring.bao.beans.RequestBean;
 
@@ -31,7 +31,7 @@ public class RequestDeal {
 	@Autowired
 	private PlatformTransactionManager tran;
 	@Autowired
-	private requestDealIf dealIf;
+	private RequestDealIf dealIf;
 	@Autowired
 	private Gson gson;
 	@Autowired
@@ -140,8 +140,8 @@ public class RequestDeal {
 		
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		
-		requestBean.setRqId("DOYOUNG");
-		requestBean.setRqStCode("B");
+//		requestBean.setRqId("DOYOUNG");
+//		requestBean.setRqStCode("B");
 		
 		if(requestBean.getRqSubName().equals("학업")) {
 			requestBean.setRqSubCode("10001001");
