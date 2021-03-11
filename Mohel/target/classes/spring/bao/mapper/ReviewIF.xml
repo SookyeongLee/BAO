@@ -7,13 +7,12 @@
 	
 	<select id="getReview" resultType="spring.bao.beans.ReviewBean">
 	<![CDATA[
-		SELECT  FROM RV WHERE RV_WIRGCODE = #{rvCode} AND RV_WIHELPER = #{rvCode} 
-		AND RV_STAR = #{rvStar} AND RV_COMMENT = #{rvComment}
+		SELECT RV_WIRQCODE AS RVWIRQCODE, RV_WIHELPER AS RVHELPER, RV_STAR AS RVSTAR, RV_COMMENT AS RVCOMMENT FROM RV WHERE RV_WIHELPER = #{rvHelper} AND RV_WIRQCODE = #{rvWirqCode}
     ]]>
 	</select>
-	<insert id ="isReview" >
+	<insert id ="insReview" >
 	<![CDATA[
-		INSERT INTO RV(RV_WIRQCODE, RV_WIHELPER, RV_STAR, RV_COMMENT) VALUES(#{rvCode},#{rvHelper},#{rvStar},#{rvComment})
+		INSERT INTO RV(RV_WIRQCODE, RV_WIHELPER, RV_STAR, RV_COMMENT) VALUES(#{rvWirqCode}, #{rvHelper}, #{rvStar}, #{rvComment})
 	]]>
 	</insert>
 

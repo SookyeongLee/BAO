@@ -48,5 +48,5 @@
       <filter-name>encodeFilter</filter-name>
       <url-pattern>/*</url-pattern>
    </filter-mapping>
->>>>>>> branch 'master' of https://github.com/SookyeongLee/BAO
+
 </web-app>

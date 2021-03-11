@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class ReviewBean {
-	private String rvCode;
+	private String sCode;
+	private String rvWirqCode;
 	private String rvHelper;
 	private String rvStar;
 	private String rvComment;

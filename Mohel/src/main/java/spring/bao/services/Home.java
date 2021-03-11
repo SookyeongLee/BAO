@@ -48,14 +48,15 @@ public class Home {
 	private ModelAndView mainCtl(RequestBean req) {
 		ModelAndView mav = new ModelAndView();
 		//this.getRecentList();
-		Gson gson = new Gson();
+		
 		String jsonData = gson.toJson(this.getRecentList(req));
-		System.out.println(jsonData);
+		//System.out.println(jsonData);
 		
 		//mav.addObject();
 		mav.addObject("jsonData",jsonData);
+		//System.out.println("값이 들어온다 들어온다 들어온다");
 		
-		mav.setViewName("main");
+		mav.setViewName("Authentication/main");
 		
 		return mav;
 	}

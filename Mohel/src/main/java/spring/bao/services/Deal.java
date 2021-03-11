@@ -30,8 +30,8 @@ public class Deal {
 		case "Ing":
 			this.ingCtl();
 			break;
-		case "EndDate":
-			this.endCtl();
+		case "End":
+			mav = this.endCtl();
 			break;
 		case "Search":
 			this.searchCtl();
@@ -57,7 +57,7 @@ public class Deal {
 	
 	private ModelAndView endCtl() {
 		ModelAndView mav = new ModelAndView();
-//		this.getEndList();
+		mav.setViewName("Deal/endDate-wisher");
 		return mav;
 	}
 	private ModelAndView ingCtl() {

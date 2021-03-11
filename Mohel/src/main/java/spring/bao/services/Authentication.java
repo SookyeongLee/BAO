@@ -1,6 +1,10 @@
 package spring.bao.services;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +24,7 @@ public class Authentication {
 	
 	public Authentication() {}
 	@Autowired
-	private HttpServletRequest request;
+	HttpServletResponse response;
 	@Autowired
 	private AuthenticationIF mapper;
 	@Autowired
@@ -30,18 +34,18 @@ public class Authentication {
 	
 	
 
-		public ModelAndView entrance(MemberBean memberbean) {
+		public ModelAndView entrance(MemberBean memberbean) throws IOException {
 			
 			ModelAndView mav = new ModelAndView();
 			
 			switch(memberbean.getSCode()) {
 				
-				case "" : 
-					mav= this.mainCtl(memberbean);
-					break;
-				case "Main":
-					mav = this.mainCtl(memberbean);
-					break;
+//				case "" : 
+//					mav= this.mainCtl(memberbean);
+//					break;
+//				case "Main":
+//					mav = this.mainCtl(memberbean);
+//					break;
 				case "LogInForm":
 					mav = this.loginFormCtl(memberbean);
 					break;
@@ -68,8 +72,10 @@ public class Authentication {
 			
 			//if(this.isSession()) {
 				this.insAccess(member);
+				//member.setMStCode("-1");
 			
 				mav.setViewName("main");
+				mav.addObject("mag", "logout");
 			
 				return mav;			
 		}
@@ -81,9 +87,12 @@ public class Authentication {
 			//System.out.println("joinCtl");
 			if(this.isMember(member)) {
 				mav.setViewName("login"); //로그인폼 화면 
+				
 			}else {
+				member.setMRcCode("99");
 				this.insMember(member);
 				mav.setViewName("login");
+				
 				tran.commit(status);
 				
 			}
@@ -114,25 +123,36 @@ public class Authentication {
 			mav.setViewName("join");
 			return mav;			
 		}
-		private ModelAndView loginCtl(MemberBean member) {
+		private ModelAndView loginCtl(MemberBean member) throws IOException {
 			TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
 			
 			ModelAndView mav = new ModelAndView();
-			System.out.println("main");
+			//System.out.println("main");
 			System.out.println(member.getMId());
-
+			
 				if(this.isMember(member)) {
 					if(this.isAccess(member)) {
 						member.setMStCode("1");
-						//System.out.println(member.getMId());
+	
 						this.insAccess(member);
-						mav.setViewName("main");
+						mav.setViewName("Authentication/main");
 						tran.commit(status);
 					
+					}else {
+						System.out.println("로그인 실패");
+						response.setContentType("text/html; charset=UTF-8");
+						 
+						PrintWriter out = response.getWriter();
+						 
+						out.println("<script>alert('로그인 실패'); location.href='이동주소';</script>");
+						 
+						out.flush();
+						mav.setViewName("Authentication/login");
 					}
 				}
 			return mav;			
 		}
+
 
 		private boolean insAccess(MemberBean member) {
 			return this.convetToBoolean(mapper.insAccess(member));
@@ -147,25 +167,10 @@ public class Authentication {
 
 		private ModelAndView loginFormCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
-			System.out.println("loginFormCtl");
+			//System.out.println("loginFormCtl");
 			mav.setViewName("login");
 			return mav;			
 		}
-
-		private ModelAndView mainCtl(MemberBean member) {
-			ModelAndView mav = new ModelAndView();
-			//this.getRecentList();
-			Gson gson = new Gson();
-			//String jsonData = gson.toJson(mapper.getRecentList());
-			//mav.addObject();
-			
-			
-			mav.setViewName("main");
-			
-			return mav;
-		}
-
-
 
 
 

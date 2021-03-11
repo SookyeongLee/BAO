@@ -1,5 +1,8 @@
 package spring.bao.mohel;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.MessageDigestSpi;
 import java.text.DateFormat;
 import java.util.Date;
@@ -15,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.MemberBean;
@@ -64,6 +68,7 @@ public class HomeController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * @throws IOException 
 	 */
 	
 //	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout",
@@ -78,9 +83,10 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/LogInForm","/Login","/JoinForm","/Join","/Logout"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) {
+	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		
+
 	//	System.out.println(request.getRequestURI().substring(1));
 		 memberbean.setSCode(request.getRequestURI().substring(1));
 		
@@ -93,7 +99,6 @@ public class HomeController {
 	public ModelAndView Main(@ModelAttribute RequestBean req) {
 		ModelAndView mav = new ModelAndView();
 		
-	//	System.out.println(request.getRequestURI().substring(1));
 		 req.setRqCode(request.getRequestURI().substring(1));
 		
 		 mav = home.entrance(req);
@@ -140,16 +145,21 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/writeReviewForm" , "/Review" ,"showReview"},
+	@RequestMapping(value = {"/WriteReview" , "/ViewReview", "/ShowReview" },
 			method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView Review(@ModelAttribute ReviewBean rev) {
 		ModelAndView mav = new ModelAndView();
+//		rev.setRvWirqCode("6000210307090359");
+//		rev.setRvHelper("JUN");
+//		rev.setRvStar("5");
+//		rev.setRvComment("나쁘지않아요");
+		rev.setSCode(request.getRequestURI().substring(1));
 		
-		rev.setRvCode(request.getRequestURI().substring(1));
 		
 		mav = review.entrance(rev);
 		return mav;
 	}
+
 	
 	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject"},
 			method = {RequestMethod.GET,RequestMethod.POST})

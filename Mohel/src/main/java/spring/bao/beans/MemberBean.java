@@ -15,4 +15,5 @@ public class MemberBean {
 	private String mAccess;
 	private String mRegionCode;
 	private String mRegionName;
+	private String mRcCode;
 }
