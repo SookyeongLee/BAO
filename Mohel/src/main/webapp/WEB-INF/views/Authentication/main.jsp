@@ -20,9 +20,9 @@
             <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo.png"></a>
         </div>
         <ul class="navbar__menu">
-            <li class="navbar__menu__item">마이페이지</li>
-            <li class="navbar__menu__item">역경매등록</li>                    
-            <li class="navbar__menu__item">로그인</li>
+            <li class="navbar__menu__item" >마이페이지</li>
+            <li class="navbar__menu__item" onClick="dealForm()">역경매등록</li>                    
+            <li class="navbar__menu__item" onClick="login()">로그인</li>
         </ul>
     </nav>
     <!-- Header -->
@@ -77,10 +77,10 @@
                 <h1 class="list__title">새로운 역경매</h1>
                 <ul class="list__items">
                     <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/common/1000.jpg">
+                        <img class="list__item__img" src="/resources/imgs/common/1000.jpg" onclick="detail()">
                         <div class="list__item__description">
-                            <h4 class="list__item-mainCtg">외국어</h4>
-                            <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
+                            <h4 class="list__item-mainCtg" onclick="detail()">외국어</h4>
+                            <div class="list__item-title" >테스트용 역경매입니다.</div>
                         </div>
                     </li>
                     <li class="list__item">
@@ -170,5 +170,42 @@
             </div>
         </div>        
     </section>
+    <script>
+    function dealForm(){
+    	var form = document.createElement("form");
+        form.action="DealForm";
+        form.post="post";
+    
+        
+        document.body.appendChild(form);
+        
+        
+        form.submit();
+    }
+    
+    function login(){
+    	var form = document.createElement("form");
+        form.action="LogInForm";
+        form.post="post";
+    
+        
+        document.body.appendChild(form);
+        
+        
+        form.submit();
+    }
+    
+    function detail(){
+    	var form = document.createElement("form");
+        form.action="MyDeal";
+        form.post="post";
+    
+        
+        document.body.appendChild(form);
+        
+        
+        form.submit();
+    }
+    </script>
 </body>
 </html>

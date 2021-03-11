@@ -38,6 +38,7 @@ import spring.bao.services.Schedule;
 @Controller
 public class HomeController {
 	
+//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private Authentication auth;
@@ -81,8 +82,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		member.setSCode(hsr.getRequestURI().substring(1));
 		
-	mav.setViewName("Profile/profileClick");
-
+//	mav.setViewName("Profile/profileClick");
+	mav = auth.entrance(member);
 		return mav;
 	}
 	
@@ -97,10 +98,10 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/MyDeal","/Detail","/Waiting","/Ing","/End","/Search","/Filter"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Deal() {
+	public ModelAndView Deal(RequestBean request, BidBean bid) {
 		ModelAndView mav = new ModelAndView();
-		
-		mav = deal.entrance();
+		request.setSCode(hsr.getRequestURI().substring(1));
+		mav = deal.entrance(request, bid);
 		return mav;
 	}
 	
@@ -152,7 +153,18 @@ public class HomeController {
 		mav = msg.entrance();
 		return mav;
 	}
+	@RequestMapping(value = "/kakao", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "Authentication/kakaotest";
 
-
-	
+	}
 }

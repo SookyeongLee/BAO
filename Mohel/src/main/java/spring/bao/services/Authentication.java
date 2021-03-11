@@ -109,15 +109,15 @@ public class Authentication {
 		private ModelAndView joinFormCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("joinFormCtl");
-			mav.setViewName("join");
+			mav.setViewName("Authentication/join");
 			return mav;			
 		}
 		private ModelAndView loginCtl(MemberBean member) {
 			TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
 			
 			ModelAndView mav = new ModelAndView();
-			System.out.println("main");
-
+			System.out.println(member.getMId());
+			System.out.println(member.getMPw());
 				if(this.isMember(member)) {
 					if(this.isAccess(member)) {
 						member.setMStCode("1");
@@ -144,17 +144,19 @@ public class Authentication {
 		private ModelAndView loginFormCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("loginFormCtl");
-			mav.setViewName("login");
+			mav.setViewName("Authentication/login");
 			return mav;			
 		}
 
 		private ModelAndView mainCtl(MemberBean member) {
 			ModelAndView mav = new ModelAndView();
+			
+			
 //			this.getRecentList();
 			Gson gson = new Gson();
 //			String jsonData = gson.toJson(mapper.getRecentList(member));
 			
-			mav.setViewName("main");
+			mav.setViewName("Authentication/main");
 			
 			return mav;
 		}

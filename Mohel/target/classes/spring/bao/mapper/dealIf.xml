@@ -22,15 +22,19 @@
 	<select id="getReqDetail" resultType="spring.bao.beans.RequestBean">
 			<![CDATA[
 			          SELECT 		
-							RQ_RCCODE AS RQRCCODE,
-							RQ_RCCODE AS RQRCCODE,
+							RQ_CODE AS RQCODE,
+							RQ_MMID AS RQID,
+							RC_NAME AS RQRCNAME,
 							MG_FILTERNAME RQFILTERNAME,
+							MG_IMG AS MGIMG,
 							SG_SUBNAME AS RQSUBNAME,
-							RQ_PERIOD AS RQPERIOD,
+							RQ_PERIOD AS RQPERIOD,	
 							RQ_TITLE AS RQTITLE,
+							TO_CHAR(RQ_SYSDATE, 'YYYY-MM-DD') AS RQSYSDATE,
 							RQ_COMMENT AS RQCOMMENT
 					FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
-					        INNER JOIN SG SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
+					        INNER JOIN SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
+					        INNER JOIN RC ON RQ.RQ_RCCODE = RC.RC_CODE	 
 					WHERE RQ_CODE = #{rqCode} AND RQ_MMID = #{rqId}
 			]]> 
 	</select>

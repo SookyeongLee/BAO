@@ -61,18 +61,28 @@ public class RequestDeal {
 		return mav;
 	}
 	// 요청글삭제
-	private ModelAndView deleteCtl(RequestBean request) {
+	private ModelAndView deleteCtl(RequestBean request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-		request.setRqCode("4000210305090309");
-		request.setRqId("DOYOUNG");
+	
+		System.out.println(request.getRqCode());
+		System.out.println(request.getRqId());
 		if(this.deleteReqDetail(request)) {
 			System.out.println("삭제완료");
-			mav.setViewName("main");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('삭제가 완료되었습니다.'); </script>");
+			out.flush();
+			mav.setViewName("Authentication/main");
 			tran.commit(status);
 		}else {
 			System.out.println("삭제 실패");
-			mav.setViewName("main");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('삭제를 실패하였습니다.'); </script>");
+			out.flush();
+			mav.setViewName("Authentication/main");
 		}
 		
 		return mav;
@@ -81,13 +91,8 @@ public class RequestDeal {
 	private ModelAndView modifyCtl(RequestBean request) throws IOException  {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-		request.setRqId("DOYOUNG");
-		request.setRqCode("5000210305090319");
-		System.out.println(request.getRqRcCode());
-		System.out.println(request.getRqPeriod());
-		System.out.println(request.getRqTitle());
-		System.out.println(request.getRqComment());
 		
+
 		if(this.updateReqDetail(request)){
 			System.out.println("수정 완료");
 			
@@ -96,8 +101,8 @@ public class RequestDeal {
 			out.println("<script>alert('수정 완료하였습니다.'); </script>");
 			out.flush();
 			
-			mav.setViewName("main");
 			tran.commit(status);
+			mav.setViewName("Deal/modify-after-view");
 		}else {
 			System.out.println("수정 실패");
 			
@@ -105,24 +110,25 @@ public class RequestDeal {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('수정을 실패하였습니다.'); </script>");
 			out.flush();
-
+			
 			mav.setViewName("requestmodify");
 			
 		}
 		return mav;
 	}
 	//수정 페이지 이동
-	private ModelAndView modifyFormCtl(RequestBean request, BidBean bid) {
+	private ModelAndView modifyFormCtl(RequestBean request, BidBean bid) throws IOException {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("들어왔다");
+		
 		bid.setBiHelper("JUN");
-		bid.setBiCode("4000220305090348");
-		request.setRqCode("5000210305090319");
-		request.setRqId("DOYOUNG");
+		bid.setBiCode("4000210305090248");
+	
 		if(this.isBidder(bid)) {
-			System.out.println("안돼~");
-			
-			mav.setViewName("test");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();			
+			out.println("<script>alert('입찰자가 존재하여 수정불가능합니다. 삭제 후 재등록 해주세요'); </script>");
+			out.flush();
+			mav.setViewName("Deal/modify-after-view");
 		}else {
 			String jsonData = gson.toJson(this.getReqDetail(request));
 			System.out.println(jsonData);
@@ -140,11 +146,7 @@ public class RequestDeal {
 		
 		request.setRqId("DOYOUNG");
 		request.setRqStCode("B");
-		System.out.println(request.getRqFilterCode());
-		System.out.println(request.getRqRcCode());
-		System.out.println(request.getRqPeriod());
-		System.out.println(request.getRqTitle());
-		System.out.println(request.getRqComment());
+
 		if(request.getRqSubName().equals("학업")) {
 			request.setRqSubCode("10001001");
 			System.out.println(request.getRqSubCode());
@@ -257,17 +259,16 @@ public class RequestDeal {
 		if(this.insReqSend(request)) {
 			System.out.println("Insert Complete");
 			tran.commit(status);
-			mav.setViewName("main");
+			mav.setViewName("Authentication/main");
 		}else {
-			System.out.println("False");
-			mav.setViewName("myProfile");
+			System.out.println("Insert False");
+			mav.setViewName("Profile/Profile");
 		}
 		return mav;
 	}
 	//거래 등록 페이지 이동
 	private ModelAndView dealFormCtl() {
 		ModelAndView mav = new ModelAndView();
-		
 		
 		mav.setViewName("request");
 		
@@ -280,7 +281,6 @@ public class RequestDeal {
 		return this.convetToBoolean(dealIf.isBidder(bid));
 	}
 	private ArrayList<RequestBean> getReqDetail(RequestBean request) {
-		System.out.println("Hi Detail");
 		return dealIf.getReqDetail(request);
 	}
 	private boolean insReqSend(RequestBean request) {

@@ -9,7 +9,7 @@
 	</select>
 
 	<insert id ="insMember" >
-		INSERT INTO MM(MM_ID,MM_NAME,MM_PW,MM_EMAIL,MM_CAREER,MM_DIVISION) VALUES(#{mId},#{mName},#{mPw},'','','')
+		INSERT INTO MM(MM_ID,MM_NAME,MM_PW,MM_EMAIL,MM_CAREER,MM_DIVISION,MM_REGION) VALUES(#{mId},#{mName},#{mPw},'','','','99')
 	</insert>
 	
 	<select id="isAccess" resultType="Int">

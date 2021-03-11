@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/resources/css/mypage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body onLoad="zz()">
+<body onLoad="list()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -64,6 +64,21 @@
         <h2 class="mypage__title">거래등록</h2>
         
             <ul>
+             
+                <li class="request__list">
+                    <div class="list-label">분야</div>
+                    <div class="list-value">
+                   <form name=rqFilter method=post>
+                                           
+                   	대분류:  <span id='rqFilterName' style="margin-right:130px;"></span>
+                     		
+                                                                   
+				소분류: 
+                    <span id='rqSubName'></span>
+                      
+</form> 
+                    </div>
+                </li>
                 <li class="request__list">
                     <div class="list-label"><label for="request-region">지역</label></div>
                     <div class="list-value">
@@ -91,20 +106,6 @@
                     </div>
                 </li>
                 <li class="request__list">
-                    <div class="list-label">분야</div>
-                    <div class="list-value">
-                   <form name=rqFilter method=post>
-                                           
-                   	대분류:  <span id='rqFilterName' style="margin-right:130px;"></span>
-                     		
-                                                                   
-				소분류: 
-                    <span id='rqSubName'></span>
-                      
-</form> 
-                    </div>
-                </li>
-                <li class="request__list">
                     <div class="list-label">기간</div>
                     <div class="list-value">
                         <input type="date" id="request-term-start" name="rqPeriod">
@@ -127,31 +128,26 @@
                 </li>
             </ul>
             <div class="mypage__bottom">
-                <button type="button" class="mypage__btn" onclick="send()">전송하기</button>
-            	<button type="button" onclick="deletez()" class="mypage__btn">삭제하기</button>
+                <button type="button" class="mypage__btn" onclick="send()">수정하기</button>
             </div>
-       
+       <input type="hidden" name ="rqCode" id="rqCode">
+       <input type="hidden" name ="rqId" id="rqId">
     </section>
 </body>
 <script>
-	function deletez(){
-		var form = document.createElement("form");
-        form.action="Delete";
-        form.post="post";
-        
-        document.body.appendChild(form);
-	       
-	       
-	       form.submit();
-	       alert("삭제가 완료되었습니다.");
-	}
 	function send(){
 		
+		
+		
+		var rqCode = document.getElementsByName("rqCode")[0];
+    	var rqId = document.getElementsByName("rqId")[0];
 		var rqRcCode = document.getElementsByName("rqRcCode")[0];
 		var rqPeriod = document.getElementsByName("rqPeriod")[0];
 		var rqTitle = document.getElementsByName("rqTitle")[0];
 		var rqComment = document.getElementsByName("rqComment")[0];
       
+	
+	
       
         
        
@@ -167,6 +163,8 @@
         form.post="post";
         
         
+        form.appendChild(rqCode);
+        form.appendChild(rqId);
         form.appendChild(rqRcCode);
         form.appendChild(rqPeriod);
         form.appendChild(rqTitle);
@@ -181,17 +179,12 @@
 	}
 	
 	
-    function dd(){
-    	var a = $("select[name=rqRcCode]").val();
-     	
-     	alert(a);
-    }
     
-    function zz(){
+    function list(){
    	 
  	let json = JSON.parse('${rqd}');
  	
- 	alert('${rqd}');
+ 	
  	
  	
  	let rqTitle = json[0].rqTitle;
@@ -241,7 +234,11 @@
  	
  	$('#rqSubName').append(rqSubName);
     
+ 	let rqCode = json[0].rqCode;
+ 	$('#rqCode').val(rqCode);
  	
+ 	let rqId = json[0].rqId;
+ 	$('#rqId').val(rqId);;
 
 
     }

@@ -1,28 +1,44 @@
 package spring.bao.services;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+
+import spring.bao.beans.BidBean;
+import spring.bao.beans.RequestBean;
+import spring.bao.mapper.dealIf;
 
 @Service
 public class Deal {
-
-	public Deal() {}
 	@Autowired
-	private HttpServletRequest request;
+	private PlatformTransactionManager tran;
+	@Autowired
+	private dealIf dealIf;
+	@Autowired
+	private Gson gson;
+	public Deal() {
+		
+	}
+	
+	
 
-	public ModelAndView entrance() {
+	public ModelAndView entrance(RequestBean request, BidBean bid) {
 		ModelAndView mav = new ModelAndView();
 		
-		switch(request.getRequestURI().substring(1)) {
+		switch(request.getSCode()) {
 		
 		case "MyDeal":
-			this.myDealCtl();
+			mav = this.myDealCtl(request, bid);
 			break;
 		case "Detail":
-			this.detailCtl();
+			mav = this.detailCtl();
 			break;
 		case "Waiting":
 			this.waitingCtl();
@@ -75,15 +91,41 @@ public class Deal {
 
 
 	private ModelAndView detailCtl() {
-		ModelAndView mav = new ModelAndView();
-//		this.getDetail();
+ModelAndView mav = new ModelAndView();
+		
+		
+		mav.setViewName("Deal/beforeDeal-wisher");
+		
 		return mav;
 	}
 
-	private ModelAndView myDealCtl() {
+	private ModelAndView myDealCtl(RequestBean request, BidBean bid) {
 		ModelAndView mav = new ModelAndView();
-//		this.getMyDealList();
+		System.out.println("들어왔다");
+		
+		request.setRqCode("4000210305090348");
+		request.setRqId("DOYOUNG");
+		
+	
+			String jsonData = gson.toJson(this.getReqDetail(request));
+			System.out.println(jsonData);
+			mav.addObject("rqd", jsonData);                                                                                                                     
+			mav.setViewName("Deal/beforeDeal-wisher");
+			
+		
 		return mav;
 	}
-	
+	private boolean deleteReqDetail(RequestBean request) {
+		return this.convetToBoolean(dealIf.deleteReqDetail(request));
+	}
+	private boolean isBidder(BidBean bid) {
+		return this.convetToBoolean(dealIf.isBidder(bid));
+	}
+	private boolean convetToBoolean(int data) {
+		return data == 1 ? true : false;
+	}
+	private ArrayList<RequestBean> getReqDetail(RequestBean request) {
+		System.out.println("Hi Detail");
+		return dealIf.getReqDetail(request);
+	}
 }

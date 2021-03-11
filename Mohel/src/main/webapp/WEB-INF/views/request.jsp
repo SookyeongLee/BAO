@@ -130,38 +130,12 @@
                 </li>
             </ul>
             <div class="mypage__bottom">
-                <button type="button" class="mypage__btn" onclick="zz()">전송하기</button>
+                <button type="button" class="mypage__btn" onclick="list()">전송하기</button>
             </div>
        
     </section>
-    ${rqd }
 </body>
-<script>
-	function send(){
-		
-		
-		let optV = document.getElementById("region").value;
-		
-		
-		alert(optV);
-		
-		
-			
-	      
-	       var form = document.createElement("form");
-	       
-	       form.action ="ReqSend";
-	       form.method ="post"
-	       
-	    
-	       
-	       document.body.appendChild(form);
-	       
-	       
-	       form.submit();
-	       
-	}
-	
+<script>	
 	var cnt = new Array();
     cnt[0] = new Array('선택해주세요');
     cnt[1] = new Array('학업','외국어','음악','미술','스포츠','자격증');
@@ -182,7 +156,7 @@
         }         
       
     }
-    function zz(){
+    function list(){
    	    var rqFilterCode = document.getElementsByName("rqFilterCode")[0];
         var rqSubName = document.getElementsByName("rqSubName")[0];
 		var rqRcCode = document.getElementsByName("rqRcCode")[0];
@@ -191,12 +165,7 @@
 		var rqComment = document.getElementsByName("rqComment")[0];
       
       
-        alert(rqFilterCode.value);
-        alert(rqSubName.value);
-        alert(rqRcCode.value);
-        alert(rqPeriod.value);
-        alert(rqTitle.value);
-        alert(rqComment.value);
+       
         
         var form = document.createElement("form");
         form.action="ReqSend";

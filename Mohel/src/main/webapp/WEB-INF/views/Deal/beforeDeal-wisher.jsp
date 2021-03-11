@@ -12,8 +12,9 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onload="list()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -37,8 +38,9 @@
     </nav>     
     
     <section class="deal mypage">
-        <h2 class="mypage__title">입시 레슨 희망합니다.</h2>
+                <h2 class="mypage__title"><div id="rqTitle"></div></h2>
         <!-- Request -->
+        
         <div class="deal__container">
             <div class="deal__img">
                 <img src="/resources/imgs/common/1000.jpg" class="deal-img">
@@ -46,30 +48,33 @@
             <div class="deal__info__container">
                 <table class="deal__info"> 
                     <tr class="deal__list">
-                        <th class="deal__title">역경매기간</th>
-                        <td class="deal__contents">2021-01-03 ~ 2021-01-17</td>
+                        <th class="deal__title">기간</th>
+                        <td class="deal__contents"><span id="rqSysDate"></span> ~ <span id="rqPeriod"></span></td>
                     </tr>
                     <tr class="deal__list">
                         <th class="deal__title">분야</th>
-                        <td class="deal__contents">음악</td>
+                        <td class="deal__contents"><div id="rqSubName"></div></td>
                     </tr>
                     <tr class="deal__list">
                         <th class="deal__title">지역</th>
-                        <td class="deal__contents">인천</td>
+                        <td class="deal__contents"><div id="rqRcName"></div></td>
                     </tr>
                     <tr class="profile__list">
                         <th class="deal__title">내용</th>
                         <td class="deal__contents">
-                            싱어송라이터인 ‘그레타’(키이라 나이틀리)는 남자친구 ‘데이브’(애덤 리바인)가 메이저 음반회사와 계약을 하게 되면서 뉴욕으로 오게 된다. 그러나 행복도 잠시, 오랜 연인이자 음악적 파트너로서 함께 노래를 만들고 부르는 것이 좋았던 그레타와 달리 스타가 된 데이브의 마음은 어느새 변해버린다. 스타 음반프로듀서였지만 이제는 해고된 ‘댄’(마크 러팔로)은 미치기 일보직전 들른 뮤직바에서 그레타의 자작곡을 듣게 되고 아직 녹슬지 않은 촉을 살려 음반제작을 제안한다. 거리 밴드를 결성한 그들은 뉴욕의 거리를 스튜디오 삼아 진짜로 부르고 싶었던 노래를 만들어가는데…
+                            <div id="rqComment"></div>
                         </td>
                     </tr>
-                </table>
+                </table>                
+           
+            <input type="hidden" name="rqCode" id="rqCode">
+            <input type="hidden" name="rqId" id="rqId">
                 <div class="deal__button">
-                    <button type="button" class="deal__btn1">수정하기</button>
-                    <button type="button" class="deal__btn2">삭제하기</button>
-                </div>
+                    <button type="button" class="deal__btn1" onclick="modify()">수정하기</button>
+                    <button type="button" class="deal__btn2" onclick="deletez()">삭제하기</button>	        
+		        </div>
+		            </div>
             </div>
-        </div>
         <!-- Bidding -->
         <table class="bidding"> 
             <caption class="bidding__title">입찰기록내역</caption>
@@ -164,5 +169,108 @@
             </tbody>                      
         </table>
     </section>   
+    ${rqd} 
 </body>
+   <script>
+    function list(){
+   	 
+ 	let json = JSON.parse('${rqd}');
+ 	
+
+ 	
+ 	
+ 	
+	let rqTitle = json[0].rqTitle;
+ 	
+ 	
+ 	$('#rqTitle').append(rqTitle);
+ 	
+//------------------------------------------------------------------------------
+    let rqComment = json[0].rqComment;
+    
+    
+ 	$('#rqComment').append(rqComment);
+	
+//------------------------------------------------------------------------------
+	let rqPeriod = json[0].rqPeriod;
+    
+    
+ 	$('#rqPeriod').append(rqPeriod);
+
+//------------------------------------------------------------------------------
+	let rqRcName = json[0].rqRcName;
+	
+	
+ 	$('#rqRcName').append(rqRcName);
+	
+ 	let rqSubName = json[0].rqSubName;
+ 	
+ 	
+ 	$('#rqSubName').append(rqSubName);
+    
+ 	let rqCode = json[0].rqCode;
+ 	$('#rqCode').val(rqCode);
+ 	
+ 	let rqId = json[0].rqId;
+ 	$('#rqId').val(rqId);
+ 	
+ 	
+ 	let rqSysDate = json[0].rqSysDate;
+ 	$('#rqSysDate').append(rqSysDate);
+    }
+   
+    function modify(){
+    	var yn = confirm("수정 하시겠습니까?");
+    	
+    	if(yn == true){
+    	 
+    	var rqCode = document.getElementsByName("rqCode")[0];
+    	var rqId = document.getElementsByName("rqId")[0];
+    	
+ 
+    	
+    	var form = document.createElement("form");
+        form.action="ModifyForm";
+        form.post="post";
+        
+        form.appendChild(rqCode);
+        form.appendChild(rqId);
+        
+        document.body.appendChild(form);
+	       
+	       
+	       form.submit();
+	       
+   			 }else{
+   				 alert("취소되었습니다.");
+   			 }
+    	}
+    
+    function deletez(){
+	var yn = prompt("삭제 하시려먼 '삭제' 라고 적어주세요");
+    	
+    	if(yn == "삭제"){
+	    	var rqCode = document.getElementsByName("rqCode")[0];
+	    	var rqId = document.getElementsByName("rqId")[0];
+    	
+    	alert(rqCode.value);
+    	alert(rqId.value);
+    	var form = document.createElement("form");
+        form.action="Delete";
+        form.post="post";
+        
+        form.appendChild(rqCode);
+        form.appendChild(rqId);
+        
+        document.body.appendChild(form);
+	       
+	       
+	       form.submit();
+    	
+    	}else{
+    		alert("취소되었습니다.");
+    	}
+    }
+</script>
+
 </html>
