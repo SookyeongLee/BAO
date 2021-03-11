@@ -35,10 +35,9 @@ public class Profiles {
 
 		ModelAndView mav = new ModelAndView();
 
-		switch (memberbean.getSCode()) {
+		switch (request.getRequestURI().substring(1)) {
 
 		case "MyProfile":
-
 			mav = this.myProfileCtl(memberbean);
 			break;
 		case "ModifyProfile":
@@ -114,16 +113,13 @@ public class Profiles {
 	private boolean updateProfile(MemberBean memberbean) {
 		return convertToBoolean(mapper.updateProfile(memberbean));
 	}
-
-	private ArrayList<MemberBean> getProfile(MemberBean memberbean) {
-		return mapper.getProfile(memberbean);
-	}
-
-	
-
 	
 	private boolean isRgNameCheck(MemberBean memberbean) {
 		return convertToBoolean(mapper.isRgNameCheck(memberbean));
+	}
+	
+	private ArrayList<MemberBean> getProfile(MemberBean memberbean) {
+		return mapper.getProfile(memberbean);
 	}
 	
 }

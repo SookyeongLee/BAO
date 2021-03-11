@@ -6,7 +6,7 @@ import spring.bao.beans.ReviewBean;
 
 
 
-public interface ReviewIF {
+public interface ReviewIf {
 
 	public ArrayList<ReviewBean> getReview(ReviewBean rev);
 	public int insReview(ReviewBean rev);

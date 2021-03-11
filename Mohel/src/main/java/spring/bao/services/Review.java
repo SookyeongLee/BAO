@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import spring.bao.beans.ReviewBean;
-import spring.bao.mapper.ReviewIF;
+import spring.bao.mapper.ReviewIf;
 
 @Service
 public class Review {
@@ -28,7 +28,7 @@ public class Review {
 	@Autowired
 	private Gson gson;
 	@Autowired
-	private ReviewIF mapper;
+	private ReviewIf mapper;
 	@Autowired
 	private PlatformTransactionManager tran;
 	

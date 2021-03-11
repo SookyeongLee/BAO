@@ -21,7 +21,7 @@
             <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo.png"></a>
         </div>
         <ul class="navbar__menu">
-            <li class="navbar__menu__item" onClick="Mypage()" >마이페이지</li>
+            <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
             <li class="navbar__menu__item">역경매등록</li>                    
             <li class='navbar__menu__item' id="logCk" value="aa" onClick='login()'>로그인</li>
         </ul>
@@ -36,7 +36,7 @@
             </div>              
             <div class="home__search">
                 <input type="text" class="home__search__input">
-                <button type="button" class="home__search__btn"><i class="fas fa-search"></i></button>            
+                <button onClick="searchClick()" class="home__search__btn"><i class="fas fa-search"></i></button>            
             </div>
         </div>
     </header>
@@ -46,27 +46,27 @@
         <div class="category">
             <ul class="category__menu">
                 <li class="category__menu__item">
-                    <div class="category__menu-icon"><i class="fas fa-palette"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(1)"><i class="fas fa-palette"></i></div>
                     <div class="category__menu-name">디자인</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon"><i class="fas fa-laptop-code"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(2)"><i class="fas fa-laptop-code"></i></div>
                     <div class="category__menu-name">IT/프로그래밍</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon"><i class="fas fa-business-time"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(3)"><i class="fas fa-business-time"></i></div>
                     <div class="category__menu-name">비즈니스</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(4)"><i class="fas fa-chalkboard-teacher"></i></div>
                     <div class="category__menu-name">레슨</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon"><i class="fas fa-house-user"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(5)"><i class="fas fa-house-user"></i></div>
                     <div class="category__menu-name">홈/리빙</div>
                 </li>
                 <li class="category__menu__item">
-                    <div class="category__menu-icon"><i class="fas fa-running"></i></div>
+                    <div class="category__menu-icon" onClick="filterClick(6)"><i class="fas fa-running"></i></div>
                     <div class="category__menu-name">건강/미용</div>
                 </li>
             </ul>
@@ -76,68 +76,31 @@
             <!-- 최신순 -->
             <div class="list__container">
                 <h1 class="list__title">새로운 역경매</h1>
-                <ul class="list__items" id="new">
-                  
-                </ul>
+                <ul class="list__items" id="newRequestList"></ul>
             </div>
             <!-- 인기순 -->
             <div class="list__container">
                 <h1 class="list__title">인기 역경매</h1>
-                <ul class="list__items" id="best">
-                    <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/common/1000.jpg">
-                        <div class="list__item__description">
-                            <h4 class="list__item-mainCtg">외국어</h4>
-                            <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/common/2000.jpg">
-                        <div class="list__item__description">
-                            <h4 class="list__item-mainCtg">외국어</h4>
-                            <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/common/3000.jpg">
-                        <div class="list__item__description">
-                            <h4 class="list__item-mainCtg">외국어</h4>
-                            <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="list__items">
-                    <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/common/4000.jpg">
-                        <div class="list__item__description">
-                            <h4 class="list__item-mainCtg">외국어</h4>
-                            <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/common/5000.jpg">
-                        <div class="list__item__description">
-                            <h4 class="list__item-mainCtg">외국어</h4>
-                            <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <img class="list__item__img" src="/resources/imgs/common/6000.jpg">
-                        <div class="list__item__description">
-                            <h4 class="list__item-mainCtg">외국어</h4>
-                            <div class="list__item-title">유학준비를 위해서 영어회화 배우고 싶습니다.</div>
-                        </div>
-                    </li>
-                </ul>
+                <ul class="list__items" id="topRequestList"></ul>
             </div>
         </div>    
     </section>
+       <%--    ${requestData}
+      ${searchData} --%>
 </body>
 
 <script>
+//최신순
+if(JSON.parse('${requestData}').length != 0){
+   filterScreen();  
+}else{}
+//인기순
+if(JSON.parse('${requestBestData}').length != 0){
+      filterBestScreen();  
+}else{}
+//온로드 
 function main(){
-   alert('${jsonData}');
-   let json = JSON.parse('${jsonData}');
+
    
 //    if(!=로그인 x??){
 //       document.getElementById("logCk").innerHTML ="로그인";
@@ -145,54 +108,154 @@ function main(){
 //       document.getElementById("logCk").innerHTML ="로그아웃";
 //    }
 
-
-   for(let i=0; i<json.length;i++){
-          
-   let insertTr= " ";
-   insertTr += "<li class='list__item' onClick='mainclick()'>";
+   searchScreen();
+   BestsearchScreen();
+   
+}
+//최신순 
+function filterScreen(){ 
+    
+    let requestList = JSON.parse('${requestData}');
+    for(let index=0 ; index<requestList.length ; index++){
+      
+        let rqCode = requestList[index].rqCode;    
+       let insertTr = " ";
+       insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+       insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+       insertTr += "<div class='list__item__description'>"
+       insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+       insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+       insertTr += "</div>";
+       insertTr += "</li>";
        
-   insertTr += "<img class='list__item__img' src='/resources/imgs/common/"+json[i].rqImage+"'>";
-   insertTr += "<div class='list__item__description'>";
-   insertTr += "<h4 class='list__item-mainCtg'>"+json[i].rqSubName+"</h4>";
-   insertTr += "<div class='list__item-title'>"+json[i].rqTitle+"</div>";
-   insertTr += "</div>";
-   insertTr += "</li>";
+       $("#newRequestList").append(insertTr);
+       } 
+}    
+//인기순  
+function filterBestScreen(){ 
+  
+ let requestList = JSON.parse('${requestBestData}');
+ for(let index=0 ; index<6 ; index++){
+   
+     let rqCode = requestList[index].rqCode;    
+    let insertTr = " ";
+    insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+    insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+    insertTr += "<div class='list__item__description'>"
+    insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+    insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+    insertTr += "</div>";
+    insertTr += "</li>";
     
-   $("#new").append(insertTr);
-   $("#best").append(insertTr);
+    $("#topRequestList").append(insertTr); 
+    } 
+}
+
+//대분류 클릭 
+function filterClick(num){
+    let filterCode = (num*1000);       
+
+    for(i = 1; i < 7; i++){
+         if(num == i){
+              let form = document.createElement("form");
+              form.action = "Filter";
+              form.method = "Post";
+              
+                    let input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "rqFilterCode";
+                    input.value = filterCode;
+                    form.appendChild(input);
+                        
+              document.body.appendChild(form);
+              form.submit();
+           }
+    }
     
+ }    
+ //검색클릭 
+function searchClick(){
+    
+    let form = document.createElement("form");
+    let word = document.getElementsByName("wordValue")[0].value;
+    form.action = "Search";
+    form.method = "Post";          
+    
+    let input = document.createElement("input");
+   input.type = "hidden";
+   input.name = "rqWord";
+   input.value = word;
+   form.appendChild(input);
+    
+    document.body.appendChild(form);
+    form.submit();  
+
+    searchScreen();
+ }
+ //검색 리스트 
+function searchScreen(){
+    
+    let searchList = JSON.parse('${searchData}');
+ for(let index=0 ; index<searchList.length ; index++){
+      
+     let rqCode = searchList[index].rqCode;    
+    let insertTr = " ";
+    insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+    insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+searchList[index].rqImage+"'>";
+    insertTr += "<div class='list__item__description'>"
+    insertTr += "<h4 class='list__item-mainCtg'>"+searchList[index].rqSubName+"</h4>";
+    insertTr += "<div class='list__item-title'>"+searchList[index].rqTitle+"</div>";
+    insertTr += "</div>";
+    insertTr += "</li>";
+    
+    $("#searchData").append(insertTr);
+  }
+ } 
+ //검색 인기 리스트 
+ function BestsearchScreen(){
+    
+    let searchList = JSON.parse('${searchBestData}');
+ for(let index=0 ; index<6 ; index++){
+      
+     let rqCode = searchList[index].rqCode;    
+    let insertTr = " ";
+    insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+    insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+searchList[index].rqImage+"'>";
+    insertTr += "<div class='list__item__description'>"
+    insertTr += "<h4 class='list__item-mainCtg'>"+searchList[index].rqSubName+"</h4>";
+    insertTr += "<div class='list__item-title'>"+searchList[index].rqTitle+"</div>";
+    insertTr += "</div>";
+    insertTr += "</li>";
+    
+    $("#TopsearchData").append(insertTr);
+  }
+ } 
+ //경매 클릭 
+ function DetailClick(rqCode){
+     var rqCode = rqCode;
+     let form = document.createElement("form");
+     form.action = "Detail";
+     form.method = "Post";
+     
+     let input = document.createElement("input");
+           input.type = "hidden";
+           input.name = "rqCode";
+           input.value = rqCode;
+           alert(input.value);
+           form.appendChild(input);
+     
+     document.body.appendChild(form);
+     form.submit();
+  }
+ //마이페이지 클릭 
+   function myPageClick(){
+      let form = document.createElement("form");
+      form.action = "MyProfile";
+      form.method = "Post";
+      document.body.appendChild(form);
+      form.submit();
    }
-
-   
-   
-}
-//메인사진 클릭 했을때 잠깐 리뷰연결해놓은것
-function mainclick(){
-   
-   var form = document.createElement("form");
-   
-   form.action = 'ShowReview';
-   form.method = "post";
-   
-   document.body.appendChild(form);
-   
-   form.submit();
-}
-//이것도 확인차 페이지만넘어가게 해놓은거
-function Mypage(){
-   alert('일단 로그인페이지');
-   var form = document.createElement("form");
-   
-   form.action = 'LogInForm';
-   form.method = "post";
-   
-   document.body.appendChild(form);
-   
-   form.submit();
-
-   
-}
-
+//로그인 클릭 
 function login(){
    alert('넘어가는가?');
    var form = document.createElement("form");

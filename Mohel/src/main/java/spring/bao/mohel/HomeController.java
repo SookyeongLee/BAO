@@ -63,106 +63,92 @@ public class HomeController {
 	@Autowired
 	private Messages msg;
 	@Autowired
-	private HttpServletRequest request;
-	@Autowired
 	private Home home;
 
-	@RequestMapping(value = { "/LogInForm", "/Login", "/JoinForm", "/Join", "/Logout" }, method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) throws IOException {
-
-		ModelAndView mav = new ModelAndView();
-
-		memberbean.setSCode(request.getRequestURI().substring(1));
-
-		mav = auth.entrance(memberbean);
-
-		return mav;
-	}
 
 	@RequestMapping(value = { "/", "/Main" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Main(@ModelAttribute RequestBean req) {
+	public ModelAndView Main(@ModelAttribute RequestBean requestBean) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav = home.entrance(requestBean);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = { "/LogInForm", "/Login", "/JoinForm", "/Join", "/Logout" }, method = { RequestMethod.GET,RequestMethod.POST })
+	public ModelAndView Auth(@ModelAttribute MemberBean memberBean) throws IOException {
 
 		ModelAndView mav = new ModelAndView();
-
-		mav = home.entrance(req);
+		
+		mav = auth.entrance(memberBean);
+		
 		return mav;
 	}
 
-	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile" }, method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public ModelAndView Profile(@ModelAttribute MemberBean member) {
+
+	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
+	public ModelAndView Profile(@ModelAttribute MemberBean memberBean) {
 		ModelAndView mav = new ModelAndView();
-		member.setSCode(request.getRequestURI().substring(1));
-		mav = pro.entrance(member);
-		member.setMId("PPP");
-
-		member.setSCode(request.getRequestURI().substring(1));
-
+		memberBean.setMId("PPP");
+		mav = pro.entrance(memberBean);
+		
 		return mav;
 	}
 
-	@RequestMapping(value = { "/MyDeal", "/Detail", "/Waiting", "/Ing", "/End", "/Search", "/Filter" }, method = {
-			RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Deal() {
+	@RequestMapping(value = { "/MyDeal", "/Detail", "/Waiting", "/Ing", "/End", "/Search", "/Filter" }, method = {RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView Deal(@ModelAttribute RequestBean requestBean) {
 		ModelAndView mav = new ModelAndView();
-
-		mav = deal.entrance();
+		
+		mav = deal.entrance(requestBean);
+		
 		return mav;
 	}
 
 	@RequestMapping(value = { "/DealForm", "/ReqSend", "/ModifyForm", "/Modify", "/Delete" }, method = {
 			RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView RequestDeal(@ModelAttribute RequestBean request, BidBean bid) throws IOException {
+	public ModelAndView RequestDeal(@ModelAttribute RequestBean requestBean, BidBean bidBean) throws IOException {
 		ModelAndView mav = new ModelAndView();
-
-		mav = rqd.entrance(request, bid);
+		
+		mav = rqd.entrance(requestBean, bidBean);
+		
 		return mav;
 	}
 
 	@RequestMapping(value = { "/MovePro", "/InsSchedule", "/UpdateSchedule", "/MoveUser", "/AcceptSchedule",
 			"/RejectSchedule", "/OkClick" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Schedule(@ModelAttribute ScheduleBean schedulebean) {
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean) {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav = schedule.entrance(schedulebean);
+		mav = schedule.entrance(scheduleBean);
 
 		return mav;
 	}
 
-	@RequestMapping(value = { "/WriteReview", "/ViewReview", "/ShowReview" }, method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public ModelAndView Review(@ModelAttribute ReviewBean rev) {
+	@RequestMapping(value = { "/WriteReview", "/ViewReview", "/ShowReview" }, method = { RequestMethod.GET,RequestMethod.POST })
+	public ModelAndView Review(@ModelAttribute ReviewBean reviewBean) {
 		ModelAndView mav = new ModelAndView();
-//		rev.setRvWirqCode("6000210307090359");
-//		rev.setRvHelper("JUN");
-//		rev.setRvStar("5");
-//		rev.setRvComment("나쁘지않아요");
-		rev.setSCode(request.getRequestURI().substring(1));
 
-		mav = review.entrance(rev);
+		mav = review.entrance(reviewBean);
+		
 		return mav;
 	}
 
-	@RequestMapping(value = { "/PriceDetail", "/RegisterBid", "/Accept", "/Reject" }, method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public ModelAndView Bid(@ModelAttribute BidBean bidbean) {
+	@RequestMapping(value = { "/PriceDetail", "/RegisterBid", "/Accept", "/Reject" }, method = { RequestMethod.GET,RequestMethod.POST })
+	public ModelAndView Bid(@ModelAttribute BidBean bidBean) {
 		ModelAndView mav = new ModelAndView();
 
-		bidbean.setBidScode(request.getRequestURI().substring(1));
-		System.out.println(request.getRequestURI().substring(1));
-		mav = bid.entrance(bidbean);
+		mav = bid.entrance(bidBean);
 
 		return mav;
 	}
 
-	@RequestMapping(value = { "/RecBox", "/Profile", "/Title", "/SendBox", "/Reply", "/Send" }, method = {
-			RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Messages(@ModelAttribute MessageBean message) {
+	@RequestMapping(value = { "/RecBox", "/Profile", "/Title", "/SendBox", "/Reply", "/Send" }, method = {RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView Messages(@ModelAttribute MessageBean messageBean) {
 		ModelAndView mav = new ModelAndView();
-
-		mav = msg.entrance();
+		
+		mav = msg.entrance(messageBean);
+		
 		return mav;
 	}
 

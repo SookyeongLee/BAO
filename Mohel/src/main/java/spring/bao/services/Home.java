@@ -8,9 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-
 import spring.bao.beans.RequestBean;
-import spring.bao.mapper.AuthenticationIf;
+import spring.bao.mapper.DealIf;
 
 @Service
 
@@ -20,30 +19,26 @@ public class Home {
 	@Autowired
 	private Gson gson;
 	@Autowired
-	private AuthenticationIf mapper;
+	private DealIf mapper;
 	
-	public ModelAndView entrance(RequestBean req) {
+	public ModelAndView entrance(RequestBean requestBean) {
 		ModelAndView mav = new ModelAndView();
 	
-				mav = this.mainCtl(req);
+				mav = this.mainCtl(requestBean);
 	
 				return mav;
 	}
-	
-	
 
 
-
-	private ModelAndView mainCtl(RequestBean req) {
+	private ModelAndView mainCtl(RequestBean requestBean) {
 		ModelAndView mav = new ModelAndView();
-		//this.getRecentList();
+
+		String json = gson.toJson(this.getFilterList(requestBean));
+	    String json2 = gson.toJson(this.getBestFilterList(requestBean));		
+
+	    mav.addObject("requestData", json);
+	    mav.addObject("requestBestData", json2);
 		
-		String jsonData = gson.toJson(this.getRecentList(req));
-		//System.out.println(jsonData);
-		
-		//mav.addObject();
-		mav.addObject("jsonData",jsonData);
-		//System.out.println("값이 들어온다 들어온다 들어온다");
 		
 		mav.setViewName("Authentication/main");
 		
@@ -51,9 +46,13 @@ public class Home {
 	}
 
 
-	private ArrayList<RequestBean> getRecentList(RequestBean req) {
-		return mapper.getRecentList(req);
-	}
+	  private ArrayList<RequestBean> getBestFilterList(RequestBean reqBean) {
+	      return mapper.BestFilterList(reqBean);
+	   }
+
+	   private ArrayList<RequestBean> getFilterList(RequestBean reqBean) {
+	      return mapper.filterList(reqBean);
+	   }
 }
 
 

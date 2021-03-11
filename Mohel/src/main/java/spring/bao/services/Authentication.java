@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 import spring.bao.beans.MemberBean;
 import spring.bao.mapper.AuthenticationIf;
 
-
 @Service
 public class Authentication {
 
@@ -31,13 +30,14 @@ public class Authentication {
 	private AuthenticationIf mapper;
 	@Autowired
 	private PlatformTransactionManager tran;
-	
+	@Autowired
+	private HttpServletRequest request;
 
 	public ModelAndView entrance(MemberBean memberbean) throws IOException {
 
 		ModelAndView mav = new ModelAndView();
 
-		switch (memberbean.getSCode()) {
+		switch (request.getRequestURI().substring(1)) {
 
 		case "LogInForm":
 			mav = this.loginFormCtl(memberbean);
@@ -60,14 +60,12 @@ public class Authentication {
 
 	private ModelAndView logoutCtl(MemberBean member) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("logoutCtl");
 
 		// if(this.isSession()) {
 		this.insAccess(member);
 		// member.setMStCode("-1");
-
-		mav.setViewName("main");
 		mav.addObject("mag", "logout");
+		mav.setViewName("Authentication/main");
 
 		return mav;
 
@@ -78,36 +76,21 @@ public class Authentication {
 		ModelAndView mav = new ModelAndView();
 		// System.out.println("joinCtl");
 		if (this.isMember(member)) {
-			mav.setViewName("login"); // 로그인폼 화면
+			mav.setViewName("Authentication/login"); // 로그인폼 화면
 
 		} else {
 			member.setMRcCode("99");
 			this.insMember(member);
-			mav.setViewName("login");
+			mav.setViewName("Authentication/login");
 
 		}
 
 		return mav;
 	}
 
-	private boolean convetToBoolean(int data) {
-		return data == 1 ? true : false;
-	}
-
-	private boolean insMember(MemberBean member) {
-
-		return this.convetToBoolean(mapper.insMember(member));
-	}
-
-	private boolean isMember(MemberBean member) {
-
-		return this.convetToBoolean(mapper.isMember(member));
-	}
-
 	private ModelAndView joinFormCtl(MemberBean member) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("joinFormCtl");
-		mav.setViewName("join");
+		mav.setViewName("Authentication/join");
 		return mav;
 	}
 
@@ -117,7 +100,6 @@ public class Authentication {
 
 		ModelAndView mav = new ModelAndView();
 		// System.out.println("main");
-		System.out.println(member.getMId());
 
 		if (this.isMember(member)) {
 			if (this.isAccess(member)) {
@@ -141,8 +123,30 @@ public class Authentication {
 				
 			}
 		}
-
 		return mav;
+	}
+	
+	
+	private ModelAndView loginFormCtl(MemberBean member) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("Authentication/login");
+		
+		return mav;
+	}
+
+	private boolean convetToBoolean(int data) {
+		return data == 1 ? true : false;
+	}
+
+	private boolean insMember(MemberBean member) {
+
+		return this.convetToBoolean(mapper.insMember(member));
+	}
+
+	private boolean isMember(MemberBean member) {
+
+		return this.convetToBoolean(mapper.isMember(member));
 	}
 
 	private boolean insAccess(MemberBean member) {
@@ -153,17 +157,5 @@ public class Authentication {
 	private boolean isAccess(MemberBean member) {
 		return this.convetToBoolean(mapper.isAccess(member));
 	}
-
-	private ModelAndView loginFormCtl(MemberBean member) {
-		ModelAndView mav = new ModelAndView();
-
-		// System.out.println("loginFormCtl");
-		System.out.println("loginFormCtl");
-		mav.setViewName("login");
-		return mav;
-	}
-
-	
-	
 
 }
