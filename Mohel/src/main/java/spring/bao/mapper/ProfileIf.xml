@@ -12,7 +12,7 @@
 		 MM_RCCODE = #{mRcCode}		 
 		WHERE MM_ID =#{mId}	
           ]]>
-	 </update>
+	 </update>	
 
 
 

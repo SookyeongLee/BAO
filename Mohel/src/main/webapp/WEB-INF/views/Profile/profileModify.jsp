@@ -164,6 +164,7 @@ function init(){
     let mCareer = json[0].mCareer;
     $('#mCareer').append(mCareer);
 	
+    
 }
 
 
@@ -172,7 +173,8 @@ function init(){
 function UpdateProfile(){
 	let json = JSON.parse('${getProfile}');
 	
-	let jsonmPw = json[0].mPw;
+	  let jsonmPw = json[0].mPw;
+	
 	  let mPw =document.getElementsByName("mPw")[0];
 	  let mPw2 =document.getElementsByName("mPw2")[0];
 	  let mPw3 = document.getElementsByName("mPw")[0];

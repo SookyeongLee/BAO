@@ -1,5 +1,8 @@
 package spring.bao.beans;
 
+import lombok.Data;
+
+@Data
 public class RequestBean {
 	private String rqCode;
 	private String rqId;

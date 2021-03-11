@@ -2,15 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace = "spring.bao.mapper.BidIf">
+	<insert id = "insBi"> 
+<![CDATA[
+	INSERT INTO BI(BI_RQCODE , BI_MMHELPER, BI_PRICE , BI_SYSDATE)
+	VALUES(#{biRqCode},#{biMmHelper},#{biPrice},SYSDATE)  
 
-
-
-
-
-
-
-
-
+  ]]>
+ </insert>
+ 
+ <select id = "getReq" resultType = "spring.bao.beans.BidBean">
+ 	<![CDATA[
+ 				SELECT RQ_CODE  AS rqCode,
+               BI_MMHELPER AS biMmHelper
+        	  FROM RQ INNER JOIN BI ON RQ.RQ_MMID = BI.BI_MMHELPER
+        		]]>
+ </select>
+<!--   rq_mmid 가 아니라 bi helper 가 와야지  -->
+ 
+<!-- 빈두개 리저트타입 안되면 합치는거도 하나의방법 -->
 
 
 

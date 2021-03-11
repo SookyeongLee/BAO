@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.BidBean;
 import spring.bao.beans.MemberBean;
+import spring.bao.beans.RequestBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -81,6 +82,7 @@ public class HomeController {
 	public ModelAndView Profile(@ModelAttribute MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
 		
+		System.out.println(" 컨트롤러 진입");
 		memberbean.setMId("PPP");
 		
 		memberbean.setSCode(request.getRequestURI().substring(1));
@@ -128,11 +130,11 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Bid(@ModelAttribute BidBean bidbean ) {
+	public ModelAndView Bid(@ModelAttribute BidBean bidbean) {
 		ModelAndView mav = new ModelAndView();
 		
+		
 		bidbean.setBidScode(request.getRequestURI().substring(1));
-		System.out.println(request.getRequestURI().substring(1));
 		mav = bid.entrance(bidbean);
 		return mav;
 	}
