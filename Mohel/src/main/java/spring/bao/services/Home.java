@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 
 import spring.bao.beans.RequestBean;
-import spring.bao.mapper.AuthenticationIF;
+import spring.bao.mapper.AuthenticationIf;
 
 @Service
 
@@ -20,11 +18,9 @@ public class Home {
 	
 	public Home() {}
 	@Autowired
-	private PlatformTransactionManager tran;
-	@Autowired
 	private Gson gson;
 	@Autowired
-	private AuthenticationIF mapper;
+	private AuthenticationIf mapper;
 	
 	public ModelAndView entrance(RequestBean req) {
 		ModelAndView mav = new ModelAndView();
