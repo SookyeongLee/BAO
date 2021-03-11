@@ -13,16 +13,18 @@
 <script src="https://kit.fontawesome.com/301043e4a8.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/css/main.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 </head>
-<body>
+<body onLoad="plusSearch()">
 	<!-- Navbar -->
 	<nav id="navbar">
 		<div class="navbar__logo">
 			<a href="#"><img class="navbar__logo__img"
-				src="imgs/common/logo.png"></a>
+				src="resources/imgs/common/logo.png"></a>
 		</div>
 		<ul class="navbar__menu">
-			<li class="navbar__menu__item">마이페이지</li>
+			<li class="navbar__menu__item" onClick="myPageClick()">마이페이지</li>
 			<li class="navbar__menu__item">거래등록</li>
 			<li class="navbar__menu__item">로그인</li>
 		</ul>
@@ -82,16 +84,50 @@
 					<div class="category__menu-icon" onClick="filterClick(6)">
 						<i class="fas fa-running"></i>
 					</div>
-					<div class="category__menu-name">건강/미용</div>			
+					<div class="category__menu-name">건강/미용</div>
 			</ul>
 		</div>
-      <section id="requestList"></section>
-      ${requestData}
-      ${searchData}
-  
-	</body>
-	<script>
+		<!-- 역경매 리스트 -->
+		<div class="list">
+			<!-- 최신순 -->
+			<div class="list__container">
+				<h1 class="list__title">새로운 역경매</h1>
 
+				<ul id="newRequestList" class="list__items"></ul>
+				<ul id="searchData" class="list__items"></ul>
+
+			</div>
+			<!-- 인기순 -->
+			<div class="list__container">
+				<h1 class="list__title">인기 역경매</h1>
+
+				<ul id="TopRequestList" class="list__items"></ul>
+				<ul id="TopsearchData" class="list__items"></ul>
+			</div>
+		</div>
+	</section>
+
+	<%--    ${requestData}
+      ${searchData} --%>
+
+</body>
+<script>
+
+//최신순
+if(JSON.parse('${requestData}').length != 0){
+   filterScreen();  
+}
+
+if(JSON.parse('${requestBestData}').length != 0){
+	   filterBestScreen();  
+ }
+
+ 
+ function plusSearch(){
+	 searchScreen();
+	 BestsearchScreen();
+ }
+	 
        function filterClick(num){
     		let filterCode = (num*1000); 		
 	
@@ -106,56 +142,134 @@
     	    			      input.name = "rqFilterCode";
     	    			      input.value = filterCode;
     	    			      form.appendChild(input);
-    	    			
-    	    			      alert(filterCode);
+    	    				    	
     	    			document.body.appendChild(form);
     	    			form.submit();
     	    	   }
     		}
-    		  let section = document.getElementById("requestList");
-    		  let requestList = JSON.parse('${requestData}');
-    		  alert(requestList[0].rqImage);
-    	     
-    	     /* let record = parseInt(requestList.length/5);
-     		    record = (requestList.length%5 > 0)? record + 1: record;
-     		    for(rIndex=0; rIndex < record; rIndex++){
-     			let div = document.createElement('Div');
-     			div.style.display = "inline-flex";
-     			div.setAttribute("name", "line");
-     			section.appendChild(div);
-     		} 
-  
-     	  for(index=0; index < requestList.length; index++){
-     			let rDivIndex = parseInt(index/5);
-     			let mvDiv = document.createElement('Div');
-     			mvDiv.style.width = "400px";
-     			mvDiv.style.height = "300px";
-     			mvDiv.style.margin = "0px 10px 20px 0px";                
-     			mvDiv.style.backgroundImage = "url(/resources/imgs/filter/" + requestList[index].rqImage + ")"
-     			mvDiv.style.backgroundSize = "contain";
-     			mvDiv.style.cursor = "pointer";0
-     		}*/
-       }
+    		
+       }    
        
-       function searchClick(){
-  
+      function filterScreen(){ 
+      
+        	 let requestList = JSON.parse('${requestData}');
+        	 for(let index=0 ; index<requestList.length ; index++){
+     			
+        	     let rqCode = requestList[index].rqCode;	 
+        		 let insertTr = " ";
+        		 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+        		 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+        		 insertTr += "<div class='list__item__description'>"
+        		 insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+        		 insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+        		 insertTr += "</div>";
+        		 insertTr += "</li>";
+        		 
+        		 $("#newRequestList").append(insertTr);
+        		 } 
+       }	 
+      
+      function filterBestScreen(){ 
+          
+     	 let requestList = JSON.parse('${requestBestData}');
+     	 for(let index=0 ; index<requestList.length ; index++){
+  			
+     	     let rqCode = requestList[index].rqCode;	 
+     		 let insertTr = " ";
+     		 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+     		 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+     		 insertTr += "<div class='list__item__description'>"
+     		 insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+     		 insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+     		 insertTr += "</div>";
+     		 insertTr += "</li>";
+     		 
+     		 $("#TopRequestList").append(insertTr); 
+     		 } 
+    }
+      
+		
+		 function searchClick(){
+			  
+	    	   let form = document.createElement("form");
+	    	   let word = document.getElementsByName("wordValue")[0].value;
+	    	   form.action = "Search";
+	    	   form.method = "Post";    	   
+	    	   
+	    	   let input = document.createElement("input");
+			   input.type = "hidden";
+			   input.name = "rqWord";
+			   input.value = word;
+			   form.appendChild(input);
+	    	   
+	    	   document.body.appendChild(form);
+	    	   form.submit();  
+
+	    	   searchScreen();
+	       }
+		 
+		 
+		 function searchScreen(){
+		 
+			 let searchList = JSON.parse('${searchData}');
+		 for(let index=0 ; index<searchList.length ; index++){
+				
+		     let rqCode = searchList[index].rqCode;	 
+			 let insertTr = " ";
+			 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+			 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+searchList[index].rqImage+"'>";
+			 insertTr += "<div class='list__item__description'>"
+			 insertTr += "<h4 class='list__item-mainCtg'>"+searchList[index].rqSubName+"</h4>";
+			 insertTr += "<div class='list__item-title'>"+searchList[index].rqTitle+"</div>";
+			 insertTr += "</div>";
+			 insertTr += "</li>";
+			 
+			 $("#searchData").append(insertTr);
+		  }
+		 } 
+		 
+		 function BestsearchScreen(){
+			 
+			 let searchList = JSON.parse('${searchBestData}');
+		 for(let index=0 ; index<searchList.length ; index++){
+				
+		     let rqCode = searchList[index].rqCode;	 
+			 let insertTr = " ";
+			 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+			 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+searchList[index].rqImage+"'>";
+			 insertTr += "<div class='list__item__description'>"
+			 insertTr += "<h4 class='list__item-mainCtg'>"+searchList[index].rqSubName+"</h4>";
+			 insertTr += "<div class='list__item-title'>"+searchList[index].rqTitle+"</div>";
+			 insertTr += "</div>";
+			 insertTr += "</li>";
+			 
+			 $("#TopsearchData").append(insertTr);
+		  }
+		 } 
+	
+	  function DetailClick(rqCode){
+			var rqCode = rqCode;
+			var form = document.createElement("form");
+			form.action = "Detail";
+			form.method = "Post";
+			
+			var input = document.createElement("input");
+			      input.type = "hidden";
+			      input.name = "rqCode";
+			      input.value = rqCode;
+			      alert(input.value);
+			      form.appendChild(input);
+			
+			document.body.appendChild(form);
+			form.submit();
+		}
+	  
+       function myPageClick(){
     	   let form = document.createElement("form");
-    	   let word = document.getElementsByName("wordValue")[0].value;
-    	   form.action = "Search";
+    	   form.action = "MyProfile";
     	   form.method = "Post";
-    	   
-    	   
-    	   
-    	   let input = document.createElement("input");
-		   input.type = "hidden";
-		   input.name = "rqWord";
-		   input.value = word;
-		   alert(word);
-		   form.appendChild(input);
-    	   
     	   document.body.appendChild(form);
     	   form.submit();
-    	   
        }
     
     </script>

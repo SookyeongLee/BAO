@@ -12,6 +12,7 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="/resources/src/main.js" defer></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -35,12 +36,28 @@
             </div>
         </div>        
     </nav>     
-    <!--Mypage Navbar -->
+   <!--Mypage Navbar -->
     <nav id="mypage">
         <ul class="mypage__menu">
-            <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item"><a href="#">경매내역</a></li>                    
-            <li class="mypage__menu__item"><a href="#">메시지</a></li> 
+            <li class="mypage__menu__item">
+                <button type="button">프로필</button>
+            </li>
+            <li class="mypage__menu__item">
+                <button type="button" class="deal-btn">거래상태</button>
+                <ul class="navbar__list deal-list">
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
+                </ul>
+            </li>                    
+            <li class="mypage__menu__item">
+                <button type="button" class="message-btn">메시지</button>
+                <ul class="navbar__list message-list">
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
+                </ul>
+            </li> 
         </ul>
     </nav>
     <!-- Profile -->
@@ -82,4 +99,15 @@
         </div>
     </div>
 </body>
+<script>
+   function waitingClick(){
+		let form = document.createElement("form");
+		form.action = "WaitingWisher";
+		form.method = "Post";	
+		  		    	
+		alert(form.action);
+		document.body.appendChild(form);
+		form.submit();
+   }
+</script>
 </html>

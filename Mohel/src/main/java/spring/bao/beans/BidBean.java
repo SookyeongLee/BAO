@@ -1,6 +1,10 @@
 package spring.bao.beans;
 
+import lombok.Data;
+
+@Data
 public class BidBean {
+
 	private String biCode;
 	private String biHelper;
 	private String biPrice;
