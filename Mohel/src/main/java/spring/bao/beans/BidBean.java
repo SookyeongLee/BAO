@@ -11,4 +11,5 @@ public class BidBean {
 	private String biComment;
 	private String winHelper;
 	private String winPrice;
+	private String bidScode;
 }

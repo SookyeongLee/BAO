@@ -1,10 +1,15 @@
 Manifest-Version: 1.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 Built-By: e
 Build-Jdk: 1.8.0_275
 =======
 Built-By: 15
 Build-Jdk: 15.0.1
 >>>>>>> refs/remotes/origin/DOYOUNG
+=======
+Built-By: 6
+Build-Jdk: 1.8.0_271
+>>>>>>> refs/remotes/origin/hyeok
 Created-By: Maven Integration for Eclipse
 

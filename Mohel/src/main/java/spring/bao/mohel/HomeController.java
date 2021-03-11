@@ -1,5 +1,6 @@
 package spring.bao.mohel;
 
+<<<<<<< HEAD
 import java.io.IOException;
 <<<<<<< HEAD
 import java.io.UnsupportedEncodingException;
@@ -11,13 +12,14 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+=======
+>>>>>>> refs/remotes/origin/hyeok
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,6 +74,7 @@ public class HomeController {
 	private Messages msg;
 	@Autowired
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private HttpServletRequest request;
 	@Autowired
 	private Home home;
@@ -79,6 +82,9 @@ public class HomeController {
 	private HttpServletRequest hsr;
 	
 	ModelAndView mav = null;
+=======
+	private HttpServletRequest request;
+>>>>>>> refs/remotes/origin/hyeok
 
 >>>>>>> refs/remotes/origin/DOYOUNG
 
@@ -98,17 +104,26 @@ public class HomeController {
 //	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping(value = {"/LogInForm","/Login","/JoinForm","/Join","/Logout"},
 =======
 	@RequestMapping(value = {"/","/Main","/LogInForm","/Login","/JoinForm","/Join","/Logout"},
 >>>>>>> refs/remotes/origin/DOYOUNG
+=======
+	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout","/DealForm"},
+>>>>>>> refs/remotes/origin/hyeok
 			method = {RequestMethod.GET,RequestMethod.POST})
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) throws IOException {
 =======
 		public ModelAndView Auth(@ModelAttribute MemberBean member) {
 >>>>>>> refs/remotes/origin/DOYOUNG
+=======
+	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) {
+>>>>>>> refs/remotes/origin/hyeok
 		ModelAndView mav = new ModelAndView();
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 		member.setSCode(hsr.getRequestURI().substring(1));
@@ -124,14 +139,26 @@ public class HomeController {
 	mav.setViewName("Profile/profileClick");
 
 >>>>>>> refs/remotes/origin/DOYOUNG
+=======
+	//	System.out.println(request.getRequestURI().substring(1));		
+	//	mav = auth.entrance();
+	//	memberbean.setSCode(request.getRequestURI().substring(1));
+	//	mav = auth.entrance(memberbean);
+		mav.setViewName("main");
+>>>>>>> refs/remotes/origin/hyeok
 		return mav;
 	}
 	
 	@RequestMapping(value = {"/","/Main"},
 			method = {RequestMethod.GET,RequestMethod.POST})
+<<<<<<< HEAD
 	public ModelAndView Main(@ModelAttribute RequestBean req) {
+=======
+	public ModelAndView Profile(@ModelAttribute MemberBean memberbean) {
+>>>>>>> refs/remotes/origin/hyeok
 		ModelAndView mav = new ModelAndView();
 		
+<<<<<<< HEAD
 		 req.setRqCode(request.getRequestURI().substring(1));
 		
 		 mav = home.entrance(req);
@@ -145,6 +172,12 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		member.setSCode(hsr.getRequestURI().substring(1));
 		mav = pro.entrance(member);
+=======
+		memberbean.setMId("PPP");
+		
+		memberbean.setSCode(request.getRequestURI().substring(1));
+		mav = pro.entrance(memberbean);
+>>>>>>> refs/remotes/origin/hyeok
 		return mav;
 	}
 	
@@ -152,6 +185,7 @@ public class HomeController {
 			method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView Deal() {
 		ModelAndView mav = new ModelAndView();
+		
 		
 		mav = deal.entrance();
 		return mav;
@@ -207,11 +241,17 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Bid() {
+	public ModelAndView Bid(@ModelAttribute BidBean bidbean ) {
 		ModelAndView mav = new ModelAndView();
 		
+<<<<<<< HEAD
 		mav = bid.entrance();
 		
+=======
+		bidbean.setBidScode(request.getRequestURI().substring(1));
+		System.out.println(request.getRequestURI().substring(1));
+		mav = bid.entrance(bidbean);
+>>>>>>> refs/remotes/origin/hyeok
 		return mav;
 	}
 	

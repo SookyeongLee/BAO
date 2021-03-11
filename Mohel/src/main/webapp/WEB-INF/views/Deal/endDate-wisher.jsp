@@ -59,6 +59,7 @@
                 </ul>
             </li> 
         </ul>
+<<<<<<< HEAD
         <a href="#" onclick="http://192.168.1.108/WriteReview', '리뷰작성', 'top=100px, left=100px, height=800px, width=800px')"></a>
     </nav>
     <!-- waiting-helper -->
@@ -123,4 +124,53 @@ function onreview(){
 
 
 </script>
+=======
+    </nav>
+    <!-- waiting-helper -->
+    <section class="dealList mypage">
+        <h2 class="mypage__title">완료</h2>
+        <div class="dealList__container">
+            <ul class="dealList__account">
+                <li class="dealList__account__member"><button type="button" class="dealList__account__btn">helper</button></li>
+                <li class="dealList__account__member"><button type="button" class="dealList__account__btn">wisher</button></li>
+            </ul>
+            <div class="dealList__list__container">
+                <div class="dealList__member">wisher</div>
+                <ul class="dealList__list">
+                    <li class="dealList__list__item">
+                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/2000.jpg"></div>
+                        <ul class="dealList__description">
+                            <li><button type="button" class="dealList-btn dealList-writeReview">리뷰작성</button></li>
+                            <li class="dealList-subCtg">인테리어</li>
+                            <li class="dealList-title">거실 인테리어 요청</li>
+                        </ul>
+                    </li>
+                    <li class="dealList__list__item">
+                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/4000.jpg"></div>
+                        <ul class="dealList__description">
+                            <li><button type="button" class="dealList-btn dealList-viewReview">리뷰보기</button></li>
+                            <li class="dealList-subCtg">일러스트 디자인</li>
+                            <li class="dealList-title">컵에 넣을 동물 일러스트가 필요합니다.</li>
+                        </ul>
+                    </li>
+                    <li class="dealList__list__item">
+                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/5000.jpg"></div>
+                        <ul class="dealList__description">
+                            <li><div class="dealList-uncontacted">성사되지 않은 경매</div></li>
+                            <li class="dealList-subCtg">웹사이트 개발</li>
+                            <li class="dealList-title">쇼핑몰 사이트 개발</li>
+                        </ul>
+                    </li>
+                    <li class="dealList__list__item dealList__list__item__more">                       
+                        <button type="button" class="dealList__more__btn">
+                            <span><i class="fas fa-plus"></i></span>
+                            <span>더보기</span>
+                        </button>                        
+                    </li>
+                </ul>    
+            </div>
+        </div>
+    </section>
+</body>
+>>>>>>> refs/remotes/origin/hyeok
 </html>

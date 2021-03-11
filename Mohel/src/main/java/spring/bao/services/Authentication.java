@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import spring.bao.beans.MemberBean;
 import spring.bao.mapper.AuthenticationIf;
 
+
 @Service
 public class Authentication {
 
@@ -140,6 +141,8 @@ public class Authentication {
 
 				out.flush();
 				mav.setViewName("Authentication/login");
+
+				
 			}
 		}
 
@@ -174,5 +177,14 @@ public class Authentication {
 
 		return mav;
 	}
+
+		private ModelAndView mainCtl() {
+			ModelAndView mav = new ModelAndView();
+			System.out.println("mainCtl");
+		//	this.getRecentList();
+			mav.setViewName("main");
+			System.out.println("왜안들어가냐 여기까지 왔는데도");
+			return mav;
+		}
 
 }

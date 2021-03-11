@@ -65,7 +65,11 @@
                     </tr>
                 </table>
                 <div class="deal__button">
+<<<<<<< HEAD
                     <button type="button" class="deal__btn2">입찰하기</button>
+=======
+                    <button type="button" class="deal__btn2" >입찰하기</button>
+>>>>>>> refs/remotes/origin/hyeok
                 </div>
             </div>
         </div>

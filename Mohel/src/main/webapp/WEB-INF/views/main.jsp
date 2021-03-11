@@ -10,7 +10,7 @@
     <meta name="description" content="메인 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="../../resources/css/main.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -189,4 +189,5 @@
     }
     </script>
 </body>
+
 </html>
