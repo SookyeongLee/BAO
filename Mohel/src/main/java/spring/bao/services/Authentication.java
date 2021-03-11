@@ -30,11 +30,8 @@ public class Authentication {
 	@Autowired
 	private AuthenticationIf mapper;
 	@Autowired
-	private HttpServletRequest request;
-	@Autowired
 	private PlatformTransactionManager tran;
-	@Autowired
-	private Gson gson;
+	
 
 	public ModelAndView entrance(MemberBean memberbean) throws IOException {
 
@@ -77,7 +74,6 @@ public class Authentication {
 	}
 
 	private ModelAndView joinCtl(MemberBean member) {
-		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
 		// System.out.println("joinCtl");
@@ -167,24 +163,7 @@ public class Authentication {
 		return mav;
 	}
 
-	private ModelAndView mainCtl(MemberBean member) {
-		ModelAndView mav = new ModelAndView();
-//			this.getRecentList();
-		Gson gson = new Gson();
-//			String jsonData = gson.toJson(mapper.getRecentList(member));
-
-		mav.setViewName("main");
-
-		return mav;
-	}
-
-		private ModelAndView mainCtl() {
-			ModelAndView mav = new ModelAndView();
-			System.out.println("mainCtl");
-		//	this.getRecentList();
-			mav.setViewName("main");
-			System.out.println("왜안들어가냐 여기까지 왔는데도");
-			return mav;
-		}
+	
+	
 
 }

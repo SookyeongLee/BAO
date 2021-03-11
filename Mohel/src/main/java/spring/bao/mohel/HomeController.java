@@ -85,8 +85,6 @@ public class HomeController {
 
 		ModelAndView mav = new ModelAndView();
 
-		req.setRqCode(request.getRequestURI().substring(1));
-
 		mav = home.entrance(req);
 		return mav;
 	}

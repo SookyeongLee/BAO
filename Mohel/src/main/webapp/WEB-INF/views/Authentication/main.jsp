@@ -76,11 +76,7 @@
             <!-- 최신순 -->
             <div class="list__container">
                 <h1 class="list__title">새로운 역경매</h1>
-<<<<<<< HEAD
                 <ul class="list__items" id="new">
-                  
-=======
-                <ul class="list__items">
                     <li class="list__item">
                         <img class="list__item__img" src="/resources/imgs/common/1000.jpg">
                         <div class="list__item__description">

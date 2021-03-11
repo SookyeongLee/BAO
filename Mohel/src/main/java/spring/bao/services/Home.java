@@ -24,16 +24,9 @@ public class Home {
 	
 	public ModelAndView entrance(RequestBean req) {
 		ModelAndView mav = new ModelAndView();
-		
-		switch(req.getRqCode()) {
-			
-			case "" : 
-				mav= this.mainCtl(req);
-				break;
-			case "Main":
+	
 				mav = this.mainCtl(req);
-				break;
-		}
+	
 				return mav;
 	}
 	
