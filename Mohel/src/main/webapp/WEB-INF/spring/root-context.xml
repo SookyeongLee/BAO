@@ -19,15 +19,7 @@
 		<bean id="BAO" class="com.zaxxer.hikari.HikariConfig">
 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 			<property name="jdbcUrl" value="jdbc:oracle:thin:@db.bao.hoonzzang.com:7041:xe"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-			<property name="username" value="PHO"/>
-=======
-			<property name="username" value="KDY"/>
->>>>>>> refs/remotes/origin/DOYOUNG
-=======
-			<property name="username" value="BJH"/>
->>>>>>> refs/remotes/origin/hyeok
+			<property name="username" value="BAO"/>
 			<property name="password" value="1234"/>
 		</bean>
 	
