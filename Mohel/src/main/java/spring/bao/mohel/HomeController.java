@@ -1,5 +1,7 @@
 package spring.bao.mohel;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -130,12 +132,13 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Bid(@ModelAttribute BidBean bidbean) {
+	public ModelAndView Bid(@ModelAttribute BidBean bidbean , MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
 		
-		
 		bidbean.setBidScode(request.getRequestURI().substring(1));
-		mav = bid.entrance(bidbean);
+		
+		mav = bid.entrance(bidbean, memberbean);
+		//System.out.println(mav.getModel().get("insBi"));
 		return mav;
 	}
 	
@@ -147,6 +150,15 @@ public class HomeController {
 		mav = msg.entrance();
 		return mav;
 	}
+	
+//	@RequestMapping(value = "/test" ,
+//			method = {RequestMethod.GET,RequestMethod.POST})
+//	public String test() {
+//		
+//		ModelAndView mav = new ModelAndView();
+//		mav = msg.entrance();
+//		return URLEncoder.encode(mav.getModel().get(" "),"UTF-8");
+//	}
 
 
 	

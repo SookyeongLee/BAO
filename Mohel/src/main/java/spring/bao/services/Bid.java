@@ -33,7 +33,7 @@ public class Bid {
 	private BidIf mapper;
 	
 	
-	public ModelAndView entrance(BidBean bidbean ) {
+	public ModelAndView entrance(BidBean bidbean , MemberBean memberbean) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -41,7 +41,7 @@ public class Bid {
 		switch(bidbean.getBidScode()) {
 		
 		case "PriceDetail":
-			mav = this.priceDetailCtl(bidbean);
+			mav = this.priceDetailCtl(bidbean, memberbean);
 			break;
 		case "RegisterBid":
 			mav = this.registerBidCtl(bidbean);
@@ -75,30 +75,50 @@ public class Bid {
 	
 	private ModelAndView registerBidCtl(BidBean bidbean) { //레지스터 입찰
 		ModelAndView mav = new ModelAndView();
-
-		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
+		System.out.println("레지스터 bid ctl 진입");
+		System.out.println(bidbean.getBiRqCode());
+		if(this.insBi(bidbean)) {
+			System.out.println("insBi 매퍼출동");
+			mav.addObject("insBi","인서트");
+			System.out.println("insBi매퍼 성공");
+			mav.setViewName("Deal/bidAfter");
+			
+		}
 	
-		this.insBi(bidbean);
-		tran.commit(status);
-		
-		mav.setViewName("Profile/profile");
+
 		return mav;
+		
 	}
 	
-	private ModelAndView priceDetailCtl(BidBean bidbean) { // 가격 상세 
+	
+	private ModelAndView priceDetailCtl(BidBean bidbean ,MemberBean memberbean) { // 가격 상세 
 	
 		System.out.println("priceDetailCtl 진입");
 		
-		bidbean.setRqCode("2000210309040334");
-		bidbean.setBiMmHelper("JUN");
+		bidbean.setRqCode("1000210305090308");	
+		memberbean.setAlMmid("JUN");
+		bidbean.setBiMmHelperView("JUN");
+		
+		
+		
+		
 		System.out.println(bidbean.getRqCode());
-		System.out.println(bidbean.getBiMmHelper());
-		
-		
+		System.out.println(bidbean.getBiMmHelperView());
+		System.out.println(bidbean.getAlMmid());
 		ModelAndView mav = new ModelAndView();
 		String json = gson.toJson(this.getReq(bidbean));
-		System.out.println("매퍼진입 성공 후 리턴");
+		System.out.println("getReq 매퍼진입 갔다왔습니다");
 		mav.addObject("getReq",json);
+		
+		String json2 = gson.toJson(this.getReq2(memberbean));
+		mav.addObject("getReq2",json2);
+		System.out.println(json2);
+		
+		
+		String bidjson = gson.toJson(this.bidList(bidbean));
+		mav.addObject("bidList",bidjson);
+		System.out.println(bidjson);
+		System.out.println("bidList 매퍼 다녀옴");
 		
 		mav.setViewName("Deal/beforeDeal-helper");
 		return mav;
@@ -110,16 +130,26 @@ public class Bid {
 		return data==1?true :false;
 	}
 
-	private ArrayList<BidBean> getReqDetail(BidBean bidbean) {
-		return mapper.getReqDetail(bidbean);
+	private ArrayList<BidBean> bidList(BidBean bidbean) {
+		System.out.println("bidList 매퍼 진입합니다.");
+		return mapper.bidList(bidbean);
 	}
 	private ArrayList<BidBean> getReq(BidBean bidbean) {
-		System.out.println("매퍼진입합니다");
+		System.out.println("getReq매퍼진입합니다");
 		return mapper.getReq(bidbean);
 	}
 	private boolean insBi(BidBean bidbean) {
+		System.out.println("insBi매퍼 진입합니다");
 		return ConvertToBoolean(mapper.insBi(bidbean));
 		
+	}
+	
+	private boolean isBiCheck(BidBean bidbean) {
+		return ConvertToBoolean(mapper.isBiCheck(bidbean));
+	}
+	
+	private ArrayList<MemberBean> getReq2(MemberBean memberbean){
+		return mapper.getReq2(memberbean);
 	}
 	
 }

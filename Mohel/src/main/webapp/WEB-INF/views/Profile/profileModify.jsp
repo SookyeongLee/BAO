@@ -118,16 +118,16 @@ function init(){
 	
 	let json = JSON.parse('${getProfile}');
 		
-    let proInfomId = document.getElementById("mId"); 
+    let proInfomId = document.getElementById("mId");         
     let mId = document.createElement('Div');              
     mId.textContent = json[0].mId;  
     proInfomId.appendChild(mId);
     
     
-    let proInfomEmail = document.getElementById("mEmailz");
-    let mEmail = document.createElement('hidden');
-    mEmail.textContent = json[0].mEmail; 
-    proInfomEmail.appendChild(mEmail);
+    let proInfomEmail = document.getElementById("mEmailz");        
+    let mEmail = document.createElement('hidden');					
+    mEmail.textContent = json[0].mEmail;  							
+    proInfomEmail.appendChild(mEmail);                             
     
     
     let proInfommRcCode = document.getElementById("mRcCodez");
@@ -150,6 +150,7 @@ function init(){
     
     let a = document.getElementById("mEmailz");
     $('input[name=mEmail]').attr('value',a.innerText);
+    
     let b = document.getElementById("mRcCodez");     
     $('select[name=mRcCode]').attr('value',b.innerText);
     
