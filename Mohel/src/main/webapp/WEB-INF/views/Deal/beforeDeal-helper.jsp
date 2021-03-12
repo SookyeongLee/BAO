@@ -67,6 +67,10 @@
                     </tr>
                 </table>       
                             
+                            
+<!--                           -------------------------------------------------------------------------------------------------------- -->
+
+                            
                	<input type="hidden" name="rqCode" id="rqCode">
             <input type="hidden" name="rqId" id="rqId">    
                 <div class="deal__button">
@@ -199,7 +203,7 @@
  	$('#rqSysDate').append(rqSysDate);
     }
    
-    function modify(){
+    
     	
     	
     	var rqCode = document.getElementsByName("rqCode")[0];
@@ -207,39 +211,6 @@
     	
     
     	
-    	var form = document.createElement("form");
-        form.action="ModifyForm";
-        form.post="post";
-        
-        form.appendChild(rqCode);
-        form.appendChild(rqId);
-        
-        document.body.appendChild(form);
-	       
-	      
-	       form.submit();	    	  
-	      
-	    	
-	      
-    }
-    
-    function deletez(){
-		
-    	var rqCode = document.getElementsByName("rqCode")[0];
-    	var rqId = document.getElementsByName("rqId")[0];
     	
-    	var form = document.createElement("form");
-        form.action="Delete";
-        form.post="post";
-        
-        form.appendChild(rqCode);
-        form.appendChild(rqId);
-        
-        document.body.appendChild(form);
-	       
-	      
-	       form.submit();
-	 
-    }
 </script>
 </html>

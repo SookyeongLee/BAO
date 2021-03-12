@@ -19,7 +19,7 @@ public class RequestBean {
 	private String rqDate;
 	private String rqStCode;
 	private String rqRcCode;	
-	private String img;
+//	private String img;
 	private String rqSysDate;
 	private String rqRcName;
 }

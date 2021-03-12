@@ -69,6 +69,7 @@
            
             <input type="hidden" name="rqCode" id="rqCode">
             <input type="hidden" name="rqId" id="rqId">
+            <input type="hidden" name="rqImage" id="rqImage">
                 <div class="deal__button">
                     <button type="button" class="deal__btn1" onclick="modify()">수정하기</button>
                     <button type="button" class="deal__btn2" onclick="deletez()">삭제하기</button>	        
@@ -176,7 +177,7 @@
    	 
  	let json = JSON.parse('${rqd}');
  	
-
+	alert('${rqd }');
  	
  	
  	
@@ -217,6 +218,11 @@
  	
  	let rqSysDate = json[0].rqSysDate;
  	$('#rqSysDate').append(rqSysDate);
+ 	
+ 	let rqImage= json[0].rqImage;
+ 	$('#rqImage').append(rqImage);
+ 	
+ 	alert(rqImage);
     }
    
     function modify(){

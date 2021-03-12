@@ -1,6 +1,7 @@
 package spring.bao.services;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,8 @@ public class Authentication {
 	private PlatformTransactionManager tran;
 	@Autowired
 	private Gson gson;
-	
+//	@Autowired
+//	HttpSession session = request.getSession(true);
 	
 
 		public ModelAndView entrance(MemberBean memberbean) {

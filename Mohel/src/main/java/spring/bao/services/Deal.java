@@ -3,6 +3,7 @@ package spring.bao.services;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,17 @@ import spring.bao.mapper.dealIf;
 
 @Service
 public class Deal {
+//	@Autowired
+//	private HttpServletRequest request;
 	@Autowired
 	private PlatformTransactionManager tran;
 	@Autowired
 	private dealIf dealIf;
 	@Autowired
 	private Gson gson;
+////	@Autowired
+//	HttpSession session = request.getSession(true);
+	
 	public Deal() {
 		
 	}
@@ -106,26 +112,20 @@ ModelAndView mav = new ModelAndView();
 		request.setRqCode("4000210305090348");
 		request.setRqId("DOYOUNG");
 		
-	
+		
+		
 			String jsonData = gson.toJson(this.getReqDetail(request));
 			System.out.println(jsonData);
-			mav.addObject("rqd", jsonData);                                                                                                                     
+			mav.addObject("rqd", jsonData);
 			mav.setViewName("Deal/beforeDeal-wisher");
 			
+
 		
 		return mav;
 	}
-	private boolean deleteReqDetail(RequestBean request) {
-		return this.convetToBoolean(dealIf.deleteReqDetail(request));
-	}
-	private boolean isBidder(BidBean bid) {
-		return this.convetToBoolean(dealIf.isBidder(bid));
-	}
-	private boolean convetToBoolean(int data) {
-		return data == 1 ? true : false;
-	}
+	
+	
 	private ArrayList<RequestBean> getReqDetail(RequestBean request) {
-		System.out.println("Hi Detail");
 		return dealIf.getReqDetail(request);
 	}
 }

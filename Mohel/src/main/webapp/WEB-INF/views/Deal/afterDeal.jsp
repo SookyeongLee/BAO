@@ -120,45 +120,10 @@
  	$('#rqSysDate').append(rqSysDate);
     }
    
-    function modify(){
+   
     	var rqCode = document.getElementsByName("rqCode")[0];
     	var rqId = document.getElementsByName("rqId")[0];
     	
-    	alert(rqCode.value);
-    	alert(rqId.value);
-    	
-    	var form = document.createElement("form");
-        form.action="ModifyForm";
-        form.post="post";
-        
-        form.appendChild(rqCode);
-        form.appendChild(rqId);
-        
-        document.body.appendChild(form);
-	       
-	       
-	       form.submit();
-    }
     
-    function deletez(){
-		
-    	var rqCode = document.getElementsByName("rqCode")[0];
-    	var rqId = document.getElementsByName("rqId")[0];
-    	
-    	alert(rqCode.value);
-    	alert(rqId.value);
-    	var form = document.createElement("form");
-        form.action="Delete";
-        form.post="post";
-        
-        form.appendChild(rqCode);
-        form.appendChild(rqId);
-        
-        document.body.appendChild(form);
-	       
-	       
-	       form.submit();
-	 
-    }
 </script>
 </html>
