@@ -55,12 +55,12 @@ function recBox(){
 	document.body.appendChild(form);
 	form.submit();
 }
-function msgForm(){
-	
-	let form = document.createElement("form");
-	form.action="MsgForm";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
+//function msgForm(){
+//	
+//	let form = document.createElement("form");
+//	form.action="MsgForm";
+//	form.method="POST";
+//	document.body.appendChild(form);
+//	form.submit();
+//}
 

@@ -79,7 +79,7 @@ function init(){
 	insertLi += "</ul>";
 	insertLi += "<div class='msgDetail__contents'>"+msg[0].msComment+"</div>";
 	insertLi += "<div class='mypage__bottom'>";
-	insertLi += "<button type='button' class='mypage__btn' onClick='msgReply()'>답장하기</button>";
+	insertLi += "<button type='button' class='mypage__btn' onClick='msgForm()'>답장하기</button>";
 	insertLi += "</div>";
    
     $("#messageDetail").append(insertLi);
@@ -87,7 +87,7 @@ function init(){
 	
 }
 
-function msgReply(){
+function msgForm(){
 	//서버전송
 	let msg = JSON.parse('${dataList}');
 	alert('${dataList}');
