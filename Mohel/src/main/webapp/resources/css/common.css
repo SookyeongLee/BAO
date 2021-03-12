@@ -600,6 +600,22 @@ select {
 .review__list__score-star .fas {
   cursor: default;
 }
+/* schedule */
+  .schedule__info {
+    width: 100%;
+  }
+  .schedule__title {
+    width: 5%;
+    text-align: left;
+    font-size: var(--font-micro);
+    padding: 10px 0 5px;
+  }
+  .schedule__contents {
+    width: 70%;
+    align-content: left;
+    font-size: var(--font-micro);
+    padding: 10px 0 5px;
+  }
 
 /* dealList */
 /* Request */

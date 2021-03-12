@@ -11,7 +11,7 @@
 	
 	<insert id="insReqSend">
 		INSERT INTO RQ(RQ_CODE, RQ_MMID, RQ_TITLE, RQ_COMMENT, RQ_FILTERCODE, RQ_SUBCODE, RQ_PERIOD, RQ_SYSDATE, RQ_STCODE, RQ_RCCODE)
-		VALUES(#{rqFilterCode}||TO_CHAR(SYSDATE,'YYMMDDHHMMSS'),#{rqId},#{rqTitle},#{rqComment},#{rqFilterCode},#{rqSubCode},#{rqPeriod},SYSDATE,#{rqStCode},#{rqRcCode})
+		VALUES(#{rqFilterCode}||TO_CHAR(SYSDATE,'YYMMDDHHMMSS'),#{rqId},#{rqTitle},#{rqComment},#{rqFilterCode},#{rqSubCode},#{rqPeriod},SYSDATE,#{rqStatus},#{rqRcCode})
 	</insert>
 	
 <!-- 	<insert id="insReq" > -->

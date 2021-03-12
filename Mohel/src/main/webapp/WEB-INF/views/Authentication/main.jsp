@@ -22,7 +22,7 @@
         </div>
         <ul class="navbar__menu">
             <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
-            <li class="navbar__menu__item">역경매등록</li>                    
+            <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                    
             <li class='navbar__menu__item' id="logCk" value="aa" onClick='login()'>로그인</li>
         </ul>
     </nav>
@@ -294,7 +294,15 @@ function login(){
    form.submit();
 
 }
-
+//경매글 올리기
+function registerReq(){
+	 let form = document.createElement("form");
+     form.action = "DealForm";
+     form.method = "Post";
+     document.body.appendChild(form);
+     form.submit();
+ 
+}
 
 </script>
 </html>

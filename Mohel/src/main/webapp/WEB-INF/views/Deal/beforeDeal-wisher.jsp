@@ -18,7 +18,7 @@
     <nav id="navbar">
         <div class="navbar__top">
             <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
+                <a href="Main"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
             </div>
             <div class="navbar__right">
                 <div class="navbar__search">

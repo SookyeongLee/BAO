@@ -8,19 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 프로필 수정</title>
     <meta name="description" content="프로필 수정 페이지">
-<<<<<<< HEAD
-    <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
+    <link rel="icon" type="image/png" href="../../resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/common.css">
+    <link rel="stylesheet" href="../../resources/css/common.css">
     <script src="/resources/src/main.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+    
 </head>
-<body>
+ <body onLoad="init()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
             <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
+                <a href="Main"><img class="navbar__logo__img" src="../../resources/imgs/common/logo-white.png"></a>
             </div>
             <div class="navbar__right">
                 <div class="navbar__search">
@@ -30,18 +32,18 @@
                     </button>
                 </div>
                 <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">역경매등록</li>                    
+                     <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+         		     <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>              
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
         </div>        
     </nav>     
-    <!--Mypage Navbar -->
+     <!--Mypage Navbar -->
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item">
-                <button type="button">프로필</button>
+                <button type="button" onClick="myPageClick()">프로필</button>
             </li>
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
@@ -54,116 +56,11 @@
             <li class="mypage__menu__item">
                 <button type="button" class="message-btn">메시지</button>
                 <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
                 </ul>
             </li> 
-        </ul>
-    </nav>
-    <!-- Profile -->
-    <section class="profile mypage">
-        <div class="profile__container">
-            <h2 class="mypage__title profile__h2">프로필 수정</h2>
-            <form name="updateProfileInfo" id="updateProfileInfo" action="UpdateProfile" method="POST">
-                <table class="profile__info"> 
-                    <tr class="profile__list">
-                        <th class="profile__title">아이디</th>
-                        <td class="profile__contents">soo</td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title"><label for="pw">비밀번호</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="password" id="pw" name="pw"></td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title"><label for="pw-check">비밀번호 확인</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="password" id="pw-check" name="pw-check"></td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title"><label for="pw-change">새 비밀번호</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="password" id="pw-change" name="pw-change"></td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title"><label for="email">E-mail</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="email" id="email" name="email"></td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title"><label for="region">사는곳</label></th>
-                        <td class="profile__contents">
-                            <select name="region" id="region" class="profile__input">
-                                <option value="select">Select</option>
-                                <option value="01">서울</option>
-                                <option value="02">인천</option>
-                                <option value="03">부산</option>
-                                <option value="04">대구</option>
-                                <option value="05">광주</option>
-                                <option value="06">대전</option>
-                                <option value="07">울산</option>
-                                <option value="08">세종</option>
-                                <option value="09">경기</option>
-                                <option value="10">강원</option>
-                                <option value="11">충북</option>
-                                <option value="12">충남</option>
-                                <option value="13">전북</option>
-                                <option value="14">전남</option>
-                                <option value="15">경북</option>
-                                <option value="16">경남</option>
-                                <option value="17">제주</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title"><label for="division">소속</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="text" id="division" name="division"></td>
-                    </tr>
-                    <tr class="profile__list">
-                        <th class="profile__title"><label for="career">경력</label></th>
-                        <td class="profile__contents"><textarea class="profile__textarea" id="career" name="career" cols="60" rows="6"></textarea></td>
-                    </tr>
-                </table>
-                <div class="mypage__bottom">
-                    <button type="button" class="mypage__btn">적용하기</button>
-                </div>
-            </form>
-        </div>
-    </section>
-</body>
-=======
-    <link rel="icon" type="image/png" href="../../resources/imgs/common/logo-m.png">
-    <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../resources/css/common.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-</head>
- <body onLoad="init()">
-    <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="../../resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">거래등록</li>                    
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
-    <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item"><a href="#">거래내역</a></li>                    
-            <li class="mypage__menu__item"><a href="#">메시지</a></li> 
         </ul>
     </nav>
     <!-- Profile -->
@@ -236,19 +133,19 @@
 <script>
 
 function init(){
-	
-	let json = JSON.parse('${getProfile}');
-		
+   
+   let json = JSON.parse('${getProfile}');
+      
     let proInfomId = document.getElementById("mId"); 
     let mId = document.createElement('Div');              
     mId.textContent = json[0].mId;  
     proInfomId.appendChild(mId);
     
     
-    let proInfomEmail = document.getElementById("mEmailz");
-    let mEmail = document.createElement('hidden');
-    mEmail.textContent = json[0].mEmail; 
-    proInfomEmail.appendChild(mEmail);
+    let proInfomEmail = document.getElementById("mEmailz");        
+    let mEmail = document.createElement('hidden');               
+    mEmail.textContent = json[0].mEmail;                       
+    proInfomEmail.appendChild(mEmail);                             
     
     
     let proInfommRcCode = document.getElementById("mRcCodez");
@@ -271,6 +168,7 @@ function init(){
     
     let a = document.getElementById("mEmailz");
     $('input[name=mEmail]').attr('value',a.innerText);
+    
     let b = document.getElementById("mRcCodez");     
     $('select[name=mRcCode]').attr('value',b.innerText);
     
@@ -284,26 +182,28 @@ function init(){
     
     let mCareer = json[0].mCareer;
     $('#mCareer').append(mCareer);
-	
+   
+    
 }
 
 
 
 
 function UpdateProfile(){
-	let json = JSON.parse('${getProfile}');
-	
-	let jsonmPw = json[0].mPw;
-	  let mPw =document.getElementsByName("mPw")[0];
-	  let mPw2 =document.getElementsByName("mPw2")[0];
-	  let mPw3 = document.getElementsByName("mPw")[0];
-	  let mPwC =document.getElementsByName("mPwC")[0];    	  
-	  let mEmail =document.getElementsByName("mEmail")[0]; 
-	  let mDivision = document.getElementsByName("mDivision")[0];
-	  let mCareer = document.getElementsByName("mCareer")[0];
-	  let mRcCode = document.getElementsByName("mRcCode")[0];
-	  
-	  
+   let json = JSON.parse('${getProfile}');
+   
+     let jsonmPw = json[0].mPw;
+   
+     let mPw =document.getElementsByName("mPw")[0];
+     let mPw2 =document.getElementsByName("mPw2")[0];
+     let mPw3 = document.getElementsByName("mPw")[0];
+     let mPwC =document.getElementsByName("mPwC")[0];         
+     let mEmail =document.getElementsByName("mEmail")[0]; 
+     let mDivision = document.getElementsByName("mDivision")[0];
+     let mCareer = document.getElementsByName("mCareer")[0];
+     let mRcCode = document.getElementsByName("mRcCode")[0];
+     
+     
  var form = document.createElement("form");
   form.action ="UpdateProfile";
   form.method ="POST"; 
@@ -311,28 +211,65 @@ function UpdateProfile(){
    
   
   if(mPw.value == jsonmPw){
-	  if(mPw.value == mPw2.value){
-  				alert("비밀번호 변경 완료");
-		  form.appendChild(mPwC);
-		  form.appendChild(mEmail);
-		  form.appendChild(mDivision);
-		  form.appendChild(mCareer);
-		  form.appendChild(mRcCode);
-		  document.body.appendChild(form);
-		  form.submit();
-	  }else {
-		  alert("기존비밀번호와 확인비밀번호가 일치하지 않습니다.");
-		  return form;
-	  }
+     if(mPw.value == mPw2.value){
+              alert("비밀번호 변경 완료");
+        form.appendChild(mPwC);
+        form.appendChild(mEmail);
+        form.appendChild(mDivision);
+        form.appendChild(mCareer);
+        form.appendChild(mRcCode);
+        document.body.appendChild(form);
+        form.submit();
+     }else {
+        alert("기존비밀번호와 확인비밀번호가 일치하지 않습니다.");
+        return form;
+     }
   
  
-	}else{
-		alert("기존비밀번호가 일치하지 않습니다");
-		return false;
-		
-	}
+   }else{
+      alert("기존비밀번호가 일치하지 않습니다");
+      return false;
+      
+   }
 }
-
+//경매글 올리기
+function registerReq(){
+	 let form = document.createElement("form");
+     form.action = "DealForm";
+     form.method = "Post";
+     document.body.appendChild(form);
+     form.submit();
+ 
+}
+//마이페이지 클릭 
+function myPageClick(){
+   let form = document.createElement("form");
+   form.action = "MyProfile";
+   form.method = "Post";
+   document.body.appendChild(form);
+   form.submit();
+}
+function sendBox(){
+	let form = document.createElement("form");
+	form.action="SendBox";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+function recBox(){
+	let form = document.createElement("form");
+	form.action="RecBox";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+function msgForm(){
+	
+	let form = document.createElement("form");
+	form.action="MsgForm?msSender=&msRecipient=&msTitle=&msComment=&msDate=&msStatus=";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
 </script>
->>>>>>> refs/remotes/origin/hyeok
 </html>

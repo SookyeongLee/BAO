@@ -135,13 +135,13 @@ public class RequestDeal {
 		return mav;
 	}
 	//거래 등록(전송)
-	private ModelAndView reqSendCtl(RequestBean requestBean) {
+	private ModelAndView reqSendCtl(RequestBean requestBean) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		
-//		requestBean.setRqId("DOYOUNG");
-//		requestBean.setRqStCode("B");
+		requestBean.setRqId("DOYOUNG");
+		requestBean.setRqStatus("B");
 		
 		if(requestBean.getRqSubName().equals("학업")) {
 			requestBean.setRqSubCode("10001001");
@@ -255,10 +255,15 @@ public class RequestDeal {
 		if(this.insReqSend(requestBean)) {
 			System.out.println("Insert Complete");
 			tran.commit(status);
-			mav.setViewName("main");
+			response.setContentType("text/html; charset=UTF-8");
+	         PrintWriter out = response.getWriter();
+	         out.println("<script>alert('거래가 등록되었습니다.'); </script>");
+	         out.flush();
+			
+			mav.setViewName("Authentication/main");
 		}else {
 			System.out.println("False");
-			mav.setViewName("myProfile");
+			mav.setViewName("Profile/myProfile");
 		}
 		return mav;
 	}
@@ -267,7 +272,7 @@ public class RequestDeal {
 		ModelAndView mav = new ModelAndView();
 		
 		
-		mav.setViewName("request");
+		mav.setViewName("Deal/request");
 		
 		return mav;
 	}	

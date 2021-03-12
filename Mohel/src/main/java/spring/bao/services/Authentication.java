@@ -25,7 +25,7 @@ public class Authentication {
 	}
 
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
 	private AuthenticationIf mapper;
 	@Autowired
@@ -104,10 +104,17 @@ public class Authentication {
 		if (this.isMember(member)) {
 			if (this.isAccess(member)) {
 				member.setMStCode("1");
-
 				this.insAccess(member);
-				mav.setViewName("Authentication/main");
 				tran.commit(status);
+				
+				response.setContentType("text/html; charset=UTF-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>alert('로그인 성공'); location.href='Main';</script>");
+
+				out.flush();
+
 
 			} else {
 				System.out.println("로그인 실패");
@@ -115,14 +122,14 @@ public class Authentication {
 
 				PrintWriter out = response.getWriter();
 
-				out.println("<script>alert('로그인 실패'); location.href='이동주소';</script>");
+				out.println("<script>alert('로그인 실패'); location.href='LogInForm';</script>");
 
 				out.flush();
-				mav.setViewName("Authentication/login");
 
 				
 			}
 		}
+		mav.setViewName("Authentication/main");
 		return mav;
 	}
 	

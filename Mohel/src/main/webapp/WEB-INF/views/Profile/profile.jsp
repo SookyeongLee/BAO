@@ -15,12 +15,12 @@
     <link rel="stylesheet" href="/resources/css/common.css">
     <script src="/resources/src/main.js" defer></script>
 </head>
-<body>
+<body onLoad="init()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
             <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
+                <a href="Main"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
             </div>
             <div class="navbar__right">
                 <div class="navbar__search">
@@ -30,8 +30,8 @@
                     </button>
                 </div>
                 <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">역경매등록</li>                    
+                     <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+         		     <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                  
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item">
-                <button type="button">프로필</button>
+                <button type="button" onClick="myPageClick()">프로필</button>
             </li>
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
@@ -54,9 +54,9 @@
             <li class="mypage__menu__item">
                 <button type="button" class="message-btn">메시지</button>
                 <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
+                     <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
                 </ul>
             </li> 
         </ul>
@@ -68,29 +68,29 @@
             <table class="profile__info"> 
                 <tr class="profile__list">
                     <th class="profile__title">아이디</th>
-                    <td class="profile__contents"></td>
+                    <td class="profile__contents" id="mId"></td>
                 </tr>
                 <tr class="profile__list">
                     <th class="profile__title">E-mail</th>
-                    <td class="profile__contents"></td>
+                    <td class="profile__contents" id="mEmail"></td>
                 </tr>
                 <tr class="profile__list">
                     <th class="profile__title">사는곳</th>
-                    <td class="profile__contents"></td>
+                    <td class="profile__contents" id="mRcName"></td>
                 </tr>
                 <tr class="profile__list">
                     <th class="profile__title">소속</th>
-                    <td class="profile__contents"></td>
+                    <td class="profile__contents" id="mDivision"></td>
                 </tr>
                 <tr class="profile__list">
                     <th class="profile__title">경력</th>
-                    <td class="profile__contents">
+                    <td class="profile__contents" id="mCareer">
                         
                     </td>
                 </tr>
             </table>
             <div class="mypage__bottom">
-                <button type="button" class="mypage__btn">수정하기</button>
+                <button type="button" class="mypage__btn" onClick="ModifyProfile()">수정하기</button>
             </div>
         </div>
     </section>
@@ -101,13 +101,12 @@ function init(){
 	
 	
 	let json = JSON.parse('${getProfile}');
-	
     
 
     let proInfomId = document.getElementById("mId"); 
     let mId = document.createElement('Div');              
     mId.textContent = json[0].mId;
-    proInfomId.appendChild(mId);
+    proInfomId.append(mId);
     
     
     
@@ -146,6 +145,47 @@ function ModifyProfile(){
 	 document.body.appendChild(form);
 	  form.submit();
 	  
+}
+function recBox(){
+	let form = document.createElement("form");
+	form.action="RecBox";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+
+function sendBox(){
+	let form = document.createElement("form");
+	form.action="SendBox";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+
+
+function msgForm(){
+	let form = document.createElement("form");
+	form.action="MsgForm?msSender=&msRecipient=&msTitle=&msComment=&msDate=&msStatus=";
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+}
+//경매글 올리기
+function registerReq(){
+	 let form = document.createElement("form");
+     form.action = "DealForm";
+     form.method = "Post";
+     document.body.appendChild(form);
+     form.submit();
+ 
+}
+//마이페이지 클릭 
+function myPageClick(){
+   let form = document.createElement("form");
+   form.action = "MyProfile";
+   form.method = "Post";
+   document.body.appendChild(form);
+   form.submit();
 }
 
 </script>
