@@ -79,7 +79,7 @@ function init(){
 	insertLi += "</ul>";
 	insertLi += "<div class='msgDetail__contents'>"+msg[0].msComment+"</div>";
 	insertLi += "<div class='mypage__bottom'>";
-	insertLi += "<button type='button' class='mypage__btn' onClick='msgForm()'>답장하기</button>";
+	insertLi += "<button type='button' class='mypage__btn' onClick='msgReply()'>답장하기</button>";
 	insertLi += "</div>";
    
     $("#messageDetail").append(insertLi);
@@ -87,18 +87,18 @@ function init(){
 	
 }
 
-function msgForm(){
-	//서버전송
-	let msg = JSON.parse('${dataList}');
-	alert('${dataList}');
-	let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
+// function msgForm(){
+// 	//서버전송
+// 	let msg = JSON.parse('${dataList}');
+// 	alert('${dataList}');
+// 	let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
 	
-	let form = document.createElement("form");
-	form.action="MsgForm?"+sendData;
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
+// 	let form = document.createElement("form");
+// 	form.action="MsgForm?"+sendData;
+// 	form.method="POST";
+// 	document.body.appendChild(form);
+// 	form.submit();
+// }
 //경매글 올리기
 function registerReq(){
 	 let form = document.createElement("form");
@@ -116,5 +116,21 @@ function myPageClick(){
    document.body.appendChild(form);
    form.submit();
 }
+
+function msgReply(){
+	//서버전송
+	let msg = JSON.parse('${dataList}');
+	
+		let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
+		alert(sendData);
+		
+		let form = document.createElement("form");
+		form.action="MsgReplyForm?"+sendData;
+		form.method="POST";
+		document.body.appendChild(form);
+		form.submit();
+}
+
+
 </script>
 </html>

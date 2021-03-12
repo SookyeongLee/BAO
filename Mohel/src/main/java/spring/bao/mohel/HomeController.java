@@ -141,7 +141,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/RecBox", "/Profile", "/Title", "/SendBox", "/Reply", "/Send" }, method = {RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "/RecBox", "/Profile", "/Title", "/SendBox","/MsgForm","/SendMsg","MsgReplyForm"}, method = {RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView Messages(@ModelAttribute MessageBean messageBean) {
 		ModelAndView mav = new ModelAndView();
 		

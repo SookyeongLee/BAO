@@ -49,6 +49,9 @@ public class Messages {
 			case "SendBox":
 				mav=this.sendBoxCtl(messagBean);
 				break;
+			case "MsgReplyForm":
+				mav=this.msgReplyFormCtl(messagBean);
+				break;
 			case "MsgForm":
 				mav=this.msgFormCtl(messagBean);
 				break;
@@ -78,14 +81,24 @@ public class Messages {
 			mav.setViewName("Message/sendBox");
 			return mav;
 		}
-		
 		private ModelAndView msgFormCtl(MessageBean messageBean) {
-			
 			ModelAndView mav = new ModelAndView();
+
+			mav.setViewName("Message/sendMsg");
+			
+			return mav;
+
+		}
+		
+		private ModelAndView msgReplyFormCtl(MessageBean messageBean) {
+			ModelAndView mav = new ModelAndView();
+
 			String json =gson.toJson(this.getMsgDetail(messageBean));
 		    mav.addObject("dataList",json);
 			mav.setViewName("Message/sendMsg");
+			
 			return mav;
+
 		}
 		
 		
