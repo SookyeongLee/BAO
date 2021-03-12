@@ -29,8 +29,8 @@
                     </button>
                 </div>
                 <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">역경매등록</li>                    
+                    <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+          		   <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                           
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -40,70 +40,99 @@
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item">
-                <button type="button">프로필</button>
+                <button type="button" onClick="myPageClick()">프로필</button>
             </li>
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
                 <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">완료</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
                 </ul>
             </li>                    
             <li class="mypage__menu__item">
                 <button type="button" class="message-btn">메시지</button>
                 <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
                 </ul>
             </li> 
         </ul>
     </nav>
-    <!-- waiting-helper -->
+       <!-- waiting-helper -->
     <section class="dealList mypage">
-        <h2 class="mypage__title">진행중</h2>
+        <h2 class="mypage__title">경매진행중</h2>
         <div class="dealList__container">
             <ul class="dealList__account">
-                <li class="dealList__account__member"><button type="button" class="dealList__account__btn">helper</button></li>
-                <li class="dealList__account__member"><button type="button" class="dealList__account__btn">wisher</button></li>
+                <li class="dealList__account__member"><button type="button" class="dealList__account__btn" onClick="IngHelperClick()">helper</button></li>
+                <li class="dealList__account__member"><button type="button" class="dealList__account__btn" onClick="IngClick()">wisher</button></li>
             </ul>
             <div class="dealList__list__container">
                 <div class="dealList__member">helper</div>
-                <ul class="dealList__list">
-                    <li class="dealList__list__item">
-                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/2000.jpg"></div>
-                        <ul class="dealList__description">
-                            <li><button type="button" class="dealList-btn dealList-schedule">스케줄 관리</button></li>
-                            <li class="dealList-subCtg">인테리어</li>
-                            <li class="dealList-title">거실 인테리어 요청</li>
-                        </ul>
-                    </li>
-                    <li class="dealList__list__item">
-                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/4000.jpg"></div>
-                        <ul class="dealList__description">
-                            <li><button type="button" class="dealList-btn dealList-schedule">스케줄 관리</button></li>
-                            <li class="dealList-subCtg">일러스트 디자인</li>
-                            <li class="dealList-title">컵에 넣을 동물 일러스트가 필요합니다.</li>
-                        </ul>
-                    </li>
-                    <li class="dealList__list__item">
-                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/5000.jpg"></div>
-                        <ul class="dealList__description">
-                            <li><button type="button" class="dealList-btn dealList-schedule">스케줄 관리</button></li>
-                            <li class="dealList-subCtg">웹사이트 개발</li>
-                            <li class="dealList-title">쇼핑몰 사이트 개발</li>
-                        </ul>
-                    </li>
-                    <li class="dealList__list__item dealList__list__item__more">                       
-                        <button type="button" class="dealList__more__btn">
+               
+                   <ul id="ingHelperList" class="list__items"></ul> 
+                   
+                     <div class="dealList__list__item dealList__list__item__more">                       
+                        <button type="button" class="dealList__more__btn" onClick="plus()">
                             <span><i class="fas fa-plus"></i></span>
                             <span>더보기</span>
                         </button>                        
-                    </li>
-                </ul>    
+                    </div>  
             </div>
         </div>
     </section>
 </body>
+<script>
+function IngClick(){
+   let form = document.createElement("form");
+      form.action = "IngWisher";
+      form.method = "Post";   
+                     
+      document.body.appendChild(form);
+      form.submit();
+}
+function IngHelperClick(){
+   let form = document.createElement("form");
+      form.action = "IngHelper";
+      form.method = "Post";   
+                     
+      document.body.appendChild(form);
+      form.submit();
+}
+var k = 0;
+
+function plus(){
+   k += 3;
+   IHelperScreen();
+}
+
+function IHelperScreen(){
+   let requestList = JSON.parse('${ingHelperList}');
+
+   for(let index=(0+k) ; index<(3+k) ; index++){
+      if(index >= requestList.length)break;
+   let insertTr = " ";
+
+   insertTr +=  "<li class='dealList__list__item'>";
+   insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+   insertTr += "<ul class='dealList__description'>";
+   insertTr += "<li><button type='button' class='dealList-btn dealList-schedule'>스케줄 관리</button></li>";
+   insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
+   insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
+   insertTr += "</ul>";
+   insertTr += "</li>";
+
+   $("#ingHelperList").append(insertTr)
+   }
+}
+//마이페이지 클릭 
+function myPageClick(){
+   let form = document.createElement("form");
+   form.action = "MyProfile";
+   form.method = "Post";
+   document.body.appendChild(form);
+   form.submit();
+}
+</script>
 </html>

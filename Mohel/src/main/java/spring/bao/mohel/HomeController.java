@@ -94,9 +94,9 @@ public class HomeController {
 	}
 	@RequestMapping(value = { "/Detail", "/WaitingHelper","/WaitingWisher", "/IngHelper","/IngWisher", "/EndHelper","/EndWisher", "/Search", "/Filter" }, method = {
 	         RequestMethod.GET, RequestMethod.POST })
-	   public ModelAndView Deal(@ModelAttribute RequestBean reqBean) throws UnsupportedEncodingException {
+	   public ModelAndView Deal(@ModelAttribute RequestBean reqBean, BidBean bidBean) throws UnsupportedEncodingException {
 	      ModelAndView mav = new ModelAndView();
-	      mav = deal.entrance(reqBean);
+	      mav = deal.entrance(reqBean,bidBean);
 	      return mav;
 	   }
 

@@ -28,8 +28,8 @@
                     </button>
                 </div>
                 <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">역경매등록</li>                    
+                    <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+     		        <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                          
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -65,11 +65,8 @@
                     </tr>
                 </table>
                 <div class="deal__button">
-<<<<<<< HEAD
                     <button type="button" class="deal__btn2">입찰하기</button>
-=======
-                    <button type="button" class="deal__btn2" >입찰하기</button>
->>>>>>> refs/remotes/origin/hyeok
+
                 </div>
             </div>
         </div>
@@ -151,4 +148,24 @@
         </table>
     </section>   
 </body>
+<script>
+//마이페이지 클릭 
+function myPageClick(){
+   let form = document.createElement("form");
+   form.action = "MyProfile";
+   form.method = "Post";
+   document.body.appendChild(form);
+   form.submit();
+}
+
+//경매글 올리기
+function registerReq(){
+	 let form = document.createElement("form");
+  form.action = "DealForm";
+  form.method = "Post";
+  document.body.appendChild(form);
+  form.submit();
+
+}
+</script>
 </html>

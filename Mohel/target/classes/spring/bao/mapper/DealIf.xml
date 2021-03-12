@@ -136,7 +136,7 @@
          RQ.RQ_PERIOD AS rqPeriod,
          RQ.RQ_TITLE AS rqTitle,
          SG.SG_SUBNAME AS rqSubName,
-         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqSimpleDate,
+         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqDate,
          MG.MG_IMG AS rqImage,
          
          ST.ST_CODE AS rqStatus
@@ -157,7 +157,7 @@
          RQ.RQ_TITLE AS rqTitle,
          SG.SG_SUBNAME AS rqSubName,
          MG.MG_IMG AS rqImage,
-         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqSimpleDate,
+         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqDate,
          ST.ST_CODE AS rqStatus
    FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
             INNER JOIN BI ON RQ.RQ_CODE = BI.BI_RQCODE
@@ -176,7 +176,7 @@
          RQ.RQ_PERIOD AS  rqPeriod,
          RQ.RQ_TITLE AS rqTitle,
          SG.SG_SUBNAME AS rqSubName,
-         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqSimpleDate,
+         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqDate,
          MG.MG_IMG AS rqImage,
          ST.ST_CODE AS rqStatus
    FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
@@ -215,7 +215,7 @@
          RQ.RQ_PERIOD AS  rqPeriod,
          RQ.RQ_TITLE AS rqTitle,
          SG.SG_SUBNAME AS rqSubName,
-         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqSimpleDate,
+         TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqDate,
          MG.MG_IMG AS rqImage,
          ST.ST_CODE AS rqStatus
    FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE

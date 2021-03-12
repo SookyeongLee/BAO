@@ -15,73 +15,80 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="main()">
-    <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__logo" > 
-            <a href="Main"><img class="navbar__logo__img" src="/resources/imgs/common/logo.png"></a>
-        </div>
-        <ul class="navbar__menu">
-            <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
-            <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                    
-            <li class='navbar__menu__item' id="logCk" value="aa" onClick='login()'>로그인</li>
-        </ul>
-    </nav>
     <!-- Header -->
-    <header id="head">           
+    <header id="head">     
+        <!-- Navbar -->
+        <nav id="navbar">
+            <div class="navbar__logo">
+                <a href="Main"><img class="navbar__logo__img" src="/resources/imgs/common/logo.png"></a>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+                <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                    
+                <li class="navbar__menu__item" id="logCk" value="aa" onClick='login()'>로그인</li>
+            </ul>
+        </nav>      
         <!-- 홈화면(검색창) -->
         <div class="home">
-            <div class="home__description">
-                <p class="home__description__p">쉽고 편리한 역경매 플랫폼</p>
-                <div class="home__description__title">도움이 필요할 땐, 모헬</div>
-            </div>              
-            <div class="home__search">
-                <input type="text" class="home__search__input" name="wordValue">
-                <button onClick="searchClick()" class="home__search__btn"><i class="fas fa-search"></i></button>            
+            <div class="home__left">
+                <h1 class="home__title">모두의 헬퍼</h1>            
+                <div class="home__search">
+                    <input type="text" class="home__search__input" name="wordValue">
+                    <button onClick="searchClick()" class="home__search__btn"><i class="fas fa-search"></i></button>            
+                </div>
+                <!-- 대분류 -->
+                <div class="category">
+                    <ul class="category__menu">
+                        <li class="category__menu__item">
+                            <div class="category__menu-icon" onClick="filterClick(4)"><img src="/resources/imgs/main/icon1.png" class="category__img"></div>
+                            <div class="category__menu-name">디자인</div>
+                        </li>
+                        <li class="category__menu__item">
+                            <div class="category__menu-icon" onClick="filterClick(5)"><img src="/resources/imgs/main/icon2.png" class="category__img"></div>
+                            <div class="category__menu-name">IT/프로그래밍</div>
+                        </li>
+                        <li class="category__menu__item">
+                            <div class="category__menu-icon" onClick="filterClick(3)"><img src="/resources/imgs/main/icon3.png" class="category__img"></div>
+                            <div class="category__menu-name">비즈니스</div>
+                        </li>
+                    </ul>
+                    <ul class="category__menu">
+                        <li class="category__menu__item">
+                            <div class="category__menu-icon" onClick="filterClick(1)"><img src="/resources/imgs/main/icon4.png" class="category__img"></div>
+                            <div class="category__menu-name">레슨</div>
+                        </li>
+                        <li class="category__menu__item">
+                            <div class="category__menu-icon" onClick="filterClick(2)"><img src="/resources/imgs/main/icon5.png" class="category__img"></div>
+                            <div class="category__menu-name">홈/리빙</div>
+                        </li>
+                        <li class="category__menu__item">
+                            <div class="category__menu-icon" onClick="filterClick(6)"><img src="/resources/imgs/main/icon6.png" class="category__img"></div>
+                            <div class="category__menu-name">건강/미용</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="home__right">
+                <img src="/resources/imgs/main/back.jpg" class="home__img">
             </div>
         </div>
     </header>
     <!-- Section -->
-    <section id="service">
-        <!-- 대분류 -->
-        <div class="category">
-            <ul class="category__menu">
-                <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(4)"><i class="fas fa-palette"></i></div>
-                    <div class="category__menu-name">디자인</div>
-                </li>
-                <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(5)"><i class="fas fa-laptop-code"></i></div>
-                    <div class="category__menu-name">IT/프로그래밍</div>
-                </li>
-                <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(3)"><i class="fas fa-business-time"></i></div>
-                    <div class="category__menu-name">비즈니스</div>
-                </li>
-                <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(1)"><i class="fas fa-chalkboard-teacher"></i></div>
-                    <div class="category__menu-name">레슨</div>
-                </li>
-                <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(2)"><i class="fas fa-house-user"></i></div>
-                    <div class="category__menu-name">홈/리빙</div>
-                </li>
-                <li class="category__menu__item">
-                    <div class="category__menu-icon" onClick="filterClick(6)"><i class="fas fa-running"></i></div>
-                    <div class="category__menu-name">건강/미용</div>
-                </li>
-            </ul>
-        </div>
+    <section id="service">       
         <!-- 역경매 리스트 -->
         <div class="list">
             <!-- 최신순 -->
             <div class="list__container">
                 <h1 class="list__title">새로운 역경매</h1>
                 <ul class="list__items" id="newRequestList"></ul>
+                 <ul id="searchData" class="list__items"></ul>
             </div>
             <!-- 인기순 -->
             <div class="list__container">
                 <h1 class="list__title">인기 역경매</h1>
                 <ul class="list__items" id="topRequestList"></ul>
+                 <ul id="topSearchData" class="list__items"></ul>
+                
             </div>
         </div>    
     </section>
@@ -98,10 +105,12 @@ if(JSON.parse('${requestData}').length != 0){
 if(JSON.parse('${requestBestData}').length != 0){
       filterBestScreen();  
 }else{}
+
 //온로드 
 function main(){
 
 	  let json = JSON.parse('${jsonData}');
+	  alert('${jsonData}');
 //    if(!=로그인 x??){
 //       document.getElementById("logCk").innerHTML ="로그인";
 //    }else{
@@ -114,7 +123,7 @@ function main(){
    for(let i=0; i<6;i++){
        
 	   let insertTr= " ";
-	   insertTr += "<li class='list__item' onClick='mainclick()'>";
+	   insertTr += "<li class='list__item' onClick='DetailClick()'>";
 	       
 	   insertTr += "<img class='list__item__img' src='/resources/imgs/common/"+json[i].rqImage+"'>";
 	   insertTr += "<div class='list__item__description'>";
@@ -125,8 +134,11 @@ function main(){
 	    
 	   $("#newRequestList").append(insertTr);
 	   $("#topRequestList").append(insertTr);
-	  
+	   
+	  	
    }
+   searchScreen();
+   BestsearchScreen();
    
    
 }
@@ -172,7 +184,6 @@ function filterBestScreen(){
 //대분류 클릭 
 function filterClick(num){
     let rqFilterCode = (num*1000);     
-
 //     for(i = 1; i < 7; i++){
 //          if(num == i){
 	let rqFilterName = rqFilterCode ==1000?"레슨":
@@ -203,27 +214,27 @@ function searchClick(){
     
     let form = document.createElement("form");
     let rqWord = document.getElementsByName("wordValue")[0].value;
-    alert(rqWord);
-    form.action = "Search?rqWord="+rqWord;
-    form.method = "Post";          
     
-    let input = document.createElement("input");
+   let input = document.createElement("input");
    input.type = "hidden";
    input.name = "rqWord";
    input.value = rqWord;
+  
+   form.action = "Search";
+   form.method = "Post";    
    form.appendChild(input);
     
     document.body.appendChild(form);
     form.submit();  
 
-    searchScreen();
+
  }
  //검색 리스트 
 function searchScreen(){
     
-    let searchList = JSON.parse('${requestData}');
+    let searchList = JSON.parse('${searchData}');
  for(let index=0 ; index<searchList.length ; index++){
-      
+      alert("jjjjj");
      let rqCode = searchList[index].rqCode;    
     let insertTr = " ";
     insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
@@ -234,13 +245,13 @@ function searchScreen(){
     insertTr += "</div>";
     insertTr += "</li>";
     
-    $("#search").append(insertTr);
+    $("#searchData").append(insertTr);
   }
  } 
  //검색 인기 리스트 
- function BestsearchScreen(){
+ function BestSearchScreen(){
     
-    let searchList = JSON.parse('${requestBestData}');
+    let searchList = JSON.parse('${searchBestData}');
  for(let index=0 ; index<6 ; index++){
       
      let rqCode = searchList[index].rqCode;    
@@ -253,7 +264,7 @@ function searchScreen(){
     insertTr += "</div>";
     insertTr += "</li>";
     
-    $("#topRequestList").append(insertTr);
+    $("#topSearchData").append(insertTr);
   }
  } 
  //경매 클릭 

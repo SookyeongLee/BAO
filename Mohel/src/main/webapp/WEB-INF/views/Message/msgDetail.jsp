@@ -46,9 +46,9 @@
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
                 <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">완료</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
                 </ul>
             </li>                    
             <li class="mypage__menu__item">
@@ -68,50 +68,29 @@
 </body>
 <script>
 function init(){
-	alert('${dataList}');
 	let msg = JSON.parse('${dataList}');
 	
 	let insertLi= " ";
 	insertLi += "<h2 class='mypage__title'>메시지</h2>";
 	insertLi += "<ul class='msgDeatil__info'>";
-	insertLi += "<li class='msgDetail-title'>"+msg[0].msTitle+"</li>";
+	insertLi += "<li class='msgDetail-title'>제목 "+msg[0].msTitle+"</li>";
 	insertLi += "<li class='msgDetail-sender'>보낸사람<span class='sender'>"+msg[0].msSender+"</span></li>";
 	insertLi += "<li class='msgDetail-recipient'>받는사람<span class='recipient'>"+msg[0].msRecipient+"</span></li>";
 	insertLi += "</ul>";
 	insertLi += "<div class='msgDetail__contents'>"+msg[0].msComment+"</div>";
 	insertLi += "<div class='mypage__bottom'>";
-	insertLi += "<button type='button' class='mypage__btn' onClick='msgForm()'>답장하기</button>";
+	insertLi += "<button type='button' class='mypage__btn' onClick='msgReply()'>답장하기</button>";
 	insertLi += "</div>";
    
     $("#messageDetail").append(insertLi);
 
 	
 }
-function sendBox(){
-	let form = document.createElement("form");
-	form.action="SendBox";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
-function recBox(){
-	let form = document.createElement("form");
-	form.action="RecBox";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
-function msgForm(){
-	
-	let form = document.createElement("form");
-	form.action="MsgForm?msSender=&msRecipient=&msTitle=&msComment=&msDate=&msStatus=";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
-function msgForm(){
+
+function msgReply(){
 	//서버전송
 	let msg = JSON.parse('${dataList}');
+	alert('${dataList}');
 	let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
 	
 	let form = document.createElement("form");

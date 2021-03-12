@@ -3,6 +3,7 @@ package spring.bao.mapper;
 import java.util.ArrayList;
 
 import spring.bao.beans.RequestBean;
+import spring.bao.services.Bid;
 
 public interface DealIf {
 

@@ -12,9 +12,10 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/resources/src/main.js" defer></script>
 </head>
-<body>
+<body onLoad="wWisherScreen()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -29,8 +30,8 @@
                     </button>
                 </div>
                 <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">역경매등록</li>                    
+                    <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+         		    <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                          
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -40,73 +41,105 @@
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item">
-                <button type="button">프로필</button>
+                <button type="button" onClick="myPageClick()">프로필</button>
             </li>
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
                 <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">완료</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
                 </ul>
             </li>                    
             <li class="mypage__menu__item">
                 <button type="button" class="message-btn">메시지</button>
                 <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
                 </ul>
             </li> 
         </ul>
     </nav>
-    <!-- waiting-helper -->
+     <!-- waiting-helper -->
     <section class="dealList mypage">
-        <h2 class="mypage__title">진행전</h2>
+        <h2 class="mypage__title">경매 진행전</h2>
         <div class="dealList__container">
             <ul class="dealList__account">
-                <li class="dealList__account__member"><button type="button" class="dealList__account__btn">helper</button></li>
-                <li class="dealList__account__member"><button type="button" class="dealList__account__btn">wisher</button></li>
+                <li class="dealList__account__member"><button type="button" class="dealList__account__btn" onClick="waitingHelperClick()">helper</button></li>
+                <li class="dealList__account__member"><button type="button" class="dealList__account__btn" onClick="waitingWisherClick()">wisher</button></li>
             </ul>
             <div class="dealList__list__container">
                 <div class="dealList__member">wisher</div>
-                <ul class="dealList__list">
-                    <li class="dealList__list__item">
-                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/1000.jpg"></div>
-                        <ul class="dealList__description">
-                            <li class="dealList-term">2021-01-03 ~ 2021-01-17</li>
-                            <li class="dealList-subCtg">음악</li>
-                            <li class="dealList-title">입시 레슨 희망합니다.</li>
-                            <li class="dealList-situation">역경매 진행중!</li>
-                        </ul>
-                    </li>
-                    <li class="dealList__list__item">
-                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/3000.jpg"></div>
-                        <ul class="dealList__description">
-                            <li class="dealList-term">2020-12-03 ~ 2020-12-17</li>
-                            <li class="dealList-subCtg">마케팅</li>
-                            <li class="dealList-title">번역앱 마케팅 희망합니다.</li>
-                            <li class="dealList-situation">역경매 기한만료! 낙찰 해주세요</li>
-                        </ul>
-                    </li>
-                    <li class="dealList__list__item">
-                        <div class="delList__img"><img class="list__item__img" src="/resources/imgs/common/6000.jpg"></div>
-                        <ul class="dealList__description">
-                            <li class="dealList-term">2020-11-03 ~ 2020-11-17</li>
-                            <li class="dealList-subCtg">심리치료</li>
-                            <li class="dealList-title">독서치료에 관심이 있습니다.</li>
-                            <li class="dealList-situation">역경매 기한만료! 낙찰 해주세요 </li>
-                        </ul>
-                    </li>
-                    <li class="dealList__list__item dealList__list__item__more">                       
-                        <button type="button" class="dealList__more__btn">
+                
+                <ul id="wWisherList" class="list__items"></ul>  
+                
+                    <div class="dealList__list__item dealList__list__item__more">                       
+                        <button type="button" class="dealList__more__btn" onClick="plus()">
                             <span><i class="fas fa-plus"></i></span>
                             <span>더보기</span>
                         </button>                        
-                    </li>
-                </ul>    
+                    </div>
+                
             </div>
         </div>
     </section>
 </body>
+<script>
+function waitingHelperClick(){
+   let form = document.createElement("form");
+   form.action = "WaitingHelper";
+   form.method = "Post";   
+   
+   document.body.appendChild(form);
+   form.submit();
+}
+function waitingWisherClick(){
+   let form = document.createElement("form");
+   form.action = "WaitingWisher";
+   form.method = "Post";   
+
+   document.body.appendChild(form);
+   form.submit();
+}
+var k = 0;
+
+function plus(){
+   k += 3;
+   wWisherScreen();
+}
+
+function wWisherScreen(){
+let requestList = JSON.parse('${wWisherList}');
+for(let index=(0+k) ; index<(3+k) ; index++){
+   
+if(index >= requestList.length)break;
+   
+let insertTr = " ";
+let status = requestList[index].rqStatus;
+let statusComment;  
+if(status=="B") {statusComment="역경매 진행중!"} else {statusComment="역경매 기한만료! 낙찰 해주세요"};
+
+insertTr +=  "<li class='dealList__list__item'>";
+insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+insertTr += "<ul class='dealList__description'>";
+insertTr += "<li class='dealList-term'>"+requestList[index].rqDate+" ~ "+requestList[index].rqPeriod+"</li>";
+insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
+insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
+insertTr += "<li class='dealList-situation'>"+statusComment+"</li>";
+insertTr += "</ul>";
+insertTr += "</li>";
+
+$("#wWisherList").append(insertTr)
+}
+}
+//마이페이지 클릭 
+function myPageClick(){
+   let form = document.createElement("form");
+   form.action = "MyProfile";
+   form.method = "Post";
+   document.body.appendChild(form);
+   form.submit();
+}
+</script>
 </html>

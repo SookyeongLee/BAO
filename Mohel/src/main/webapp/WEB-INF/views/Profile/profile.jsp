@@ -46,9 +46,9 @@
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
                 <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">완료</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
                 </ul>
             </li>                    
             <li class="mypage__menu__item">
@@ -146,30 +146,7 @@ function ModifyProfile(){
 	  form.submit();
 	  
 }
-function recBox(){
-	let form = document.createElement("form");
-	form.action="RecBox";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
 
-function sendBox(){
-	let form = document.createElement("form");
-	form.action="SendBox";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
-
-
-function msgForm(){
-	let form = document.createElement("form");
-	form.action="MsgForm?msSender=&msRecipient=&msTitle=&msComment=&msDate=&msStatus=";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-}
 //경매글 올리기
 function registerReq(){
 	 let form = document.createElement("form");

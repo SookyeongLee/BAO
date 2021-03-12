@@ -11,7 +11,8 @@
     <link rel="icon" type="image/png" href="imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/mypage.css">
+    <script src="/resources/src/main.js" defer></script>
+    <link rel="stylesheet" href="/resources/css/common.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -27,9 +28,9 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">거래등록</li>                    
+                <ul class="navbar__menu"> 
+                		<li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+         		     <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                     
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -38,20 +39,19 @@
     <!--Mypage Navbar -->
     <nav id="mypage">
         <ul class="mypage__menu">
-            <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item navbar-click">
-                <a href="#">거래내역</a>
-                <ul class="navbar__list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">내요청</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">거래대기중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">거래진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">거래완료</button></li>
+            <li class="mypage__menu__item"><a href="MyProfile">프로필</a></li>
+            <li class="mypage__menu__item">
+                <button type="button" class="deal-btn">거래상태</button>
+                <ul class="navbar__list deal-list">
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
                 </ul>
             </li>                    
-            <li class="mypage__menu__item navbar-click">
-                <a href="#">메시지</a>
-                <ul class="navbar__list">
-                     <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
+            <li class="mypage__menu__item">
+                <button type="button" class="message-btn">메시지</button>
+                <ul class="navbar__list message-list">
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
                     <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
                     <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
                 </ul>
@@ -181,30 +181,25 @@
         
         form.submit();
     }
-    function recBox(){
-    	let form = document.createElement("form");
-    	form.action="RecBox";
-    	form.method="POST";
-    	document.body.appendChild(form);
-    	form.submit();
-    }
-
-    function sendBox(){
-    	let form = document.createElement("form");
-    	form.action="SendBox";
-    	form.method="POST";
-    	document.body.appendChild(form);
-    	form.submit();
-    }
 
 
-    function msgForm(){
-    	let form = document.createElement("form");
-    	form.action="MsgForm?msSender=&msRecipient=&msTitle=&msComment=&msDate=&msStatus=";
-    	form.method="POST";
-    	document.body.appendChild(form);
-    	form.submit();
-    }
+  //경매글 올리기
+  function registerReq(){
+  	 let form = document.createElement("form");
+       form.action = "DealForm";
+       form.method = "Post";
+       document.body.appendChild(form);
+       form.submit();
+   
+  }
+  //마이페이지 클릭 
+  function myPageClick(){
+     let form = document.createElement("form");
+     form.action = "MyProfile";
+     form.method = "Post";
+     document.body.appendChild(form);
+     form.submit();
+  }
 </script>
 </html>
     
