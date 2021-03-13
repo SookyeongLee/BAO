@@ -17,7 +17,7 @@
 	<!-- DB연결 정보 -->
 		<!--  이 구문 을 써놓으면 메모리에 new로 올라가 있다. -->
 		<bean id="BAO" class="com.zaxxer.hikari.HikariConfig">
-			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 			<property name="jdbcUrl" value="jdbc:oracle:thin:@db.bao.hoonzzang.com:7041:xe"/>
 			<property name="username" value="LSJ"/>
 			<property name="password" value="1234"/>
