@@ -245,4 +245,47 @@
          ORDER BY RQ.RQ_SYSDATE DESC
       ]]>
    </select>
+    <select id="getDetail" resultType="spring.bao.beans.RequestBean">
+      <![CDATA[
+      SELECT
+            RQ.RQ_TITLE AS rqTitle,  
+            RQ.RQ_CODE AS rqCode,
+            MG.MG_IMG AS rqImage,
+            TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqSimpleDate,
+         RQ.RQ_PERIOD AS  rqPeriod,
+         SG.SG_SUBNAME AS rqSubName,
+            RC.RC_NAME AS rqRcName,
+            RQ.RQ_COMMENT AS rqComment,
+            BI.BI_MMHELPER AS biHelper,
+            BI.BI_PRICE AS biPrice,
+         ST.ST_CODE AS rqStatus
+   FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
+            INNER JOIN BI ON RQ.RQ_CODE = BI.BI_RQCODE
+           INNER JOIN SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
+           INNER JOIN ST ON RQ.RQ_STCODE = ST.ST_CODE
+            INNER JOIN RC ON RQ.RQ_RCCODE = RC.RC_CODE
+    WHERE RQ.RQ_CODE = #{rqCode}
+      ]]>
+   </select>
+   
+   <select id="getDetailAD" resultType="spring.bao.beans.RequestBean">
+      <![CDATA[
+      SELECT
+            RQ.RQ_TITLE AS rqTitle,  
+            RQ.RQ_CODE AS rqCode,
+            MG.MG_IMG AS rqImage,
+            TO_CHAR(RQ.RQ_SYSDATE,'YYYY-MM-DD') AS rqSimpleDate,
+         RQ.RQ_PERIOD AS  rqPeriod,
+         SG.SG_SUBNAME AS rqSubName,
+            RC.RC_NAME AS rqRcName,
+            RQ.RQ_COMMENT AS rqComment,
+         ST.ST_CODE AS rqStatus
+   FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
+           INNER JOIN SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
+           INNER JOIN ST ON RQ.RQ_STCODE = ST.ST_CODE
+            INNER JOIN RC ON RQ.RQ_RCCODE = RC.RC_CODE
+    WHERE RQ.RQ_CODE = #{rqCode}
+      ]]>
+   </select>
+   
 </mapper>

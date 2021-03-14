@@ -1,13 +1,24 @@
 package spring.bao.mohel;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.BidBean;
@@ -16,7 +27,7 @@ import spring.bao.beans.MessageBean;
 import spring.bao.beans.RequestBean;
 import spring.bao.beans.ReviewBean;
 import spring.bao.beans.ScheduleBean;
-
+import spring.bao.mapper.ScheduleIf;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -51,7 +62,14 @@ public class HomeController {
 	private Messages msg;
 	@Autowired
 	private Home home;
+	@Autowired
+	private ScheduleIf scMapper;
+	@Autowired
+	private PlatformTransactionManager tran;
+	@Autowired
+	private HttpServletRequest request;
 
+	
 
 	@RequestMapping(value = { "/", "/Main" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView Main(@ModelAttribute RequestBean requestBean) {
@@ -100,17 +118,57 @@ public class HomeController {
 		return mav;
 	}
 
-
-	@RequestMapping(value = { "/MovePro", "/InsSchedule", "/UpdateSchedule", "/MoveUser", "/AcceptSchedule",
+	@RequestMapping(value = { "/MovePro","/UpdateSchedule", "/MoveUser", "/AcceptSchedule",
 			"/RejectSchedule", "/OkClick" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean) {
-
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean) throws IOException {
+	
 		ModelAndView mav = new ModelAndView();
 
 		mav = schedule.entrance(scheduleBean);
 
 		return mav;
 	}
+	@RequestMapping(value = { "/InsSchedule"}, method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView init(@RequestBody List<HashMap<String,Object>> jsondata,ScheduleBean scheduleBean ) throws IOException {
+		TransactionStatus status=tran.getTransaction(new DefaultTransactionDefinition());
+
+		ModelAndView mav = new ModelAndView();
+		
+		scheduleBean.setScCode(jsondata.get(0).get("scCode").toString());
+		scheduleBean.setScHelper(jsondata.get(0).get("scHelper").toString());
+		scheduleBean.setScStatus("S");
+		
+		mav = schedule.entrance(scheduleBean);
+
+//		HashMap<String,Object> insDetailSchedule = new HashMap<String,Object>();
+//		insDetailSchedule.put("list", jsondata);
+	
+//			if(convertToBoolean(scMapper.insDetailSchedule(jsondata))) {
+//				System.out.println("sd");
+//				tran.commit(status);
+//				response.setContentType("text/html; charset=UTF-8");
+//				PrintWriter out = response.getWriter();
+//				out.println("<script>alert('스케쥴 등록이 완료되었습니다.')</script>"); 
+//				out.flush();
+//				out.close();
+//			}else {
+//				tran.rollback(status);
+//				response.setContentType("text/html; charset=UTF-8");
+//				PrintWriter out = response.getWriter();
+//				out.println("<script>alert('nothing');</script>"); 
+//				out.flush();
+//				out.close();
+//			
+//			};
+			
+//			mav.setViewName("Authentication/main");
+		
+		return mav;
+	}
+	
+	
+	
+
 
 	@RequestMapping(value = { "/WriteReview", "/ViewReview", "/ShowReview" }, method = { RequestMethod.GET,RequestMethod.POST })
 	public ModelAndView Review(@ModelAttribute ReviewBean reviewBean) {

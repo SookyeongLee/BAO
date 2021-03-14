@@ -32,5 +32,34 @@
                 ORDER BY RQ.RQ_PERIOD DESC
     ]]>
    </select>
+   
+	<resultMap type="RequestBean" id="RequestBean">
+          <id column="RQ_CODE" property="rqCode"/>
+          <id column="SG_SUBNAM" property="rqSubName"/>
+          <id column="RQ_TITLE" property="rqTitle"/>
+          <id column="MG_IMG" property="rqImage"/>
+          <id column="RQ_PERIOD" property="rqDate"/>  
+          
+        <association property="bidBean"  javaType="BidBean" >
+             <id property="winHelper"  column="BI_MMHELPER" />
+        </association>
+   </resultMap>
+
+   <select id="getRecentList2" parameterType="RequestBean" resultType="RequestBean">
+   <![CDATA[
+      SELECT RQ.RQ_CODE AS RQCODE,
+      SG.SG_SUBNAME AS RQSUBNAME,
+      RQ.RQ_TITLE AS RQTITLE,
+      MG.MG_IMG AS RQIMAGE,
+      RQ.RQ_PERIOD AS RQDATE,
+      COUNT(BI.BI_MMHELPER) AS RQBEST
+      FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
+                INNER JOIN SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
+                LEFT JOIN BI ON RQ.RQ_CODE = BI.BI_RQCODE
+                GROUP BY RQ.RQ_CODE,RQ.RQ_TITLE, RQ.RQ_PERIOD, SG.SG_SUBNAME, MG.MG_IMG
+                ORDER BY  COUNT(BI.BI_MMHELPER) DESC
+ 
+    ]]>
+   </select>
 	
 </mapper>

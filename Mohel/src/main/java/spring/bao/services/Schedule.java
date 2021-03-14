@@ -2,6 +2,7 @@ package spring.bao.services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -35,7 +37,8 @@ public class Schedule {
 	@Autowired
 	private PlatformTransactionManager tran;
 	
-	public ModelAndView entrance(ScheduleBean scheduleBean) throws Exception {
+	
+	public ModelAndView entrance(ScheduleBean scheduleBean) throws IOException {
 		
 		ModelAndView mav = null;
 		
@@ -86,12 +89,11 @@ public class Schedule {
 		return mav;		
 	}
 	
-	private ModelAndView moveUserCtl(ScheduleBean scheduleBean) throws Exception {
+	private ModelAndView moveUserCtl(ScheduleBean scheduleBean) throws IOException {
 		String scInfo =gson.toJson(this.getSchedule(scheduleBean));
 
 		System.out.println(scInfo.length());
 		ModelAndView mav = new ModelAndView();
-		System.out.println("소정 마스터 ㄱ ㄱ ");
 		
 		if(!scInfo.equals("[]")) {
 			mav.addObject("scInfo", scInfo);
@@ -99,7 +101,7 @@ public class Schedule {
 		}else{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('nothing');location.href='Main' </script>"); 
+			out.println("<script>alert('nothing');location.href='Main'; </script>"); 
 			out.flush();
 			out.close();
 		}
@@ -113,28 +115,26 @@ public class Schedule {
 		return mav;		
 	}
 	
-	
-	
-	private ModelAndView insScheduleCtl(ScheduleBean scheduleBean) {
+	private ModelAndView insScheduleCtl( ScheduleBean scheduleBean){
 		TransactionStatus status=tran.getTransaction(new DefaultTransactionDefinition());
-
+		
 		ModelAndView mav = new ModelAndView();
-//		if(this.insSchedule(scheduleBean)) {
-//			if(this.insDetailSchedule(scheduleBean)) {
-//				tran.commit(status);
-//				//메세지 전송하기 //스케쥴 입력했다고 메세지 보내주기 
-//			}
-//		}
-//		String jsonInfo = request.getParameter("data");
-//		System.out.println("???"+jsonInfo);
-//		try {
-//		JSONParser jsonParser = new JSONParser();
-//		JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonInfo);
-//		System.out.println(jsonObject.get(0));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		mav.setViewName("Schedule/conditionPro");
+		
+		try {
+			if(this.insSchedule(scheduleBean)) {
+				System.out.println("Insert Complete");
+				System.out.println(scheduleBean.getScCode());
+				System.out.println(scheduleBean.getScHelper());
+				System.out.println(scheduleBean.getScStatus());
+				tran.commit(status);
+				mav.setViewName("Authentication/main");
+			}
+		}catch(Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		
 		return mav;		
 	}
 
@@ -158,9 +158,6 @@ public class Schedule {
 		return data == 1?true:false;
 	}
 	
-	private boolean insDetailSchedule(ScheduleBean scheduleBean) {
-		return convertToBoolean(mapper.insDetailSchedule(scheduleBean));
-	}
 	
 	private boolean insSchedule(ScheduleBean scheduleBean) {
 		return convertToBoolean(mapper.insSchedule(scheduleBean));

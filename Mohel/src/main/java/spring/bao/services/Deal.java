@@ -72,6 +72,7 @@ public class Deal {
       mav.setViewName("Authentication/main");
       return mav;
    }
+   
    private ModelAndView searchCtl(RequestBean requestBean) {
 	      ModelAndView mav = new ModelAndView();
 	     System.out.println("word:"+requestBean.getRqWord());
@@ -132,6 +133,14 @@ public class Deal {
 
 	      return mav;
 	   }
+   private ModelAndView waitingWisherCtl(RequestBean requestBean) {
+	      ModelAndView mav = new ModelAndView();
+	      requestBean.setRqId("JUN");
+	      String json = gson.toJson(this.getWwisherList(requestBean));
+	      mav.addObject("wWisherList", json);
+	      mav.setViewName("Deal/waiting-wisher");
+	      return mav;
+	   }
    
    private ModelAndView waitingHelperCtl(RequestBean requestBean,BidBean bidBean) {
 	      ModelAndView mav = new ModelAndView();
@@ -142,14 +151,27 @@ public class Deal {
 	      return mav;
 	   }
 
-	   private ModelAndView waitingWisherCtl(RequestBean requestBean) {
+   private ModelAndView detailCtl(RequestBean requestBean) {
 	      ModelAndView mav = new ModelAndView();
-	      requestBean.setRqId("JUN");
-	      String json = gson.toJson(this.getWwisherList(requestBean));
-	      mav.addObject("wWisherList", json);
-	      mav.setViewName("Deal/waiting-wisher");
+	      
+//	      if(reqBean.getRqDetailSelect().equals("bh")) {
+//	         //reqBean.setRqCode("1000210305090308");
+//	         String json = gson.toJson(this.getDetail(reqBean));
+//	         mav.addObject("detail", json);
+//	         mav.setViewName("Deal/beforeDeal-helper");
+//	      }else if(reqBean.getRqDetailSelect().equals("bw")){
+//	         //reqBean.setRqCode("1000210305090308");
+//	         String json = gson.toJson(this.getDetail(reqBean));
+//	         mav.addObject("detail", json);
+//	         mav.setViewName("Deal/beforeDeal-wisher");
+//	      }else if(reqBean.getRqDetailSelect().equals("ad")){
+//	         String json = gson.toJson(this.getDetailAD(reqBean));
+//	         mav.addObject("detailAd", json);
+//	         mav.setViewName("Deal/afterDeal");
+//	      }   
 	      return mav;
 	   }
+
    
    private ArrayList<RequestBean> getBestFilterList(RequestBean requestBean) {
       return mapper.BestFilterList(requestBean);
@@ -158,12 +180,9 @@ public class Deal {
    private ArrayList<RequestBean> getFilterList(RequestBean requestBean) {
       return mapper.filterList(requestBean);
    }
-
-
-
-
+   
    private ArrayList<RequestBean> getBestAllSearchList(RequestBean requestBean) {
-      return mapper.BestallSearchList(requestBean);
+	   return mapper.BestallSearchList(requestBean);
    }
 
    private ArrayList<RequestBean> getAllSearchList(RequestBean requestBean) {
@@ -171,22 +190,19 @@ public class Deal {
    }
 
    private ArrayList<RequestBean> getSearchList(RequestBean requestBean) {
-
-	   return mapper.searchList(requestBean);
+	  return mapper.searchList(requestBean);
    }
-
-
+   
    private ArrayList<RequestBean> getBestSearchList(RequestBean requestBean) {
-      return mapper.BestSearchList(requestBean);
+	  return mapper.BestSearchList(requestBean);
    }
-
-   private ArrayList<RequestBean> getEndHelperList(RequestBean requestBean) {
-      return mapper.getEndHelperList(requestBean);
-   }
-
-
+   
    private ArrayList<RequestBean> getEndWisherList(RequestBean requestBean) {
-      return mapper.getEndWisherList(requestBean);
+	   return mapper.getEndWisherList(requestBean);
+   }
+   
+   private ArrayList<RequestBean> getEndHelperList(RequestBean requestBean) {
+	    return mapper.getEndHelperList(requestBean);
    }
 
 
@@ -198,8 +214,6 @@ public class Deal {
       return mapper.getIngHelperList(requestBean);
    }
 
-
-
    private ArrayList<RequestBean> getWhelperList(RequestBean requestBean) {
       return mapper.getWhelperList(requestBean);
    }
@@ -208,16 +222,12 @@ public class Deal {
       return mapper.getWwisherList(requestBean);
    }
 
-   private ModelAndView detailCtl(RequestBean requestBean) {
-      ModelAndView mav = new ModelAndView();
-//      String json = gson.toJson(this.getDetail(reqBean));
-//      mav.addObject("detail", json);
-      mav.setViewName("Deal/beforeDeal-helper");
-      return mav;
-   }
-
+  
    private ArrayList<RequestBean> getDetail(RequestBean requestBean) {
       return mapper.getDetail(requestBean);
    }
+   private  ArrayList<RequestBean> getDetailAD(RequestBean requestBean) {
+	   return mapper.getDetailAD(requestBean);
+  }
 
 }

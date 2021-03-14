@@ -103,9 +103,12 @@
 <script>
 function init(){
 	let rec = JSON.parse('${recList}');
+	alert('${recList}');
 	
 	for(let i=0;i<rec.length;i++){
-	
+	if(rec[i].msStatus=="N"){
+		
+	}
 		    	
 	let insertTr= " ";
 	insertTr += "<tr>";

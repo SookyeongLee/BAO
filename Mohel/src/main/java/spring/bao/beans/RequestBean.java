@@ -22,4 +22,12 @@ public class RequestBean {
 	private String rqWord;
 	private String img;
 	private int rqBest;
+	
+	//현옥  
+	   private String rqDeadLine;
+	   private String rdCode;
+	   private String rdComment;
+	   
+	   private BidBean bidBean;
+
 }

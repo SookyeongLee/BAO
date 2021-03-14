@@ -1,179 +1,53 @@
-package spring.bao.services;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.google.gson.Gson;
-
-import spring.bao.beans.ScheduleBean;
-import spring.bao.mapper.ScheduleIf;
-
-@Service
-public class Schedule {
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper	namespace="spring.bao.mapper.ScheduleIf">
+<!-- QUERY에 포함된 문자중 < > & || 등이 있다면 xml 파싱을 하지 않도록  -->
+	<select	id="getBidInfo" resultType="spring.bao.beans.ScheduleBean">
+		<![CDATA[
+	SELECT  WI_RQCODE AS SCCODE,
+        WI_HELPER AS SCHELPER,
+        RQ_MMID AS SCWISHER,
+        MG_FILTERNAME AS SCFILTERNAME,
+        SG_SUBNAME AS SCSUBNAME,
+        RQ_TITLE AS SDTITLE
+	FROM WI INNER JOIN RQ ON WI.WI_RQCODE = RQ.RQ_CODE 
+        LEFT OUTER JOIN  MG ON MG.MG_FILTERCODE = RQ.RQ_FILTERCODE 
+        LEFT OUTER JOIN SG ON SG.SG_SUBCODE =RQ.RQ_SUBCODE WHERE RQ_CODE='5000210309040337'
+		]]>
+	</select>
+	<select	id="getSchedule" resultType="spring.bao.beans.ScheduleBean">
+		<![CDATA[
+	SELECT SD_SCWIRQCODE AS SCCODE,
+        SD_SCWIBIHELPER AS SCHELPER,
+        RQ_MMID AS SCWISHER,
+        MG_FILTERNAME AS SCFILTERNAME,
+        SG_SUBNAME AS SCSUBNAME,
+        RQ_TITLE AS SDTITLE,
+        SD_STEP AS SCSTEP,
+        SD_PERIOD AS SDDATE,
+        SD_COMMENT AS SDCOMMENT,
+        SC_STCODE AS SCSTATUS
+	FROM SD INNER JOIN RQ ON SD.SD_SCWIRQCODE = RQ.RQ_CODE 
+        INNER JOIN SC ON SC.SC_WIRQCODE = RQ.RQ_CODE
+        LEFT OUTER JOIN  MG ON MG.MG_FILTERCODE = RQ.RQ_FILTERCODE 
+        LEFT OUTER JOIN SG ON SG.SG_SUBCODE =RQ.RQ_SUBCODE WHERE RQ_CODE='5000210309040337'
+		]]>
+	</select>
 	
-	public Schedule() {}
-	@Autowired
-	private HttpServletRequest request;
-	@Autowired
-	private HttpServletResponse response;
-	@Autowired
-	private ScheduleIf mapper;
-	@Autowired
-	private Gson gson;
-	@Autowired
-	private PlatformTransactionManager tran;
+	<insert	id="insSchedule">
+	<![CDATA[
+	INSERT INTO SC(SC_WIRQCODE,SC_WIBIHELPER,SC_STCODE) VALUES(#{scCode},#{scHelper},#{scStatus})
+	]]>
+	</insert>
 	
-	public ModelAndView entrance(ScheduleBean scheduleBean) throws Exception {
-		
-		ModelAndView mav = null;
-		
-		switch(request.getRequestURI().substring(1)) {
-		case "MovePro":
-			mav=this.moveProCtl(scheduleBean);
-			break;
-		case "InsSchedule":
-			mav=this.insScheduleCtl(scheduleBean);
-			break;
-		case "UpdateSchedule":
-			this.updateScheduleCtl();
-			break;
-		case "MoveUser":
-			mav=this.moveUserCtl(scheduleBean);
-			break;
-		case "AcceptSchedule":
-			this.acceptCtl();
-			break;
-		case "RejectSchedule":
-			this.rejectCtl();
-			break;
-		case "OkClick":
-			this.okCtl();
-			break;
-		}
-		return mav;
-	}
-	private ModelAndView okCtl() {
-		ModelAndView mav = new ModelAndView();
-//		this.updateStatus();
-//		this.insSendBox();
-//		this.insHelperRecBox();
-		return mav;		
-	}
-	private ModelAndView rejectCtl() {
-		ModelAndView mav = new ModelAndView();
-//		this.insSendBox();
-//		this.insHelperRecBox();
-		return mav;		
-	}
+	<insert	id="insDetailSchedule"  parameterType="java.util.List" >
+	INSERT INTO SD(SD_SCWIRQCODE,SD_SCWIBIHELPER,SD_STEP,SD_PERIOD,SD_COMMENT,SD_STCODE) 
+	VALUES
+		<foreach collection="list" item="type"  open="(" close=")" separator=",">
+			#{type.scCode},#{type.scHelper},#{type.sdStep},#{type.sdPeriod},#{type.sdComment},'S'
+        </foreach>
+	</insert>
 	
-	private ModelAndView acceptCtl() {
-		ModelAndView mav = new ModelAndView();
-//		this.insFixSchedule();
-//		this.insSendBox();
-//		this.insHelperRecBox();
-		return mav;		
-	}
-	
-	private ModelAndView moveUserCtl(ScheduleBean scheduleBean) throws Exception {
-		String scInfo =gson.toJson(this.getSchedule(scheduleBean));
-
-		System.out.println(scInfo.length());
-		ModelAndView mav = new ModelAndView();
-		System.out.println("소정 마스터 ㄱ ㄱ ");
-		
-		if(!scInfo.equals("[]")) {
-			mav.addObject("scInfo", scInfo);
-			mav.setViewName("Schedule/conditionUser");
-		}else{
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('nothing');location.href='Main' </script>"); 
-			out.flush();
-			out.close();
-		}
-
-		return mav;
-	}
-	
-	private ModelAndView updateScheduleCtl() {
-		ModelAndView mav = new ModelAndView();
-//		this.updateSchedule();
-		return mav;		
-	}
-	
-	
-	
-	private ModelAndView insScheduleCtl(ScheduleBean scheduleBean) {
-		TransactionStatus status=tran.getTransaction(new DefaultTransactionDefinition());
-
-		ModelAndView mav = new ModelAndView();
-//		if(this.insSchedule(scheduleBean)) {
-//			if(this.insDetailSchedule(scheduleBean)) {
-//				tran.commit(status);
-//				//메세지 전송하기 //스케쥴 입력했다고 메세지 보내주기 
-//			}
-//		}
-//		String jsonInfo = request.getParameter("data");
-//		System.out.println("???"+jsonInfo);
-//		try {
-//		JSONParser jsonParser = new JSONParser();
-//		JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonInfo);
-//		System.out.println(jsonObject.get(0));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		mav.setViewName("Schedule/conditionPro");
-		return mav;		
-	}
-
-	private ModelAndView moveProCtl(ScheduleBean scheduleBean) {
-		String scInfo =gson.toJson(this.getSchedule(scheduleBean));
-		String bidInfo =gson.toJson(this.getBidInfo(scheduleBean));
-
-		ModelAndView mav = new ModelAndView();
-		
-		if(!scInfo.equals("[]")) {
-			mav.addObject("scInfo", scInfo);
-		}else{
-			mav.addObject("scInfo", bidInfo);
-		}
-		mav.setViewName("Schedule/conditionPro");
-
-		return mav;
-	}
-	
-	private boolean convertToBoolean(int data) {
-		return data == 1?true:false;
-	}
-	
-	private boolean insDetailSchedule(ScheduleBean scheduleBean) {
-		return convertToBoolean(mapper.insDetailSchedule(scheduleBean));
-	}
-	
-	private boolean insSchedule(ScheduleBean scheduleBean) {
-		return convertToBoolean(mapper.insSchedule(scheduleBean));
-	}
-	
-	private ArrayList<Schedule> getBidInfo(ScheduleBean scheduleBean){
-		return mapper.getBidInfo(scheduleBean);
-	}
-
-	private ArrayList<Schedule> getSchedule(ScheduleBean scheduleBean){
-		return mapper.getSchedule(scheduleBean);
-	}
-	
-}
+</mapper>

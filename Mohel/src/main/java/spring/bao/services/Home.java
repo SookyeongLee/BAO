@@ -29,26 +29,29 @@ public class Home {
 				return mav;
 	}
 
+//전체 수정 
+	   private ModelAndView mainCtl(RequestBean req) {
+		      ModelAndView mav = new ModelAndView();
 
-	private ModelAndView mainCtl(RequestBean requestBean) {
-		ModelAndView mav = new ModelAndView();
+		      String jsonData = gson.toJson(this.getRecentList(req));
+		      String jsonData2 = gson.toJson(this.getRecentList2(req));
+		      System.out.println();
+		      System.out.println("ddd"+jsonData2);
+		      mav.addObject("jsonData",jsonData);
+		      mav.addObject("list2", jsonData2);
+		      
+		      mav.setViewName("Authentication/main");
+		      
+		      return mav;
+		   }
 
-	    String json = gson.toJson(this.getRecentList(requestBean));		
+		   private ArrayList<RequestBean> getRecentList(RequestBean req) {
+		      return mapper.getRecentList(req);
+		   }
+		   private ArrayList<RequestBean> getRecentList2(RequestBean req) {
+		      return mapper.getRecentList2(req);
+		   }
 
-	    mav.addObject("jsonData", json);
-		
-		
-		mav.setViewName("Authentication/main");
-		
-		return mav;
-	}
-
-
-	  
-
-	   private ArrayList<RequestBean> getRecentList(RequestBean reqBean) {
-	      return mapper.getRecentList(reqBean);
-	   }
 }
 
 

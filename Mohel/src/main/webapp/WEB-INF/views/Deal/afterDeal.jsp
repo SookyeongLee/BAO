@@ -76,7 +76,7 @@
    <script>
     function list(){
    	 
- 	let json = JSON.parse('${rqd}');
+ 	let json = JSON.parse('${detailAd}'); //제이슨 값수정 
  	
  	
  	
@@ -118,9 +118,14 @@
  	
  	let rqSysDate = json[0].rqSysDate;
  	$('#rqSysDate').append(rqSysDate);
+    
+   //아래부분 종식코드 추가 
+    let rqImage=" ";
+    rqImage += "<img class='deal__img' src='../../resources/imgs/common/"+json[0].rqImage+"'>"
+    $('#rqImage').append(rqImage);
     }
    
-   
+
     	var rqCode = document.getElementsByName("rqCode")[0];
     	var rqId = document.getElementsByName("rqId")[0];
     	

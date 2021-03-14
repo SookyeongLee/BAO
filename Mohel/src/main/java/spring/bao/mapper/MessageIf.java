@@ -12,4 +12,5 @@ public interface MessageIf {
 	public ArrayList<Messages> getSendList(MessageBean messagebean);
 	public ArrayList<Messages> getMsgDetail(MessageBean messagebean);
 	public int insMessage(MessageBean messagebean);
+	public int updateStatus(MessageBean messagebean);
 }

@@ -1,10 +1,12 @@
 package spring.bao.services;
 
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,7 @@ public class Messages {
 		private Gson gson;
 		@Autowired
 		private PlatformTransactionManager tran;
+		
 
 		public ModelAndView entrance(MessageBean messagBean) {
 			
@@ -71,13 +74,15 @@ public class Messages {
 			
 			messageBean.setMsStatus("N");
 			messageBean.setMsDate(this.getCurrentDate('d'));
-			
-			if(this.insMessage(messageBean)) {
-			tran.commit(status);
-			
-			String json =gson.toJson(this.getSendList(messageBean));
-		    mav.addObject("SendList",json);
-			};
+			try {
+				if(this.insMessage(messageBean)) {
+					tran.commit(status);
+					String json =gson.toJson(this.getSendList(messageBean));
+					mav.addObject("SendList",json);
+				};
+			}catch(Exception e) {
+				tran.rollback(status);
+			}
 			mav.setViewName("Message/sendBox");
 			return mav;
 		}
@@ -113,11 +118,21 @@ public class Messages {
 		}
 
 		private ModelAndView tiltleCtl(MessageBean messageBean) {
-			
+			TransactionStatus status=tran.getTransaction(new DefaultTransactionDefinition());
+
 			ModelAndView mav = new ModelAndView();
 			String json =gson.toJson(this.getMsgDetail(messageBean));
 //		    System.out.println(json);
 		    mav.addObject("dataList",json);
+		  
+		    try {
+		    	if(this.updateStatus(messageBean)) {
+		    		tran.commit(status);
+		    	}
+		    }catch(Exception e) {
+		    	e.printStackTrace();
+		    		tran.rollback(status);
+		    }
 			mav.setViewName("Message/msgDetail");
 			return mav;
 		}
@@ -144,6 +159,10 @@ public class Messages {
 		
 		private boolean convertToBoolean(int data) {
 			return data == 1?true:false;
+		}
+		
+		private boolean updateStatus(MessageBean messageBean) {
+			return convertToBoolean(mapper.updateStatus(messageBean));
 		}
 		
 		private boolean insMessage(MessageBean messageBean) {

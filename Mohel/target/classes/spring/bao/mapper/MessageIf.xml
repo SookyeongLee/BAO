@@ -50,6 +50,12 @@
 		]]>
 	</insert>
 	
+	<update id="updateStatus" >
+		<![CDATA[
+	UPDATE MS SET MS_STCODE='Y' WHERE MS_MMRECIPIENT=#{msRecipient} AND MS_MMSENDER=#{msSender} AND TO_CHAR(MS_SYSDATE,'YYYY-MM-DD HH24:MI:SS')=#{msDate} 
+		]]>
+	</update>
+	
 	
 	
 </mapper>

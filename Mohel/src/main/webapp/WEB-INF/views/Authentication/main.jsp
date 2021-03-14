@@ -110,7 +110,6 @@ if(JSON.parse('${requestBestData}').length != 0){
 function main(){
 
 	  let json = JSON.parse('${jsonData}');
-	  alert('${jsonData}');
 //    if(!=로그인 x??){
 //       document.getElementById("logCk").innerHTML ="로그인";
 //    }else{

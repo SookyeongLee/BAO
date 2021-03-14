@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/resources/css/common.css">
     <script src="/resources/src/main.js" defer></script>
 </head>
-<body>
+<body onLoad="IHelperScreen()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -108,24 +108,35 @@ function plus(){
 }
 
 function IHelperScreen(){
-   let requestList = JSON.parse('${ingHelperList}');
+	  let requestList = JSON.parse('${ingHelperList}');
 
-   for(let index=(0+k) ; index<(3+k) ; index++){
-      if(index >= requestList.length)break;
-   let insertTr = " ";
+	   for(let index=(0+k) ; index<(3+k) ; index++){
+	      if(index >= requestList.length)break;
+	   let rqCode = requestList[index].rqCode;
+	   let insertTr = " ";
 
-   insertTr +=  "<li class='dealList__list__item'>";
-   insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
-   insertTr += "<ul class='dealList__description'>";
-   insertTr += "<li><button type='button' class='dealList-btn dealList-schedule'>스케줄 관리</button></li>";
-   insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
-   insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
-   insertTr += "</ul>";
-   insertTr += "</li>";
+	   insertTr +=  "<li class='dealList__list__item' onClick='DetailClick("+ rqCode +")'>"
+	   insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+	   insertTr += "<ul class='dealList__description'>";
+	   insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='movePro()'>스케줄 관리</button></li>";
+	   insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
+	   insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
+	   insertTr += "</ul>";
+	   insertTr += "</li>";
 
-   $("#ingHelperList").append(insertTr)
-   }
+	   $("#ingHelperList").append(insertTr)
+	   }
 }
+function movePro(){
+	   let form = document.createElement("form");
+	   form.action = "MovePro";
+	   form.method = "Post";
+	   form.target = "_blank";
+	   
+	   
+	   document.body.appendChild(form);
+	   form.submit();
+	}
 //마이페이지 클릭 
 function myPageClick(){
    let form = document.createElement("form");

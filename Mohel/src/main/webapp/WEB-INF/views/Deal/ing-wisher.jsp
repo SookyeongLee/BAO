@@ -117,22 +117,35 @@ function plus(){
 }
 
 function iWisherScreen(){
-let requestList = JSON.parse('${ingWisherList}');
-for(let index=(0+k) ; index<(3+k) ; index++){
-   if(index >= requestList.length)break;
-let insertTr = " ";
+	let requestList = JSON.parse('${ingWisherList}');
 
-insertTr +=  "<li class='dealList__list__item'>";
-insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
-insertTr += "<ul class='dealList__description'>";
-insertTr += "<li><button type='button' class='dealList-btn dealList-schedule'>스케줄 관리</button></li>";
-insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
-insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
-insertTr += "</ul>";
-insertTr += "</li>";
+	for(let index=(0+k) ; index<(3+k) ; index++){
+	   if(index >= requestList.length)break;
+	let rqCode = requestList[index].rqCode;
+	let insertTr = " ";
 
-$("#ingWisherList").append(insertTr)
+	insertTr +=  "<li class='dealList__list__item'>"
+	insertTr += "<div class='delList__img'  onClick='DetailClick("+ rqCode +")'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+	insertTr += "<ul class='dealList__description'>";
+	insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='moveUser()'>스케줄 관리</button></li>";
+	insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
+	insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
+	insertTr += "</ul>";
+	insertTr += "</li>";
+
+	$("#ingWisherList").append(insertTr)
+	}
 }
+
+function moveUser(){
+   let form = document.createElement("form");
+   form.action = "MoveUser";
+   form.method = "Post";
+   form.target = "_blank";
+   
+   
+   document.body.appendChild(form);
+   form.submit();
 }
 //마이페이지 클릭 
 function myPageClick(){

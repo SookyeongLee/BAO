@@ -12,6 +12,7 @@ public interface AuthenticationIf {
 	public int insMember(MemberBean memberbean);	
 	public int isAccess(MemberBean memberbean);
 	public ArrayList<RequestBean> getRecentList(RequestBean req);
+	public ArrayList<RequestBean> getRecentList2(RequestBean req);
 	public int insAccess(MemberBean member);
 
 
