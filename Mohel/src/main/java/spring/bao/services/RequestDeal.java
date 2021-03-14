@@ -272,7 +272,7 @@ public class RequestDeal {
 		ModelAndView mav = new ModelAndView();
 		
 		
-		mav.setViewName("Deal/request");
+		mav.setViewName("RequestDeal/request");
 		
 		return mav;
 	}	

@@ -340,6 +340,7 @@ select {
 .fa-envelope {
   color: var(--color-skyblue);
 }
+
 .pointer {
   cursor: pointer;
 }

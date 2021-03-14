@@ -46,16 +46,31 @@ public class Profiles {
 		case "UpdateProfile":
 			mav = this.updateProfileCtl(memberbean);
 			break;
+		case "ClickProfile":
+			mav = this.clickProfileCtl(memberbean);
+			break;
+			
 		}
 
 		return mav;
 
 	}
 
+	
+	private ModelAndView clickProfileCtl(MemberBean memberbean) {
+		System.out.println(memberbean.getMId());
+		ModelAndView mav = new ModelAndView();
+		String json = gson.toJson(this.getClickProfile(memberbean));
+		mav.addObject("clickPro",json);
+		mav.setViewName("Profile/profileClick");
+		return mav;
+	}
+	
 	private ModelAndView updateProfileCtl(MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-		
+		memberbean.setMId("PPP");
+
 		try {
 			if (this.updateProfile(memberbean)) {
 					String json = gson.toJson(this.getProfile(memberbean));
@@ -72,6 +87,7 @@ public class Profiles {
 
 	private ModelAndView modifyProfileCtl(MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
+		memberbean.setMId("PPP");
 
 		String json = gson.toJson(this.getProfile(memberbean));
 		mav.addObject("getProfile", json);
@@ -84,6 +100,8 @@ public class Profiles {
 	private ModelAndView myProfileCtl(MemberBean memberbean) {
 		
 		ModelAndView mav = new ModelAndView();
+		memberbean.setMId("PPP");
+
 		if(this.isRgNameCheck(memberbean)) {
 			String json = gson.toJson(this.getProfile(memberbean));
 			mav.addObject("getProfile", json);
@@ -119,6 +137,10 @@ public class Profiles {
 	}
 	
 	private ArrayList<MemberBean> getProfile(MemberBean memberbean) {
+		return mapper.getProfile(memberbean);
+	}
+	
+	private ArrayList<MemberBean> getClickProfile(MemberBean memberbean) {
 		return mapper.getProfile(memberbean);
 	}
 	

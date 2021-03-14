@@ -9,6 +9,8 @@ public interface ProfileIf {
 	public int updateProfile(MemberBean memberbean);
 
 	public ArrayList<MemberBean> getProfile(MemberBean memberbean);
+	
+	public ArrayList<MemberBean> getClickProfile(MemberBean memberbean);
 
 	public int isRgNameCheck(MemberBean memberbean);
 

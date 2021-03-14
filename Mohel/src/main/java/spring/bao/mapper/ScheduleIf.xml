@@ -50,4 +50,28 @@
         </foreach>
 	</insert>
 	
+	<update id="insFixSchedule">
+		<![CDATA[
+	UPDATE SC SET SC_STCODE='S' WHERE SC_WIRQCODE=#{scCode}
+		]]>
+	</update>
+	<insert id="insMessage">
+		<![CDATA[
+	INSERT INTO MS(MS_MMRECIPIENT,MS_MMSENDER,MS_TITLE,MS_COMMENT,MS_SYSDATE,MS_STCODE) 
+	VALUES (#{msRecipient},#{msSender},'스케쥴이 수락되었습니다.','스케쥴이 수락되었습니다. 앞으로 잘 부탁드립니다.',SYSDATE,'N')
+		]]>	
+	</insert>
+	<insert id="insRejectMessage">
+		<![CDATA[
+	INSERT INTO MS(MS_MMRECIPIENT,MS_MMSENDER,MS_TITLE,MS_COMMENT,MS_SYSDATE,MS_STCODE) 
+	VALUES (#{msRecipient},#{msSender},'스케쥴이 거절되었습니다.','스케쥴이 거절되었습니다. 다시 등록해 주세요',SYSDATE,'N')
+		]]>	
+	</insert>
+	<update id="updateStatus">
+		<![CDATA[
+	UPDATE SD SET SD_STCODE='A' WHERE SD_SCWIRQCODE=#{scCode} AND SD_STEP=#{sdCode}
+		]]>
+	</update>
+	
+	
 </mapper>

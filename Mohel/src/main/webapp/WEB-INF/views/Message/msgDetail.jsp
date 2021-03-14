@@ -40,9 +40,7 @@
      <!--Mypage Navbar -->
     <nav id="mypage">
         <ul class="mypage__menu">
-            <li class="mypage__menu__item">
-                <button type="button" onClick="myPageClick()">프로필</button>
-            </li>
+            <li class="mypage__menu__item"><a href="MyProfile">프로필</a></li>
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
                 <ul class="navbar__list deal-list">
@@ -60,7 +58,7 @@
                 </ul>
             </li> 
         </ul>
-    </nav> 
+    </nav>
     <!-- Message Detail -->
     <section class="msgDetail mypage">
       <section id="messageDetail"></section>
@@ -87,18 +85,7 @@ function init(){
 	
 }
 
-// function msgForm(){
-// 	//서버전송
-// 	let msg = JSON.parse('${dataList}');
-// 	alert('${dataList}');
-// 	let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
-	
-// 	let form = document.createElement("form");
-// 	form.action="MsgForm?"+sendData;
-// 	form.method="POST";
-// 	document.body.appendChild(form);
-// 	form.submit();
-// }
+
 //경매글 올리기
 function registerReq(){
 	 let form = document.createElement("form");

@@ -40,7 +40,8 @@
     <section class="writeReview mypage">
         <h2 class="mypage__title">리뷰보기</h2>       
         <input type="hidden" id="rvWirqCode" name="rvWirqCode" >
-		<input type="hidden" id="rvHelper" name="rvHelper" >     
+      <input type="hidden" id="rvHelper" name="rvHelper" >
+      <input type="hidden" id="rvStar" name="rvStar" >          
         <div class="review__list1">
             <img src="../../resources/imgs/common/2000.jpg" class="review__list__img">
             <div class="review__list__subCtg">인테리어</div>
@@ -56,31 +57,30 @@
             <div class="review__list__text" id="rvComment"></div>
         </div>
     </section>
-    ${info }
+  
 </body>
 <script>
 function viewreview(){
-	let json = JSON.parse('${info}');
-	
-	alert('${info}');
-	
-	
-    let rvWirqCode = json[0].rvWirqCode
-	
-	$('#rvWirqCode').val(rvWirqCode);
-	alert(rvWirqCode);
-
-	
-	let rvHelper = json[0].rvHelper
-		
-	$('#rvHelper').val(rvHelper);
-	alert(rvHelper);
-	
+   let json = JSON.parse('${info}');
    
-	
-	let rvComment = json[0].rvComment 
+   alert('${info}');
+   
+   
+    let rvWirqCode = json[0].rvWirqCode
+   $('#rvWirqCode').val(rvWirqCode);
+
+   
+   let rvHelper = json[0].rvHelper   
+   $('#rvHelper').val(rvHelper);
+   
+   
+   let rvComment = json[0].rvComment 
     $('#rvComment').append(rvComment);
-	
+   
+   let rvStar = json[0].rvStar 
+    $('#rvStar').append(rvStar);
+   
+   
 
 }
 

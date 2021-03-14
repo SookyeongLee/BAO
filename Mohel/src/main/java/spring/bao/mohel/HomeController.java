@@ -91,10 +91,9 @@ public class HomeController {
 	}
 
 
-	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
+	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile","ClickProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
 	public ModelAndView Profile(@ModelAttribute MemberBean memberBean) {
 		ModelAndView mav = new ModelAndView();
-		memberBean.setMId("PPP");
 		mav = pro.entrance(memberBean);
 		
 		return mav;
@@ -120,16 +119,16 @@ public class HomeController {
 
 	@RequestMapping(value = { "/MovePro","/UpdateSchedule", "/MoveUser", "/AcceptSchedule",
 			"/RejectSchedule", "/OkClick" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean) throws IOException {
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean,MessageBean messageBean) throws IOException {
 	
 		ModelAndView mav = new ModelAndView();
 
-		mav = schedule.entrance(scheduleBean);
+		mav = schedule.entrance(scheduleBean,messageBean);
 
 		return mav;
 	}
 	@RequestMapping(value = { "/InsSchedule"}, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView init(@RequestBody List<HashMap<String,Object>> jsondata,ScheduleBean scheduleBean ) throws IOException {
+	public ModelAndView init(@RequestBody List<HashMap<String,Object>> jsondata,ScheduleBean scheduleBean ,MessageBean messageBean) throws IOException {
 		TransactionStatus status=tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
@@ -138,7 +137,7 @@ public class HomeController {
 		scheduleBean.setScHelper(jsondata.get(0).get("scHelper").toString());
 		scheduleBean.setScStatus("S");
 		
-		mav = schedule.entrance(scheduleBean);
+		mav = schedule.entrance(scheduleBean,messageBean);
 
 //		HashMap<String,Object> insDetailSchedule = new HashMap<String,Object>();
 //		insDetailSchedule.put("list", jsondata);
@@ -171,10 +170,10 @@ public class HomeController {
 
 
 	@RequestMapping(value = { "/WriteReview", "/ViewReview", "/ShowReview" }, method = { RequestMethod.GET,RequestMethod.POST })
-	public ModelAndView Review(@ModelAttribute ReviewBean reviewBean) {
+	public ModelAndView Review(@ModelAttribute ReviewBean reviewBean,BidBean bidBean) {
 		ModelAndView mav = new ModelAndView();
 
-		mav = review.entrance(reviewBean);
+		mav = review.entrance(reviewBean, bidBean);
 		
 		return mav;
 	}
@@ -188,7 +187,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/RecBox", "/Profile", "/Title", "/SendBox","/MsgForm","/SendMsg","MsgReplyForm"}, method = {RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "/RecBox", "/Title", "/SendBox","/MsgForm","/SendMsg","MsgReplyForm"}, method = {RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView Messages(@ModelAttribute MessageBean messageBean) {
 		ModelAndView mav = new ModelAndView();
 		

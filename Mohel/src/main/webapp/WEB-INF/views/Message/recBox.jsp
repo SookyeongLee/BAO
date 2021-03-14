@@ -103,17 +103,21 @@
 <script>
 function init(){
 	let rec = JSON.parse('${recList}');
-	alert('${recList}');
 	
 	for(let i=0;i<rec.length;i++){
-	if(rec[i].msStatus=="N"){
 		
+		let count = rec.length/15 ;
+		alert(count);
+	if(rec[i].msStatus=="N"){
+		$( "td" ).css( "color", "#A9A9A9" );
+		$( "i" ).css( "color", "#A9A9A9" );
+
 	}
-		    	
+	
 	let insertTr= " ";
 	insertTr += "<tr>";
 	insertTr += "<td class='message__data'><i class='fas fa-envelope'></i></td>";
-	insertTr += "<td class='message__data pointer' onClick='showPop()'>"+ rec[i].msSender +"</td>";
+	insertTr += "<td class='message__data pointer' onClick='clickProfile("+i+")'>"+ rec[i].msSender +"</td>";
 	insertTr += "<td class='message__data message__title pointer' onClick='msgDetail("+i+")'>"+rec[i].msTitle+"</td>";
 	insertTr += "<td class='message__data'>"+rec[i].msDate+"</td>";
 	insertTr += "</tr>";
@@ -124,8 +128,16 @@ function init(){
 	}
 	
 }
-function showPop(){
-	window.open("Profile","a", "width=600, height=800, left=100, top=50");	
+function clickProfile(i){
+	let rec = JSON.parse('${recList}');
+	let mId=rec[i].msSender;
+
+	let form = document.createElement("form");
+	form.action="ClickProfile?mId="+mId;
+	form.method="POST";
+	form.target = "_blank";
+	document.body.appendChild(form);
+	form.submit();
 	
 }
 

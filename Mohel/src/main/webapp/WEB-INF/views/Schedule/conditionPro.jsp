@@ -29,8 +29,8 @@
                     </button>
                 </div>
                 <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">거래등록</li>                    
+                   <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
+               	   <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                     
                     <li class="navbar__menu__item">로그아웃</li>
                 </ul>
             </div>
@@ -40,14 +40,14 @@
     <nav id="mypage">
         <ul class="mypage__menu">
             <li class="mypage__menu__item">
-                <button type="button"  onClick="pro()">프로필</button>
+                <button type="button" onClick="myPageClick()">프로필</button>
             </li>
             <li class="mypage__menu__item">
                 <button type="button" class="deal-btn">거래상태</button>
                 <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">완료</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
+                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
                 </ul>
             </li>                    
             <li class="mypage__menu__item">
@@ -249,7 +249,14 @@ function msgForm(){
 	
 	
 }
-
+//마이페이지 클릭 
+function myPageClick(){
+   let form = document.createElement("form");
+   form.action = "MyProfile";
+   form.method = "Post";
+   document.body.appendChild(form);
+   form.submit();
+}
 
 	
 </script>

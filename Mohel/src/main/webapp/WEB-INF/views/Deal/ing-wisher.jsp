@@ -155,5 +155,22 @@ function myPageClick(){
    document.body.appendChild(form);
    form.submit();
 }
+//경매 클릭 
+function DetailClick(rqCode){
+    var rqCode = rqCode;
+    let form = document.createElement("form");
+    form.action = "Detail";
+    form.method = "Post";
+    
+    let input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "rqCode";
+          input.value = rqCode;
+          alert(input.value);
+          form.appendChild(input);
+    
+    document.body.appendChild(form);
+    form.submit();
+ }
 </script>
 </html>

@@ -116,7 +116,7 @@ function IHelperScreen(){
 	   let insertTr = " ";
 
 	   insertTr +=  "<li class='dealList__list__item' onClick='DetailClick("+ rqCode +")'>"
-	   insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+	   insertTr += "<div class='delList__img' onClick='DetailClick("+rqCode+")'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
 	   insertTr += "<ul class='dealList__description'>";
 	   insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='movePro()'>스케줄 관리</button></li>";
 	   insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
@@ -137,6 +137,7 @@ function movePro(){
 	   document.body.appendChild(form);
 	   form.submit();
 	}
+
 //마이페이지 클릭 
 function myPageClick(){
    let form = document.createElement("form");
@@ -145,5 +146,22 @@ function myPageClick(){
    document.body.appendChild(form);
    form.submit();
 }
+//경매 클릭 
+function DetailClick(rqCode){
+    var rqCode = rqCode;
+    let form = document.createElement("form");
+    form.action = "Detail";
+    form.method = "Post";
+    
+    let input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "rqCode";
+          input.value = rqCode;
+          alert(input.value);
+          form.appendChild(input);
+    
+    document.body.appendChild(form);
+    form.submit();
+ }
 </script>
 </html>

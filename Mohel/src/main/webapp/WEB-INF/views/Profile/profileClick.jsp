@@ -12,8 +12,9 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onLoad="init()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -41,31 +42,7 @@
         <div class="profile__container">
             <h2 class="mypage__title profile__h2">프로필 및 리뷰</h2>
             <table class="profile__info"> 
-                <tr class="profile__list">
-                    <th class="profile__title">아이디</th>
-                    <td class="profile__contents">soo</td>
-                </tr>
-                <tr class="profile__list">
-                    <th class="profile__title">E-mail</th>
-                    <td class="profile__contents">mohel@naver.com</td>
-                </tr>
-                <tr class="profile__list">
-                    <th class="profile__title">사는곳</th>
-                    <td class="profile__contents">인천광역시 미추홀구 매소홀로488번길 6-32 태승빌딩 5층</td>
-                </tr>
-                <tr class="profile__list">
-                    <th class="profile__title">소속</th>
-                    <td class="profile__contents">YBM 회화 강사</td>
-                </tr>
-                <tr class="profile__list">
-                    <th class="profile__title">경력</th>
-                    <td class="profile__contents">
-                        - GQ Korea 프리랜서 번역가<br>
-                        - Pagoda One 전임 회화 강사<br>
-                        - 인터파크 Paedea Plus<br>
-                        - 크몽 튜터 1년차
-                    </td>
-                </tr>
+               
             </table>
         </div>
     </section>
@@ -246,4 +223,36 @@
         </div>       
     </section>
 </body>
+<script>
+function init(){
+	let profileInfo =JSON.parse('${clickPro}');
+	alert('${clickPro}');
+	
+	let insertTr="";
+	insertTr += "<tr class='profile__list'>";
+	insertTr += "<th class='profile__title'>아이디</th>";
+	insertTr += "<td class='profile__contents'>"+profileInfo[0].mId+"</td>";
+	insertTr += "</tr>";
+	insertTr += "<tr class='profile__list'>";
+	insertTr += "<th class='profile__title'>E-mail</th>";
+	insertTr += "<td class='profile__contents'>"+profileInfo[0].mEmail+"</td>";
+	insertTr += "</tr>";
+	insertTr += "<tr class='profile__list'>";
+	insertTr += "<th class='profile__title'>사는곳</th>";
+	insertTr += "<td class='profile__contents'>"+profileInfo[0].mRcName+"</td>";
+	insertTr += "</tr>";
+	insertTr += "<tr class='profile__list'>";
+	insertTr += "<th class='profile__title'>소속</th>";
+	insertTr += " <td class='profile__contents'>"+profileInfo[0].mDivision+"</td>";
+	insertTr += "</tr>";
+	insertTr += "<tr class='profile__list'>";
+	insertTr += "<th class='profile__title'>경력</th>";
+	insertTr += "<td class='profile__contents'>"+profileInfo[0].mCareer+"</td>";
+    insertTr += "</tr>";
+    
+    $(".profile__info").append(insertTr);
+
+    
+}
+</script>
 </html>

@@ -43,9 +43,6 @@ public class Messages {
 			case "RecBox":
 				mav=this.recBoxCtl(messagBean);
 				break;
-			case "Profile":
-				mav=this.profileCtl();
-				break;
 			case "Title":
 				mav=this.tiltleCtl(messagBean);
 				break;
@@ -138,14 +135,6 @@ public class Messages {
 		}
 	
 
-		private ModelAndView profileCtl() {
-			
-			ModelAndView mav = new ModelAndView();
-			System.out.println("here");
-			mav.setViewName("Profile/profileClick");
-			return mav;
-		}
-		
 		private ModelAndView recBoxCtl(MessageBean messageBean) {
 
 			ModelAndView mav = new ModelAndView();
