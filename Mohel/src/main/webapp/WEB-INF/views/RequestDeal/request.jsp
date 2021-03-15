@@ -15,49 +15,13 @@
     <link rel="stylesheet" href="/resources/css/common.css">
 </head>
 <body>
+    
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="Main"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu"> 
-                		<li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
-         		     <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                     
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+
     <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item"><a href="MyProfile">프로필</a></li>
-            <li class="mypage__menu__item">
-                <button type="button" class="deal-btn">거래상태</button>
-                <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
-                </ul>
-            </li>                    
-            <li class="mypage__menu__item">
-                <button type="button" class="message-btn">메시지</button>
-                <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
-                </ul>
-            </li> 
-        </ul>
-    </nav>
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
+    
     <!-- Request enrollment -->
     <section class="request mypage">
         <h2 class="mypage__title">거래등록</h2>

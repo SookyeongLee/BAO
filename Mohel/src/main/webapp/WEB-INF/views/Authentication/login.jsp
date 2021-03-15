@@ -28,23 +28,11 @@
                 <button type="submit" class="contents__submit__click"  onClick="login()">로그인</button>
             </div>
         </form>
-        <div class="contents__line">
-            <span class="contents__line-or">or</span>
-        </div>
-        <!-- sns login-->
-        <div class="contents__sns">
-            <div class="sns-naver"></div>
-            <div class="sns-kakao"></div>
-            <div class="sns-google"></div>
-        </div>
         <!-- 회원가입하기 -->
-        <p class="contents__account">아직 회원이 아니세요?<a href="#" class="contents__account-link" onClick="join()"> 회원가입</a></p>
+        <p class="contents__account">아직 회원이 아니세요? <a href="#" class="contents__account-link" onClick="join()">회원가입</a></p>
     </section>
-    <!-- Footer -->
-    <footer id="footer">
-        <p class="footer__rights">Copyright 2021 BAO. All Rights Reserved.</p>
-    </footer>
-    
+        
+           
    <script>
       function login(){
             var mId = document.getElementsByName('mId')[0];

@@ -30,12 +30,9 @@
                 <button type="submit" class="contents__submit__click" onClick="Check()">가입하기</button>
             </div>
         </form>
+        <!-- 로그인하기 -->
+        <p class="contents__account">이미 모헬 회원이신가요? <a href="#" class="contents__account-link">로그인</a></p>
     </section>
-    <!-- Footer -->
-    <footer id="footer">
-        <p class="footer__rights">Copyright 2021 BAO. All Rights Reserved.</p>
-    </footer>
-    
     <script>
       function Check(){
          var mId = document.getElementsByName('mId')[0];

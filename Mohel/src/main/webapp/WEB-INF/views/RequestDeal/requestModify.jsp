@@ -11,54 +11,17 @@
     <link rel="icon" type="image/png" href="imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/mypage.css">
+    <link rel="stylesheet" href="/resources/css/common.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="list()">
+    
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">거래등록</li>                    
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+
     <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item navbar-click">
-                <a href="#">거래내역</a>
-                <ul class="navbar__list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">내요청</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">거래대기중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">거래진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">거래완료</button></li>
-                </ul>
-            </li>                    
-            <li class="mypage__menu__item navbar-click">
-                <a href="#">메시지</a>
-                <ul class="navbar__list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
-                </ul>
-            </li> 
-        </ul>
-    </nav>
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
+    
     <!-- Request enrollment -->
     <section class="request mypage">
         <h2 class="mypage__title">거래등록</h2>

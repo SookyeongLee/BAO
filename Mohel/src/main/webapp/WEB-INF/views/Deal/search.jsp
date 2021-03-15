@@ -12,6 +12,7 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/main.css">
+    <script src="/resources/src/scroll.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="main()">
@@ -29,7 +30,7 @@
             </ul>
         </nav>      
         <!-- 홈화면(검색창) -->
-        <div class="home">
+        <div id="home">
             <div class="home__left">
                 <h1 class="home__title">모두의 헬퍼</h1>            
                 <div class="home__search">
@@ -81,6 +82,11 @@
             <div class="list__container">
                 <h1 class="list__title">새로운 역경매</h1>
                  <ul id="searchData" class="list__items"></ul>
+                 
+                <!-- 최신순 버튼이동 -->
+                <button type="button" class="before-btn" onClick="beforeClick()"><i class="fas fa-angle-left"></i></button>
+                <button type="button" class="after-btn" onClick="afterClick()"><i class="fas fa-angle-right"></i></button>
+                 
             </div>
             <!-- 인기순 -->
             <div class="list__container">
@@ -90,11 +96,104 @@
             </div>
         </div>    
     </section>
-       <%--    ${requestData}
-      ${searchData} --%>
+	<!-- Footer -->
+    <footer id="foot">
+        <p class="foot__rights">Copyright © 2021 Mohel | All rights reserved. | BAO</p>
+    </footer>
+    <!-- Arrow button -->
+    <button class="arrow-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 </body>
-<section id="search"></section>
 <script>
+//최신순 버튼이동
+var r=0;
+
+function beforeClick(){
+   
+   $("#newRequestList").empty();   
+   let requestList = JSON.parse('${requestData}');
+
+        r -= 6;   
+        if(r >= 0){
+   
+       for(let index = r; index < r+6; index++){
+            
+           let rqCode = requestList[index].rqCode;    
+          let insertTr = " ";
+          insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+          insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+          insertTr += "<div class='list__item__description'>"
+          insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+          insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+          insertTr += "</div>";
+          insertTr += "</li>";
+          
+          $("#newRequestList").append(insertTr);
+          } 
+        } else {
+             r += 6;   
+            for(let index = r; index < r+6; index++){
+                 
+                let rqCode = requestList[index].rqCode;    
+               let insertTr = " ";
+               insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+               insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+               insertTr += "<div class='list__item__description'>"
+               insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+               insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+               insertTr += "</div>";
+               insertTr += "</li>";
+               
+               $("#newRequestList").append(insertTr);
+               } 
+        }
+} 
+
+
+function afterClick(){
+   
+   $("#newRequestList").empty();   
+   let requestList = JSON.parse('${requestData}');
+
+        r += 6;   
+        if(r < requestList.length){
+   
+       for(let index = r; index < r+6; index++){
+            
+           let rqCode = requestList[index].rqCode;    
+          let insertTr = " ";
+          insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+          insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+          insertTr += "<div class='list__item__description'>"
+          insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+          insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+          insertTr += "</div>";
+          insertTr += "</li>";
+          
+          $("#newRequestList").append(insertTr);
+          } 
+        } else {
+             r -= 6;   
+            for(let index = r; index < r+6; index++){
+                 
+                let rqCode = requestList[index].rqCode;    
+               let insertTr = " ";
+               insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+               insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+               insertTr += "<div class='list__item__description'>"
+               insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+               insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+               insertTr += "</div>";
+               insertTr += "</li>";
+               
+               $("#newRequestList").append(insertTr);
+               } 
+        }
+} 
+
+
+
 //최신순
 if(JSON.parse('${requestData}').length != 0){
    filterScreen();  
@@ -176,7 +275,7 @@ function searchScreen(){
  function filterScreen(){ 
      
      let requestList = JSON.parse('${requestData}');
-     for(let index=0 ; index<requestList.length ; index++){
+     for(let index=0 ; index<6 ; index++){
        
          let rqCode = requestList[index].rqCode;    
         let insertTr = " ";
