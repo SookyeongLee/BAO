@@ -168,20 +168,20 @@ button {
 .before-btn, .after-btn{
   position: absolute;
   top:46%;
-  font-size: 28px;
+  font-size: 36px;
   color: #bfbfbf; 
   width: 50px;
   height: 50px;
   line-height: 50px;
 }
 .before-btn{
-  left: -60px;   
+  left: -80px;   
 }
 .after-btn{
-  right: -30px;
+  right: -64px;
 }
 .before-btn:hover, .after-btn:hover{
-  background-color: #e5e5e5;
+  background-color: #eeeeee;
   border-radius: 50%;
   opacity: 0.6;
 }
