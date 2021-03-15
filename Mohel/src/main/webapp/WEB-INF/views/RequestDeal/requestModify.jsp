@@ -25,7 +25,7 @@
     
     <!-- Request enrollment -->
     <section class="request mypage">
-        <h2 class="mypage__title">역거래등록</h2>
+        <h2 class="mypage__title">역경매등록</h2>
         
             <ul>
              
