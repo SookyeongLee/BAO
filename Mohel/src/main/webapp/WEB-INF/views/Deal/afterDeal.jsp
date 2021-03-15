@@ -12,8 +12,9 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onload="list()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -35,37 +36,82 @@
             </div>
         </div>        
     </nav>     
-
+    
     <section class="deal mypage">
-        <h2 class="mypage__title">입시 레슨 희망합니다.</h2>
+        <h2 class="mypage__title"><div id="rqTitle"></div></h2>
         <!-- Request -->
+        
         <div class="deal__container">
-            <div class="deal__img">
-                <img src="/resources/imgs/common/1000.jpg" class="deal-img">
+            <div id="rqImage">
             </div>
             <div class="deal__info__container">
                 <table class="deal__info"> 
                     <tr class="deal__list">
-                        <th class="deal__title">역경매기간</th>
-                        <td class="deal__contents">2021-01-03 ~ 2021-01-17</td>
+                        <th class="deal__title" style="width:300px">기간</th>
+                        <td class="deal__contents"><span id="rqSysDate"></span> ~ <span id="rqPeriod"></span></td>
                     </tr>
                     <tr class="deal__list">
                         <th class="deal__title">분야</th>
-                        <td class="deal__contents">음악</td>
+                        <td class="deal__contents"><div id="rqSubName"></div></td>
                     </tr>
                     <tr class="deal__list">
                         <th class="deal__title">지역</th>
-                        <td class="deal__contents">인천</td>
+                        <td class="deal__contents"><div id="rqRcName"></div></td>
                     </tr>
                     <tr class="profile__list">
-                        <th class="deal__title">내용</th>
+                        <th class="deal__title" >내용</th>
                         <td class="deal__contents">
-                            싱어송라이터인 ‘그레타’(키이라 나이틀리)는 남자친구 ‘데이브’(애덤 리바인)가 메이저 음반회사와 계약을 하게 되면서 뉴욕으로 오게 된다. 그러나 행복도 잠시, 오랜 연인이자 음악적 파트너로서 함께 노래를 만들고 부르는 것이 좋았던 그레타와 달리 스타가 된 데이브의 마음은 어느새 변해버린다. 스타 음반프로듀서였지만 이제는 해고된 ‘댄’(마크 러팔로)은 미치기 일보직전 들른 뮤직바에서 그레타의 자작곡을 듣게 되고 아직 녹슬지 않은 촉을 살려 음반제작을 제안한다. 거리 밴드를 결성한 그들은 뉴욕의 거리를 스튜디오 삼아 진짜로 부르고 싶었던 노래를 만들어가는데…
+                            <div id="rqComment"></div>
                         </td>
                     </tr>
-                </table>
+                </table>                
             </div>
         </div>
+        <input type="hidden" name="rqCode" id="rqCode">
+            <input type="hidden" name="rqId" id="rqId">
+            <input type="hidden" name="rqImage" id="rqImage">
     </section>   
 </body>
-</html> 
+
+   <script>
+    function list(){
+   	 
+ 	let json = JSON.parse('${detailAd}');
+ 	
+	let rqTitle = json[0].rqTitle;
+ 	$('#rqTitle').append(rqTitle);
+ 	
+//------------------------------------------------------------------------------
+    let rqComment = json[0].rqComment; 
+ 	$('#rqComment').append(rqComment);
+	
+//------------------------------------------------------------------------------
+	let rqPeriod = json[0].rqPeriod;  
+ 	$('#rqPeriod').append(rqPeriod);
+
+//------------------------------------------------------------------------------
+	let rqRcName = json[0].rqRcName;
+ 	$('#rqRcName').append(rqRcName);
+	
+ 	let rqSubName = json[0].rqSubName;	
+ 	$('#rqSubName').append(rqSubName);
+    
+ 	let rqCode = json[0].rqCode;
+ 	$('#rqCode').val(rqCode);
+ 	
+ 	let rqId = json[0].rqId;
+ 	$('#rqId').val(rqId);
+ 	
+ 	let rqSysDate = json[0].rqSimpleDate;
+ 	$('#rqSysDate').append(rqSysDate);
+ 	
+ 	let rqImage=" ";
+ 	rqImage += "<img class='deal__img' src='../../resources/imgs/common/"+json[0].rqImage+"'>"
+ 	$('#rqImage').append(rqImage);
+    }	
+ 	
+    	var rqCode = document.getElementsByName("rqCode")[0];
+    	var rqId = document.getElementsByName("rqId")[0];
+    
+</script>
+</html>

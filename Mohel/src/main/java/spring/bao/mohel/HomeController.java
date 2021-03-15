@@ -39,11 +39,7 @@ import spring.bao.services.Schedule;
 @Controller
 public class HomeController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	@Autowired
-	private Authentication auth;
-	@Autowired
-	private Profiles pro;
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);	
 	@Autowired
 	private Deal deal;
 	@Autowired
@@ -76,8 +72,8 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/Detail", "/WaitingHelper","/WaitingWisher", "/IngHelper","/IngWisher", "/EndHelper","/EndWisher", "/Search", "/Filter" }, method = {
-			RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "/Detail", "/WaitingHelper","/WaitingWisher", "/IngHelper","/IngWisher", "/EndHelper","/EndWisher", "/Search", "/Filter" },
+			        method = {RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView Deal(@ModelAttribute RequestBean reqBean) throws UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView();
 		reqBean.setACode(request.getRequestURI().substring(1));
@@ -98,10 +94,8 @@ public class HomeController {
 			"/RejectSchedule", "/OkClick" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView Schedule(@ModelAttribute ScheduleBean schedulebean) {
 		ModelAndView mav = new ModelAndView();
-
 		schedulebean.setaCode(request.getRequestURI().substring(1));
-
-		mav = schedule.entrance();
+		mav = schedule.entrance(schedulebean);
 		return mav;
 	}
 

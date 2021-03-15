@@ -51,13 +51,13 @@
 		<div class="category">
 			<ul class="category__menu">
 				<li class="category__menu__item">
-					<div class="category__menu-icon" onClick="filterClick(1)">
+					<div class="category__menu-icon" onClick="filterClick(4)">
 						<i class="fas fa-palette"></i>
 					</div>
 					<div class="category__menu-name">디자인</div>
 				</li>
 				<li class="category__menu__item">
-					<div class="category__menu-icon" onClick="filterClick(2)">
+					<div class="category__menu-icon" onClick="filterClick(5)">
 						<i class="fas fa-laptop-code"></i>
 					</div>
 					<div class="category__menu-name">IT/프로그래밍</div>
@@ -69,13 +69,13 @@
 					<div class="category__menu-name">비즈니스</div>
 				</li>
 				<li class="category__menu__item">
-					<div class="category__menu-icon" onClick="filterClick(4)">
+					<div class="category__menu-icon" onClick="filterClick(1)">
 						<i class="fas fa-chalkboard-teacher"></i>
 					</div>
 					<div class="category__menu-name">레슨</div>
 				</li>
 				<li class="category__menu__item">
-					<div class="category__menu-icon" onClick="filterClick(5)">
+					<div class="category__menu-icon" onClick="filterClick(2)">
 						<i class="fas fa-house-user"></i>
 					</div>
 					<div class="category__menu-name">홈/리빙</div>
@@ -97,6 +97,12 @@
 				<ul id="searchData" class="list__items"></ul>
 
 			</div>
+
+			<div>
+				<input type="button" value="이전" onClick="beforeClick()" />
+				<input type="button" value="다음" onClick="afterClick()" />
+			</div>
+
 			<!-- 인기순 -->
 			<div class="list__container">
 				<h1 class="list__title">인기 역경매</h1>
@@ -105,22 +111,104 @@
 				<ul id="TopsearchData" class="list__items"></ul>
 			</div>
 		</div>
+
 	</section>
-
-	<%--    ${requestData}
-      ${searchData} --%>
-
 </body>
 <script>
+var r=0;
+
+function beforeClick(){
+	
+	$("#newRequestList").empty();	
+	let requestList = JSON.parse('${requestData}');
+
+	     r -= 6;	
+	     if(r >= 0){
+	
+		 for(let index = r; index < r+6; index++){
+				
+		     let rqCode = requestList[index].rqCode;	 
+			 let insertTr = " ";
+			 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+			 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+			 insertTr += "<div class='list__item__description'>"
+			 insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+			 insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+			 insertTr += "</div>";
+			 insertTr += "</li>";
+			 
+			 $("#newRequestList").append(insertTr);
+			 } 
+	     } else {
+	    	   r += 6;	
+	  		 for(let index = r; index < r+6; index++){
+	  				
+	  		     let rqCode = requestList[index].rqCode;	 
+	  			 let insertTr = " ";
+	  			 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+	  			 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+	  			 insertTr += "<div class='list__item__description'>"
+	  			 insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+	  			 insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+	  			 insertTr += "</div>";
+	  			 insertTr += "</li>";
+	  			 
+	  			 $("#newRequestList").append(insertTr);
+	  			 } 
+	     }
+} 
+
+
+function afterClick(){
+	
+	$("#newRequestList").empty();	
+	let requestList = JSON.parse('${requestData}');
+
+	     r += 6;	
+	     if(r < requestList.length){
+	
+		 for(let index = r; index < r+6; index++){
+				
+		     let rqCode = requestList[index].rqCode;	 
+			 let insertTr = " ";
+			 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+			 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+			 insertTr += "<div class='list__item__description'>"
+			 insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+			 insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+			 insertTr += "</div>";
+			 insertTr += "</li>";
+			 
+			 $("#newRequestList").append(insertTr);
+			 } 
+	     } else {
+	    	   r -= 6;	
+	  		 for(let index = r; index < r+6; index++){
+	  				
+	  		     let rqCode = requestList[index].rqCode;	 
+	  			 let insertTr = " ";
+	  			 insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
+	  			 insertTr += "<img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'>";
+	  			 insertTr += "<div class='list__item__description'>"
+	  			 insertTr += "<h4 class='list__item-mainCtg'>"+requestList[index].rqSubName+"</h4>";
+	  			 insertTr += "<div class='list__item-title'>"+requestList[index].rqTitle+"</div>";
+	  			 insertTr += "</div>";
+	  			 insertTr += "</li>";
+	  			 
+	  			 $("#newRequestList").append(insertTr);
+	  			 } 
+	     }
+} 
+
 
 //최신순
 if(JSON.parse('${requestData}').length != 0){
-   filterScreen();  
-}
+	filterScreen();  
+}else{}
 
 if(JSON.parse('${requestBestData}').length != 0){
-	   filterBestScreen();  
- }
+	filterBestScreen();  
+}else{}
 
  
  function plusSearch(){
@@ -131,8 +219,6 @@ if(JSON.parse('${requestBestData}').length != 0){
        function filterClick(num){
     		let filterCode = (num*1000); 		
 	
-    		for(i = 1; i < 7; i++){
-    			  if(num == i){
     	    			let form = document.createElement("form");
     	    			form.action = "Filter";
     	    			form.method = "Post";
@@ -145,15 +231,13 @@ if(JSON.parse('${requestBestData}').length != 0){
     	    				    	
     	    			document.body.appendChild(form);
     	    			form.submit();
-    	    	   }
-    		}
     		
        }    
        
       function filterScreen(){ 
       
         	 let requestList = JSON.parse('${requestData}');
-        	 for(let index=0 ; index<requestList.length ; index++){
+        	 for(let index=0 ; index < 6 ; index++){
      			
         	     let rqCode = requestList[index].rqCode;	 
         		 let insertTr = " ";
@@ -172,7 +256,7 @@ if(JSON.parse('${requestBestData}').length != 0){
       function filterBestScreen(){ 
           
      	 let requestList = JSON.parse('${requestBestData}');
-     	 for(let index=0 ; index<requestList.length ; index++){
+     	 for(let index = 0 ; index < 6 ; index++){
   			
      	     let rqCode = requestList[index].rqCode;	 
      		 let insertTr = " ";
@@ -205,14 +289,13 @@ if(JSON.parse('${requestBestData}').length != 0){
 	    	   document.body.appendChild(form);
 	    	   form.submit();  
 
-	    	   searchScreen();
 	       }
 		 
 		 
 		 function searchScreen(){
 		 
 			 let searchList = JSON.parse('${searchData}');
-		 for(let index=0 ; index<searchList.length ; index++){
+		 for(let index=0 ; index<6 ; index++){
 				
 		     let rqCode = searchList[index].rqCode;	 
 			 let insertTr = " ";
@@ -231,7 +314,7 @@ if(JSON.parse('${requestBestData}').length != 0){
 		 function BestsearchScreen(){
 			 
 			 let searchList = JSON.parse('${searchBestData}');
-		 for(let index=0 ; index<searchList.length ; index++){
+		 for(let index=0 ; index<6 ; index++){
 				
 		     let rqCode = searchList[index].rqCode;	 
 			 let insertTr = " ";
@@ -247,19 +330,25 @@ if(JSON.parse('${requestBestData}').length != 0){
 		  }
 		 } 
 	
-	  function DetailClick(rqCode){
-			var rqCode = rqCode;
-			var form = document.createElement("form");
-			form.action = "Detail";
-			form.method = "Post";
+	  function DetailClick(value){
+		  	let rqCode = value;
+				let form = document.createElement("form");
+				form.action = "Detail";
+				form.method = "Post";
+				form.target = "_black"
 			
-			var input = document.createElement("input");
+			let input = document.createElement("input");
 			      input.type = "hidden";
 			      input.name = "rqCode";
 			      input.value = rqCode;
-			      alert(input.value);
-			      form.appendChild(input);
-			
+			      form.appendChild(input);	 
+			      
+		    let input2 = document.createElement("input");
+			      input2.type = "hidden";
+			      input2.name = "rqDetailSelect";
+			      input2.value = "bh";
+			      form.appendChild(input2);	      
+			      
 			document.body.appendChild(form);
 			form.submit();
 		}

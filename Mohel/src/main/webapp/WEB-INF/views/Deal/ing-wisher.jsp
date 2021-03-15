@@ -121,12 +121,13 @@ let requestList = JSON.parse('${ingWisherList}');
 
 for(let index=(0+k) ; index<(3+k) ; index++){
 	if(index >= requestList.length)break;
+let rqCode = requestList[index].rqCode;
 let insertTr = " ";
 
-insertTr +=  "<li class='dealList__list__item'>";
-insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+insertTr +=  "<li class='dealList__list__item'>"
+insertTr += "<div class='delList__img'  onClick='DetailClick("+ rqCode +")'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
 insertTr += "<ul class='dealList__description'>";
-insertTr += "<li><button type='button' class='dealList-btn dealList-schedule'>스케줄 관리</button></li>";
+insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='moveUser()'>스케줄 관리</button></li>";
 insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
 insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
 insertTr += "</ul>";
@@ -134,6 +135,42 @@ insertTr += "</li>";
 
 $("#ingWisherList").append(insertTr)
 }
+}
+
+
+function moveUser(){
+	let form = document.createElement("form");
+	form.action = "MoveUser";
+	form.method = "Post";
+	form.target = "_blank";
+	
+	
+	document.body.appendChild(form);
+	form.submit();
+}
+
+
+function DetailClick(value){
+	let rqCode = value;
+	let form = document.createElement("form");
+	form.action = "Detail";
+	form.method = "Post";
+	form.target = "_black";
+	
+	let input = document.createElement("input");
+	      input.type = "hidden";
+	      input.name = "rqCode";
+	      input.value = rqCode;
+	      form.appendChild(input);	 
+	      
+    let input2 = document.createElement("input");
+	      input2.type = "hidden";
+	      input2.name = "rqDetailSelect";
+	      input2.value = "ad";
+	      form.appendChild(input2);	      
+	      
+	document.body.appendChild(form);
+	form.submit();
 }
 </script>
 </html>

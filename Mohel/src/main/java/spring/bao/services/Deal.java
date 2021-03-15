@@ -25,8 +25,6 @@ public class Deal {
 	@Autowired
 	private DealIf mapper;
 	@Autowired
-	private PlatformTransactionManager tran;
-	@Autowired
 	private Gson gson;
 
 	public ModelAndView entrance(RequestBean reqBean) {
@@ -52,7 +50,7 @@ public class Deal {
 		case "EndHelper":
 			mav = this.endHelperCtl(reqBean);
 			break;
-		case "EndWisher":
+		case "EndWisher": 
 			mav = this.endWisherCtl(reqBean);
 			break;
 		case "Search":
@@ -203,10 +201,27 @@ public class Deal {
 
 	private ModelAndView detailCtl(RequestBean reqBean) {
 		ModelAndView mav = new ModelAndView();
-//		String json = gson.toJson(this.getDetail(reqBean));
-//		mav.addObject("detail", json);
-		mav.setViewName("Deal/beforeDeal-helper");
+		
+		if(reqBean.getRqDetailSelect().equals("bh")) {
+			//reqBean.setRqCode("1000210305090308");
+			String json = gson.toJson(this.getDetail(reqBean));
+			mav.addObject("detail", json);
+			mav.setViewName("Deal/beforeDeal-helper");
+		}else if(reqBean.getRqDetailSelect().equals("bw")){
+			//reqBean.setRqCode("1000210305090308");
+			String json = gson.toJson(this.getDetail(reqBean));
+			mav.addObject("detail", json);
+			mav.setViewName("Deal/beforeDeal-wisher");
+		}else if(reqBean.getRqDetailSelect().equals("ad")){
+			String json = gson.toJson(this.getDetailAD(reqBean));
+			mav.addObject("detailAd", json);
+			mav.setViewName("Deal/afterDeal");
+		}	
 		return mav;
+	}
+
+	private  ArrayList<RequestBean> getDetailAD(RequestBean reqBean) {
+		return mapper.getDetailAD(reqBean);
 	}
 
 	private ArrayList<RequestBean> getDetail(RequestBean reqBean) {

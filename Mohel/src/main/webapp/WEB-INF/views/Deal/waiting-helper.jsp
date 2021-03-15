@@ -119,11 +119,12 @@ for(let index=(0+k) ; index<(3+k) ; index++){
 if(index >= requestList.length)break;
 
 let insertTr = " ";
+let rqCode = requestList[index].rqCode;
 let status = requestList[index].rqStatus;
 let statusComment;  
 if(status=="B") {statusComment="역경매 진행중!"} else {statusComment="역경매 기한만료! 낙찰 해주세요"};
 
-insertTr +=  "<li class='dealList__list__item'>";
+insertTr +=  "<li class='dealList__list__item' onClick='DetailClick("+ rqCode +")'>"
 insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
 insertTr += "<ul class='dealList__description'>";
 insertTr += "<li class='dealList-term'>"+requestList[index].rqSimpleDate+" ~ "+requestList[index].rqPeriod+"</li>";
@@ -135,6 +136,29 @@ insertTr += "</li>";
 
 $("#wHelperList").append(insertTr)
 }
+}
+
+function DetailClick(value){
+	let rqCode = value;
+	let form = document.createElement("form");
+	form.action = "Detail";
+	form.method = "Post";
+	form.target = "_black"
+	
+	let input = document.createElement("input");
+	      input.type = "hidden";
+	      input.name = "rqCode";
+	      input.value = rqCode;
+	      form.appendChild(input);
+	      
+	let input2 = document.createElement("input");
+	      input2.type = "hidden";
+	      input2.name = "rqDetailSelect";
+	      input2.value = "bh";
+	      form.appendChild(input2);	
+	      
+	document.body.appendChild(form);
+	form.submit();
 }
 </script>
 </html>

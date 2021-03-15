@@ -29,10 +29,12 @@
          <constructor-arg ref="BAO"/><!-- 생성할때 반드시 넘겨줘야 할 인자값 -->
       </bean>
       
-   <!-- SqlSession 정보 -->
+      <!-- SqlSession 정보 -->
       <bean id="SqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
          <property name="dataSource" ref="dbsource"/>
+       <property name="configLocation" value="classpath:/mybatis-config.xml"/>
       </bean>
+
       
    <!-- Transaction 정보 -->
       <bean id="tran" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

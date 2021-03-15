@@ -9,7 +9,6 @@
     <title>모헬: 모두의 헬퍼 - 회원가입</title>
     <meta name="description" content="회원가입 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/account.css">
 </head>
 <body>
@@ -19,14 +18,15 @@
     </header>
     <!-- Section -->
     <section id="contents">
-        <form action="Join" method="post" id="joinInfo" name="joinInfo">
+        <form action="Join" name="joinInfo" id="joinInfo" method="post">
             <div class="contents__join">
-                <input type="text" class="contents-id" maxlength="41" name="mId" placeholder="아이디" title="아이디 입력" required>
-                <input type="password" class="contents-pw" maxlength="16" name="mPw" placeholder="비밀번호" title="비밀번호 입력" required>
-                <input type="password" class="contents-pwck" maxlength="16" placeholder="비밀번호 재확인" title="비밀번호 재확인 입력" required>
+                <input type="text" class="contents-id" maxlength="41" id ="mName"name="mName" placeholder="이름" title="이름 입력" required>
+                <input type="text" class="contents-id" maxlength="41"  id= "mId" name="mId" placeholder="아이디" title="아이디 입력" required>
+                <input type="password" class="contents-pw" maxlength="16" id="mPw" name="mPw" placeholder="비밀번호" title="비밀번호 입력" required>
+                <input type="password" class="contents-pwck" maxlength="16" id="mPw2" name="mPw2" placeholder="비밀번호 재확인" title="비밀번호 재확인 입력" required >
             </div>            
             <div class="contents__submit">
-                <button type="submit" class="contents__submit__click">가입하기</button>
+                <button type="button" class="contents__submit__click"  onClick="Check()">가입하기</button>
             </div>
         </form>
     </section>
@@ -35,6 +35,45 @@
         <p class="footer__rights">Copyright 2021 BAO. All Rights Reserved.</p>
     </footer>
 </body>
+<script>
+function Check(){
+   var mId = document.getElementsByName('mId')[0];
+   var mName = document.getElementsByName('mName')[0];
+   var mPw = document.getElementsByName('mPw')[0];
+   var mPw2 = document.getElementsByName('mPw2')[0];
+     
+   if( !document.joinInfo.mId.value) {
+         alert("ID를 입력하세요");
+         return false;
+       } 
+       if(!document.joinInfo.mPw.value){
+         alert("비밀번호를 입력하세요");
+         return false;
+       }
+       if(document.joinInfo.mPw.value != document.joinInfo.mPw2.value){
+          alert("비밀번호가 서로 다릅니다.");
+          return false;
+       
+       }
+   
+   var form = document.createElement('form');
+   form.action = 'Join';
+   form.method = 'post';
+   
+   form.appendChild(mId);
+   form.appendChild(mPw);
+   form.appendChild(mPw2);
+   form.appendChild(mName);
+   document.body.appendChild(form);
+   
+   form.submit();
+   
+}
+
+
+
+</script>
+
 </html>
 </body>
 </html>

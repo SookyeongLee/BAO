@@ -100,14 +100,5 @@
     </div>
 </body>
 <script>
-   function waitingClick(){
-		let form = document.createElement("form");
-		form.action = "WaitingWisher";
-		form.method = "Post";	
-		  		    	
-		alert(form.action);
-		document.body.appendChild(form);
-		form.submit();
-   }
 </script>
 </html>

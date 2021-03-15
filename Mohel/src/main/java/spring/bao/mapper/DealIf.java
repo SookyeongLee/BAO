@@ -18,7 +18,9 @@ public interface DealIf {
 	
 	public ArrayList<RequestBean> BestallSearchList(RequestBean reqBean);//베스트 검색(검색어 없음)
 
-	public ArrayList<RequestBean> getDetail(RequestBean reqBean);  // 요청글 상세정보 정보 겟 
+	public ArrayList<RequestBean> getDetail(RequestBean reqBean);  // 요청글 상세정보 겟 
+	
+	public ArrayList<RequestBean> getDetailAD(RequestBean reqBean); // 요청글 상세정보 (거래진행중, 완료)겟
 
 	public ArrayList<RequestBean> getWwisherList(RequestBean reqBean); // 내요청리스트 wisher정보 겟
 	
@@ -33,11 +35,5 @@ public interface DealIf {
 	public ArrayList<RequestBean> getEndWisherList(RequestBean reqBean); // 거래완료 wisher정보 겟 
 
 	
-
-	
-
-	
-
-
 	
 }

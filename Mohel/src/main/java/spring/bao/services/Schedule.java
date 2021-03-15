@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.ScheduleBean;
+
 @Service
 public class Schedule {
 	
@@ -13,10 +15,12 @@ public class Schedule {
 	@Autowired
 	private HttpServletRequest request;
 	
-	public ModelAndView entrance() {
+	public ModelAndView entrance(ScheduleBean schedulebean) {
+		ModelAndView mav = new ModelAndView();
+		
 		switch(request.getRequestURI().substring(1)) {
 		case "MovePro":
-			this.moveProCtl();
+		    mav = this.moveProCtl();
 			break;
 		case "InsSchedule":
 			this.insScheduleCtl();
@@ -25,7 +29,7 @@ public class Schedule {
 			this.updateScheduleCtl();
 			break;
 		case "MoveUser":
-			this.moveUserCtl();
+			mav = this.moveUserCtl();
 			break;
 		case "AcceptSchedule":
 			this.acceptCtl();
@@ -37,7 +41,7 @@ public class Schedule {
 			this.okCtl();
 			break;
 		}
-		return null;
+		return mav;
 	}
 	private ModelAndView okCtl() {
 		ModelAndView mav = new ModelAndView();
@@ -64,6 +68,7 @@ public class Schedule {
 	private ModelAndView moveUserCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getSchedule();
+		mav.setViewName("Schedule/schedule-User");
 		return mav;		
 	}
 	
@@ -82,6 +87,8 @@ public class Schedule {
 	private ModelAndView moveProCtl() {
 		ModelAndView mav = new ModelAndView();
 //		this.getSchedule();
+		System.out.println("movePro진입");
+		mav.setViewName("Schedule/schedule-Pro");
 		return mav;
 	}
 	
