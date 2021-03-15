@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/resources/css/common.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/resources/src/main.js" defer></script>
+    <script src="/resources/src/search.js" defer></script>
 </head>
 <body onLoad="wWisherScreen()">
     

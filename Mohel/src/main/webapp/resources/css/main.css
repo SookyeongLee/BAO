@@ -167,6 +167,7 @@ button {
 /* 최신순 버튼이동 */
 .before-btn, .after-btn{
   position: absolute;
+  top:46%;
   font-size: 28px;
   color: #bfbfbf; 
   width: 50px;
@@ -174,12 +175,10 @@ button {
   line-height: 50px;
 }
 .before-btn{
-  left: -60px;  
-  top:46%;
+  left: -60px;   
 }
 .after-btn{
   right: -30px;
-  top:46%;
 }
 .before-btn:hover, .after-btn:hover{
   background-color: #e5e5e5;

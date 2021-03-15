@@ -12,6 +12,7 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="/resources/src/main.js" defer></script>
+    <script src="/resources/src/search.js" defer></script>
     <link rel="stylesheet" href="/resources/css/common.css">
 </head>
 <body>

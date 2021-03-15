@@ -8,8 +8,8 @@
             </div>
             <div class="navbar__right">
                 <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
+                    <input type="text" id="search" name="wordValue">
+                    <button type="button" class="search__btn" onClick="searchClick()">                                                     
                         <i class="fas fa-search"></i>
                     </button>
                 </div>

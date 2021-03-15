@@ -210,7 +210,7 @@ function main(){
 function searchScreen(){
     
     let searchList = JSON.parse('${searchData}');
- for(let index=0 ; index<searchList.length ; index++){
+ for(let index=0 ; index<6; index++){
      let rqCode = searchList[index].rqCode;    
     let insertTr = " ";
     insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
