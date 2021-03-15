@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 거래등록</title>
     <meta name="description" content="거래등록 페이지">
-    <link rel="icon" type="image/png" href="imgs/common/logo-m.png">
+    <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="/resources/src/main.js" defer></script>
@@ -24,13 +24,13 @@
     
     <!-- Request enrollment -->
     <section class="request mypage">
-        <h2 class="mypage__title">거래등록</h2>
+        <h2 class="mypage__title">역거래등록</h2>
         
             <ul>
                 <li class="request__list">
                     <div class="list-label"><label for="request-region">지역</label></div>
                     <div class="list-value">
-                        <select name='rqRcCode'>
+                        <select name='rqRcCode' id="list-region">
                             <option value="select">Select</option>
                             <option value="01">서울</option>
                             <option value="02">인천</option>
@@ -56,19 +56,17 @@
                     <div class="list-label">분야</div>
                     <div class="list-value">
                    <form name=rqFilter method=post>
-                                          대분류: 
-                   <select name='rqFilterCode' onchange="change(this.selectedIndex);"  class=input >
-                     		<option value="select">선택</option>
+                   <select name='rqFilterCode' onchange="change(this.selectedIndex);" id="list-mainCtg">
+                     		<option value="select">Select</option>
                             <option value="1000">레슨</option>
                             <option value="2000">홈/리빙</option>
                             <option value="3000">비즈니스</option>
                             <option value="4000">디자인</option>
                             <option value="5000">IT/프로그래밍</option>
                             <option value="6000">건강/미용</option>
-                    </select>                                                  
-                                                  소분류: 
-                    <select name='rqSubName'  class=select>
-                       <option value=''>전체</option>
+                    </select>                                                   
+                    <select name='rqSubName' id="list-subCtg">
+                       <option value=''>Select</option>
                     </select>
 </form> 
                     </div>
@@ -76,7 +74,7 @@
                 <li class="request__list">
                     <div class="list-label">기간</div>
                     <div class="list-value">
-                        <input type="date" id="request-term-start" name="rqPeriod">
+                        <input type="date" id="request-term" name="rqPeriod">
                        
                     </div>
                 </li>
@@ -101,7 +99,7 @@
 </body>
 <script>	
 	var cnt = new Array();
-    cnt[0] = new Array('선택해주세요');
+    cnt[0] = new Array('Select');
     cnt[1] = new Array('학업','외국어','음악','미술','스포츠','자격증');
     cnt[2] = new Array('인테리어','이사','청소업체','야외시공','수리','가구');
     cnt[3] = new Array('번역','통역','마케팅','컨설팅','문서','인쇄');
@@ -145,8 +143,6 @@
         
         form.submit();
     }
-
-
   //경매글 올리기
   function registerReq(){
   	 let form = document.createElement("form");
@@ -166,5 +162,3 @@
   }
 </script>
 </html>
-    
-    
