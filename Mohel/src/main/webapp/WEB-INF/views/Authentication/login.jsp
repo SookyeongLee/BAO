@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 로그인</title>
     <meta name="description" content="로그인 페이지">
-    <link rel="icon" type="image/png" href="../../resources/imgs/common/logo-m.png">
+    <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../resources/css/account.css">
+    <link rel="stylesheet" href="/resources/css/account.css">
 </head>
 <body>
     <!-- Header -->
     <header id="head">
-        <a href="Main"><img src="../../resources/imgs/common/logo.png" class="head__logo" alt="logo image"></a>
+        <a href="Main"><img src="/resources/imgs/common/logo.png" class="head__logo" alt="logo image"></a>
     </header>
-    <!-- Secion -->
+    <!-- Section -->
     <section id="contents">
         <form action="Login" method="post" name="loginInfo" id="loginInfo">
             <div class="contents__login">
@@ -29,7 +29,7 @@
             </div>
         </form>
         <!-- 회원가입하기 -->
-        <p class="contents__account">아직 회원이 아니세요? <a href="#" class="contents__account-link" onClick="join()">회원가입</a></p>
+        <p class="contents__account">아직 회원이 아니세요? <a href="JoinForm" class="contents__account-link">회원가입</a></p>
     </section>
         
            
@@ -51,18 +51,6 @@
          form.submit();
       }
 
-
-      function join(){
-         alert('넘어가나 ?');
-         var form = document.createElement("form");
-         
-         form.action = 'JoinForm';
-         form.method = "post";
-         
-         document.body.appendChild(form);
-         
-         form.submit();
-         }
    </script>
    
 </body>

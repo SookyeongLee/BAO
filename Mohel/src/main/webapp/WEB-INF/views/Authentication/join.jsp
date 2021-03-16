@@ -31,7 +31,7 @@
             </div>
         </form>
         <!-- 로그인하기 -->
-        <p class="contents__account">이미 모헬 회원이신가요? <a href="#" class="contents__account-link">로그인</a></p>
+        <p class="contents__account">이미 모헬 회원이신가요? <a href="LogInForm" class="contents__account-link">로그인</a></p>
     </section>
     <script>
       function Check(){
@@ -65,6 +65,7 @@
         document.body.appendChild(form);
         form.submit();
       }
+      
    </script>
 
 </body>

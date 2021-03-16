@@ -28,6 +28,7 @@
 	<context:component-scan base-package="spring.bao.mohel" />
 	<context:component-scan base-package="spring.bao.services" />
 	
-	
+	<beans:bean id="enc" class="spring.bao.utils.Encryption"></beans:bean>
+    <beans:bean id="pu" class="spring.bao.utils.ProjectUtils"></beans:bean>
 	
 </beans:beans>

@@ -81,7 +81,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = { "/LogInForm", "/Login", "/JoinForm", "/Join", "/Logout" }, method = { RequestMethod.GET,RequestMethod.POST })
-	public ModelAndView Auth(@ModelAttribute MemberBean memberBean) throws IOException {
+	public ModelAndView Auth(@ModelAttribute MemberBean memberBean) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 		
@@ -100,9 +100,9 @@ public class HomeController {
 	}
 	@RequestMapping(value = { "/Detail", "/WaitingHelper","/WaitingWisher", "/IngHelper","/IngWisher", "/EndHelper","/EndWisher", "/Search", "/Filter" }, method = {
 	         RequestMethod.GET, RequestMethod.POST })
-	   public ModelAndView Deal(@ModelAttribute RequestBean reqBean, BidBean bidBean) throws UnsupportedEncodingException {
+	   public ModelAndView Deal(@ModelAttribute RequestBean reqBean) throws UnsupportedEncodingException {
 	      ModelAndView mav = new ModelAndView();
-	      mav = deal.entrance(reqBean,bidBean);
+	      mav = deal.entrance(reqBean);
 	      return mav;
 	   }
 

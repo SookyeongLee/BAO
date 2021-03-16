@@ -2,6 +2,7 @@ package spring.bao.services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.jar.Attributes.Name;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,152 +18,176 @@ import com.google.gson.Gson;
 
 import spring.bao.beans.MemberBean;
 import spring.bao.mapper.AuthenticationIf;
+import spring.bao.utils.Encryption;
+import spring.bao.utils.ProjectUtils;
+
 
 @Service
 public class Authentication {
+   
+   public Authentication() {}
+   @Autowired
+   HttpServletResponse response;
+   @Autowired
+   private AuthenticationIf mapper;
+   @Autowired
+   private PlatformTransactionManager tran;
+   @Autowired
+   private Gson gson;
+   @Autowired
+   private Encryption enc;
+   @Autowired
+   private ProjectUtils pu;
+   @Autowired
+   private HttpServletRequest request;
+   
+   
 
-	public Authentication() {
-	}
+      public ModelAndView entrance(MemberBean memberbean) throws Exception {
+         
+         ModelAndView mav = new ModelAndView();
+         
+         switch(request.getRequestURI().substring(1)) {
 
-	@Autowired
-	private HttpServletResponse response;
-	@Autowired
-	private AuthenticationIf mapper;
-	@Autowired
-	private PlatformTransactionManager tran;
-	@Autowired
-	private HttpServletRequest request;
-
-	public ModelAndView entrance(MemberBean memberbean) throws IOException {
-
-		ModelAndView mav = new ModelAndView();
-
-		switch (request.getRequestURI().substring(1)) {
-
-		case "LogInForm":
-			mav = this.loginFormCtl(memberbean);
-			break;
-		case "Login":
-			mav = this.loginCtl(memberbean);
-			break;
-		case "JoinForm":
-			mav = this.joinFormCtl(memberbean);
-			break;
-		case "Join":
-			mav = this.joinCtl(memberbean);
-			break;
-		case "Logout":
-			mav = this.logoutCtl(memberbean);
-			break;
-		}
-		return mav;
-	}
-
-	private ModelAndView logoutCtl(MemberBean member) {
-		ModelAndView mav = new ModelAndView();
-
-		// if(this.isSession()) {
-		this.insAccess(member);
-		// member.setMStCode("-1");
-		mav.addObject("mag", "logout");
-		mav.setViewName("Authentication/main");
-
-		return mav;
-
-	}
-
-	private ModelAndView joinCtl(MemberBean member) {
-
-		ModelAndView mav = new ModelAndView();
-		// System.out.println("joinCtl");
-		if (this.isMember(member)) {
-			mav.setViewName("Authentication/login"); // 로그인폼 화면
-
-		} else {
-			member.setMRcCode("99");
-			this.insMember(member);
-			mav.setViewName("Authentication/login");
-
-		}
-
-		return mav;
-	}
-
-	private ModelAndView joinFormCtl(MemberBean member) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("Authentication/join");
-		return mav;
-	}
-
-	private ModelAndView loginCtl(MemberBean member) throws IOException {
-
-		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-
-		ModelAndView mav = new ModelAndView();
-		// System.out.println("main");
-
-		if (this.isMember(member)) {
-			if (this.isAccess(member)) {
-				member.setMStCode("1");
-				this.insAccess(member);
-				tran.commit(status);
-				
-				response.setContentType("text/html; charset=UTF-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>alert('로그인 성공'); location.href='Main';</script>");
-
-				out.flush();
+            case "LogInForm":
+               mav = this.loginFormCtl(memberbean);
+               break;
+            case "Login":
+               mav = this.loginCtl(memberbean);
+               break;
+            case "JoinForm":
+               mav = this.joinFormCtl(memberbean);
+               break;
+            case "Join":
+               mav =this.joinCtl(memberbean);
+               break;
+            case "Logout":
+               mav =this.logoutCtl(memberbean);
+               break;
+         }
+         return mav;
+      }
+   
+      private ModelAndView loginCtl(MemberBean member) throws Exception {
+          TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
+          //네임은 아무거나 /가져올 코드를 
+          //디비에 들어있는값과 로그인할때  일치할때  ? 
+             System.out.println(member.getMId()); 
+           ModelAndView mav = new ModelAndView();
+             if(this.isMember(member)) {
+                if(this.isAccess(member)) {
+                   member.setMStCode("1");
+                   this.insAccess(member);
+                   pu.setAttribute("mId",member.getMId());
+                   
+                   
+                   member.setMId(pu.getSessionId());
+                   
+                   mav.setViewName("Authentication/main");
+                   tran.commit(status);
+                
+                }else {
+                   System.out.println("로그인 실패");
+                   response.setContentType("text/html; charset=UTF-8");
+                    
+                   PrintWriter out = response.getWriter();
+                    
+                   out.println("<script>alert('로그인 실패'); location.href='이동주소';</script>");
+                    
+                   out.flush();
+                   mav.setViewName("Authentication/login");
+                   tran.rollback(status);
+                }
+             }
+          return mav;         
+       }
 
 
-			} else {
-				System.out.println("로그인 실패");
-				response.setContentType("text/html; charset=UTF-8");
+      private ModelAndView logoutCtl(MemberBean member) throws Exception {
+         TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
+         
+         ModelAndView mav = new ModelAndView();
 
-				PrintWriter out = response.getWriter();
+System.out.println(pu.getAttribute("mId")); //가져오는데 써먹질 못하네
+          member.setMId((String) pu.getAttribute("mId")); 
+           
+System.out.println(member.getMId());
+         if(pu.getAttribute("mId") != "") {
+            member.setMStCode("-1");
+            this.insAccess(member); 
+            pu.removeAttribute("mId");
 
-				out.println("<script>alert('로그인 실패'); location.href='LogInForm';</script>");
+            mav.setViewName("Authentication/main");
+            tran.commit(status);
+         }
+            return mav;         
+      }
+      
+      private ModelAndView joinCtl(MemberBean member) {
+         TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
+         
+         ModelAndView mav = new ModelAndView();
+         //System.out.println("joinCtl");
+         if(this.isMember(member)) {
+            
+            mav.setViewName("login"); //로그인폼 화면 
+            
+         }else {
+            
+            //
+            member.setMPw(enc.encode(member.getMPw()));
+            member.setMRcCode("99");
+            this.insMember(member);
+            mav.setViewName("login");
+            
+            tran.commit(status);
+            
+         }
+         
+         return mav;         
+      }
+   
 
-				out.flush();
 
-				
-			}
-		}
-		mav.setViewName("Authentication/main");
-		return mav;
-	}
-	
-	
-	private ModelAndView loginFormCtl(MemberBean member) {
-		ModelAndView mav = new ModelAndView();
+      private boolean convetToBoolean(int data) {
+         return data ==1 ? true : false;
+      }
+      private boolean insMember(MemberBean member) {
+         
+         return this.convetToBoolean(mapper.insMember(member));
+      }
 
-		mav.setViewName("Authentication/login");
-		
-		return mav;
-	}
 
-	private boolean convetToBoolean(int data) {
-		return data == 1 ? true : false;
-	}
+      private boolean isMember(MemberBean member) {
+         
+         return this.convetToBoolean(mapper.isMember(member));
+      }
 
-	private boolean insMember(MemberBean member) {
 
-		return this.convetToBoolean(mapper.insMember(member));
-	}
+      private ModelAndView joinFormCtl(MemberBean member) throws Exception {
+         ModelAndView mav = new ModelAndView();
+         mav.setViewName("Authentication/join");
+         return mav;         
+      }
+  
 
-	private boolean isMember(MemberBean member) {
+      private boolean insAccess(MemberBean member) {
+         return this.convetToBoolean(mapper.insAccess(member));
+         
+      }
 
-		return this.convetToBoolean(mapper.isMember(member));
-	}
 
-	private boolean insAccess(MemberBean member) {
-		return this.convetToBoolean(mapper.insAccess(member));
+      private boolean isAccess(MemberBean member) {
+         return enc.matches(member.getMPw(), mapper.isAccess(member).getMPw());
+         
+      }
 
-	}
 
-	private boolean isAccess(MemberBean member) {
-		return this.convetToBoolean(mapper.isAccess(member));
-	}
+      private ModelAndView loginFormCtl(MemberBean member) {
+         ModelAndView mav = new ModelAndView();
+         //System.out.println("loginFormCtl");
+         mav.setViewName("Authentication/login");
+         return mav;         
+      }
 
 }

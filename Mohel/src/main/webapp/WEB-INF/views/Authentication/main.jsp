@@ -26,7 +26,7 @@
             <ul class="navbar__menu">
                 <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
                 <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                    
-                <li class="navbar__menu__item" id="logCk" value="aa" onClick='login()'>로그인</li>
+                <li class="navbar__menu__item" id="logCk" value="로그인" onClick='login(this)'></li>
             </ul>
         </nav>      
         <!-- 홈화면(검색창) -->
@@ -98,7 +98,7 @@
             </div>
         </div>    
     </section>
-	<!-- Footer -->
+   <!-- Footer -->
     <footer id="foot">
         <p class="foot__rights">Copyright © 2021 Mohel | All rights reserved. | BAO</p>
     </footer>
@@ -109,6 +109,36 @@
 </body>
 <script>
 //최신순 버튼이동
+
+
+
+session = "${mId}";
+
+
+if(session == ""){ 
+       document.getElementById("logCk").innerHTML ="로그인"; 
+}else{
+   document.getElementById("logCk").innerHTML ="로그아웃";
+}  
+
+
+//로그인 클릭 
+function login(obj){
+
+
+   
+   var form = document.createElement("form");
+   
+   form.action = (obj.innerText == "로그아웃") ?  "Logout" : "LogInForm" ;
+   
+   form.method = "post";
+   
+   document.body.appendChild(form);
+   
+   form.submit();
+
+}
+
 var r=0;
 
 function beforeClick(){
@@ -205,7 +235,6 @@ if(JSON.parse('${requestBestData}').length != 0){
       filterBestScreen();  
 }else{}
 
-
 //온로드 
 function main(){
    newScreen();
@@ -214,11 +243,13 @@ function main(){
 
 function newScreen(){
     let json = JSON.parse('${jsonData}');
+    
       
      for(let i=0; i<6;i++){
-     
+         let rqCode = json[i].rqCode; 
+         
       let insertTr= " ";
-      insertTr += "<li class='list__item' onClick='DetailClick()'>";
+      insertTr += "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
           
       insertTr += "<img class='list__item__img' src='/resources/imgs/common/"+json[i].rqImage+"'>";
       insertTr += "<div class='list__item__description'>";
@@ -235,9 +266,10 @@ function newScreen(){
 function bestScreen(){
       let json = JSON.parse('${list2}');   
       for(let i=0; i<6;i++){
+         let rqCode = json[i].rqCode;
          
          let insertTr= " ";
-         insertTr +="<li class='list__item'>";
+         insertTr += "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
          insertTr +="<img class='list__item__img'src='/resources/imgs/common/"+json[i].rqImage+"'>";
          insertTr +="<div class='list__item__description'>"
          insertTr +="<h4 class='list__item-mainCtg'>"+json[i].rqSubName+"</h4>"
@@ -294,13 +326,13 @@ function filterClick(num){
     let rqFilterCode = (num*1000);     
 //     for(i = 1; i < 7; i++){
 //          if(num == i){
-	let rqFilterName = rqFilterCode ==1000?"레슨":
-					rqFilterCode ==2000?"홈/리빙":
-						rqFilterCode ==3000?"비즈니스":
-							rqFilterCode ==4000?"디자인":
-								rqFilterCode ==5000?"IT/프로그래밍":
-									rqFilterCode ==6000?"건강/미용":"";
-	
+   let rqFilterName = rqFilterCode ==1000?"레슨":
+               rqFilterCode ==2000?"홈/리빙":
+                  rqFilterCode ==3000?"비즈니스":
+                     rqFilterCode ==4000?"디자인":
+                        rqFilterCode ==5000?"IT/프로그래밍":
+                           rqFilterCode ==6000?"건강/미용":"";
+   
               let form = document.createElement("form");
               let input = document.createElement("input");
               input.type = "hidden";
@@ -342,7 +374,7 @@ function searchScreen(){
     
     let searchList = JSON.parse('${searchData}');
  for(let index=0 ; index<searchList.length ; index++){
-      alert("jjjjj");
+      
      let rqCode = searchList[index].rqCode;    
     let insertTr = " ";
     insertTr +=  "<li class='list__item' onClick='DetailClick("+ rqCode +")'>";
@@ -376,8 +408,8 @@ function searchScreen(){
   }
  } 
  //경매 클릭 
- function DetailClick(rqCode){
-     var rqCode = rqCode;
+ function DetailClick(value){
+     let rqCode = value;
      let form = document.createElement("form");
      form.action = "Detail";
      form.method = "Post";
@@ -400,22 +432,10 @@ function searchScreen(){
       document.body.appendChild(form);
       form.submit();
    }
-//로그인 클릭 
-function login(){
-   alert('넘어가는가?');
-   var form = document.createElement("form");
-   
-   form.action = 'LogInForm';
-   form.method = "post";
-   
-   document.body.appendChild(form);
-   
-   form.submit();
 
-}
 //경매글 올리기
 function registerReq(){
-	 let form = document.createElement("form");
+    let form = document.createElement("form");
      form.action = "DealForm";
      form.method = "Post";
      document.body.appendChild(form);

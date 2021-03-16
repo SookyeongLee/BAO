@@ -12,9 +12,11 @@
 		INSERT INTO MM(MM_ID,MM_NAME,MM_PW,MM_EMAIL,MM_CAREER,MM_DIVISION) VALUES(#{mId},#{mName},#{mPw},'','','')
 	</insert>
 	
-	<select id="isAccess" resultType="Int">
-		SELECT COUNT(*) FROM MM WHERE MM_ID = #{mId} AND MM_PW = #{mPw}
-	</select>
+	<select id="isAccess" resultType="spring.bao.beans.MemberBean">
+   <![CDATA[
+      SELECT MM_PW AS MPW FROM MM WHERE MM_ID = #{mId}
+   ]]>
+   </select>
 	
 	<insert id ="insAccess" >
 		INSERT INTO AL(AL_MMID, AL_STCODE, AL_ACCESS) VALUES(#{mId},#{mStCode},SYSDATE)
