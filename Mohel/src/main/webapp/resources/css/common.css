@@ -735,7 +735,11 @@ select {
   font-size: var(--font-small);
   font-weight: var(--weight-bold);
 }
-.modal__content__value{
+.modal__content__value1, 
+.modal__content__value2, 
+.modal__content__value3, 
+.modal__content__value4, 
+.modal__content__value5{
   font-size: var(--font-micro);
 }
 
