@@ -83,7 +83,7 @@ public class Authentication {
                    
                    member.setMId(pu.getSessionId());
                    
-                   mav.setViewName("Authentication/main");
+                   mav.setViewName("Authentication/goMain");
                    tran.commit(status);
                 
                 }else {
@@ -116,7 +116,7 @@ System.out.println(member.getMId());
             this.insAccess(member); 
             pu.removeAttribute("mId");
 
-            mav.setViewName("Authentication/main");
+            mav.setViewName("Authentication/goMain");
             tran.commit(status);
          }
             return mav;         
