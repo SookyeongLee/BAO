@@ -75,9 +75,7 @@ public class Messages {
 				if(this.insMessage(messageBean)) {
 					tran.commit(status);
 					String json =gson.toJson(this.getSendList(messageBean));
-				
 					mav.addObject("SendList",json);
-					
 				};
 			}catch(Exception e) {
 				tran.rollback(status);
@@ -87,7 +85,7 @@ public class Messages {
 		}
 		private ModelAndView msgFormCtl(MessageBean messageBean) {
 			ModelAndView mav = new ModelAndView();
-
+			mav.addObject("mId","PPP");
 			mav.setViewName("Message/sendMsg");
 			
 			return mav;
@@ -121,7 +119,6 @@ public class Messages {
 
 			ModelAndView mav = new ModelAndView();
 			String json =gson.toJson(this.getMsgDetail(messageBean));
-//		    System.out.println(json);
 		    mav.addObject("dataList",json);
 		  
 		    try {
@@ -141,7 +138,6 @@ public class Messages {
 
 			ModelAndView mav = new ModelAndView();
 		    String json =gson.toJson(this.getRecList(messageBean));
-//		    System.out.println(json);
 		    mav.addObject("recList",json);
 			mav.setViewName("Message/recBox");
 			

@@ -9,13 +9,14 @@ import spring.bao.beans.ScheduleBean;
 import spring.bao.services.Schedule;
 
 public interface ScheduleIf {
-	public ArrayList<Schedule> getSchedule(ScheduleBean scheduleBean);
-	public ArrayList<Schedule> getBidInfo(ScheduleBean scheduleBean);
+	public ArrayList<ScheduleBean> getSchedule(ScheduleBean scheduleBean);
+	public ArrayList<ScheduleBean> getBidInfo(ScheduleBean scheduleBean);
 	public int insSchedule(ScheduleBean scheduleBean);
 	public int insFixSchedule(ScheduleBean scheduleBean);
 	public int insMessage(MessageBean messagBean);
 	public int insRejectMessage(MessageBean messagBean);
-	public int updateStatus(ScheduleBean scheduleBean);
-	public int insDetailSchedule(List<HashMap<String, Object>> jsondata);
+	public int acceptItem(ScheduleBean scheduleBean);
+	public int itemMsg(MessageBean messagBean);
+	public int insDetailSchedule(HashMap<String, Object> jsondata);
 
 }

@@ -73,8 +73,6 @@ function init(){
 	
 	for(let i=0;i<rec.length;i++){
 		
-		let count = rec.length/15 ;
-		alert(count);
 	if(rec[i].msStatus=="N"){
 		$( "td" ).css( "color", "#A9A9A9" );
 		$( "i" ).css( "color", "#A9A9A9" );
@@ -182,18 +180,6 @@ function myPageClick(){
    document.body.appendChild(form);
    form.submit();
 }
-function msgForm(){
-	//서버전송
-	let msg = JSON.parse('${dataList}');
-	let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
-	alert(sendData);
-	
-	let form = document.createElement("form");
-	form.action="MsgForm?"+sendData;
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-	
-}
+
 </script>
 </html>

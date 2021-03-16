@@ -169,21 +169,6 @@ function myPageClick(){
    document.body.appendChild(form);
    form.submit();
 }
-function msgForm(){
-	//서버전송
-	let msg = JSON.parse('${dataList}');
-	let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
-	alert(sendData);
-	
-	alert(msg.length);
-	
-	let form = document.createElement("form");
-	form.action="MsgForm?"+sendData;
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-	
-	
-}
+
 </script>
 </html>

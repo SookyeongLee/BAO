@@ -14,7 +14,7 @@
         RQ_TITLE AS SDTITLE
 	FROM WI INNER JOIN RQ ON WI.WI_RQCODE = RQ.RQ_CODE 
         LEFT OUTER JOIN  MG ON MG.MG_FILTERCODE = RQ.RQ_FILTERCODE 
-        LEFT OUTER JOIN SG ON SG.SG_SUBCODE =RQ.RQ_SUBCODE WHERE RQ_CODE='5000210309040337'
+        LEFT OUTER JOIN SG ON SG.SG_SUBCODE =RQ.RQ_SUBCODE WHERE RQ_CODE='4000210305090348'
 		]]>
 	</select>
 	<select	id="getSchedule" resultType="spring.bao.beans.ScheduleBean">
@@ -26,13 +26,13 @@
         SG_SUBNAME AS SCSUBNAME,
         RQ_TITLE AS SDTITLE,
         SD_STEP AS SCSTEP,
-        SD_PERIOD AS SDDATE,
+        SD_PERIOD AS SDPERIOD,
         SD_COMMENT AS SDCOMMENT,
         SC_STCODE AS SCSTATUS
 	FROM SD INNER JOIN RQ ON SD.SD_SCWIRQCODE = RQ.RQ_CODE 
         INNER JOIN SC ON SC.SC_WIRQCODE = RQ.RQ_CODE
         LEFT OUTER JOIN  MG ON MG.MG_FILTERCODE = RQ.RQ_FILTERCODE 
-        LEFT OUTER JOIN SG ON SG.SG_SUBCODE =RQ.RQ_SUBCODE WHERE RQ_CODE='5000210309040337'
+        LEFT OUTER JOIN SG ON SG.SG_SUBCODE =RQ.RQ_SUBCODE WHERE RQ_CODE='4000210305090348'
 		]]>
 	</select>
 	
@@ -42,17 +42,16 @@
 	]]>
 	</insert>
 	
-	<insert	id="insDetailSchedule"  parameterType="java.util.List" >
+	<insert	id="insDetailSchedule"  parameterType="java.util.HashMap" >
+	<![CDATA[
 	INSERT INTO SD(SD_SCWIRQCODE,SD_SCWIBIHELPER,SD_STEP,SD_PERIOD,SD_COMMENT,SD_STCODE) 
-	VALUES
-		<foreach collection="list" item="type"  open="(" close=")" separator=",">
-			#{type.scCode},#{type.scHelper},#{type.sdStep},#{type.sdPeriod},#{type.sdComment},'S'
-        </foreach>
+	VALUES(#{scCode},#{scHelper},#{sdStep},#{sdPeriod},#{sdComment},'S')
+	]]>
 	</insert>
 	
 	<update id="insFixSchedule">
 		<![CDATA[
-	UPDATE SC SET SC_STCODE='S' WHERE SC_WIRQCODE=#{scCode}
+	UPDATE SC SET SC_STCODE='A' WHERE SC_WIRQCODE=#{scCode}
 		]]>
 	</update>
 	<insert id="insMessage">
@@ -67,11 +66,17 @@
 	VALUES (#{msRecipient},#{msSender},'스케쥴이 거절되었습니다.','스케쥴이 거절되었습니다. 다시 등록해 주세요',SYSDATE,'N')
 		]]>	
 	</insert>
-	<update id="updateStatus">
+	<update id="acceptItem">
 		<![CDATA[
 	UPDATE SD SET SD_STCODE='A' WHERE SD_SCWIRQCODE=#{scCode} AND SD_STEP=#{sdCode}
 		]]>
 	</update>
 	
+	<insert id="itemMsg">
+		<![CDATA[
+	INSERT INTO MS(MS_MMRECIPIENT,MS_MMSENDER,MS_TITLE,MS_COMMENT,MS_SYSDATE,MS_STCODE) 
+	VALUES (#{msRecipient},#{msSender},'스케쥴을 확인하였습니다.','스케쥴을 확인하였습니다.다음 스케쥴을 진행하여 주세요.',SYSDATE,'N')
+		]]>	
+	</insert>
 	
 </mapper>

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +33,6 @@ public class Schedule {
 	@Autowired
 	private HttpServletRequest request;
 	@Autowired
-	private HttpServletResponse response;
-	@Autowired
 	private ScheduleIf mapper;
 	@Autowired
 	private Gson gson;
@@ -47,12 +47,6 @@ public class Schedule {
 		case "MovePro":
 			mav = this.moveProCtl(scheduleBean);
 			break;
-		case "InsSchedule":
-			mav = this.insScheduleCtl(scheduleBean);
-			break;
-		case "UpdateSchedule":
-			this.updateScheduleCtl();
-			break;
 		case "MoveUser":
 			mav = this.moveUserCtl(scheduleBean);
 			break;
@@ -63,19 +57,38 @@ public class Schedule {
 			mav=this.rejectCtl(messageBean);
 			break;
 		case "OkClick":
-			mav=this.okCtl(scheduleBean);
+			mav=this.okCtl(scheduleBean,messageBean);
 			break;
 		}
 		return mav;
 	}
+	public ModelAndView entrance(List<HashMap<String,Object>> jsondata,ScheduleBean scheduleBean, MessageBean messageBean) throws IOException {
 
-	private ModelAndView okCtl(ScheduleBean scheduleBean) {
+		ModelAndView mav = null;
+
+		switch (request.getRequestURI().substring(1)) {
+		
+		case "InsSchedule":
+			mav = this.insScheduleCtl(jsondata,scheduleBean);
+			break;
+		case "UpdateSchedule":
+			this.updateScheduleCtl();
+			break;
+		}
+		return mav;
+	}
+	
+	
+
+	private ModelAndView okCtl(ScheduleBean scheduleBean,MessageBean messageBean) {
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
 		try {
-		if(this.updateStatus(scheduleBean)) {
-			tran.commit(status);
+		if(this.acceptItem(scheduleBean)) {
+			if(this.itemMsg(messageBean)) {
+				tran.commit(status);
+			}
 		}
 		}catch(Exception e) {
 			tran.rollback(status);
@@ -88,12 +101,14 @@ public class Schedule {
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
-		messageBean.setMsRecipient("JUN");
-		messageBean.setMsSender("모두의 헬퍼");
+		messageBean.setMsRecipient("PPP");
+		messageBean.setMsSender("DOYOUNG");
 
 		try {
 			if (this.insRejectMessage(messageBean)) {
 				tran.commit(status);
+				System.out.println("ok");
+				mav.setViewName("Deal/ing-wisher");
 			}
 		} catch (Exception e) {
 			tran.rollback(status);
@@ -106,13 +121,14 @@ public class Schedule {
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
-		scheduleBean.setScCode("6000210305090301");
-		messageBean.setMsRecipient("JUN");
-		messageBean.setMsSender("모두의 헬퍼");
+		scheduleBean.setScCode("4000210305090348");
+		messageBean.setMsRecipient("PPP");
+		messageBean.setMsSender("DOYOUNG");
 		try {
 			if (this.insFixSchedule(scheduleBean)) {
 				if (this.insMessage(messageBean)) {
 					tran.commit(status);
+					mav.setViewName("Deal/ing-wisher");
 				}
 			}
 		} catch (Exception e) {
@@ -124,23 +140,21 @@ public class Schedule {
 		return mav;
 	}
 
-	private ModelAndView moveUserCtl(ScheduleBean scheduleBean) throws IOException {
+	private ModelAndView moveUserCtl(ScheduleBean scheduleBean) {
 		String scInfo = gson.toJson(this.getSchedule(scheduleBean));
+		String bidInfo = gson.toJson(this.getBidInfo(scheduleBean));
 
-		System.out.println(scInfo.length());
 		ModelAndView mav = new ModelAndView();
 
 		if (!scInfo.equals("[]")) {
 			mav.addObject("scInfo", scInfo);
 			mav.setViewName("Schedule/conditionUser");
-		} else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('nothing');location.href='Main'; </script>");
-			out.flush();
-			out.close();
-		}
 
+		} else {
+			mav.addObject("scInfo", bidInfo);
+			mav.setViewName("Deal/ing-wisher");
+		}
+		
 		return mav;
 	}
 
@@ -150,24 +164,31 @@ public class Schedule {
 		return mav;
 	}
 
-	private ModelAndView insScheduleCtl(ScheduleBean scheduleBean) {
+	private ModelAndView insScheduleCtl(List<HashMap<String,Object>> jsondata,ScheduleBean scheduleBean) {
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
-
 		ModelAndView mav = new ModelAndView();
-
+		
+		scheduleBean.setScCode(jsondata.get(0).get("scCode").toString());
+		scheduleBean.setScHelper(jsondata.get(0).get("scHelper").toString());
+		scheduleBean.setScStatus("S");
+		
 		try {
 			if (this.insSchedule(scheduleBean)) {
-				System.out.println("Insert Complete");
-				System.out.println(scheduleBean.getScCode());
-				System.out.println(scheduleBean.getScHelper());
-				System.out.println(scheduleBean.getScStatus());
+				for(int i=0;i<jsondata.size();i++) {
+					if(!this.insDetailSchedule(jsondata.get(i))) {
+						tran.rollback(status);
+						break;
+					}
+				}
 				tran.commit(status);
 				mav.setViewName("Authentication/main");
 			}
 		} catch (Exception e) {
+			tran.rollback(status);
 			e.getMessage();
 			e.printStackTrace();
 			System.out.println(e);
+			mav.setViewName("Schedule/conditionPro");
 		}
 
 		return mav;
@@ -192,8 +213,11 @@ public class Schedule {
 	private boolean convertToBoolean(int data) {
 		return data == 1 ? true : false;
 	}
-	private boolean updateStatus(ScheduleBean scheduleBean) {
-		return convertToBoolean(mapper.updateStatus(scheduleBean));
+	private boolean itemMsg(MessageBean messageBean) {
+		return convertToBoolean(mapper.itemMsg(messageBean));
+	}
+	private boolean acceptItem(ScheduleBean scheduleBean) {
+		return convertToBoolean(mapper.acceptItem(scheduleBean));
 	}
 	private boolean insRejectMessage(MessageBean messageBean) {
 		return convertToBoolean(mapper.insRejectMessage(messageBean));
@@ -210,12 +234,16 @@ public class Schedule {
 		return convertToBoolean(mapper.insSchedule(scheduleBean));
 	}
 
-	private ArrayList<Schedule> getBidInfo(ScheduleBean scheduleBean) {
+	private boolean insDetailSchedule(HashMap<String, Object> jsondata) {
+		return convertToBoolean(mapper.insDetailSchedule(jsondata));
+	}
+	private ArrayList<ScheduleBean> getBidInfo(ScheduleBean scheduleBean) {
 		return mapper.getBidInfo(scheduleBean);
 	}
 
-	private ArrayList<Schedule> getSchedule(ScheduleBean scheduleBean) {
+	private ArrayList<ScheduleBean> getSchedule(ScheduleBean scheduleBean) {
 		return mapper.getSchedule(scheduleBean);
 	}
+	
 
 }

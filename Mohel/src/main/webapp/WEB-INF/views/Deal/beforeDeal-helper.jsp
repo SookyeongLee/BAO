@@ -20,41 +20,72 @@
     <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
     
     <section class="deal mypage">
-        <h2 class="mypage__title">입시 레슨 희망합니다.</h2>
+        <h2 class="mypage__title"><div id="rqTitle"></div></h2>
         <!-- Request -->
         <div class="deal__container">
             <div class="deal__img">
-                <img src="/resources/imgs/common/1000.jpg" class="deal-img">
+                <div id="rqImage"></div>
             </div>
             <div class="deal__info__container">
-                <table class="deal__info"> 
+                 <table class="deal__info"> 
                     <tr class="deal__list">
-                        <th class="deal__title">역경매기간</th>
-                        <td class="deal__contents">2021-01-03 ~ 2021-01-17</td>
+                        <th class="deal__title" style="width:300px">기간</th>
+                        <td class="deal__contents"><span id="rqSysDate"></span> ~ <span id="rqPeriod"></span></td>
                     </tr>
                     <tr class="deal__list">
                         <th class="deal__title">분야</th>
-                        <td class="deal__contents">음악</td>
+                        <td class="deal__contents"><div id="rqSubName"></div></td>
                     </tr>
                     <tr class="deal__list">
                         <th class="deal__title">지역</th>
-                        <td class="deal__contents">인천</td>
+                        <td class="deal__contents"><div id="rqRcName"></div></td>
                     </tr>
                     <tr class="profile__list">
-                        <th class="deal__title">내용</th>
+                        <th class="deal__title" >내용</th>
                         <td class="deal__contents">
-                            싱어송라이터인 ‘그레타’(키이라 나이틀리)는 남자친구 ‘데이브’(애덤 리바인)가 메이저 음반회사와 계약을 하게 되면서 뉴욕으로 오게 된다. 그러나 행복도 잠시, 오랜 연인이자 음악적 파트너로서 함께 노래를 만들고 부르는 것이 좋았던 그레타와 달리 스타가 된 데이브의 마음은 어느새 변해버린다. 스타 음반프로듀서였지만 이제는 해고된 ‘댄’(마크 러팔로)은 미치기 일보직전 들른 뮤직바에서 그레타의 자작곡을 듣게 되고 아직 녹슬지 않은 촉을 살려 음반제작을 제안한다. 거리 밴드를 결성한 그들은 뉴욕의 거리를 스튜디오 삼아 진짜로 부르고 싶었던 노래를 만들어가는데…
+                            <div id="rqComment"></div>
                         </td>
                     </tr>
-                </table>
+                </table>       
+            <input type="hidden" name="rqCode" id="rqCode">
+            <input type="hidden" name="rqId" id="rqId">   
+            <input type="hidden" name="rqImage" id="rqImage"> 
+
                 <div class="deal__button">
                     <button type="button" class="deal__btn2">입찰하기</button>
 
                 </div>
             </div>
         </div>
+                        <!-- 입찰 모달 시작 -->
+                <div class="modal__container" id="modal">
+                    <div class="modal">
+                        <button class="close-btn" id="close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        <div class="modal__header">
+                            <div class="modal__header__title">입찰하기</div>
+                        </div>
+                        <div class="modal__content">
+                            <form class="modal__form">
+                                <div>
+                                    <label for="bidding-price" class="bidding-price-label">입찰금액</label>
+                                    <input type="text" id="bidding-price" name="biPrice">
+                                    <input type="hidden" id="biMmHelper" name="biMmHelper2">
+                                </div>
+                                <div class="bidding-price-btn__container">
+                                    <button type="button" class="bidding-price-btn" onClick = "bid()">신중하게 입찰하기</button>
+                                </div>    
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 입찰 모달 끝 -->
+
+        <input type = "hidden" name = "biRqCode" id ="rqCodez" />
+        <input type = "hidden" name = "biMmHelper"  id ="alMmid"/>
         <!-- Bidding -->
-        <table class="bidding"> 
+        <table class="bidding" id ="best"> 
             <caption class="bidding__title">입찰기록내역</caption>
             <colgroup>
                 <col style="width: 60%;">
@@ -66,89 +97,22 @@
                     <th class="bidding__head">금액</th>
                 </tr>
             </thead>
-            <tbody>                
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">14000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">14000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td> 
-                    <td class="bidding__data">14000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td> 
-                    <td class="bidding__data">14000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td> 
-                    <td class="bidding__data">14000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td> 
-                    <td class="bidding__data">14000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td> 
-                    <td class="bidding__data">14000원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__btn">soo</button></td>
-                    <td class="bidding__data">13000원</td>
-                </tr>
-            </tbody>                      
+            
         </table>
-    </section>   
+    </section> 
+    <input type = "hidden" name = "biRqCode" id ="rqCodez" />
+    <input type = "hidden" name = "biMmHelper"  id ="alMmid"/>
+      
 </body>
 <script>
-//마이페이지 클릭 
-function myPageClick(){
-   let form = document.createElement("form");
-   form.action = "MyProfile";
-   form.method = "Post";
-   document.body.appendChild(form);
-   form.submit();
-}
-
-//경매글 올리기
-function registerReq(){
-	 let form = document.createElement("form");
-  form.action = "DealForm";
-  form.method = "Post";
-  document.body.appendChild(form);
-  form.submit();
-
-}
-</script>
-</html>
+function init(){
+		let json = JSON.parse('${detail}');
+		alert(json[0].rqTitle+json[0].rqComment+json[0].rqPeriod);
+		
+		let rqTitle = json[0].rqTitle;
+	 	$('#rqTitle').append(rqTitle);
+	 	
+	    let rqComment = json[0].rqComment;
+	 	$('#rqComment').append(rqComment);
+		let rqPeriod = json[0].rqPeriod;
+	 	$('#rqPeriod').append(rqPe

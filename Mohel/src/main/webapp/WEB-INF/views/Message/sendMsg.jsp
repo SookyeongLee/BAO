@@ -52,46 +52,75 @@
 </body>
 <script>
 function init(){
-	
-	alert('${dataList}');
 	let msg = JSON.parse('${dataList}');
-
-		let sender = msg[0].msSender;
-		
-		$(document).ready(function() {
-	        $('#sendMsg-recipient').val(sender);
-	    });		
-		
-	 let comment = " ";
-	 comment +="<p><br></p>";
-	 comment +="\n-----------------------original message--------------------------------";
-	 comment +="\n From : "+ msg[0].msSender;
-	 comment +="\n To : "+ msg[0].msRecipient;
-	 comment +="\n Sent : "+ msg[0].msDate;
-	 comment +="\n Subject : "+ msg[0].msTitle;
-	 comment +="\n\n"+ msg[0].msComment;
-	 
-	 $("#sendMsg-contents").append(comment);
 	
+	if(!msg){
+		haveMsgList();
+	}else if('${mId}'!=null){
+		noMsgList();
+	}
+
 }
-
-
-
-function sendMsg(){
-	let msg = JSON.parse('${dataList}');
-
-	let msSender = msg[0].msRecipient;
-	let msRecipient = $('#sendMsg-recipient').val();
-	let msTitle = $('#sendMsg-title').val();
-	let msComment = $('#sendMsg-contents').val();
+function haveMsgList(){
 	
-	let form = document.createElement("form");
-	form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-			
-	let con = alert("메세지 전송이 완료되었습니다.");	
+	let sender = msg[0].msSender;
+	
+	$(document).ready(function() {
+        $('#sendMsg-recipient').val(sender);
+    });		
+	
+ let comment = " ";
+ comment +="<p><br></p>";
+ comment +="\n-----------------------original message--------------------------------";
+ comment +="\n From : "+ msg[0].msSender;
+ comment +="\n To : "+ msg[0].msRecipient;
+ comment +="\n Sent : "+ msg[0].msDate;
+ comment +="\n Subject : "+ msg[0].msTitle;
+ comment +="\n\n"+ msg[0].msComment;
+ 
+ $("#sendMsg-contents").append(comment);
+ 
+}
+function noMsgList(){
+	let sender = '${mId}';
+	$(document).ready(function() {
+        $('#sendMsg-recipient').val(sender);  
+	 });	
+}
+function sendMsg(){
+	
+	if(JSON.parse('${dataList}')!=null){
+		let msg = JSON.parse('${dataList}');
+		
+		let msSender = msg[0].msRecipient;
+		let msRecipient = $('#sendMsg-recipient').val();
+		let msTitle = $('#sendMsg-title').val();
+		let msComment = $('#sendMsg-contents').val();
+		
+		let form = document.createElement("form");
+		form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
+		form.method="POST";
+		document.body.appendChild(form);
+		form.submit();
+				
+		let con = alert("메세지 전송이 완료되었습니다.");	
+	}else if('${mId}'!=null){
+		
+		let msSender = '${mId}';
+		let msRecipient = $('#sendMsg-recipient').val();
+		let msTitle = $('#sendMsg-title').val();
+		let msComment = $('#sendMsg-contents').val();
+		
+		let form = document.createElement("form");
+		form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
+		form.method="POST";
+		document.body.appendChild(form);
+		form.submit();
+				
+		let con = alert("메세지 전송이 완료되었습니다.");	
+	}
+	
+	
 
 }
 //경매글 올리기
