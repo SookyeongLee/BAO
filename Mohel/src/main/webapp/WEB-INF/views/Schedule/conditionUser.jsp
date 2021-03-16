@@ -11,7 +11,8 @@
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/common.css">
-    <script src="/resources/src/main.js" defer></script>
+    <script src="/resources/src/navbar.js" defer></script>
+    <script src="/resources/src/navbar2.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="init()">
@@ -162,41 +163,6 @@ function init(){
 });
 			
 }		
-
-
-function msgForm(){
-	//서버전송
-	let msg = JSON.parse('${dataList}');
-	let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
-	alert(sendData);
-	
-	alert(msg.length);
-	
-	let form = document.createElement("form");
-	form.action="MsgForm?"+sendData;
-	form.method="POST";
-	document.body.appendChild(form);
-	form.submit();
-	
-	
-}
-//마이페이지 클릭 
-function myPageClick(){
-   let form = document.createElement("form");
-   form.action = "MyProfile";
-   form.method = "Post";
-   document.body.appendChild(form);
-   form.submit();
-}
-//경매글 올리기
-function registerReq(){
-	 let form = document.createElement("form");
-  form.action = "DealForm";
-  form.method = "Post";
-  document.body.appendChild(form);
-  form.submit();
-
-}
 
 </script>
 </html>

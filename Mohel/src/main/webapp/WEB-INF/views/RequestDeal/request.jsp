@@ -11,8 +11,8 @@
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="/resources/src/main.js" defer></script>
-    <script src="/resources/src/search.js" defer></script>
+    <script src="/resources/src/navbar.js" defer></script>
+    <script src="/resources/src/navbar2.js" defer></script>
     <link rel="stylesheet" href="/resources/css/common.css">
 </head>
 <body>
@@ -144,22 +144,6 @@
         
         form.submit();
     }
-  //경매글 올리기
-  function registerReq(){
-  	 let form = document.createElement("form");
-       form.action = "DealForm";
-       form.method = "Post";
-       document.body.appendChild(form);
-       form.submit();
-   
-  }
-  //마이페이지 클릭 
-  function myPageClick(){
-     let form = document.createElement("form");
-     form.action = "MyProfile";
-     form.method = "Post";
-     document.body.appendChild(form);
-     form.submit();
-  }
+
 </script>
 </html>

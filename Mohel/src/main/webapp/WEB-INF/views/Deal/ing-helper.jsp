@@ -12,8 +12,8 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
-    <script src="/resources/src/main.js" defer></script>
-    <script src="/resources/src/search.js" defer></script>
+    <script src="/resources/src/navbar.js" defer></script>
+    <script src="/resources/src/navbar2.js" defer></script>
 </head>
 <body onLoad="IHelperScreen()">
     
@@ -44,14 +44,6 @@
     </section>
 </body>
 <script>
-function IngClick(){
-   let form = document.createElement("form");
-      form.action = "IngWisher";
-      form.method = "Post";   
-                     
-      document.body.appendChild(form);
-      form.submit();
-}
 function IngHelperClick(){
    let form = document.createElement("form");
       form.action = "IngHelper";
@@ -98,30 +90,5 @@ function movePro(){
 	   form.submit();
 	}
 
-//마이페이지 클릭 
-function myPageClick(){
-   let form = document.createElement("form");
-   form.action = "MyProfile";
-   form.method = "Post";
-   document.body.appendChild(form);
-   form.submit();
-}
-//경매 클릭 
-function DetailClick(rqCode){
-    var rqCode = rqCode;
-    let form = document.createElement("form");
-    form.action = "Detail";
-    form.method = "Post";
-    
-    let input = document.createElement("input");
-          input.type = "hidden";
-          input.name = "rqCode";
-          input.value = rqCode;
-          alert(input.value);
-          form.appendChild(input);
-    
-    document.body.appendChild(form);
-    form.submit();
- }
 </script>
 </html>

@@ -12,8 +12,8 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
-    <script src="/resources/src/main.js" defer></script>
-    <script src="/resources/src/search.js" defer></script>
+    <script src="/resources/src/navbar.js" defer></script>
+    <script src="/resources/src/navbar2.js" defer></script>
 </head>
 <body>
     
@@ -112,13 +112,6 @@ function DetailClick(rqCode){
     document.body.appendChild(form);
     form.submit();
  }
-//마이페이지 클릭 
-function myPageClick(){
-   let form = document.createElement("form");
-   form.action = "MyProfile";
-   form.method = "Post";
-   document.body.appendChild(form);
-   form.submit();
-}
+
 </script>
 </html>
