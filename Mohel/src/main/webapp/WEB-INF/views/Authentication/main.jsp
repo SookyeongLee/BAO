@@ -82,7 +82,7 @@
             <div class="list__container">
                 <h1 class="list__title">새로운 역경매</h1>
                 <ul class="list__items" id="newRequestList"></ul>
-                 <ul id="searchData" class="list__items"></ul>
+                 <ul id="new" class="list__items"></ul>
                  
                 <!-- 최신순 버튼이동 -->
                 <button type="button" class="before-btn" onClick="beforeClick()"><i class="fas fa-angle-left"></i></button>
@@ -93,7 +93,7 @@
             <div class="list__container">
                 <h1 class="list__title">인기 역경매</h1>
                 <ul class="list__items" id="topRequestList"></ul>
-                 <ul id="topSearchData" class="list__items"></ul>
+                 <ul id="best" class="list__items"></ul>
                 
             </div>
         </div>    
@@ -205,41 +205,51 @@ if(JSON.parse('${requestBestData}').length != 0){
       filterBestScreen();  
 }else{}
 
+
 //온로드 
 function main(){
-
-	  let json = JSON.parse('${jsonData}');
-//    if(!=로그인 x??){
-//       document.getElementById("logCk").innerHTML ="로그인";
-//    }else{
-//       document.getElementById("logCk").innerHTML ="로그아웃";
-//    }
-
-//    searchScreen();
-//    BestsearchScreen();
-   
-   for(let i=0; i<6;i++){
-       
-	   let insertTr= " ";
-	   insertTr += "<li class='list__item' onClick='DetailClick()'>";
-	       
-	   insertTr += "<img class='list__item__img' src='/resources/imgs/common/"+json[i].rqImage+"'>";
-	   insertTr += "<div class='list__item__description'>";
-	   insertTr += "<h4 class='list__item-mainCtg'>"+json[i].rqSubName+"</h4>";
-	   insertTr += "<div class='list__item-title'>"+json[i].rqTitle+"</div>";
-	   insertTr += "</div>";
-	   insertTr += "</li>";
-	    
-	   $("#newRequestList").append(insertTr);
-	   $("#topRequestList").append(insertTr);
-	   
-	  	
-   }
-   searchScreen();
-   BestsearchScreen();
-   
-   
+   newScreen();
+   bestScreen();
 }
+
+function newScreen(){
+    let json = JSON.parse('${jsonData}');
+      
+     for(let i=0; i<6;i++){
+     
+      let insertTr= " ";
+      insertTr += "<li class='list__item' onClick='DetailClick()'>";
+          
+      insertTr += "<img class='list__item__img' src='/resources/imgs/common/"+json[i].rqImage+"'>";
+      insertTr += "<div class='list__item__description'>";
+      insertTr += "<h4 class='list__item-mainCtg'>"+json[i].rqSubName+"</h4>";
+      insertTr += "<div class='list__item-title'>"+json[i].rqTitle+"</div>";
+      insertTr += "</div>";
+      insertTr += "</li>";
+       
+      $("#new").append(insertTr);
+        
+  }    
+}
+
+function bestScreen(){
+      let json = JSON.parse('${list2}');   
+      for(let i=0; i<6;i++){
+         
+         let insertTr= " ";
+         insertTr +="<li class='list__item'>";
+         insertTr +="<img class='list__item__img'src='/resources/imgs/common/"+json[i].rqImage+"'>";
+         insertTr +="<div class='list__item__description'>"
+         insertTr +="<h4 class='list__item-mainCtg'>"+json[i].rqSubName+"</h4>"
+         insertTr +="<div class='list__item-title'>"+json[i].rqTitle+"</div>"
+         insertTr +="</div>"
+         insertTr +="</li>"
+
+         $("#best").append(insertTr);
+         }
+   }
+
+
 //최신순 
 function filterScreen(){ 
     

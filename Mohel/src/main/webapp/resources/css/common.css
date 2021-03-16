@@ -343,11 +343,12 @@ select {
 }
 .message__title {
   text-align: left;
+  cursor: pointer;
 }
 .fa-envelope {
   color: var(--color-skyblue);
 }
-.pointer {
+.profile-btn {
   cursor: pointer;
 }
 .message__move {
@@ -726,6 +727,19 @@ select {
   border: 1px solid var(--color-blue);
 }
 
+/* 프로필 클릭 모달 */
+.modal__box{
+  padding-bottom: 12px;
+}
+.modal__content__title{
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold);
+}
+.modal__content__value{
+  font-size: var(--font-micro);
+}
+
+
 /* Review */
 /* writeReview */
 .review__list1 {
@@ -781,5 +795,6 @@ select {
 .review__list__text {
   line-height: 24px;
 }
+
 
 

@@ -10,11 +10,11 @@
     <meta name="description" content="받은 메시지함 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <link rel="stylesheet" href="/resources/css/common.css">
-    <script src="/resources/src/main.js" defer></script>
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-     <script src="/resources/src/main.js" defer></script>
-     <script src="/resources/src/search.js" defer></script>
+    <script src="/resources/src/main.js" defer></script>
+    <script src="/resources/src/search.js" defer></script>
+    <script src="/resources/src/profile.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="init()">
@@ -61,6 +61,11 @@
             </div>
         </div>
     </section>
+    
+    <!-- 프로필 클릭 모달 시작 -->
+    <%@ include file="/WEB-INF/views/common/profileClick.jsp" %>
+    <!-- 프로필 클릭 모달 끝 -->
+    
 </body>
 
 <script>
@@ -80,8 +85,8 @@ function init(){
 	let insertTr= " ";
 	insertTr += "<tr>";
 	insertTr += "<td class='message__data'><i class='fas fa-envelope'></i></td>";
-	insertTr += "<td class='message__data pointer' onClick='clickProfile("+i+")'>"+ rec[i].msSender +"</td>";
-	insertTr += "<td class='message__data message__title pointer' onClick='msgDetail("+i+")'>"+rec[i].msTitle+"</td>";
+	insertTr += "<td class='message__data profile-btn' onClick='showModal("+i+")'>"+ rec[i].msSender +"</td>";
+	insertTr += "<td class='message__data message__title' onClick='msgDetail("+i+")'>"+rec[i].msTitle+"</td>";
 	insertTr += "<td class='message__data'>"+rec[i].msDate+"</td>";
 	insertTr += "</tr>";
    
@@ -91,17 +96,11 @@ function init(){
 	}
 	
 }
-function clickProfile(i){
-	let rec = JSON.parse('${recList}');
-	let mId=rec[i].msSender;
 
-	let form = document.createElement("form");
-	form.action="ClickProfile?mId="+mId;
-	form.method="POST";
-	form.target = "_blank";
-	document.body.appendChild(form);
-	form.submit();
-	
+//Show modal
+function showModal(i){
+	let send = JSON.parse('${SendList}');
+	modal.classList.add('show-modal');
 }
 
 function msgDetail(i){
