@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="/resources/src/main.js" defer></script>
     <script src="/resources/src/search.js" defer></script>
-    <script src="/resources/src/profile.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="init()">
@@ -63,7 +62,7 @@
     </section>
     
     <!-- 프로필 클릭 모달 시작 -->
-    <%@ include file="/WEB-INF/views/common/profileClick.jsp" %>
+    <%@ include file="/WEB-INF/views/common/profileClick.jsp" %>         
     <!-- 프로필 클릭 모달 끝 -->
        
 </body>
@@ -83,18 +82,61 @@ function init(){
 	insertTr += "<td class='message__data'>"+send[i].msDate+"</td>";
 	insertTr += "</tr>";
    
-    $("#sendDiv").append(insertTr);
-		
-    
+    $("#sendDiv").append(insertTr);   
 	}
-	
+		
 }
 
 //Show modal
+const modal = document.getElementById('modal');
 function showModal(i){
 	let send = JSON.parse('${SendList}');
-	modal.classList.add('show-modal');
-}
+	alert(send[i].msRecipient);
+	modal.classList.add('show-modal');		
+	    
+		let msRecipient =send[i].msRecipient;
+		$(".modal__content__value1").append(msRecipient);
+
+		let mEmail=send[i].mEmail;
+		$(".modal__content__value2").append(mEmail);
+
+		let mRccode=send[i].mRccode; 
+		$(".modal__content__value3").append(mRccode);
+
+		let mDivision=send[i].mDivision;
+		$(".modal__content__value4").append(mDivision);
+
+		let mCareer=send[i].mCareer;
+		$(".modal__content__value5").append(mCareer);
+		
+	}
+
+//Hide modal
+const close = document.getElementById('close');
+close.addEventListener('click', () => {
+    modal.classList.remove('show-modal');
+       
+    $(".modal__content__value1").empty();
+    $(".modal__content__value2").empty();
+    $(".modal__content__value3").empty();
+    $(".modal__content__value4").empty();
+    $(".modal__content__value5").empty();
+    
+});
+        
+//Hide modal(모달창 외부 클릭해서 닫기)
+window.addEventListener('click', (e) => {
+    e.target === modal ? 
+			    		modal.classList.remove('show-modal') ||  
+			    		$(".modal__content__value1").empty() && 
+					    $(".modal__content__value2").empty() && 
+					    $(".modal__content__value3").empty() && 
+					    $(".modal__content__value4").empty() && 
+					    $(".modal__content__value5").empty() 
+					    										: false;
+});
+
+
 
 function msgDetail(i){
 	//서버전송 

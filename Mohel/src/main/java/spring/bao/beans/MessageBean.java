@@ -11,4 +11,11 @@ public class MessageBean {
 	private String msComment;
 	private String msDate;
 	private String msStatus;
+	
+	//member
+	private String mEmail;
+	private String mCareer;
+	private String mDivision;
+	private String mRcCode;
+	private String mRcName;
 }

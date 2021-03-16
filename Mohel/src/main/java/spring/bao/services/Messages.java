@@ -75,7 +75,9 @@ public class Messages {
 				if(this.insMessage(messageBean)) {
 					tran.commit(status);
 					String json =gson.toJson(this.getSendList(messageBean));
+				
 					mav.addObject("SendList",json);
+					
 				};
 			}catch(Exception e) {
 				tran.rollback(status);
@@ -108,7 +110,7 @@ public class Messages {
 			
 			ModelAndView mav = new ModelAndView();
 			String json =gson.toJson(this.getSendList(messageBean));
-//		    System.out.println(json);
+		    System.out.println(json);
 		    mav.addObject("SendList",json);
 			mav.setViewName("Message/sendBox");
 			return mav;

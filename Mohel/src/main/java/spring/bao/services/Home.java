@@ -34,9 +34,7 @@ public class Home {
 		      ModelAndView mav = new ModelAndView();
 
 		      String jsonData = gson.toJson(this.getRecentList(req));
-		      String jsonData2 = gson.toJson(this.getRecentList2(req));
-		      System.out.println();
-		      System.out.println("ddd"+jsonData2);
+		      String jsonData2 = gson.toJson(this.getRecentList2(req));		   
 		      mav.addObject("jsonData",jsonData);
 		      mav.addObject("list2", jsonData2);
 		      
