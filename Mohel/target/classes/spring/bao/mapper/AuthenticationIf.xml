@@ -24,14 +24,20 @@
 	
 	<select id="getRecentList" resultType="spring.bao.beans.RequestBean">
    <![CDATA[
-     SELECT RQ.RQ_CODE AS RQCODE,
-   			 SG.SG_SUBNAME AS RQSUBNAME,
-   			   RQ.RQ_TITLE AS RQTITLE,
-   			   MG.MG_IMG AS RQIMAGE,
-    		  RQ.RQ_PERIOD AS RQPERIOD
-      FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
-                INNER JOIN SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
-                ORDER BY RQ.RQ_PERIOD DESC
+     SELECT
+                             RQ.RQ_CODE AS rqCode,
+                             RQ.RQ_FILTERCODE AS rqFilterCode,
+                             RQ.RQ_PERIOD AS  rqPeriod,
+                             RQ.RQ_TITLE AS rqTitle,
+                             SG.SG_SUBNAME AS rqSubName,
+                             MG.MG_IMG AS rqImage,
+                             ST.ST_CODE AS rqStatus,
+                             RQ.RQ_SYSDATE AS RQSYSDATE
+                             FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
+                               INNER JOIN SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
+                               INNER JOIN ST ON RQ.RQ_STCODE = ST.ST_CODE
+                               WHERE RQ.RQ_STCODE = 'B'
+                               ORDER BY RQ.RQ_SYSDATE DESC
     ]]>
    </select>
    

@@ -1,5 +1,14 @@
 'use strict';
 
+//프로필 클릭 
+function myPageClick(){
+   let form = document.createElement("form");
+   form.action = "MyProfile";
+   form.method = "Post";
+   document.body.appendChild(form);
+   form.submit();
+}
+
 function waitingClick(){
    let form = document.createElement("form");
       form.action = "WaitingWisher";

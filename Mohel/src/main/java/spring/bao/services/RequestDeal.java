@@ -260,7 +260,7 @@ public class RequestDeal {
 	         out.println("<script>alert('거래가 등록되었습니다.'); </script>");
 	         out.flush();
 			
-			mav.setViewName("Authentication/main");
+	         mav.setViewName("Authentication/goMain");
 		}else {
 			System.out.println("False");
 			mav.setViewName("Profile/myProfile");

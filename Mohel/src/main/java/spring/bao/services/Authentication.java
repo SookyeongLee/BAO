@@ -92,7 +92,7 @@ public class Authentication {
                     
                    PrintWriter out = response.getWriter();
                     
-                   out.println("<script>alert('로그인 실패'); location.href='이동주소';</script>");
+                   out.println("<script>alert('로그인 실패');</script>");
                     
                    out.flush();
                    mav.setViewName("Authentication/login");
@@ -101,7 +101,6 @@ public class Authentication {
              }
           return mav;         
        }
-
 
       private ModelAndView logoutCtl(MemberBean member) throws Exception {
          TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
@@ -123,29 +122,31 @@ System.out.println(member.getMId());
             return mav;         
       }
       
-      private ModelAndView joinCtl(MemberBean member) {
-         TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
-         
-         ModelAndView mav = new ModelAndView();
-         //System.out.println("joinCtl");
-         if(this.isMember(member)) {
-            
-            mav.setViewName("login"); //로그인폼 화면 
-            
-         }else {
-            
-            //
-            member.setMPw(enc.encode(member.getMPw()));
-            member.setMRcCode("99");
-            this.insMember(member);
-            mav.setViewName("login");
-            
-            tran.commit(status);
-            
-         }
-         
-         return mav;         
-      }
+      private ModelAndView joinCtl(MemberBean member) throws Exception {
+          TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
+          
+          ModelAndView mav = new ModelAndView();
+          //System.out.println("joinCtl");
+          if(this.isMember(member)) {
+      
+             mav.setViewName("Authentication/join"); //회원실패시 그자리 
+             
+          }else {
+             
+             //
+             member.setMPw(enc.encode(member.getMPw()));
+             member.setMRcCode("99");
+             this.insMember(member);
+
+             mav.setViewName("Authentication/login");//회원가입시 이동
+             
+             tran.commit(status);
+             
+          }
+          
+          return mav;  
+       }
+    
    
 
 

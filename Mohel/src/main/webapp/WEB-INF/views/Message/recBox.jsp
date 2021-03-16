@@ -98,23 +98,23 @@ function init(){
 //Show modal
 const modal = document.getElementById('modal');
 function showModal(i){
-	let send = JSON.parse('${SendList}');
-	alert(send[i].msRecipient);
+	let rec = JSON.parse('${recList}');
+	alert(rec[i].msSender);
 	modal.classList.add('show-modal');		
 	    
-		let msRecipient =send[i].msRecipient;
-		$(".modal__content__value1").append(msRecipient);
+		let msSender =rec[i].msSender;
+		$(".modal__content__value1").append(msSender);
 
-		let mEmail=send[i].mEmail;
+		let mEmail=rec[i].mEmail;
 		$(".modal__content__value2").append(mEmail);
 
-		let mRccode=send[i].mRccode; 
+		let mRccode=rec[i].mRccode; 
 		$(".modal__content__value3").append(mRccode);
 
-		let mDivision=send[i].mDivision;
+		let mDivision=rec[i].mDivision;
 		$(".modal__content__value4").append(mDivision);
 
-		let mCareer=send[i].mCareer;
+		let mCareer=rec[i].mCareer;
 		$(".modal__content__value5").append(mCareer);
 		
 	}

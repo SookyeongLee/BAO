@@ -16,7 +16,7 @@
                 <ul class="navbar__menu">
                       <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
          		     <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                  
-                    <li class="navbar__menu__item">로그아웃</li>
+                    <li class="navbar__menu__item" onClick="logout()">로그아웃</li>
                 </ul>
             </div>
         </div>        
