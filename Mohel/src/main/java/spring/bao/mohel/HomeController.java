@@ -91,7 +91,7 @@ public class HomeController {
 	}
 
 
-	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile","ClickProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
+	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile","/ClickProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
 	public ModelAndView Profile(@ModelAttribute MemberBean memberBean) {
 		ModelAndView mav = new ModelAndView();
 		mav = pro.entrance(memberBean);

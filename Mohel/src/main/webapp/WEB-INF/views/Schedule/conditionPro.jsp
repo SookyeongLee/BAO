@@ -7,59 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 스케쥴 헬퍼</title>
-    <meta name="description" content="메시지 디테일 페이지">
+    <meta name="description" content="스케쥴 헬퍼 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../resources/css/common.css">
+    <link rel="stylesheet" href="/resources/css/common.css">
     <script src="/resources/src/main.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="init()">
+    
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                   <li class="navbar__menu__item" onClick="myPageClick()" >마이페이지</li>
-               	   <li class="navbar__menu__item" onClick="registerReq()">역경매등록</li>                     
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
-      <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item">
-                <button type="button" onClick="myPageClick()">프로필</button>
-            </li>
-            <li class="mypage__menu__item">
-                <button type="button" class="deal-btn">거래상태</button>
-                <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
-                </ul>
-            </li>                    
-            <li class="mypage__menu__item">
-                <button type="button" class="message-btn">메시지</button>
-                <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
-                </ul>
-            </li> 
-        </ul>
-    </nav> 
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+
+    <!--Mypage Navbar -->
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
+    
     <!-- Send Schedule -->
     <section class="schedule mypage">
         <h2 class="mypage__title">스케쥴</h2>
@@ -101,6 +63,7 @@
 <script>
 function init(){
 	let schedule = JSON.parse('${scInfo}');
+	alert('${scInfo}');
 	
 	let scCode = schedule[0].scCode;
 	let scFilter = schedule[0].scFilterName;
@@ -111,16 +74,11 @@ function init(){
 	let sdComment = schedule[0].sdComment;
     let scStatus = schedule[0].scStatus;
 	
-	//날짜 포맷  
-	let sdDate = schedule[0].sdDate;
-	if(sdDate){
-	let year = sdDate.substr(0,4);
-	let month = sdDate.substr(4,2);
-	let day = sdDate.substr(6,2);
-	let sdPeriod = year+"-"+month+"-"+day;
-	
+// 	//날짜 포맷  
+	let sdPeriod = schedule[0].sdPeriod;
+	if(sdPeriod){
+
 	 $("#schedule_date1").val(sdPeriod);
-	
 	}
     
 	 $("#schedule-code").val(scCode); 
@@ -134,11 +92,8 @@ function init(){
 	 if(sdComment){
 	 for(let index=1;index<schedule.length;index++){
 		//날짜 포맷  
-			let sdDate = schedule[index].sdDate;
-			let year = sdDate.substr(0,4);
-			let month = sdDate.substr(4,2);
-			let day = sdDate.substr(6,2);
-			let sdPeriod = year+"-"+month+"-"+day;
+			let sdPeriod = schedule[index].sdPeriod;
+
 			
 			let sdComment = schedule[index].sdComment;
 		 
@@ -192,22 +147,21 @@ function init(){
 				let sdPeriod= new Array();
 				let sdComment = new Array();
 				let param = new Array();
-
 				
-				let SubName = $('#schedule-sub').text().substr(1);
 				
 				for(i=0;i<maxAppend;i++){
 
+					
 					let data ={
 							scCode: $('#schedule-code').val(),
 							scFilterName : $('#schedule-main').text(),
-							scSubName : SubName,
+							scSubName : $('#schedule-sub').text().substr(1),
 							scWisher : $('#schedule-wisher').text(),
 							scHelper : $('#schedule-helper').text(),
 							sdTitle : $('#schedule-title').text(),
 						    scStatus : 'N',
 						    sdStep: i+1,
-						    sdPeriod : $('#schedule_date'+(i+1)).val(),
+						    sdPeriod :$('#schedule_date'+(i+1)).val(),
 							sdComment : $('#schedule-contents'+(i+1)).val()
 					};
 					param.push(data);

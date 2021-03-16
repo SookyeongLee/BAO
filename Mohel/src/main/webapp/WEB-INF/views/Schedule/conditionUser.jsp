@@ -7,59 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 스케쥴 위시어</title>
-    <meta name="description" content="메시지 디테일 페이지">
+    <meta name="description" content="스케쥴 위시어 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../resources/css/common.css">
+    <link rel="stylesheet" href="/resources/css/common.css">
     <script src="/resources/src/main.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="init()">
+    
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">거래등록</li>                    
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
-      <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item">
-                <button type="button" onClick="myPageClick()">프로필</button>
-            </li>
-            <li class="mypage__menu__item">
-                <button type="button" class="deal-btn">거래상태</button>
-                <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
-                </ul>
-            </li>                    
-            <li class="mypage__menu__item">
-                <button type="button" class="message-btn">메시지</button>
-                <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="recBox()">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="sendBox()">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="msgForm()">메시지쓰기</button></li>
-                </ul>
-            </li> 
-        </ul>
-    </nav> 
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+
+    <!--Mypage Navbar -->
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
+    
     <!-- Send Schedule -->
     <section class="schedule mypage">
         <h2 class="mypage__title">스케쥴</h2>
@@ -87,20 +49,22 @@
                 </tbody>
             </table>
             <div class="schedule__textarea" name="textarea">
-                <div>STEP1  기간 : <input type="date" id="schedule_date1" name="tag"></div>
+                <div>STEP1  기간 : <input type="date" id="schedule_date1" name="tag"><span class="mypage_ok"></span></div>
                 <textarea id="schedule-contents1" name="schedule-contents" cols="120" rows="10"></textarea>
                 <section id="step"></section>         
             </div>
                    <input type="hidden" id="schedule-code" /><input type="hidden" id="schedule-status" />
             <div class="mypage__bottom">
-                <button  type="button" class="mypage__btn" id="sendMsg">등록</button>
+                
             </div>
         </form>
     </section>
 </body>
 <script>
 function init(){
+	
 	let schedule = JSON.parse('${scInfo}');
+	alert('${scInfo}');
 	
 	let scCode = schedule[0].scCode;
 	let scFilter = schedule[0].scFilterName;
@@ -111,19 +75,14 @@ function init(){
 	let sdComment = schedule[0].sdComment;
     let scStatus = schedule[0].scStatus;
 	
-	//날짜 포맷  
-	let sdDate = schedule[0].sdDate;
-	if(sdDate){
-	let year = sdDate.substr(0,4);
-	let month = sdDate.substr(4,2);
-	let day = sdDate.substr(6,2);
-	let date = year+"-"+month+"-"+day;
-	
-	 $("#schedule_date1").val(date);
-	
+// 	//날짜 포맷  
+	let sdPeriod = schedule[0].sdPeriod;
+	if(sdPeriod){
+
+	 $("#schedule_date1").val(sdPeriod);
 	}
     
-	 $("#schedule-code").val(scCode);
+	 $("#schedule-code").val(scCode); 
 	 $("#schedule-main").append(scFilter);
 	 $("#schedule-sub").append(scSub);
 	 $("#schedule-title").append(sdTitle);
@@ -134,30 +93,77 @@ function init(){
 	 if(sdComment){
 	 for(let index=1;index<schedule.length;index++){
 		//날짜 포맷  
-			let sdDate = schedule[index].sdDate;
-			let year = sdDate.substr(0,4);
-			let month = sdDate.substr(4,2);
-			let day = sdDate.substr(6,2);
-			let date = year+"-"+month+"-"+day;
+			let sdPeriod = schedule[index].sdPeriod;
+
 			
 			let sdComment = schedule[index].sdComment;
 		 
 		 let plusArea = " ";
-		 plusArea += "<div>STEP"+(index+1)+" 기간 : <input type='date' id= 'schedule_date"+(index+1)+"' name='tag'></div>";
+		 plusArea += "<div>STEP"+(index+1)+" 기간 : <input type='date' id= 'schedule_date"+(index+1)+"' name='tag'><span class='mypage_ok'></span></div>";
    	     plusArea += "<textarea id='schedule-contents"+(index+1)+"' name='schedule-contents' cols='120' rows='10'></textarea>";     
 		    
 		 $("#step").append(plusArea);
 		 
-		 $("#schedule_date"+(index+1)).val(date);
+		 $("#schedule_date"+(index+1)).val(sdPeriod);
 		 $("#schedule-contents"+(index+1)).append(sdComment);
 		 
 	 }
 	 }
 	 
+	 if(schedule[0].scStatus=='S'){
+			let insertBt =" ";
+			insertBt +="<button  type='button' class='mypage__btn' id='sendAccept'>수락</button>";
+			insertBt +=" ";
+			insertBt +="<button  type='button' class='mypage__btn' id='sendReject'>거절</button>";
+			
+			 $(".mypage__bottom").append(insertBt);
+		}else if(schedule[0].scStatus=='A'){
+			let insertBt =" ";
+			insertBt ="<button  type='button' class='mypage__btn' onClick='check()'>확인</button>";
+			
+			 $(".mypage_ok").append(insertBt);
+			
+			
+		}
 	
 	 
+	 $(function() {
+			$('#sendAccept').click(function(){
+				let check = confirm("수락하시겠습니까?")
+				
+				if(check){
+					let form = document.createElement("form");
+					form.action="AcceptSchedule";
+					form.method="POST";
+					document.body.appendChild(form);
+					form.submit();
+				}
+				
+			});
+	
+	});
+	 function check(){
+		 alert("ddd"); 
+	 }
+	
+	$(function() {
+		$('#sendReject').click(function(){
+			let check = confirm("거절하시겠습니까?")
+			
+			if(check){
+				let form = document.createElement("form");
+				form.action="RejectSchedule";
+				form.method="POST";
+				document.body.appendChild(form);
+				form.submit();
+			}
+		});
+	
+});
+			
+}		
 
-}
+
 function msgForm(){
 	//서버전송
 	let msg = JSON.parse('${dataList}');
@@ -182,7 +188,15 @@ function myPageClick(){
    document.body.appendChild(form);
    form.submit();
 }
+//경매글 올리기
+function registerReq(){
+	 let form = document.createElement("form");
+  form.action = "DealForm";
+  form.method = "Post";
+  document.body.appendChild(form);
+  form.submit();
 
+}
 
 </script>
 </html>
