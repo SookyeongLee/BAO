@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import spring.bao.beans.BidBean;
+import spring.bao.beans.MemberBean;
 import spring.bao.beans.RequestBean;
 import spring.bao.mapper.DealIf;
+import spring.bao.utils.ProjectUtils;
 
 @Service
 public class Deal {
@@ -26,14 +28,16 @@ public class Deal {
    private HttpServletRequest request;
    @Autowired
    private Gson gson;
-
-   public ModelAndView entrance(RequestBean requestBean) {
+   @Autowired
+   private ProjectUtils pu;
+      
+   public ModelAndView entrance(RequestBean requestBean, MemberBean memberbean) throws Exception {
       ModelAndView mav = new ModelAndView();
 
-      switch (request.getRequestURI().substring(1)) {
+      switch (requestBean.getSCode()) {
 
       case "Detail":
-         mav = this.detailCtl(requestBean);
+         mav = this.detailCtl(requestBean, memberbean);
          break;
       case "WaitingHelper":
          mav = this.waitingHelperCtl(requestBean);
@@ -151,28 +155,41 @@ public class Deal {
          return mav;
       }
 
-   private ModelAndView detailCtl(RequestBean requestBean) {
-         ModelAndView mav = new ModelAndView();
-         
-         if(requestBean.getRqDetailSelect().equals("bh")) {
-            //reqBean.setRqCode("1000210305090308");
-            String json = gson.toJson(this.getDetail(requestBean));
-            mav.addObject("detail", json);
-            mav.setViewName("Deal/beforeDeal-helper");
-         }else if(requestBean.getRqDetailSelect().equals("bw")){
-            //reqBean.setRqCode("1000210305090308");
-            String json = gson.toJson(this.getDetail(requestBean));
-            mav.addObject("detail", json);
-            mav.setViewName("Deal/beforeDeal-wisher");
-         }else if(requestBean.getRqDetailSelect().equals("ad")){
-            String json = gson.toJson(this.getDetailAD(requestBean));
-            mav.addObject("detailAd", json);
-            mav.setViewName("Deal/afterDeal");
-         }   
-         return mav;
-      }
+   private ModelAndView detailCtl(RequestBean requestBean, MemberBean memberbean) {
+       ModelAndView mav = new ModelAndView();
+       
+       System.out.println(requestBean.getRqCode());
+       requestBean.setRqDetailSelect("bh");
+       
+       memberbean.setAlMmid("PPP");
+       if(requestBean.getRqDetailSelect().equals("bh")) {
+          //reqBean.setRqCode("1000210305090308");
+          String json = gson.toJson(this.getDetail(requestBean));
+          mav.addObject("detail", json);
+          String getReq = gson.toJson(this.getReq(requestBean));
+          mav.addObject("getReq", getReq);
+          String getReq2 = gson.toJson(this.getReq2(memberbean));
+          mav.addObject("getReq2", getReq2);
+          String bidList = gson.toJson(this.bidList(requestBean));
+          mav.addObject("bidList", bidList);
+          System.out.println(bidList);
+          mav.setViewName("Deal/beforeDeal-helper");
+       }else if(requestBean.getRqDetailSelect().equals("bw")){
+          //reqBean.setRqCode("1000210305090308");
+          String json = gson.toJson(this.getDetail(requestBean));
+          mav.addObject("detail", json);
+          mav.setViewName("Deal/beforeDeal-wisher");
+       }else if(requestBean.getRqDetailSelect().equals("ad")){
+          String json = gson.toJson(this.getDetailAD(requestBean));
+          mav.addObject("detailAd", json);
+          mav.setViewName("Deal/afterDeal");
+       }   
+       return mav;
+    }
+
 
    
+
    private ArrayList<RequestBean> getBestFilterList(RequestBean requestBean) {
       return mapper.BestFilterList(requestBean);
    }
@@ -229,5 +246,14 @@ public class Deal {
    private  ArrayList<RequestBean> getDetailAD(RequestBean requestBean) {
       return mapper.getDetailAD(requestBean);
   }
+   private  ArrayList<RequestBean> getReq(RequestBean requestBean) {
+         return mapper.getReq(requestBean);
+     }
+   private  ArrayList<MemberBean> getReq2(MemberBean memberbean) {
+         return mapper.getReq2(memberbean);
+     }
+   private  ArrayList<RequestBean> bidList(RequestBean requestBean) {
+         return mapper.bidList(requestBean);
+     }
 
 }

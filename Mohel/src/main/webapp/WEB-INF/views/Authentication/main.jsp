@@ -418,8 +418,13 @@ function searchScreen(){
            input.type = "hidden";
            input.name = "rqCode";
            input.value = rqCode;
-           alert(input.value);
            form.appendChild(input);
+           
+     let input2 = document.createElement("input");
+          input2.type = "hidden";
+          input2.name = "rqDetailSelect";
+          input2.value = "bh";
+          form.appendChild(input2);                         
      
      document.body.appendChild(form);
      form.submit();

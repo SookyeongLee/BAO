@@ -73,9 +73,9 @@ function init(){
 	
 	for(let i=0;i<rec.length;i++){
 		
-	if(rec[i].msStatus=="N"){
+	if(rec[i].msStatus=="Y"){
 		$( "td" ).css( "color", "#A9A9A9" );
-		$( "i" ).css( "color", "#A9A9A9" );
+		/* $( "i" ).css( "color", "#A9A9A9" ); */
 
 	}
 	
@@ -131,7 +131,7 @@ close.addEventListener('click', () => {
     $(".modal__content__value5").empty();
     
 });
-        
+
 //Hide modal(모달창 외부 클릭해서 닫기)
 window.addEventListener('click', (e) => {
     e.target === modal ? 

@@ -9,7 +9,13 @@
 
 
 
+<insert id = "insBi"> 
+<![CDATA[
+   INSERT INTO BI(BI_RQCODE , BI_MMHELPER, BI_PRICE , BI_SYSDATE, BI_STCODE)
+   VALUES(#{biRqCode},#{biMmHelper},#{biPrice},SYSDATE, 'M')  
 
+  ]]>
+ </insert>
 
 
 

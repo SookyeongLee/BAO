@@ -96,18 +96,25 @@ $("#wHelperList").append(insertTr)
 }
 }
 //경매 클릭 
-function DetailClick(rqCode){
-    var rqCode = rqCode;
+function DetailClick(value){
+    let rqCode = value;
     let form = document.createElement("form");
+    
     form.action = "Detail";
     form.method = "Post";
+    form.target = "_black";
     
     let input = document.createElement("input");
           input.type = "hidden";
           input.name = "rqCode";
           input.value = rqCode;
-          alert(input.value);
           form.appendChild(input);
+          
+    let input2 = document.createElement("input");
+         input2.type = "hidden";
+         input2.name = "rqDetailSelect";
+         input2.value = "bh";
+         form.appendChild(input2);      
     
     document.body.appendChild(form);
     form.submit();

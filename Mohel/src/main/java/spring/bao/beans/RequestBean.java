@@ -15,14 +15,17 @@ public class RequestBean {
    private String rqImage;
    private String rqSubCode;
    private String rqSubName;
+   private String rqSimpleDate;
    private String rqPeriod;
    private String rqDate;
    private String rqStatus;
-   private String rqRcCode;   
+   private String rqRcCode;
+   private String rqRcName;
    private String rqWord;
    private String img;
    private int rqBest;
    private String RqDetailSelect;
+   private String rqCodez;
    
    //현옥  
       private String rqDeadLine;
@@ -32,11 +35,15 @@ public class RequestBean {
       //+Bid빈 
       private String biCode;
       private String biHelper;
+      private String biMmHelperview;
       private String biPrice;
       private String biDate;
       private String biComment;
       private String winHelper;
       private String winPrice;
       private String bidScode;
+      private String BiRqCode;
+      private String biMmHelper;
+      private String biStCode;
 
 }

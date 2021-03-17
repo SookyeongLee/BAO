@@ -2,6 +2,7 @@ package spring.bao.mapper;
 
 import java.util.ArrayList;
 
+import spring.bao.beans.MemberBean;
 import spring.bao.beans.RequestBean;
 import spring.bao.services.Bid;
 
@@ -35,6 +36,13 @@ public interface DealIf {
 
    public ArrayList<RequestBean> getEndWisherList(RequestBean reqBean); // 거래완료 wisher정보 겟 
 
+   public ArrayList<RequestBean> getReq(RequestBean reqBean);
+   
+   public ArrayList<MemberBean> getReq2(MemberBean memberbean);
+   
+   public ArrayList<RequestBean> bidList(RequestBean reqBean);
+   
+   
 
    
 }

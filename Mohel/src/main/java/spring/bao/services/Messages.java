@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import spring.bao.beans.MemberBean;
 import spring.bao.beans.MessageBean;
 import spring.bao.mapper.MessageIf;
+import spring.bao.utils.ProjectUtils;
 
 @Service
 public class Messages {
@@ -27,14 +29,18 @@ public class Messages {
 		@Autowired
 		private HttpServletRequest request;
 		@Autowired
+		private HttpServletResponse response;
+		@Autowired
 		private MessageIf mapper;
 		@Autowired
 		private Gson gson;
 		@Autowired
 		private PlatformTransactionManager tran;
+		@Autowired
+		private ProjectUtils pu;
 		
 
-		public ModelAndView entrance(MessageBean messagBean) {
+		public ModelAndView entrance(MessageBean messagBean) throws Exception {
 			
 			ModelAndView mav = null;
 			
@@ -83,10 +89,21 @@ public class Messages {
 			mav.setViewName("Message/sendBox");
 			return mav;
 		}
-		private ModelAndView msgFormCtl(MessageBean messageBean) {
+		private ModelAndView msgFormCtl(MessageBean messageBean) throws Exception {
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("mId","PPP");
-			mav.setViewName("Message/sendMsg");
+			
+			messageBean.setMId((String)pu.getAttribute("mId"));
+			
+			if(pu.getAttribute("mId") != null) {
+				mav.addObject("mId",messageBean.getMId());
+				mav.setViewName("Message/sendMsg");
+			}else {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('로그인후 이용 가능합니다.');</script>");
+				out.flush();
+				mav.setViewName("Authentication/login");
+			}
 			
 			return mav;
 
@@ -104,14 +121,26 @@ public class Messages {
 		}
 		
 		
-		private ModelAndView sendBoxCtl(MessageBean messageBean) {
+		private ModelAndView sendBoxCtl(MessageBean messageBean) throws Exception {
 			
 			ModelAndView mav = new ModelAndView();
-			String json =gson.toJson(this.getSendList(messageBean));
-		    System.out.println(json);
-		    mav.addObject("SendList",json);
-			mav.setViewName("Message/sendBox");
+
+			messageBean.setMsSender((String)pu.getAttribute("mId"));
+
+			
+			if(pu.getAttribute("mId") != null) {
+				String json =gson.toJson(this.getSendList(messageBean));
+			    mav.addObject("SendList",json);
+				mav.setViewName("Message/sendBox");
+			}else {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('로그인후 이용 가능합니다.');</script>");
+				out.flush();
+				mav.setViewName("Authentication/login");
+			}
 			return mav;
+
 		}
 
 		private ModelAndView tiltleCtl(MessageBean messageBean) {
@@ -134,12 +163,24 @@ public class Messages {
 		}
 	
 
-		private ModelAndView recBoxCtl(MessageBean messageBean) {
+		private ModelAndView recBoxCtl(MessageBean messageBean) throws Exception {
 
 			ModelAndView mav = new ModelAndView();
-		    String json =gson.toJson(this.getRecList(messageBean));
-		    mav.addObject("recList",json);
-			mav.setViewName("Message/recBox");
+			
+			messageBean.setMsRecipient((String)pu.getAttribute("mId"));
+
+			if(pu.getAttribute("mId") != null) {
+				String json =gson.toJson(this.getRecList(messageBean));
+			    mav.addObject("recList",json);
+				mav.setViewName("Message/recBox");
+			}else {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('로그인후 이용 가능합니다.');</script>");
+				out.flush();
+				mav.setViewName("Authentication/login");
+			}
+		    
 			
 			return mav;
 		}

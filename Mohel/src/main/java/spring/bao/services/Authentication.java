@@ -77,7 +77,7 @@ public class Authentication {
              if(this.isMember(member)) {
                 if(this.isAccess(member)) {
                    member.setMStCode("1");
-                   this.insAccess(member);
+                   if(this.insAccess(member)) {
                    pu.setAttribute("mId",member.getMId());
                    
                    
@@ -85,7 +85,7 @@ public class Authentication {
                    
                    mav.setViewName("Authentication/goMain");
                    tran.commit(status);
-                
+                   }
                 }else {
                    System.out.println("로그인 실패");
                    response.setContentType("text/html; charset=UTF-8");
@@ -107,45 +107,61 @@ public class Authentication {
          
          ModelAndView mav = new ModelAndView();
 
-System.out.println(pu.getAttribute("mId")); //가져오는데 써먹질 못하네
+
           member.setMId((String) pu.getAttribute("mId")); 
            
-System.out.println(member.getMId());
+
          if(pu.getAttribute("mId") != "") {
             member.setMStCode("-1");
-            this.insAccess(member); 
+            if(this.insAccess(member)) { 
             pu.removeAttribute("mId");
 
             mav.setViewName("Authentication/goMain");
             tran.commit(status);
          }
+         }
             return mav;         
       }
       
-      private ModelAndView joinCtl(MemberBean member) throws Exception {
-          TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
-          
-          ModelAndView mav = new ModelAndView();
-          //System.out.println("joinCtl");
-          if(this.isMember(member)) {
       
-             mav.setViewName("Authentication/join"); //회원실패시 그자리 
+      private ModelAndView joinCtl(MemberBean member) throws Exception {
+         TransactionStatus status =tran.getTransaction(new DefaultTransactionDefinition());
+         
+         ModelAndView mav = new ModelAndView();
+         System.out.println("id"+member.getMId());
+         if(this.isMember(member)) {//이미회원일경우
+            response.setContentType("text/html; charset=UTF-8");
              
-          }else {
-             
-             //
-             member.setMPw(enc.encode(member.getMPw()));
-             member.setMRcCode("99");
-             this.insMember(member);
+             PrintWriter out = response.getWriter();
+              
+             out.println("<script>alert('회원입니다');</script>");
+              
+             out.flush();
+            
+            mav.setViewName("Authentication/login"); //로그인폼 화면 
+            
+         }else{
+            
+            //
+            member.setMPw(enc.encode(member.getMPw()));
+            if(this.insMember(member)) {
+               response.setContentType("text/html; charset=UTF-8");
+                
+                PrintWriter out = response.getWriter();
+                 
+                out.println("<script>alert('회원가입 축하합니다');</script>");
+                 
+                out.flush();
+                tran.commit(status);  
+                mav.setViewName("Authentication/login");// 회원가입되면이쪽으로 
 
-             mav.setViewName("Authentication/login");//회원가입시 이동
-             
-             tran.commit(status);
-             
-          }
-          
-          return mav;  
-       }
+            }
+            
+         } 
+         
+         return mav;         
+      }
+   
     
    
 

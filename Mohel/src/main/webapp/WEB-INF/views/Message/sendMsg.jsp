@@ -45,84 +45,84 @@
                 <textarea id="sendMsg-contents" name="sendMsg-contents" cols="139" rows="25"></textarea>            
             </div>
             <div class="mypage__bottom">
-                <button type="button" class="mypage__btn" onclick="sendMsg()">보내기</button>
+                <button type="button" class="mypage__btn" id="sendMessage">보내기</button>
             </div>
         </form>
     </section>
 </body>
 <script>
 function init(){
-	let msg = JSON.parse('${dataList}');
-	
-	if(!msg){
-		haveMsgList();
-	}else if('${mId}'!=null){
-		noMsgList();
-	}
-
-}
-function haveMsgList(){
-	
-	let sender = msg[0].msSender;
-	
-	$(document).ready(function() {
-        $('#sendMsg-recipient').val(sender);
-    });		
-	
- let comment = " ";
- comment +="<p><br></p>";
- comment +="\n-----------------------original message--------------------------------";
- comment +="\n From : "+ msg[0].msSender;
- comment +="\n To : "+ msg[0].msRecipient;
- comment +="\n Sent : "+ msg[0].msDate;
- comment +="\n Subject : "+ msg[0].msTitle;
- comment +="\n\n"+ msg[0].msComment;
- 
- $("#sendMsg-contents").append(comment);
- 
-}
-function noMsgList(){
-	let sender = '${mId}';
-	$(document).ready(function() {
-        $('#sendMsg-recipient').val(sender);  
-	 });	
-}
-function sendMsg(){
-	
-	if(JSON.parse('${dataList}')!=null){
-		let msg = JSON.parse('${dataList}');
-		
-		let msSender = msg[0].msRecipient;
-		let msRecipient = $('#sendMsg-recipient').val();
-		let msTitle = $('#sendMsg-title').val();
-		let msComment = $('#sendMsg-contents').val();
-		
-		let form = document.createElement("form");
-		form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
-		form.method="POST";
-		document.body.appendChild(form);
-		form.submit();
-				
-		let con = alert("메세지 전송이 완료되었습니다.");	
-	}else if('${mId}'!=null){
-		
-		let msSender = '${mId}';
-		let msRecipient = $('#sendMsg-recipient').val();
-		let msTitle = $('#sendMsg-title').val();
-		let msComment = $('#sendMsg-contents').val();
-		
-		let form = document.createElement("form");
-		form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
-		form.method="POST";
-		document.body.appendChild(form);
-		form.submit();
-				
-		let con = alert("메세지 전송이 완료되었습니다.");	
+	let msg = '${dataList}';
+	if(msg){
+		msg=JSON.parse('${dataList}');
+	}else{
+		msg="";
 	}
 	
+	if(msg){
+		let sender = msg[0].msSender;
+		
+		$(document).ready(function() {
+	        $('#sendMsg-recipient').val(sender);
+	    });		
+		
+	 let comment = " ";
+	 comment +="<p><br></p>";
+	 comment +="\n-----------------------original message--------------------------------";
+	 comment +="\n From : "+ msg[0].msSender;
+	 comment +="\n To : "+ msg[0].msRecipient;
+	 comment +="\n Sent : "+ msg[0].msDate;
+	 comment +="\n Subject : "+ msg[0].msTitle;
+	 comment +="\n\n"+ msg[0].msComment;
+	 
+	 $("#sendMsg-contents").append(comment);
+
+	}else if('${mId}'!=null){
+		let sender = '${mId}';
+			
+	}
+	 $(function() {
+			$('#sendMessage').click(function(){
+
+				let msg = '${dataList}';
+				if(msg){
+					msg=JSON.parse('${dataList}');
+				}else{
+					msg="";
+				}
+				
+				if(msg){
+					
+					let msSender = msg[0].msRecipient;
+					let msRecipient = $('#sendMsg-recipient').val();
+					let msTitle = $('#sendMsg-title').val();
+					let msComment = $('#sendMsg-contents').val();
+					
+					let form = document.createElement("form");
+					form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
+					form.method="POST";
+					document.body.appendChild(form);
+					form.submit();
+							
+					let con = alert("메세지 전송이 완료되었습니다.");	
+				}else if('${mId}'!=null){
+					let msSender = '${mId}';
+					let msRecipient = $('#sendMsg-recipient').val();
+					let msTitle = $('#sendMsg-title').val();
+					let msComment = $('#sendMsg-contents').val();
+					
+					let form = document.createElement("form");
+					form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
+					form.method="POST";
+					document.body.appendChild(form);
+					form.submit();
+							
+					let con = alert("메세지 전송이 완료되었습니다.");	
+				}
+			});
+	});	
 	
 
 }
-
 </script>
 </html>

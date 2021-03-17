@@ -15,6 +15,7 @@ import spring.bao.beans.MemberBean;
 import com.google.gson.Gson;
 
 import spring.bao.mapper.ProfileIf;
+import spring.bao.utils.ProjectUtils;
 
 @Service
 public class Profiles {
@@ -30,8 +31,10 @@ public class Profiles {
 	private PlatformTransactionManager tran;
 	@Autowired
 	private Gson gson;
+	@Autowired
+	private ProjectUtils pu;
 
-	public ModelAndView entrance(MemberBean memberbean) {
+	public ModelAndView entrance(MemberBean memberbean) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -97,32 +100,35 @@ public class Profiles {
 
 	}
 
-	private ModelAndView myProfileCtl(MemberBean memberbean) {
-		
-		ModelAndView mav = new ModelAndView();
-		memberbean.setMId("PPP");
+	private ModelAndView myProfileCtl(MemberBean memberbean) throws Exception {
+	      
+	      ModelAndView mav = new ModelAndView();
+	      //memberbean.setMId((String)pu.getAttribute("mId"));
+	      //System.out.println(memberbean.getMId());
+	      
 
-		if(this.isRgNameCheck(memberbean)) {
-			String json = gson.toJson(this.getProfile(memberbean));
-			mav.addObject("getProfile", json);
-			mav.setViewName("Profile/profile");
-		}else {
-		String json = gson.toJson(this.getProfile(memberbean));
-		mav.addObject("getProfile", json);
-		mav.setViewName("Profile/profile");
 
-		// if(this.isSession) {
-//			this.getMyProfile();
-//		}else {
-//			//로그인창 이동  
-//		}
-	
-		
-		}
-		
-		return mav;
+	      if(pu.getAttribute("mId") != null) {
+	         memberbean.setMId((String)pu.getAttribute("mId"));
+	         if(this.isRgNameCheck(memberbean)) {
+	            String json = gson.toJson(this.getProfile(memberbean));
+	            mav.addObject("getProfile", json);
+	            mav.setViewName("Profile/profile");
+	         }else {
+	         String json = gson.toJson(this.getProfile(memberbean));
+	         mav.addObject("getProfile", json);
+	         mav.setViewName("Profile/profile");
+	         
+	         }
+	      } else {
+	         mav.setViewName("Authentication/login");
+	      }
+	   
+	      
+	      
+	      return mav;
 
-	}
+	   }
 
 	private boolean convertToBoolean(int data) {
 		return data == 1 ? true : false;

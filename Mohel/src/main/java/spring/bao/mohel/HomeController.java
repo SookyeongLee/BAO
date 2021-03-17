@@ -92,7 +92,7 @@ public class HomeController {
 
 
 	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile","/ClickProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
-	public ModelAndView Profile(@ModelAttribute MemberBean memberBean) {
+	public ModelAndView Profile(@ModelAttribute MemberBean memberBean) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav = pro.entrance(memberBean);
 		
@@ -100,9 +100,11 @@ public class HomeController {
 	}
 	@RequestMapping(value = { "/Detail", "/WaitingHelper","/WaitingWisher", "/IngHelper","/IngWisher", "/EndHelper","/EndWisher", "/Search", "/Filter" }, method = {
 	         RequestMethod.GET, RequestMethod.POST })
-	   public ModelAndView Deal(@ModelAttribute RequestBean reqBean) throws UnsupportedEncodingException {
+	   public ModelAndView Deal(@ModelAttribute RequestBean requestBean, MemberBean memberbean) throws Exception {
 	      ModelAndView mav = new ModelAndView();
-	      mav = deal.entrance(reqBean);
+	      requestBean.setSCode(request.getRequestURI().substring(1));
+
+	      mav = deal.entrance(requestBean, memberbean);
 	      return mav;
 	   }
 
@@ -177,18 +179,17 @@ public class HomeController {
 		
 		return mav;
 	}
-
 	@RequestMapping(value = { "/PriceDetail", "/RegisterBid", "/Accept", "/Reject" }, method = { RequestMethod.GET,RequestMethod.POST })
-	public ModelAndView Bid(@ModelAttribute BidBean bidBean) {
-		ModelAndView mav = new ModelAndView();
+	   public ModelAndView Bid(@ModelAttribute MemberBean memberbean, RequestBean requestBean) throws IOException {
+	      ModelAndView mav = new ModelAndView();
+	      requestBean.setSCode(request.getRequestURI().substring(1));
+	      mav = bid.entrance(memberbean, requestBean);
 
-		mav = bid.entrance(bidBean);
-
-		return mav;
-	}
+	      return mav;
+	   }
 
 	@RequestMapping(value = { "/RecBox", "/Title", "/SendBox","/MsgForm","/SendMsg","MsgReplyForm"}, method = {RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Messages(@ModelAttribute MessageBean messageBean) {
+	public ModelAndView Messages(@ModelAttribute MessageBean messageBean) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		mav = msg.entrance(messageBean);

@@ -18,4 +18,5 @@ public class MessageBean {
 	private String mDivision;
 	private String mRcCode;
 	private String mRcName;
+	private String mId;
 }

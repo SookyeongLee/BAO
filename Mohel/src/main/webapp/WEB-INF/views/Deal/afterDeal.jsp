@@ -24,9 +24,8 @@
         <h2 class="mypage__title"><div id="rqTitle"></div></h2>
         <!-- Request -->
         
-        <div class="deal__container">
-            <div class="deal__img">
-                <img src="/resources/imgs/common/1000.jpg" class="deal-img">
+        <div class="deal__container">   
+               <div id="rqImage">
             </div>
             <div class="deal__info__container">
                 <table class="deal__info"> 
@@ -58,60 +57,45 @@
 
    <script>
     function list(){
-   	 
- 	let json = JSON.parse('${detailAd}'); //제이슨 값수정 
- 	
- 	
- 	
- 	
-	let rqTitle = json[0].rqTitle;
- 	
- 	
- 	$('#rqTitle').append(rqTitle);
- 	
+       
+    let json = JSON.parse('${detailAd}'); //제이슨 값수정 
+    
+   let rqTitle = json[0].rqTitle;   
+    $('#rqTitle').append(rqTitle);
+    
 //------------------------------------------------------------------------------
     let rqComment = json[0].rqComment;
-    
-    
- 	$('#rqComment').append(rqComment);
-	
+    $('#rqComment').append(rqComment);
+   
 //------------------------------------------------------------------------------
-	let rqPeriod = json[0].rqPeriod;
-    
-    
- 	$('#rqPeriod').append(rqPeriod);
+   let rqPeriod = json[0].rqPeriod;
+    $('#rqPeriod').append(rqPeriod);
 
 //------------------------------------------------------------------------------
-	let rqRcName = json[0].rqRcName;
-	
-	
- 	$('#rqRcName').append(rqRcName);
-	
- 	let rqSubName = json[0].rqSubName;
- 	
- 	
- 	$('#rqSubName').append(rqSubName);
+   let rqRcName = json[0].rqRcName;
+    $('#rqRcName').append(rqRcName);
+   
+    let rqSubName = json[0].rqSubName;
+    $('#rqSubName').append(rqSubName);
     
- 	let rqCode = json[0].rqCode;
- 	$('#rqCode').val(rqCode);
- 	
- 	let rqId = json[0].rqId;
- 	$('#rqId').val(rqId);
- 	
- 	
- 	let rqSysDate = json[0].rqSysDate;
- 	$('#rqSysDate').append(rqSysDate);
+    let rqCode = json[0].rqCode;
+    $('#rqCode').val(rqCode);
     
+    let rqId = json[0].rqId;
+    $('#rqId').val(rqId);
+    
+    let rqSysDate = json[0].rqSimpleDate;
+    $('#rqSysDate').append(rqSysDate);    
    //아래부분 종식코드 추가 
-    let rqImage=" ";
+    let rqImage="";
     rqImage += "<img class='deal__img' src='../../resources/imgs/common/"+json[0].rqImage+"'>"
     $('#rqImage').append(rqImage);
     }
    
 
-    	var rqCode = document.getElementsByName("rqCode")[0];
-    	var rqId = document.getElementsByName("rqId")[0];
-    	
+       var rqCode = document.getElementsByName("rqCode")[0];
+       var rqId = document.getElementsByName("rqId")[0];
+       
     
 </script>
 </html>

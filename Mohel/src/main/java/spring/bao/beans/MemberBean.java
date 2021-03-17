@@ -22,4 +22,5 @@ public class MemberBean {
 	private String mRcName;
 	private String mRcCode;
 	private String mPwC;
+	private String alMmid;
 }

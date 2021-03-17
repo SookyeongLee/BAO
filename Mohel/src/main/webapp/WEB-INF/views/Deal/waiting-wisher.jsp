@@ -93,6 +93,29 @@ insertTr += "</li>";
 $("#wWisherList").append(insertTr)
 }
 }
+function DetailClick(value){
+	   let rqCode = value;
+	    let form = document.createElement("form");
+	    
+	    form.action = "Detail";
+	    form.method = "Post";
+	    form.target = "_black";
+	    
+	    let input = document.createElement("input");
+	          input.type = "hidden";
+	          input.name = "rqCode";
+	          input.value = rqCode;
+	          form.appendChild(input);
+	          
+	    let input2 = document.createElement("input");
+	         input2.type = "hidden";
+	         input2.name = "rqDetailSelect";
+	         input2.value = "bw";
+	         form.appendChild(input2); 
+	    
+	    document.body.appendChild(form);
+	    form.submit();
+	 }
 
 </script>
 </html>
