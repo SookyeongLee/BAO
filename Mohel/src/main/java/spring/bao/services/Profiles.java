@@ -82,14 +82,14 @@ public class Profiles {
 	private ModelAndView myProfileCtl(MemberBean memberbean) {
 		
 		ModelAndView mav = new ModelAndView();
-		if(this.isRgNameCheck(memberbean)) {
+		System.out.println(memberbean.getMId());
+//			this.isRgNameCheck(memberbean);
 			String json = gson.toJson(this.getProfile(memberbean));
+			System.out.println("getProfile 매퍼 다녀옴 ");
 			mav.addObject("getProfile", json);
 			mav.setViewName("Profile/profile");
-		}else {
-		String json = gson.toJson(this.getProfile(memberbean));
-		mav.addObject("getProfile", json);
-		mav.setViewName("Profile/profile");
+		
+				return mav;
 
 		// if(this.isSession) {
 //			this.getMyProfile();
@@ -97,9 +97,8 @@ public class Profiles {
 //			//로그인창 이동  
 //		}
 		
-		}
 		
-		return mav;
+	
 
 	}
 

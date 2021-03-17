@@ -1,11 +1,11 @@
 package spring.bao.beans;
-
 import lombok.Data;
-
 @Data
 public class RequestBean {
+	private String sCode;
 	private String rqCode;
 	private String rqId;
+	private String rcName;
 	private String rqTitle;
 	private String rqComment;
 	private String rqFilterCode;
@@ -13,9 +13,11 @@ public class RequestBean {
 	private String rqImage;
 	private String rqSubCode;
 	private String rqSubName;
-	private String rqDeadLine;
+	private String rqPeriod;
 	private String rqDate;
 	private String rqStatus;
-	private String rdCode;
-	private String rdComment;
+	private String rqRcCode;	
+//	private String img;
+	private String rqSysDate;
+	private String rqRcName;
 }

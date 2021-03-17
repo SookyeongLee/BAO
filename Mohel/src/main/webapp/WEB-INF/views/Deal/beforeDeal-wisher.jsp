@@ -12,8 +12,14 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+li{
+ list-style:none;
+}
+</style>
 </head>
-<body>
+<body onLoad ="init()">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__top">
@@ -71,8 +77,11 @@
             </div>
         </div>
         <!-- Bidding -->
-        <table class="bidding"> 
-            <caption class="bidding__title">입찰기록내역</caption>
+        <table class="bidding" id="best"> 
+        
+            <caption class="bidding__title">입찰기록내역</caption> 
+            <button type="button" id ="rejectMsg"  onClick = "rejectMsg()">모든 입찰 거절하기</button>
+          
             <colgroup>
                 <col style="width: 45%;">
                 <col style="width: 35%;">
@@ -85,84 +94,180 @@
                     <th class="bidding__head">낙찰</th>
                 </tr>
             </thead>
-            <tbody>                
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id">soo</button></td>
-                    <td class="bidding__data right">13000원</td>
-                    <td class="bidding__data"><button type="button" class="bidding__data__choice">선택</button></td>
-                </tr>
-            </tbody>                      
+                             <!-- <section id="best"></section> -->
         </table>
+      		     
+                 <input type = "hidden" name = "biMmHelper"  id ="alMmid"/>
+                 <input type = "hidden" name = "wiRqCode"  id ="wiRqCode"/>
+                 <input type = "hidden" name = "rqCode"  id ="rqCode"/> 
+				<input type="hidden" name="rqId" id="rqId"/>  
+				
+				   
+						
+               
+               
     </section>   
 </body>
+
+<script>
+
+function init(){
+	
+	let reqjson = JSON.parse('${getReq}'); 
+	
+	let rqCode1 = reqjson[0].rqCode;
+	$('#rqCode').val(rqCode1); 
+	
+	let rqCode2 = reqjson[0].rqCode;
+	$('#wiRqCode').val(rqCode2);
+	
+	
+	alert(rqCode1);
+	
+	alert(rqCode2 + "wiRqCode");                       
+	
+	alert('${getReq}');				
+    
+	
+	
+		
+   let rqMmid  = JSON.parse('${reqMmid}');      
+   let rqId = rqMmid[0].rqId; 
+	alert(rqId + "요청글 올린사람"); 
+   $('#rqId').val(rqId); //  히든 id에 값넣어주는애    
+	  
+    		 
+    
+    var wiBidInfo = JSON.parse('${bidList}');  
+   alert('${bidList}');
+    		
+    		
+    		
+	    
+	
+	
+    
+	   for(let i=0; i< wiBidInfo.length; i++){	      
+		   var biMmHelperView = wiBidInfo[i].biMmHelperView;
+		   var biPrice = wiBidInfo[i].biPrice;
+		   
+		   let insertTr= " ";
+	      insertTr += "<tr>"
+	    	  insertTr += "<td class='bidding__data right'><button type='button' class='bidding__data__id' onClick = 'prClick(\""+biMmHelperView+"\")'>"+wiBidInfo[i].biMmHelperView+"</button></td>"
+	    	 																																	
+	    	  insertTr += "<td class='bidding__data right'><div name='wiPrice'>"+wiBidInfo[i].biPrice+"원</div></td>"
+	    	  insertTr += "<td class='bidding__data'><button type='button' class='bidding__data__choice'  onClick='accept("+biPrice+",\""+biMmHelperView+"\");' >선택</td>"
+	    	  insertTr +=  "</tr>"
+	
+	    	  
+	      $("#best").append(insertTr);
+
+	      
+	   }
+}
+
+
+
+
+
+
+//포문을 없애고 1  2 3 4 5 파라미터를 넣고 액셉트 괄호안에 
+// 액셉트  파라미터 받고 초이스에서 
+
+function accept(obj , onj){
+	
+		let wiRqCode = document.getElementsByName("wiRqCode")[0]; // 이거 rqcode 가져오는거고
+// 		let rqCode = document.getElementsByName("rqCode")[0];
+		let rqId = document.getElementsByName("rqId")[0]; // 
+		
+				
+		
+ 
+		
+		
+		let biPrice = document.createElement("input");
+		biPrice.type = "hidden";
+		biPrice.name = "wiPrice";
+		biPrice.value = obj;
+		
+	
+		let wiHelper = document.createElement("input");
+		wiHelper.type = "hidden";
+		wiHelper.name = "wiHelper"; 
+		wiHelper.value = onj;
+		
+// 		alert(wiRqCode.value);
+// 		alert(rqCode.value + "rqCode");
+// 		alert(input.value);
+// 		alert(input2.value + "낙찰자");
+		
+
+		var a = confirm("정말로 낙찰 하시겠습니까?");
+		
+		if(a == true){
+			alert("선택하신 HELPER로 낙찰 하셨습니다.");
+		let form = document.createElement("form");
+		form.action = "Accept";
+		form.method = "post";  
+		
+			 form.appendChild(wiRqCode);
+			 form.appendChild(rqCode);
+			 form.appendChild(wiHelper);
+			 form.appendChild(biPrice);
+			 form.appendChild(rqId);
+			document.body.appendChild(form);
+			form.submit();
+			}else {
+				return false;
+			}
+		
+}		
+		 
+		
+		
+		
+
+
+function prClick(obj){
+	
+	
+	alert(obj);//
+	
+	let input  = document.createElement("input");
+	input.type = "hidden";
+	input.name = "mId";
+	input.value = obj;
+	
+	let form = document.createElement("form");
+	form.action = "MyProfile";
+	form.method = "post";
+	form.appendChild(input);
+	document.body.appendChild(form);
+	form.submit();
+	
+}
+
+
+	
+	 
+
+function  rejectMsg(){
+	
+	let rqId = document.getElementsByName("rqId")[0]; // 	
+	let rqCode = document.getElementsByName("rqCode")[0];
+	alert(rqId.value+rqCode.value); 
+	
+	let form = document.createElement("form");
+	form.action = "Reject";
+	form.method = "post";
+	form.appendChild(rqId);
+	form.appendChild(rqCode);
+	document.body.appendChild(form);
+	form.submit();
+	
+}
+
+	
+</script>
+
 </html>

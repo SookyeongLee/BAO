@@ -109,10 +109,9 @@
             </div>
         </div>
         <input type = "hidden" name = "biRqCode" id ="rqCodez" />
-        <input type = "hidden" name = "biMmHelperView"  id ="biMmHelperz"/>
         <input type = "hidden" name = "biMmHelper"  id ="alMmid"/>
         <!-- Bidding -->
-        <table class="bidding"> 
+        <table class="bidding" id ="best"> 
             <caption class="bidding__title">입찰기록내역</caption>
             <colgroup>
                 <col style="width: 60%;">
@@ -125,104 +124,34 @@
                     
                 </tr>
             </thead>
-            <tbody>                
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView" id="biMmHelperView"></div></button></td>
-                    <td class="bidding__data"><div name = "biPricez" ></div>원	</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td> 
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td> 
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td> 
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td> 
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td> 
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-                <tr>
-                    <td class="bidding__data right"><button type="button" class="bidding__data__id"><div name ="biMmHelperView"></button></td>
-                    <td class="bidding__data"><div name = "biPricez">원</td>
-                </tr>
-            </tbody>                      
+                           
         </table>        
     </section> 
 </body>
 <script>
-
+ 
 	function init(){
 			
-		let json = JSON.parse('${getReq}');
-		let json2 = JSON.parse('${getReq2}');
+		let json = JSON.parse('${getReq}');   //rqcode
+		let json2 = JSON.parse('${getReq2}');  //al_mmid  == helper 
 		
 		alert('${getReq}');
 		alert('${getReq2}');
 		
-		//let json = JSON.Stringify({rqCode :null , y: 7942}));
-		
-// 		json.isNull("rqCode");﻿ 
-// 		json.isNull("biMmHelper");﻿ 
-
 		let rqCode1 = json[0].rqCode;   //제이슨에서 넘어온 rqCode 
-	
-		 $("#rqCodez").val(rqCode1);
-// 		 let rq = $("#rqCodez").val();
-
-		  
-		
-// 		let helper = $('#biMmHelperz').val();
+		$("#rqCodez").val(rqCode1);
+		 let rq = $("#rqCodez").val();
+		let helper = $('#biMmHelperz').val();
 		 
 		   
-			let alMmid = json2[0].alMmid;   //제이슨에서 넘어온 almmid
-			 $("#alMmid").val(alMmid);	
+		let alMmid = json2[0].alMmid;   //제이슨에서 넘어온 almmid
+		$("#alMmid").val(alMmid);	
 			
 			
 		
 		let bidInfojson = JSON.parse('${bidList}');
-		   let bidInfobiMmHelper = bidInfojson[0].biMmHelperView;
-		   let bidInfobiPrice = bidInfojson[0].biPrice;
+		let bidInfobiMmHelper = bidInfojson[0].biMmHelperView;
+		let bidInfobiPrice = bidInfojson[0].biPrice;
 		   
 		   alert('${bidList}');
 		   
@@ -234,33 +163,46 @@
 // 			alert(bidInfobiMmHelper);
 // 			alert(bidInfobiPrice);	
 			
+			 
+		   for(let i=0; i< bidInfojson.length; i++){	      
+			   let biMmHelperView = bidInfojson[i].biMmHelperView;
+			   let biPrice = bidInfojson[i].biPrice;
+			   
+			   let insertTr= " ";
+		      insertTr += "<tr>"
+		    	  insertTr += "<td class='bidding__data right'><button type='button' class='bidding__data__id' onClick = 'prClick(\""+biMmHelperView+"\")'>"+bidInfojson[i].biMmHelperView+"</button></td>"
+		    	  insertTr += "<td class='bidding__data right'><div name='wiPrice'>"+bidInfojson[i].biPrice+"원</div>	</td>"
+		    	  insertTr +=  "</tr>"
+		      
+		
+		    	  
+		      $("#best").append(insertTr);
+
+		      
+		   }
+		
 			
 			 
-			 for(i = 0 ; i < 14; i++){				 
-				 let bidInfoPrice = document.getElementsByName("biPricez")[i]; 
-				 let biPricez = document.createElement('Div');              
-				 biPricez.textContent = bidInfojson[i].biPrice;  
-				 bidInfoPrice.appendChild(biPricez)
-			 }
-		
-			 
-			 
-			 for(i = 1 ; i < 15; i++){		
-				
-			 let bidInfoHelper = document.getElementsByName("biMmHelperView")[i]; 
-			 let biMmHelperz = document.createElement('Div');              
-			 biMmHelperz.textContent = bidInfojson[2].biMmHelperView;  
-			 bidInfoHelper.appendChild(biMmHelperz)
-			 
-			}
-			 
-// 		    let rqCode = document.getElementsByName("rqCode")[0];
-// 		    let biMmHelper = document.getElementsByName("biMmHelper")[0];
-// 		    let biPrice = document.getElementsByName("biPrice")[0];
-		
-		  
-		 
 	}
+	
+	function prClick(obj){
+		
+		
+		let input  = document.createElement("input");
+		input.type = "hidden";
+		input.name = "mId";
+		input.value = obj;
+		
+		
+		let form = document.createElement("form");
+		form.action = "MyProfile";
+		form.method = "post";
+		form.appendChild(input);
+		document.body.appendChild(form);
+		form.submit();
+		
+	}
+	
 
 	
 //val 안에 밸류  input 여기말하느거임 여기 ><  append 사이 ex div>여기말하는거임여기 append <
@@ -268,9 +210,6 @@
 	
 	
 function bid(){
-	
-	
-	
 	
   	let rqCode = document.getElementsByName("biRqCode")[0];
     let biMmHelper = document.getElementsByName("biMmHelper")[0];

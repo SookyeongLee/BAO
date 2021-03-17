@@ -26,7 +26,7 @@ public class RequestDeal {
 			break;
 		case "ModifyForm":
 			this.modifyFormCtl();
-			break;
+			break;  
 		case "Modify":
 			this.modifyCtl();
 			break; 

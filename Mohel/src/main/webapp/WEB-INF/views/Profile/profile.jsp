@@ -88,7 +88,7 @@ function init(){
 	
 	let json = JSON.parse('${getProfile}');
 	
-    
+
 
     let proInfomId = document.getElementById("mId"); 
     let mId = document.createElement('Div');              

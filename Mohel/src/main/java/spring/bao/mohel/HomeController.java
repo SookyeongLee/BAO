@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import spring.bao.beans.BidBean;
 import spring.bao.beans.MemberBean;
+import spring.bao.beans.MessageBean;
 import spring.bao.beans.RequestBean;
+import spring.bao.beans.wiPriceBean;
 import spring.bao.services.Authentication;
 import spring.bao.services.Bid;
 import spring.bao.services.Deal;
@@ -84,8 +86,6 @@ public class HomeController {
 	public ModelAndView Profile(@ModelAttribute MemberBean memberbean) {
 		ModelAndView mav = new ModelAndView();
 		
-		System.out.println(" 컨트롤러 진입");
-		memberbean.setMId("PPP");
 		
 		memberbean.setSCode(request.getRequestURI().substring(1));
 		mav = pro.entrance(memberbean);
@@ -130,14 +130,14 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject"},
+	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject" ,"/goWisher"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Bid(@ModelAttribute BidBean bidbean , MemberBean memberbean) {
+	public ModelAndView Bid(@ModelAttribute BidBean bidbean , MemberBean memberbean , MessageBean message) {
 		ModelAndView mav = new ModelAndView();
 		
 		bidbean.setBidScode(request.getRequestURI().substring(1));
 		
-		mav = bid.entrance(bidbean, memberbean);
+		mav = bid.entrance(bidbean, memberbean , message);
 		//System.out.println(mav.getModel().get("insBi"));
 		return mav;
 	}

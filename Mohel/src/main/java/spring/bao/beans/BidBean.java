@@ -10,16 +10,22 @@ public class BidBean {
 	private int biPrice;
 	private String biSysdate;
 	private String biComment;
-	private String winHelper;
-	private int winPrice;
+	private String wiHelper;
 	private String bidScode;
 	private String alStCode;
+	private String wiPrice;
 	
 	
-	//추가
+	//REQUEST
 	private String rqCode;
 	private String rqId;
 	private String mId;
 	private String alMmid;
 	private String biMmHelperView;
+	private String wiRqCode;
+	private String rqStcode;
+	private String choice;
+	private String prWiHelper;
+	private String biStCode;
+	
 }
