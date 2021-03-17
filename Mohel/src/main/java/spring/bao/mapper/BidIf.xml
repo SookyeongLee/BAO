@@ -128,7 +128,7 @@
 <insert id = "insRejectMsg">
  <![CDATA[
  INSERT INTO MS(MS_MMRECIPIENT,MS_MMSENDER,MS_TITLE,MS_COMMENT,MS_SYSDATE,MS_STCODE) 
-VALUES(#{biMmHelper},#{rqId},'유찰되었습니다.','유찰 되셨습니다 안타깝습니다 다음 기회에 또 입찰 부탁 드립니다. 제발 테스트 되게 해주세요 ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ',SYSDATE,'N')
+VALUES(#{biMmHelper},#{rqId},'유찰되었습니다.','유찰 되셨습니다 안타깝습니다 다음 기회에 또 입찰 부탁 드립니다. ',SYSDATE,'N')
  ]]>
  </insert> 			 
  

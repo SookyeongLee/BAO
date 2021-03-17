@@ -147,7 +147,10 @@ function init(){
 	
 	
     
-	   for(let i=0; i< wiBidInfo.length; i++){	      
+	   for( i=0; i<15; i++){	      
+				
+			   
+			   
 		   var biMmHelperView = wiBidInfo[i].biMmHelperView;
 		   var biPrice = wiBidInfo[i].biPrice;
 		   
@@ -164,6 +167,7 @@ function init(){
 
 	      
 	   }
+	
 }
 
 

@@ -92,7 +92,7 @@ public class Bid {
 			tran.rollback(status);
 			e.printStackTrace();
 		}
-		mav.setViewName("Deal/beforeDeal-helper");
+		mav.setViewName("Deal/reject-after-view");
 		return mav;
 	}
 
