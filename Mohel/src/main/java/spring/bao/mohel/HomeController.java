@@ -111,7 +111,7 @@ public class HomeController {
 
 	@RequestMapping(value = { "/DealForm", "/ReqSend", "/ModifyForm", "/Modify", "/Delete" }, method = {
 			RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView RequestDeal(@ModelAttribute RequestBean requestBean, BidBean bidBean) throws IOException {
+	public ModelAndView RequestDeal(@ModelAttribute RequestBean requestBean, BidBean bidBean) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		mav = rqd.entrance(requestBean, bidBean);

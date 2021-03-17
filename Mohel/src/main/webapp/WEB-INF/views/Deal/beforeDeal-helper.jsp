@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모헬: 모두의 헬퍼 - 역경매</title>
-    <meta name="description" content="dealDetail 진행전 helper 페이지">
+    <meta name="description" content="dealDetail 입찰 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -73,8 +73,8 @@
                                     <input type="text" id="bidding-price" name="biPrice">
                                     <input type="hidden" id="biMmHelper" name="biMmHelper2">
                                 </div>
-                                <div class="bidding-price-btn__container">
-                                    <button type="button" class="bidding-price-btn" onClick = "bid()">신중하게 입찰하기</button>
+                                <div class="submit__box">
+                                    <button type="button" class="submit-btn" onClick = "bid()">신중하게 입찰하기</button>
                                 </div>    
                             </form>
                         </div>

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import spring.bao.mapper.RequestDealIf;
+import spring.bao.utils.ProjectUtils;
 import spring.bao.beans.BidBean;
 import spring.bao.beans.RequestBean;
 
@@ -38,8 +39,10 @@ public class RequestDeal {
 	private HttpServletResponse response;
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private ProjectUtils pu;
 	
-	public ModelAndView entrance(RequestBean requestBean, BidBean bid) throws IOException {
+	public ModelAndView entrance(RequestBean requestBean, BidBean bid) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		switch(request.getRequestURI().substring(1)) {
@@ -268,14 +271,17 @@ public class RequestDeal {
 		return mav;
 	}
 	//거래 등록 페이지 이동
-	private ModelAndView dealFormCtl() {
-		ModelAndView mav = new ModelAndView();
-		
-		
-		mav.setViewName("RequestDeal/request");
-		
-		return mav;
-	}	
+	private ModelAndView dealFormCtl() throws Exception {   
+	      ModelAndView mav = new ModelAndView();
+	      
+	      if(pu.getAttribute("mId") != null) {
+	         mav.setViewName("RequestDeal/request");
+	      } else {
+	         mav.setViewName("Authentication/login");
+	      }
+	      
+	      return mav;
+	   }   
 	private boolean convetToBoolean(int data) {
 		return data == 1 ? true : false;
 	}

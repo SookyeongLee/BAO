@@ -93,7 +93,7 @@ function init(){
 				
 				if(msg){
 					
-					let msSender = msg[0].msRecipient;
+					let msSender = '${mId}';
 					let msRecipient = $('#sendMsg-recipient').val();
 					let msTitle = $('#sendMsg-title').val();
 					let msComment = $('#sendMsg-contents').val();
