@@ -9,7 +9,6 @@
   --color-dark-grey: #4d4d4d;
 
   /* Font size */
-  /* --font-regular: 18px; */
   --font-small: 15px;
   --font-micro: 14px;
 
@@ -19,9 +18,7 @@
   /* Size */
   --spacing-large: 50px;
   --spacing-medium: 30px;
-  /* --spacing-regular: 20px; */
   --spacing-small: 15px;
-  /* --spacing-micro: 4px; */
 }
 
 /* Universal tags */
@@ -117,18 +114,14 @@ a {
   color: var(--color-dark-grey);
   text-align: center;
   font-size: var(--font-micro);
+  font-weight: var(--weight-bold);
   margin: 0;
+  margin-top: 32px;
 }
 .contents__account-link {
   color: var(--color-blue);
   font-weight: var(--weight-bold);
 }
-/* Footer */
-#footer {
-  padding: var(--spacing-small);
-}
-.footer__rights {
-  font-size: var(--font-micro);
-  color: var(--color-grey);
-  margin: 0;
+.contents__account-link:hover {
+  text-decoration: underline;
 }

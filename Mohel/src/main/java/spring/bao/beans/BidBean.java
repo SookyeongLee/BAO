@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class BidBean {
-
 	private String biCode;
 	private String biHelper;
 	private String biPrice;
@@ -12,4 +11,5 @@ public class BidBean {
 	private String biComment;
 	private String winHelper;
 	private String winPrice;
+	private String bidScode;
 }

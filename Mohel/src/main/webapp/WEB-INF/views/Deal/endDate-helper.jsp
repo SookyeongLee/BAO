@@ -6,64 +6,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>모헬: 모두의 헬퍼 - 경매완료</title>
-    <meta name="description" content="경매내역-경매완료-helper 페이지">
+    <title>모헬: 모두의 헬퍼 - 완료</title>
+    <meta name="description" content="거래상태-완료-helper 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
-    <script src="/resources/src/main.js" defer></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="/resources/src/navbar.js" defer></script>
+    <script src="/resources/src/navbar2.js" defer></script>
 </head>
-<body onLoad="eHelperScreen()">
+<body>
+    
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">경매등록</li>                    
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+
     <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item">
-                <button type="button">프로필</button>
-            </li>
-            <li class="mypage__menu__item">
-                <button type="button" class="deal-btn">거래상태</button>
-                <ul class="navbar__list deal-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="waitingClick()">진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="IngClick()">진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn" onClick="endClick()">완료</button></li>
-                </ul>
-            </li>                    
-            <li class="mypage__menu__item">
-                <button type="button" class="message-btn">메시지</button>
-                <ul class="navbar__list message-list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
-                </ul>
-            </li> 
-        </ul>
-    </nav>
-    <!-- waiting-helper -->
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
+    
+       <!-- waiting-helper -->
     <section class="dealList mypage">
-        <h2 class="mypage__title">경매완료</h2>
+        <h2 class="mypage__title">완료</h2>
         <div class="dealList__container">
             <ul class="dealList__account">
                 <li class="dealList__account__member"><button type="button" class="dealList__account__btn" onClick="endHelperClick()">helper</button></li>
@@ -75,12 +37,9 @@
                 
               <ul id="endHelperList" class="list__items"></ul> 
                    
-                     <div class="dealList__list__item dealList__list__item__more">                       
-                        <button type="button" class="dealList__more__btn" onClick="plus()">
-                            <span><i class="fas fa-plus"></i></span>
-                            <span>더보기</span>
-                        </button>                        
-                    </div>  
+                     <div class="dealList__more__button">
+                    <button type="button" class="dealList__more__btn" onClick="plus()">더보기</button>
+                  </div>  
                  
             </div>
         </div>
@@ -88,40 +47,40 @@
 </body>
 <script>
 function endHelperClick(){
-	let form = document.createElement("form");
-	form.action = "EndHelper";
-	form.method = "Post";	
-	
-	document.body.appendChild(form);
-	form.submit();
+   let form = document.createElement("form");
+   form.action = "EndHelper";
+   form.method = "Post";   
+   
+   document.body.appendChild(form);
+   form.submit();
 }
 
 function endWisherClick(){
-	let form = document.createElement("form");
-	form.action = "EndWisher";
-	form.method = "Post";	
-	
-	document.body.appendChild(form);
-	form.submit();
+   let form = document.createElement("form");
+   form.action = "EndWisher";
+   form.method = "Post";   
+   
+   document.body.appendChild(form);
+   form.submit();
 }
 var k = 0;
 
 function plus(){
-	k += 3;
-	eHelperScreen();
+   k += 3;
+   eHelperScreen();
 }
 
 function eHelperScreen(){
 let requestList = JSON.parse('${endHelperList}');
 
 for(let index=(0+k) ; index<(3+k) ; index++){
-	if(index >= requestList.length)break;
-	let rqCode = requestList[index].rqCode;
+   if(index >= requestList.length)break;
 let insertTr = " ";
 
-insertTr +=  "<li class='dealList__list__item' onClick='DetailClick("+ rqCode +")'>"
-insertTr += "<div class='delList__img'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+insertTr +=  "<li class='dealList__list__item'>";
+insertTr += "<div class='delList__img'onClick='DetailClick("+rqCode+")'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
 insertTr += "<ul class='dealList__description'>";
+insertTr += "<li><button type='button' class='dealList-btn dealList-viewReview'>리뷰 보기</button></li>";
 insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
 insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
 insertTr += "</ul>";
@@ -130,28 +89,28 @@ insertTr += "</li>";
 $("#endHelperList").append(insertTr)
 }
 }
-
+//경매 클릭 
 function DetailClick(value){
-	let rqCode = value;
-	let form = document.createElement("form");
-	form.action = "Detail";
-	form.method = "Post";
-	form.target = "_black"
-	
-	let input = document.createElement("input");
-	      input.type = "hidden";
-	      input.name = "rqCode";
-	      input.value = rqCode;
-	      form.appendChild(input);	 
-	      
-    let input2 = document.createElement("input");
-	      input2.type = "hidden";
-	      input2.name = "rqDetailSelect";
-	      input2.value = "ad";
-	      form.appendChild(input2);	      
-	      
-	document.body.appendChild(form);
-	form.submit();
-}
+    let rqCode = value;
+       let form = document.createElement("form");
+       form.action = "Detail";
+       form.method = "Post";
+       form.target = "_black";
+       
+       let input = document.createElement("input");
+             input.type = "hidden";
+             input.name = "rqCode";
+             input.value = rqCode;
+             form.appendChild(input);
+             
+       let input2 = document.createElement("input");
+            input2.type = "hidden";
+            input2.name = "rqDetailSelect";
+            input2.value = "ad";
+            form.appendChild(input2);    
+    
+    document.body.appendChild(form);
+    form.submit();
+ }
 </script>
 </html>

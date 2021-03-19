@@ -9,40 +9,22 @@
     <title>모헬: 모두의 헬퍼 - 메시지 쓰기</title>
     <meta name="description" content="메시지 보내는 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
+    <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="/resources/src/main.js" defer></script>
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/common.css">
+	<script src="/resources/src/navbar.js" defer></script>
+    <script src="/resources/src/navbar2.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onLoad="init()">
+    
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">경매등록</li>                    
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+
     <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item"><a href="#">경매내역</a></li>                    
-            <li class="mypage__menu__item"><a href="#">메시지</a></li> 
-        </ul>
-    </nav> 
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
+    
     <!-- Send Message -->
     <section class="sendMsg mypage">
         <h2 class="mypage__title">메시지 쓰기</h2>
@@ -63,9 +45,84 @@
                 <textarea id="sendMsg-contents" name="sendMsg-contents" cols="139" rows="25"></textarea>            
             </div>
             <div class="mypage__bottom">
-                <button type="button" class="mypage__btn">보내기</button>
+                <button type="button" class="mypage__btn" id="sendMessage">보내기</button>
             </div>
         </form>
     </section>
 </body>
+<script>
+function init(){
+	let msg = '${dataList}';
+	if(msg){
+		msg=JSON.parse('${dataList}');
+	}else{
+		msg="";
+	}
+	
+	if(msg){
+		let sender = msg[0].msSender;
+		
+		$(document).ready(function() {
+	        $('#sendMsg-recipient').val(sender);
+	    });		
+		
+	 let comment = " ";
+	 comment +="<p><br></p>";
+	 comment +="\n-----------------------original message--------------------------------";
+	 comment +="\n From : "+ msg[0].msSender;
+	 comment +="\n To : "+ msg[0].msRecipient;
+	 comment +="\n Sent : "+ msg[0].msDate;
+	 comment +="\n Subject : "+ msg[0].msTitle;
+	 comment +="\n\n"+ msg[0].msComment;
+	 
+	 $("#sendMsg-contents").append(comment);
+
+	}else if('${mId}'!=null){
+		let sender = '${mId}';
+			
+	}
+	 $(function() {
+			$('#sendMessage').click(function(){
+
+				let msg = '${dataList}';
+				if(msg){
+					msg=JSON.parse('${dataList}');
+				}else{
+					msg="";
+				}
+				
+				if(msg){
+					
+					let msSender = '${mId}';
+					let msRecipient = $('#sendMsg-recipient').val();
+					let msTitle = $('#sendMsg-title').val();
+					let msComment = $('#sendMsg-contents').val();
+					
+					let form = document.createElement("form");
+					form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
+					form.method="POST";
+					document.body.appendChild(form);
+					form.submit();
+							
+					let con = alert("메세지 전송이 완료되었습니다.");	
+				}else if('${mId}'!=null){
+					let msSender = '${mId}';
+					let msRecipient = $('#sendMsg-recipient').val();
+					let msTitle = $('#sendMsg-title').val();
+					let msComment = $('#sendMsg-contents').val();
+					
+					let form = document.createElement("form");
+					form.action="SendMsg?msSender="+msSender+"&msRecipient="+msRecipient+"&msTitle="+msTitle+"&msComment="+msComment+"&msDate=&msStatus=";
+					form.method="POST";
+					document.body.appendChild(form);
+					form.submit();
+							
+					let con = alert("메세지 전송이 완료되었습니다.");	
+				}
+			});
+	});	
+	
+
+}
+</script>
 </html>

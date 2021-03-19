@@ -9,54 +9,21 @@
     <title>모헬: 모두의 헬퍼 - 받은 메시지함</title>
     <meta name="description" content="받은 메시지함 페이지">
     <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
+    <link rel="stylesheet" href="/resources/css/common.css">
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="/resources/src/navbar.js" defer></script>
+    <script src="/resources/src/navbar2.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onLoad="init()">
+    
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">경매등록</li>                    
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+
     <!--Mypage Navbar -->
-    <nav id="mypage">
-        <ul class="mypage__menu">
-            <li class="mypage__menu__item"><a href="#">프로필</a></li>
-            <li class="mypage__menu__item navbar-click">
-                <a href="#">경매내역</a>
-                <ul class="navbar__list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">경매진행전</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">경매진행중</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">경매완료</button></li>
-                </ul>
-            </li>                    
-            <li class="mypage__menu__item navbar-click">
-                <a href="#">메시지</a>
-                <ul class="navbar__list">
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">받은메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">보낸메시지함</button></li>
-                    <li class="navbar__list__item"><button type="button" class="navbar__list__btn">메시지쓰기</button></li>
-                </ul>
-            </li> 
-        </ul>
-    </nav>
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
+    
     <!-- Message List -->
     <section class="message mypage">
         <div class="message__container">
@@ -76,97 +43,8 @@
                         <th class="message__head">전송시간</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
-                    <tr>
-                        <td class="message__data"><i class="fas fa-envelope"></i></td>
-                        <td class="message__data pointer">soo</td>
-                        <td class="message__data message__title pointer">시간 조정을 하고 싶습니다.</td>
-                        <td class="message__data">2021-12-24 19:41</td>
-                    </tr>
+                <tbody id="recDiv">
+                   
                 </tbody>                      
             </table>
             <div class="message__move">
@@ -182,5 +60,105 @@
             </div>
         </div>
     </section>
+    
+    <!-- 프로필 클릭 모달 시작 -->
+    <%@ include file="/WEB-INF/views/common/profileClick.jsp" %>
+    <!-- 프로필 클릭 모달 끝 -->
+    
 </body>
+
+<script>
+function init(){
+	let rec = JSON.parse('${recList}');
+	
+	for(let i=0;i<rec.length;i++){
+		
+	if(rec[i].msStatus=="Y"){
+		$( "td" ).css( "color", "#A9A9A9" );
+		/* $( "i" ).css( "color", "#A9A9A9" ); */
+
+	}
+	
+	let insertTr= " ";
+	insertTr += "<tr>";
+	insertTr += "<td class='message__data'><i class='fas fa-envelope'></i></td>";
+	insertTr += "<td class='message__data profile-btn' onClick='showModal("+i+")'>"+ rec[i].msSender +"</td>";
+	insertTr += "<td class='message__data message__title' onClick='msgDetail("+i+")'>"+rec[i].msTitle+"</td>";
+	insertTr += "<td class='message__data'>"+rec[i].msDate+"</td>";
+	insertTr += "</tr>";
+   
+    $("#recDiv").append(insertTr);
+		
+    
+	}
+	
+}
+
+
+//Show modal
+const modal = document.getElementById('modal');
+function showModal(i){
+	let rec = JSON.parse('${recList}');
+	modal.classList.add('show-modal');		
+	    
+		let msSender =rec[i].msSender;
+		$(".modal__content__value1").append(msSender);
+
+		let mEmail=rec[i].mEmail;
+		$(".modal__content__value2").append(mEmail);
+
+		let mRccode=rec[i].mRccode; 
+		$(".modal__content__value3").append(mRccode);
+
+		let mDivision=rec[i].mDivision;
+		$(".modal__content__value4").append(mDivision);
+
+		let mCareer=rec[i].mCareer;
+		$(".modal__content__value5").append(mCareer);
+		
+	}
+
+//Hide modal
+const close = document.getElementById('close');
+close.addEventListener('click', () => {
+    modal.classList.remove('show-modal');
+       
+    $(".modal__content__value1").empty();
+    $(".modal__content__value2").empty();
+    $(".modal__content__value3").empty();
+    $(".modal__content__value4").empty();
+    $(".modal__content__value5").empty();
+    
+});
+
+//Hide modal(모달창 외부 클릭해서 닫기)
+window.addEventListener('click', (e) => {
+    e.target === modal ? 
+			    		modal.classList.remove('show-modal') ||  
+			    		$(".modal__content__value1").empty() && 
+					    $(".modal__content__value2").empty() && 
+					    $(".modal__content__value3").empty() && 
+					    $(".modal__content__value4").empty() && 
+					    $(".modal__content__value5").empty() 
+					    										: false;
+});
+
+
+
+
+function msgDetail(i){
+	//서버전송 
+	let rec = JSON.parse('${recList}');
+	let sendData = "msRecipient="+rec[i].msRecipient+"&msSender="+rec[i].msSender+"&msDate="+rec[i].msDate+"&msTitle="+rec[i].msTitle+"&msComment="+rec[i].msComment+"&msStatus="+rec[i].msStatus;
+	alert(sendData);
+	
+	let form = document.createElement("form");
+	form.action="Title?"+sendData;
+	form.method="POST";
+	document.body.appendChild(form);
+	form.submit();
+	
+}
+
+</script>
 </html>

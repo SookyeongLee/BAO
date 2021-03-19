@@ -12,37 +12,20 @@
     <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common.css">
+    <script src="/resources/src/navbar.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onload="list()">
+
     <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar__top">
-            <div class="navbar__logo">
-                <a href="#"><img class="navbar__logo__img" src="/resources/imgs/common/logo-white.png"></a>
-            </div>
-            <div class="navbar__right">
-                <div class="navbar__search">
-                    <input type="text" name="search" id="search">
-                    <button type="button" class="search__btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <ul class="navbar__menu">
-                    <li class="navbar__menu__item">마이페이지</li>
-                    <li class="navbar__menu__item">역경매등록</li>                    
-                    <li class="navbar__menu__item">로그아웃</li>
-                </ul>
-            </div>
-        </div>        
-    </nav>     
-    
+    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+   
     <section class="deal mypage">
         <h2 class="mypage__title"><div id="rqTitle"></div></h2>
         <!-- Request -->
         
-        <div class="deal__container">
-            <div id="rqImage">
+        <div class="deal__container">   
+               <div id="rqImage">
             </div>
             <div class="deal__info__container">
                 <table class="deal__info"> 
@@ -69,49 +52,50 @@
         </div>
         <input type="hidden" name="rqCode" id="rqCode">
             <input type="hidden" name="rqId" id="rqId">
-            <input type="hidden" name="rqImage" id="rqImage">
     </section>   
 </body>
 
    <script>
     function list(){
-   	 
- 	let json = JSON.parse('${detailAd}');
- 	
-	let rqTitle = json[0].rqTitle;
- 	$('#rqTitle').append(rqTitle);
- 	
+       
+    let json = JSON.parse('${detailAd}'); //제이슨 값수정 
+    
+   let rqTitle = json[0].rqTitle;   
+    $('#rqTitle').append(rqTitle);
+    
 //------------------------------------------------------------------------------
-    let rqComment = json[0].rqComment; 
- 	$('#rqComment').append(rqComment);
-	
+    let rqComment = json[0].rqComment;
+    $('#rqComment').append(rqComment);
+   
 //------------------------------------------------------------------------------
-	let rqPeriod = json[0].rqPeriod;  
- 	$('#rqPeriod').append(rqPeriod);
+   let rqPeriod = json[0].rqPeriod;
+    $('#rqPeriod').append(rqPeriod);
 
 //------------------------------------------------------------------------------
-	let rqRcName = json[0].rqRcName;
- 	$('#rqRcName').append(rqRcName);
-	
- 	let rqSubName = json[0].rqSubName;	
- 	$('#rqSubName').append(rqSubName);
+   let rqRcName = json[0].rqRcName;
+    $('#rqRcName').append(rqRcName);
+   
+    let rqSubName = json[0].rqSubName;
+    $('#rqSubName').append(rqSubName);
     
- 	let rqCode = json[0].rqCode;
- 	$('#rqCode').val(rqCode);
- 	
- 	let rqId = json[0].rqId;
- 	$('#rqId').val(rqId);
- 	
- 	let rqSysDate = json[0].rqSimpleDate;
- 	$('#rqSysDate').append(rqSysDate);
- 	
- 	let rqImage=" ";
- 	rqImage += "<img class='deal__img' src='../../resources/imgs/common/"+json[0].rqImage+"'>"
- 	$('#rqImage').append(rqImage);
-    }	
- 	
-    	var rqCode = document.getElementsByName("rqCode")[0];
-    	var rqId = document.getElementsByName("rqId")[0];
+    let rqCode = json[0].rqCode;
+    $('#rqCode').val(rqCode);
+    
+    let rqId = json[0].rqId;
+    $('#rqId').val(rqId);
+    
+    let rqSysDate = json[0].rqSimpleDate;
+    $('#rqSysDate').append(rqSysDate);    
+   //아래부분 종식코드 추가 
+    let rqImage="";
+    rqImage += "<img class='deal__img' src='../../resources/imgs/common/"+json[0].rqImage+"'>"
+    $('#rqImage').append(rqImage);
+    }
+   
+
+       var rqCode = document.getElementsByName("rqCode")[0];
+       var rqId = document.getElementsByName("rqId")[0];
+       
     
 </script>
 </html>

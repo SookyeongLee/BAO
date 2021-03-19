@@ -6,226 +6,254 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.MvcNamespaceHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import spring.bao.beans.RequestBean;
 import spring.bao.mapper.DealIf;
+import spring.bao.utils.ProjectUtils;
 
 @Service
 public class Deal {
 
-	public Deal() {
-	}
+   public Deal() {
+   }
 
-	@Autowired
-	private DealIf mapper;
-	@Autowired
-	private Gson gson;
+   @Autowired
+   private DealIf mapper;
+   @Autowired
+   private HttpServletRequest request;
+   @Autowired
+   private Gson gson;
+   @Autowired
+   private ProjectUtils pu;
 
-	public ModelAndView entrance(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
+   public ModelAndView entrance(RequestBean requestBean) throws Exception {
+      ModelAndView mav = new ModelAndView();
 
-		switch (reqBean.getACode()) {
+      switch (request.getRequestURI().substring(1)) {
 
-		case "Detail":
-			mav = this.detailCtl(reqBean);
-			break;
-		case "WaitingHelper":
-			mav = this.waitingHelperCtl(reqBean);
-			break;
-		case "WaitingWisher":
-			mav = this.waitingWisherCtl(reqBean);
-			break;
-		case "IngHelper":
-			mav = this.ingHelperCtl(reqBean);
-			break;
-		case "IngWisher":
-			mav = this.ingWisherCtl(reqBean);
-			break;
-		case "EndHelper":
-			mav = this.endHelperCtl(reqBean);
-			break;
-		case "EndWisher": 
-			mav = this.endWisherCtl(reqBean);
-			break;
-		case "Search":
-			mav = this.searchCtl(reqBean);
-			break;
-		case "Filter":
-			mav = this.filterCtl(reqBean);
-			break;
-		}
-		return mav;
-	}
+      case "Detail":
+         mav = this.detailCtl(requestBean);
+         break;
+      case "WaitingHelper":
+         mav = this.waitingHelperCtl(requestBean);
+         break;
+      case "WaitingWisher":
+         mav = this.waitingWisherCtl(requestBean);
+         break;
+      case "IngHelper":
+         mav = this.ingHelperCtl(requestBean);
+         break;
+      case "IngWisher":
+         mav = this.ingWisherCtl(requestBean);
+         break;
+      case "EndHelper":
+         mav = this.endHelperCtl(requestBean);
+         break;
+      case "EndWisher": 
+         mav = this.endWisherCtl(requestBean);
+         break;
+      case "Search":
+         mav = this.searchCtl(requestBean);
+         break;
+      case "Filter":
+         mav = this.filterCtl(requestBean);
+         break;
+      }
+      return mav;
+   }
 
-	private ModelAndView filterCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
-		String json = gson.toJson(this.getFilterList(reqBean));
-		String json2 = gson.toJson(this.getBestFilterList(reqBean));
-		mav.addObject("requestData", json);
-		mav.addObject("requestBestData", json2);
-		mav.setViewName("main");
-		return mav;
-	}
+   private ModelAndView filterCtl(RequestBean requestBean) {
+      ModelAndView mav = new ModelAndView();
+      String json = gson.toJson(this.getFilterList(requestBean));
+      String json2 = gson.toJson(this.getBestFilterList(requestBean));
+      mav.addObject("requestData", json);
+      mav.addObject("requestBestData", json2);
+      mav.setViewName("Authentication/main");
+      return mav;
+   }
+   
+   private ModelAndView searchCtl(RequestBean requestBean) {
+	      ModelAndView mav = new ModelAndView();
 
-	private ArrayList<RequestBean> getBestFilterList(RequestBean reqBean) {
-		return mapper.BestFilterList(reqBean);
-	}
+	      if (requestBean.getRqWord().equals("")) {
+	         String json = gson.toJson(this.getAllSearchList(requestBean));
+	         String json2 = gson.toJson(this.getBestAllSearchList(requestBean));
+	         mav.addObject("searchData", json);
+	         mav.addObject("searchBestData", json2);
+	         mav.setViewName("Authentication/main");
+	      } else {
+	         String json = gson.toJson(this.getSearchList(requestBean));
+	         String json2 = gson.toJson(this.getBestSearchList(requestBean));
+	         mav.addObject("searchData", json);
+	         mav.addObject("searchBestData", json2);
+	         mav.setViewName("Deal/search");
+	      }
+	      return mav;
+	   }
 
-	private ArrayList<RequestBean> getFilterList(RequestBean reqBean) {
-		return mapper.filterList(reqBean);
-	}
+   private ModelAndView endWisherCtl(RequestBean requestBean) throws Exception {
+      ModelAndView mav = new ModelAndView();
+      requestBean.setRqId((String)pu.getAttribute("mId"));
 
-	private ModelAndView searchCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
+      String json = gson.toJson(this.getEndWisherList(requestBean));
+      mav.addObject("endWisherList", json);
+      mav.setViewName("Deal/endDate-wisher");
+      return mav;
+   }
+   
+   private ModelAndView endHelperCtl(RequestBean requestBean) throws Exception {
+	      ModelAndView mav = new ModelAndView();
 
-		if (reqBean.getRqWord().equals("")) {
-			String json = gson.toJson(this.getAllSearchList(reqBean));
-			String json2 = gson.toJson(this.getBestAllSearchList(reqBean));
-			mav.addObject("searchData", json);
-			mav.addObject("searchBestData", json2);
-			mav.setViewName("main");
-		} else {
-			String json = gson.toJson(this.getSearchList(reqBean));
-			String json2 = gson.toJson(this.getBestSearchList(reqBean));
-			mav.addObject("searchData", json);
-			mav.addObject("searchBestData", json2);
-			mav.setViewName("main");
-		}
-		return mav;
-	}
+	      requestBean.setWinHelper((String)pu.getAttribute("mId"));
+	      String json = gson.toJson(this.getEndHelperList(requestBean));
+	      mav.addObject("endHelperList", json);
+	      mav.setViewName("Deal/endDate-helper");
+	      return mav;
+	   }
 
-	private ArrayList<RequestBean> getBestSearchList(RequestBean reqBean) {
-		return mapper.BestSearchList(reqBean);
-	}
+   private ModelAndView ingWisherCtl(RequestBean requestBean) throws Exception {
+	      ModelAndView mav = new ModelAndView();
+	      requestBean.setRqId((String)pu.getAttribute("mId"));
+	      String json = gson.toJson(this.getIngWisherList(requestBean));
+	      mav.addObject("ingWisherList", json);
+	      mav.setViewName("Deal/ing-wisher");
 
-	private ArrayList<RequestBean> getBestAllSearchList(RequestBean reqBean) {
-		return mapper.BestallSearchList(reqBean);
-	}
+	      return mav;
+	   }
+   private ModelAndView ingHelperCtl(RequestBean requestBean) throws Exception {
+	      ModelAndView mav = new ModelAndView();
+	      requestBean.setWinHelper((String)pu.getAttribute("mId"));
+	      String json = gson.toJson(this.getIngHelperList(requestBean));
+	      mav.addObject("ingHelperList", json);
+	      mav.setViewName("Deal/ing-helper");
 
-	private ArrayList<RequestBean> getAllSearchList(RequestBean reqBean) {
-		return mapper.allSearchList(reqBean);
-	}
+	      return mav;
+	   }
+   private ModelAndView waitingWisherCtl(RequestBean requestBean) throws Exception {
+	      ModelAndView mav = new ModelAndView();
+	      requestBean.setRqId((String)pu.getAttribute("mId"));
+	      String json = gson.toJson(this.getWwisherList(requestBean));
+	      mav.addObject("wWisherList", json);
+	      mav.setViewName("Deal/waiting-wisher");
+	      return mav;
+	   }
+   
+   private ModelAndView waitingHelperCtl(RequestBean requestBean) throws Exception {
+	      ModelAndView mav = new ModelAndView();
+	      requestBean.setBiHelper((String)pu.getAttribute("mId"));
+	      System.out.println(requestBean.getBiHelper());
+	      String json = gson.toJson(this.getWhelperList(requestBean));
+	      mav.addObject("wHelperList", json);
+	      mav.setViewName("Deal/waiting-helper");
+	      return mav;
+	   }
 
-	private ArrayList<RequestBean> getSearchList(RequestBean reqBean) {
+   private ModelAndView detailCtl(RequestBean requestBean) throws Exception {
+	      ModelAndView mav = new ModelAndView();
+	      if(pu.getAttribute("mId") == null) {
+	    	  mav.setViewName("Authentication/login");
+	      }else {
+	         if(pu.getAttribute("mId").equals(requestBean.getRqId())) {
+	        	 String jsonz = gson.toJson(this.getDetail(requestBean));
+	        	 mav.addObject("detail", jsonz);
+		        	String bidListz = gson.toJson(this.bidList(requestBean));
+			         mav.addObject("bidList", bidListz);
+			         mav.setViewName("Deal/beforeDeal-wisher");
+		        }else {
+		        	
+	         if(pu.getAttribute("mId") != null) {
+	    	   
+	      if(requestBean.getRqDetailSelect().equals("bh")) {
+	         String json = gson.toJson(this.getDetail(requestBean));         
+	         mav.addObject("detail", json);         
+	         String bidList = gson.toJson(this.bidList(requestBean));
+	         mav.addObject("bidList", bidList);
+	         mav.setViewName("Deal/beforeDeal-helper");
+	        
+	      }else if(requestBean.getRqDetailSelect().equals("bw")){
+	         String json = gson.toJson(this.getDetail(requestBean));
+	         mav.addObject("detail", json);
+	         String bidList = gson.toJson(this.bidList(requestBean));
+	         mav.addObject("bidList", bidList);
+	         mav.setViewName("Deal/beforeDeal-wisher");
+	     
+	      }else if(requestBean.getRqDetailSelect().equals("ad")){
+	         String json = gson.toJson(this.getDetailAD(requestBean));
+	         mav.addObject("detailAd", json);
+	         mav.setViewName("Deal/afterDeal");
+	        }   
+	      } else {
+	    	  mav.setViewName("Authentication/login");
+	      }
+		       }
+	      }
+	      return mav;
+	   
+   }
+   
+   private ArrayList<RequestBean> bidList(RequestBean requestBean) {
+	return mapper.bidList(requestBean);
+}
 
-		return mapper.searchList(reqBean);
-	}
+private ArrayList<RequestBean> getBestFilterList(RequestBean requestBean) {
+      return mapper.BestFilterList(requestBean);
+   }
 
-	private ModelAndView endHelperCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
+   private ArrayList<RequestBean> getFilterList(RequestBean requestBean) {
+      return mapper.filterList(requestBean);
+   }
+   
+   private ArrayList<RequestBean> getBestAllSearchList(RequestBean requestBean) {
+	   return mapper.BestallSearchList(requestBean);
+   }
 
-		reqBean.setWinHelper("JUN");
-		String json = gson.toJson(this.getEndHelperList(reqBean));
-		mav.addObject("endHelperList", json);
-		mav.setViewName("Deal/endDate-helper");
-		return mav;
-	}
+   private ArrayList<RequestBean> getAllSearchList(RequestBean requestBean) {
+      return mapper.allSearchList(requestBean);
+   }
 
-	private ArrayList<RequestBean> getEndHelperList(RequestBean reqBean) {
-		return mapper.getEndHelperList(reqBean);
-	}
+   private ArrayList<RequestBean> getSearchList(RequestBean requestBean) {
+	  return mapper.searchList(requestBean);
+   }
+   
+   private ArrayList<RequestBean> getBestSearchList(RequestBean requestBean) {
+	  return mapper.BestSearchList(requestBean);
+   }
+   
+   private ArrayList<RequestBean> getEndWisherList(RequestBean requestBean) {
+	   return mapper.getEndWisherList(requestBean);
+   }
+   
+   private ArrayList<RequestBean> getEndHelperList(RequestBean requestBean) {
+	    return mapper.getEndHelperList(requestBean);
+   }
 
-	private ModelAndView endWisherCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
-		reqBean.setRqId("JUN");
 
-		String json = gson.toJson(this.getEndWisherList(reqBean));
-		mav.addObject("endWisherList", json);
-		mav.setViewName("Deal/endDate-wisher");
-		return mav;
-	}
+   private ArrayList<RequestBean> getIngWisherList(RequestBean requestBean) {
+      return mapper.getIngWisherList(requestBean);
+   }
 
-	private ArrayList<RequestBean> getEndWisherList(RequestBean reqBean) {
-		return mapper.getEndWisherList(reqBean);
-	}
+   private ArrayList<RequestBean> getIngHelperList(RequestBean requestBean) {
+      return mapper.getIngHelperList(requestBean);
+   }
 
-	private ModelAndView ingHelperCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
-		reqBean.setWinHelper("JUN");
-		String json = gson.toJson(this.getIngHelperList(reqBean));
-		mav.addObject("ingHelperList", json);
-		mav.setViewName("Deal/ing-helper");
+   private ArrayList<RequestBean> getWhelperList(RequestBean requestBean) {
+      return mapper.getWhelperList(requestBean);
+   }
 
-		return mav;
-	}
+   private ArrayList<RequestBean> getWwisherList(RequestBean requestBean) {
+      return mapper.getWwisherList(requestBean);
+   }
 
-	private ModelAndView ingWisherCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
-		reqBean.setRqId("JUN");
-		String json = gson.toJson(this.getIngWisherList(reqBean));
-		mav.addObject("ingWisherList", json);
-		mav.setViewName("Deal/ing-wisher");
-
-		return mav;
-	}
-
-	private ArrayList<RequestBean> getIngWisherList(RequestBean reqBean) {
-		return mapper.getIngWisherList(reqBean);
-	}
-
-	private ArrayList<RequestBean> getIngHelperList(RequestBean reqBean) {
-		return mapper.getIngHelperList(reqBean);
-	}
-
-	private ModelAndView waitingHelperCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
-		reqBean.setBiHelper("JUN");
-		String json = gson.toJson(this.getWhelperList(reqBean));
-		mav.addObject("wHelperList", json);
-		mav.setViewName("Deal/waiting-helper");
-		return mav;
-	}
-
-	private ModelAndView waitingWisherCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
-		reqBean.setRqId("JUN");
-		String json = gson.toJson(this.getWwisherList(reqBean));
-		mav.addObject("wWisherList", json);
-		mav.setViewName("Deal/waiting-wisher");
-		return mav;
-	}
-
-	private ArrayList<RequestBean> getWhelperList(RequestBean reqBean) {
-		return mapper.getWhelperList(reqBean);
-	}
-
-	private ArrayList<RequestBean> getWwisherList(RequestBean reqBean) {
-		return mapper.getWwisherList(reqBean);
-	}
-
-	private ModelAndView detailCtl(RequestBean reqBean) {
-		ModelAndView mav = new ModelAndView();
-		
-		if(reqBean.getRqDetailSelect().equals("bh")) {
-			//reqBean.setRqCode("1000210305090308");
-			String json = gson.toJson(this.getDetail(reqBean));
-			mav.addObject("detail", json);
-			mav.setViewName("Deal/beforeDeal-helper");
-		}else if(reqBean.getRqDetailSelect().equals("bw")){
-			//reqBean.setRqCode("1000210305090308");
-			String json = gson.toJson(this.getDetail(reqBean));
-			mav.addObject("detail", json);
-			mav.setViewName("Deal/beforeDeal-wisher");
-		}else if(reqBean.getRqDetailSelect().equals("ad")){
-			String json = gson.toJson(this.getDetailAD(reqBean));
-			mav.addObject("detailAd", json);
-			mav.setViewName("Deal/afterDeal");
-		}	
-		return mav;
-	}
-
-	private  ArrayList<RequestBean> getDetailAD(RequestBean reqBean) {
-		return mapper.getDetailAD(reqBean);
-	}
-
-	private ArrayList<RequestBean> getDetail(RequestBean reqBean) {
-		return mapper.getDetail(reqBean);
-	}
+  
+   private ArrayList<RequestBean> getDetail(RequestBean requestBean) {
+      return mapper.getDetail(requestBean);
+   }
+   private  ArrayList<RequestBean> getDetailAD(RequestBean requestBean) {
+	   return mapper.getDetailAD(requestBean);
+  }
 
 }

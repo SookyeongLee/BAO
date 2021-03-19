@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-     ${requestData}
+
 </body>
+<script>
+var form = document.createElement("form");
+form.action="Main";
+form.post="post";
+
+document.body.appendChild(form);
+
+form.submit();
+</script>
 </html>
