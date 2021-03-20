@@ -91,7 +91,7 @@ public class HomeController {
 	}
 
 
-	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile","/ClickProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
+	@RequestMapping(value = { "/MyProfile", "/ModifyProfile", "/UpdateProfile" }, method = { RequestMethod.GET,RequestMethod.POST })
 	public ModelAndView Profile(@ModelAttribute MemberBean memberBean) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav = pro.entrance(memberBean);
@@ -119,9 +119,9 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/MovePro","/UpdateSchedule", "/MoveUser", "/AcceptSchedule",
+	@RequestMapping(value = { "/MovePro", "/MoveUser", "/AcceptSchedule",
 			"/RejectSchedule", "/OkClick" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean,MessageBean messageBean) throws IOException {
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean,MessageBean messageBean) throws Exception {
 	
 		ModelAndView mav = new ModelAndView();
 
@@ -129,40 +129,12 @@ public class HomeController {
 
 		return mav;
 	}
-	@RequestMapping(value = { "/InsSchedule"}, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "/InsSchedule","/UpdateSchedule"}, method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView init(@RequestBody List<HashMap<String,Object>> jsondata,ScheduleBean scheduleBean ,MessageBean messageBean) throws IOException {
-		TransactionStatus status=tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
 		
-		scheduleBean.setScCode(jsondata.get(0).get("scCode").toString());
-		scheduleBean.setScHelper(jsondata.get(0).get("scHelper").toString());
-		scheduleBean.setScStatus("S");
-		
-		mav = schedule.entrance(scheduleBean,messageBean);
-
-//		HashMap<String,Object> insDetailSchedule = new HashMap<String,Object>();
-//		insDetailSchedule.put("list", jsondata);
-	
-//			if(convertToBoolean(scMapper.insDetailSchedule(jsondata))) {
-//				System.out.println("sd");
-//				tran.commit(status);
-//				response.setContentType("text/html; charset=UTF-8");
-//				PrintWriter out = response.getWriter();
-//				out.println("<script>alert('스케쥴 등록이 완료되었습니다.')</script>"); 
-//				out.flush();
-//				out.close();
-//			}else {
-//				tran.rollback(status);
-//				response.setContentType("text/html; charset=UTF-8");
-//				PrintWriter out = response.getWriter();
-//				out.println("<script>alert('nothing');</script>"); 
-//				out.flush();
-//				out.close();
-//			
-//			};
-			
-//			mav.setViewName("Authentication/main");
+		mav = schedule.entrance(jsondata,scheduleBean,messageBean);
 		
 		return mav;
 	}

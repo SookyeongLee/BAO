@@ -21,6 +21,7 @@ public class MemberBean {
 	//추가
 	private String mRcName;
 	private String mRcCode;
-	private String mPwC;
+	private String mPwCk;
+	private String newMPw;
 	private String alMmid;
 }

@@ -105,6 +105,7 @@ public class Encryption implements PasswordEncoder{
    public String encode(CharSequence originPassword) {
       return passwordEncoder.encode(originPassword);
    }
+  
 
    @Override
    public boolean matches(CharSequence originPassword, String encodedPassword) {

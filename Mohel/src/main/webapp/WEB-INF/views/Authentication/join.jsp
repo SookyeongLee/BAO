@@ -54,7 +54,7 @@
                     alert("check ok");
                     let form = document.createElement('form');
                     form.action = 'Join';
-                          form.method = 'Post'; 
+                    form.method = 'Post'; 
                            
                     let mId = document.createElement("input");
                     mId.type = "hidden";

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
 <mapper namespace = "spring.bao.mapper.ProfileIf">
- <update id= "updateProfile" >
+
+ 	<update id= "updateProfile" >
 	<![CDATA[
   UPDATE MM SET  
-  		 MM_PW = #{mPwC},
+  		 MM_PW = #{mPw},
 		 MM_EMAIL = #{mEmail},    
 		 MM_DIVISION = #{mDivision},  
 		 MM_CAREER = #{mCareer} ,
@@ -13,60 +15,48 @@
 		WHERE MM_ID =#{mId}	
           ]]>
 	 </update>
-
-
-
-	 
+	<insert id="insRg">
+	 <![CDATA[
+	INSERT INTO RG(RG_MMID,RG_RCCODE) VALUES(#{mId},#{mRcCode})
+		  ]]>
+	</insert>
+	
+	<update id="updateRg">
+	 <![CDATA[
+	 UPDATE RG SET RG_RCCODE=#{mRcCode} WHERE RG_MMID=#{mId}
+	  ]]>
+	</update>
+	
 	 <select id = "getProfile" resultType="spring.bao.beans.MemberBean">
 	 <![CDATA[
 		SELECT MM_ID AS mId, 
-		 MM_EMAIL AS mEmail, 
-		 RC_NAME AS mRcName,
-		 MM_DIVISION AS mDivision, 
-		 MM_CAREER AS mCareer , 
+		NVL( MM_EMAIL,'없음') AS mEmail, 
+        NVL(MM_RCCODE,'없음') as mRcCode,
+		NVL( MM_DIVISION,'없음') AS mDivision, 
+		 NVL(MM_CAREER, '없음') AS mCareer , 
 		 MM_PW as mPw		 
-		 		 
-		FROM MM INNER JOIN RG ON MM.MM_ID = RG.RG_MMID
-		INNER JOIN RC ON RG.RG_RCCODE = RC.RC_CODE
-		WHERE MM_ID=#{mId}		
+		FROM MM 
+		WHERE MM_ID=#{mId}			
 		  ]]>
-	
 	 </select>
 	 
-	 <select id = "getClickProfile" resultType="spring.bao.beans.MemberBean">
+	  <select id = "getRgProfile" resultType="spring.bao.beans.MemberBean">
 	 <![CDATA[
 		SELECT MM_ID AS mId, 
-		 MM_EMAIL AS mEmail, 
-		 RC_NAME AS mRcName,
-		 MM_DIVISION AS mDivision, 
-		 MM_CAREER AS mCareer , 
+		NVL( MM_EMAIL,'없음') AS mEmail, 
+        NVL(MM_RCCODE,'없음') as mRcCode,
+        RC_NAME as mRcName,
+		NVL( MM_DIVISION,'없음') AS mDivision, 
+		 NVL(MM_CAREER, '없음') AS mCareer , 
 		 MM_PW as mPw		 
-		 		 
-		FROM MM INNER JOIN RG ON MM.MM_ID = RG.RG_MMID
-		INNER JOIN RC ON RG.RG_RCCODE = RC.RC_CODE
+		FROM MM  INNER JOIN RC ON MM_RCCODE = RC_CODE
 		WHERE MM_ID=#{mId}		
 		  ]]>
-	<set>  
-	<if test='mEmail == null'>
-		<![CDATA[ mEmail='없음']]>
-	</if>
-	<if test='mRcName == null'>
-		<![CDATA[ mRcName='없음']]>
-	</if>
-	<if test='mDivision == null'>
-		<![CDATA[ mDivision='없음']]>
-	</if>
-	<if test='mCareer == null'>
-		<![CDATA[ mCareer='없음']]>
-	</if>
-	</set>	
 	 </select>
 	
-	 
-	 
-	  <select id = "isRgNameCheck" resultType="int">
+	  <select id = "isRcCodeCheck" resultType="int">
 	 <![CDATA[
-	SELECT COUNT (*) RG_CODE FROM RG  WHERE RG_MMID= #{mId}	
+   SELECT COUNT(MM_RCCODE) FROM MM  WHERE MM_ID= #{mId}
 		  ]]>
 		
 	 </select>

@@ -45,7 +45,6 @@
 						<th class="schedule__title"><label for="schedule-period"></label></th>
 						<td class="schedule__contents"></td>
 						<th class="schedule__title"><label for="schedule-period"></label></th>
-						<td class="schedule__contents"><button id="plus" type="button" >항목추가</button><button id="minus" type="button" >항목삭제</button></td>
 					</tr>
                 </tbody>
             </table>
@@ -93,14 +92,16 @@ function init(){
 
 	 if(sdComment){
 	 for(let index=1;index<schedule.length;index++){
+		 
 		//날짜 포맷  
 			let sdPeriod = schedule[index].sdPeriod;
 
 			
 			let sdComment = schedule[index].sdComment;
+			
 		 
 		 let plusArea = " ";
-		 plusArea += "<div>STEP"+(index+1)+" 기간 : <input type='date' id= 'schedule_date"+(index+1)+"' name='tag'><span class='mypage_ok'></span></div>";
+		 plusArea += "<div>STEP"+(index+1)+" 기간 : <input type='date' id= 'schedule_date"+(index+1)+"' name='tag'><span class='mypage_ok"+(index+1)+"'></span></div>";
    	     plusArea += "<textarea id='schedule-contents"+(index+1)+"' name='schedule-contents' cols='120' rows='10'></textarea>";     
 		    
 		 $("#step").append(plusArea);
@@ -119,12 +120,16 @@ function init(){
 			
 			 $(".mypage__bottom").append(insertBt);
 		}else if(schedule[0].scStatus=='A'){
-			let insertBt =" ";
-			insertBt ="<button  type='button' class='mypage__btn' onClick='check()'>확인</button>";
+	
+				 let insertBt =" ";
+				insertBt ="<button  type='button' id='checkClick' >확인</button>";
+				 $(".mypage_ok").append(insertBt);
 			
-			 $(".mypage_ok").append(insertBt);
-			
-			
+			 for(let index=1;index<schedule.length+1;index++){
+				 let insertBt =" ";
+				insertBt ="<button  type='button' id='checkClick"+(index+1)+"' >확인</button>";
+				 $(".mypage_ok"+(index+1)).append(insertBt);
+			}
 		}
 	
 	 
@@ -132,20 +137,24 @@ function init(){
 			$('#sendAccept').click(function(){
 				let check = confirm("수락하시겠습니까?")
 				
+				let schedule = JSON.parse('${scInfo}');
+	
+				let scCode = schedule[0].scCode;
+				let scHelper = schedule[0].scHelper;
+				
+				
 				if(check){
 					let form = document.createElement("form");
-					form.action="AcceptSchedule";
+					form.action="AcceptSchedule?scCode="+scCode+"&scHelper="+scHelper;
 					form.method="POST";
 					document.body.appendChild(form);
 					form.submit();
 				}
 				
 			});
-	
 	});
-	 function check(){
-		 alert("ddd"); 
-	 }
+	
+	
 	
 	$(function() {
 		$('#sendReject').click(function(){
@@ -159,8 +168,194 @@ function init(){
 				form.submit();
 			}
 		});
-	
 });
+	
+	 $(function() {
+			$('#checkClick').click(function(){
+			   
+		         let form = document.createElement('form');
+		         form.action = 'OkClick';
+		         form.method = 'post';
+		         
+		         let scCode = document.createElement("input");
+		         scCode.type = "hidden";
+		         scCode.name = "scCode";
+		         scCode.value = schedule[0].scCode;
+                 form.appendChild(scCode);   
+                 
+                 let scHelper = document.createElement("input");
+                 scHelper.type = "hidden";
+                 scHelper.name = "scHelper";
+                 scHelper.value = schedule[0].scHelper;
+                 form.appendChild(scHelper);   
+                 
+                 let scWisher = document.createElement("input");
+                 scWisher.type = "hidden";
+                 scWisher.name = "scWisher";
+                 scWisher.value = schedule[0].scWisher;
+                 form.appendChild(scWisher);   
+                 
+                 let sdStep = document.createElement("input");
+                 sdStep.type = "hidden";
+                 sdStep.name = "sdStep";
+                 sdStep.value = schedule[0].sdStep;
+                 form.appendChild(sdStep);   
+
+		         document.body.appendChild(form);
+		         
+		         form.submit();
+				
+			});
+	});
+	 $(function() {
+			$('#checkClick2').click(function(){
+
+		         let form = document.createElement('form');
+		         form.action = 'OkClick';
+		         form.method = 'post';
+		         
+		         let scCode = document.createElement("input");
+		         scCode.type = "hidden";
+		         scCode.name = "scCode";
+		         scCode.value = schedule[1].scCode;
+                form.appendChild(scCode);   
+                
+                let scHelper = document.createElement("input");
+                scHelper.type = "hidden";
+                scHelper.name = "scHelper";
+                scHelper.value = schedule[1].scHelper;
+                form.appendChild(scHelper);   
+                
+                let scWisher = document.createElement("input");
+                scWisher.type = "hidden";
+                scWisher.name = "scWisher";
+                scWisher.value = schedule[1].scWisher;
+                form.appendChild(scWisher);   
+                
+                let sdStep = document.createElement("input");
+                sdStep.type = "hidden";
+                sdStep.name = "sdStep";
+                sdStep.value = schedule[1].sdStep;
+                form.appendChild(sdStep);   
+
+		         document.body.appendChild(form);
+		         
+		         form.submit();
+				
+			});
+	});
+	 $(function() {
+			$('#checkClic3').click(function(){
+
+		         let form = document.createElement('form');
+		         form.action = 'OkClick';
+		         form.method = 'post';
+		         
+		         let scCode = document.createElement("input");
+		         scCode.type = "hidden";
+		         scCode.name = "scCode";
+		         scCode.value = schedule[2].scCode;
+                form.appendChild(scCode);   
+                
+                let scHelper = document.createElement("input");
+                scHelper.type = "hidden";
+                scHelper.name = "scHelper";
+                scHelper.value = schedule[2].scHelper;
+                form.appendChild(scHelper);   
+                
+                let scWisher = document.createElement("input");
+                scWisher.type = "hidden";
+                scWisher.name = "scWisher";
+                scWisher.value = schedule[2].scWisher;
+                form.appendChild(scWisher);   
+                
+                let sdStep = document.createElement("input");
+                sdStep.type = "hidden";
+                sdStep.name = "sdStep";
+                sdStep.value = schedule[2].sdStep;
+                form.appendChild(sdStep);   
+
+		         document.body.appendChild(form);
+		         
+		         form.submit();
+				
+			});
+	});
+	 $(function() {
+			$('#checkClick4').click(function(){
+
+		         let form = document.createElement('form');
+		         form.action = 'OkClick';
+		         form.method = 'post';
+		         
+		         let scCode = document.createElement("input");
+		         scCode.type = "hidden";
+		         scCode.name = "scCode";
+		         scCode.value = schedule[3].scCode;
+                form.appendChild(scCode);   
+                
+                let scHelper = document.createElement("input");
+                scHelper.type = "hidden";
+                scHelper.name = "scHelper";
+                scHelper.value = schedule[3].scHelper;
+                form.appendChild(scHelper);   
+                
+                let scWisher = document.createElement("input");
+                scWisher.type = "hidden";
+                scWisher.name = "scWisher";
+                scWisher.value = schedule[3].scWisher;
+                form.appendChild(scWisher);   
+                
+                let sdStep = document.createElement("input");
+                sdStep.type = "hidden";
+                sdStep.name = "sdStep";
+                sdStep.value = schedule[3].sdStep;
+                form.appendChild(sdStep);   
+
+		         document.body.appendChild(form);
+		         
+		         form.submit();
+				
+			});
+	});
+	 $(function() {
+			$('#checkClick5').click(function(){
+
+		         let form = document.createElement('form');
+		         form.action = 'OkClick';
+		         form.method = 'post';
+		         
+		         let scCode = document.createElement("input");
+		         scCode.type = "hidden";
+		         scCode.name = "scCode";
+		         scCode.value = schedule[4].scCode;
+                form.appendChild(scCode);   
+                
+                let scHelper = document.createElement("input");
+                scHelper.type = "hidden";
+                scHelper.name = "scHelper";
+                scHelper.value = schedule[4].scHelper;
+                form.appendChild(scHelper);   
+                
+                let scWisher = document.createElement("input");
+                scWisher.type = "hidden";
+                scWisher.name = "scWisher";
+                scWisher.value = schedule[4].scWisher;
+                form.appendChild(scWisher);   
+                
+                let sdStep = document.createElement("input");
+                sdStep.type = "hidden";
+                sdStep.name = "sdStep";
+                sdStep.value = schedule[4].sdStep;
+                form.appendChild(sdStep);   
+
+		         document.body.appendChild(form);
+		         
+		         form.submit();
+				
+			});
+	});
+	 
 			
 }		
 

@@ -56,7 +56,7 @@
             </div>
                    <input type="hidden" id="schedule-code" /><input type="hidden" id="schedule-status" />
             <div class="mypage__bottom">
-                <button  type="button" class="mypage__btn" id="sendMsg">등록</button>
+                <button  type="button" class="mypage__btn" id="sendSchedule">등록</button>
             </div>
         </form>
     </section>
@@ -142,7 +142,7 @@ function init(){
 	});	
 	 
 	 $(function() {
-			$('#sendMsg').click(function(){
+			$('#sendSchedule').click(function(){
 				let maxAppend = area.tag.length?area.tag.length:1;
 			    
 				let sdPeriod= new Array();

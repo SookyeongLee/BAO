@@ -433,6 +433,26 @@ select {
   margin-top: 10px;
 }
 
+
+/* schedule */
+.schedule__info {
+  width: 100%;
+}
+.schedule__title {
+  width: 10%;
+  text-align: left;
+  font-size: var(--font-micro);
+  padding: 10px 0 5px;
+}
+.schedule__contents {
+  width: 60%;
+  padding: 10px 0 5px;
+}
+
+#schedule-contents {
+  border: 1px solid var(--color-light-grey);
+  margin-top: 10px;
+}
 /* Request enrollment(거래등록) */
 .list-label {
   margin: 30px 0 10px;

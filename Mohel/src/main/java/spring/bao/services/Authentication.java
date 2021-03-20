@@ -1,8 +1,6 @@
 package spring.bao.services;
 
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.jar.Attributes.Name;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +25,7 @@ public class Authentication {
    
    public Authentication() {}
    @Autowired
-   HttpServletResponse response;
+   private HttpServletResponse response;
    @Autowired
    private AuthenticationIf mapper;
    @Autowired
