@@ -14,14 +14,13 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	
-	
 	<!-- DB연결 정보 -->
 		<!--  이 구문 을 써놓으면 메모리에 new로 올라가 있다. -->
 		<bean id="BAO" class="com.zaxxer.hikari.HikariConfig">
-			<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 			<property name="jdbcUrl" value="jdbc:oracle:thin:@db.bao.hoonzzang.com:7041:xe"/>
-			<property name="username" value="PHO"/>
-			<property name="password" value="1234"/>
+			<property name="username" value="user"/>
+			<property name="password" value="pw"/>
 		</bean>
 	
 	<!-- DBCP 정보 -->
@@ -33,7 +32,6 @@
 	<!-- SqlSession 정보 -->
 		<bean id="SqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dbsource"/>
-		 <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
 		</bean>
 		
 	<!-- Transaction 정보 -->
@@ -42,13 +40,10 @@
 		</bean>
 		
 	<!-- mybatis base-package 정보 -->
-		<mybatis-spring:scan base-package="spring.bao.mapper"/>
+		<mybatis-spring:scan base-package="icia.kotlin.mapper"/>
 		<!-- 인터페이가 있는 패키지를 경로로 잡아줘야 한다. -->
 		<!-- 이부분은 매퍼 생성시 패키지이름 재설정  하면됨 -->
 		
-	
-	
-	
-		<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+		
+		
 </beans>
-	

@@ -1,43 +1,15 @@
 package spring.bao.mohel;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.security.MessageDigestSpi;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import spring.bao.beans.BidBean;
-import spring.bao.beans.MemberBean;
-import spring.bao.beans.MessageBean;
-import spring.bao.beans.RequestBean;
-import spring.bao.beans.ReviewBean;
-import spring.bao.beans.ScheduleBean;
-import spring.bao.mapper.AuthenticationIF;
-import spring.bao.services.Authentication;
-import spring.bao.services.Bid;
-import spring.bao.services.Deal;
-import spring.bao.services.Home;
-import spring.bao.services.Messages;
-import spring.bao.services.Profiles;
-import spring.bao.services.RequestDeal;
-import spring.bao.services.Review;
-import spring.bao.services.Schedule;
-
 
 /**
  * Handles requests for the application home page.
@@ -46,137 +18,22 @@ import spring.bao.services.Schedule;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	@Autowired
-	private Authentication auth;
-	@Autowired
-	private Profiles pro;
-	@Autowired
-	private Deal deal;
-	@Autowired
-	private Schedule schedule;
-	@Autowired
-	private Review review;
-	@Autowired
-	private Bid bid;
-	@Autowired
-	private RequestDeal rqd;
-	@Autowired
-	private Messages msg;
-	@Autowired
-	private HttpServletRequest request;
-	@Autowired
-	private Home home;
-
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 * @throws Exception 
 	 */
-	
-//	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout",
-//			"/MyProfile","/ModifyProfile","/UpdateProfile","/DealForm"},
-//			method = {RequestMethod.GET,RequestMethod.POST})
-//	public ModelAndView Auth(Locale locale, Model model) {
-//		ModelAndView mav = new ModelAndView();
-//		System.out.println(request.getRequestURI().substring(1));
-//		mav = auth.entrance();
-//		return mav;
-//	}
-	
-	@RequestMapping(value = {"/LogInForm","/Login","/JoinForm","/Join","/Logout"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) throws Exception {
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
 		
-
-		 memberbean.setSCode(request.getRequestURI().substring(1));
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		 mav = auth.entrance(memberbean);
-		return mav;
+		String formattedDate = dateFormat.format(date);
+		System.out.println("ooo");
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "home";
 	}
-	
-	@RequestMapping(value = {"/","/Main"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Main(@ModelAttribute RequestBean req ) {
-		ModelAndView mav = new ModelAndView();
-		
-		 req.setRqCode(request.getRequestURI().substring(1));
-		
-		 mav = home.entrance(req);
-		return mav;
-	}
-	
-	
-	@RequestMapping(value = {"/MyProfile","/ModifyProfile","/UpdateProfile"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Profile() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav = pro.entrance();
-		return mav;
-	}
-	
-	@RequestMapping(value = {"/MyDeal","/Detail","/Waiting","/Ing","/End","/Search","/Filter"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Deal() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav = deal.entrance();
-		return mav;
-	}
-	
-	@RequestMapping(value = {"/DealForm","/ReqSend","/ModifyForm","/Modify","/delete"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView RequestDeal() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav = rqd.entrance();
-		return mav;
-	}
-	
-	@RequestMapping(value = {"/MovePro","/InsSchedule","/UpdateSchedule","/MoveUser",
-			"/AcceptSchedule","/RejectSchedule","/OkClick"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Schedule(@ModelAttribute ScheduleBean schedulebean) {
-		ModelAndView mav = new ModelAndView();
-		 
-		schedulebean.setScCode(request.getRequestURI().substring(1));
-	
-		mav = schedule.entrance(schedulebean);
-		return mav;
-	}
-	
-	@RequestMapping(value = {"/WriteReview" , "/WirteReviewForm", "/ShowReview" },
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Review(@ModelAttribute ReviewBean rev,@ModelAttribute BidBean bid) {
-		ModelAndView mav = new ModelAndView();
-
-		rev.setSCode(request.getRequestURI().substring(1));
-		
-		
-		mav = review.entrance(rev,bid);
-		return mav;
-	}
-
-	
-	@RequestMapping(value = {"/PriceDetail","/RegisterBid","/Accept","/Reject"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Bid() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav = bid.entrance();
-		
-		return mav;
-	}
-	
-	@RequestMapping(value = {"/RecBox","/Profile","/Title","/SendBox","/Reply","/Send"},
-			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Messages(@ModelAttribute MessageBean message) {
-		ModelAndView mav = new ModelAndView();
-		
-		mav = msg.entrance();
-		return mav;
-	}
-
-
 	
 }
