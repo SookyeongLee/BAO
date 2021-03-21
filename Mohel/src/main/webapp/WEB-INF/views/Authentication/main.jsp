@@ -447,7 +447,7 @@ function registerReq(){
      form.submit();
  
 }
-//들어있는ㄴ게없어서 안받아져서 일단 해놈 
+
 
 </script>
 </html>
