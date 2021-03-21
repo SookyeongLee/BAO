@@ -9,4 +9,6 @@ public class ReviewBean {
 	private String rvHelper;
 	private String rvStar;
 	private String rvComment;
+//	private String wiRqCode;
+//	private String wiHelper;
 }

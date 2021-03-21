@@ -1,17 +1,32 @@
 package spring.bao.services;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+
+import spring.bao.beans.BidBean;
+import spring.bao.beans.ReviewBean;
+import spring.bao.mapper.ReviewIF;
 
 @Service
 public class Deal {
-
-	public Deal() {}
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private Gson gson;
+	@Autowired
+	private ReviewIF mapper;
+	@Autowired
+	private PlatformTransactionManager tran;
+	public Deal() {}
+	
 
 	public ModelAndView entrance() {
 		ModelAndView mav = new ModelAndView();
@@ -57,7 +72,16 @@ public class Deal {
 	
 	private ModelAndView endCtl() {
 		ModelAndView mav = new ModelAndView();
+//		bid.setWiHelper("JUN");
+//		bid.setWiRqCode("6000210305090301");
+//		
+//		System.out.println(bid.getWiRqCode());
+//		
+//		String jsonData = gson.toJson(this.getCH(bid));
+//		System.out.println(jsonData);
+//		 mav.addObject("info",jsonData);	
 		mav.setViewName("Deal/endDate-wisher");
+		//mav.setViewName("Review/writeReview");
 		return mav;
 	}
 	private ModelAndView ingCtl() {
@@ -85,5 +109,7 @@ public class Deal {
 //		this.getMyDealList();
 		return mav;
 	}
-	
+	private ArrayList<BidBean> getCH(BidBean bid) {
+		return mapper.getCH(bid);
+	}
 }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
-
+import spring.bao.beans.BidBean;
 import spring.bao.beans.RequestBean;
 import spring.bao.mapper.AuthenticationIF;
 
@@ -26,14 +26,14 @@ public class Home {
 	@Autowired
 	private AuthenticationIF mapper;
 	
-	public ModelAndView entrance(RequestBean req) {
+	public ModelAndView entrance(RequestBean req ) {
 		ModelAndView mav = new ModelAndView();
 		
 		switch(req.getRqCode()) {
 			
-			case "" : 
-				mav= this.mainCtl(req);
-				break;
+//			case "" : 
+//				mav= this.mainCtl(req);
+//				break;
 			case "Main":
 				mav = this.mainCtl(req);
 				break;
@@ -47,23 +47,23 @@ public class Home {
 
 	private ModelAndView mainCtl(RequestBean req) {
 		ModelAndView mav = new ModelAndView();
-		//this.getRecentList();
-		
+
 		String jsonData = gson.toJson(this.getRecentList(req));
-		//System.out.println(jsonData);
-		
-		//mav.addObject();
+		String jsonData2 = gson.toJson(this.getRecentList2(req));
+
 		mav.addObject("jsonData",jsonData);
-		//System.out.println("값이 들어온다 들어온다 들어온다");
+		mav.addObject("list2", jsonData2);
 		
 		mav.setViewName("Authentication/main");
 		
 		return mav;
 	}
 
-
 	private ArrayList<RequestBean> getRecentList(RequestBean req) {
 		return mapper.getRecentList(req);
+	}
+	private ArrayList<RequestBean> getRecentList2(RequestBean req) {
+		return mapper.getRecentList2(req);
 	}
 }
 

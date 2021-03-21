@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.bao.beans.BidBean;
 import spring.bao.beans.MemberBean;
 import spring.bao.beans.MessageBean;
 import spring.bao.beans.RequestBean;
@@ -68,7 +69,7 @@ public class HomeController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
 	
 //	@RequestMapping(value = {"/","/Main","/LoginForm","/Login","/JoinForm","/Join","/Logout",
@@ -83,11 +84,10 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/LogInForm","/Login","/JoinForm","/Join","/Logout"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) throws IOException {
+	public ModelAndView Auth(@ModelAttribute MemberBean memberbean) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 
-	//	System.out.println(request.getRequestURI().substring(1));
 		 memberbean.setSCode(request.getRequestURI().substring(1));
 		
 		 mav = auth.entrance(memberbean);
@@ -96,7 +96,7 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/","/Main"},
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Main(@ModelAttribute RequestBean req) {
+	public ModelAndView Main(@ModelAttribute RequestBean req ) {
 		ModelAndView mav = new ModelAndView();
 		
 		 req.setRqCode(request.getRequestURI().substring(1));
@@ -145,18 +145,15 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/WriteReview" , "/ViewReview", "/ShowReview" },
+	@RequestMapping(value = {"/WriteReview" , "/WirteReviewForm", "/ShowReview" },
 			method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView Review(@ModelAttribute ReviewBean rev) {
+	public ModelAndView Review(@ModelAttribute ReviewBean rev,@ModelAttribute BidBean bid) {
 		ModelAndView mav = new ModelAndView();
-//		rev.setRvWirqCode("6000210307090359");
-//		rev.setRvHelper("JUN");
-//		rev.setRvStar("5");
-//		rev.setRvComment("나쁘지않아요");
+
 		rev.setSCode(request.getRequestURI().substring(1));
 		
 		
-		mav = review.entrance(rev);
+		mav = review.entrance(rev,bid);
 		return mav;
 	}
 

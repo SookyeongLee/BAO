@@ -41,9 +41,6 @@ function Check(){
 	var mName = document.getElementsByName('mName')[0];
 	var mPw = document.getElementsByName('mPw')[0];
 	var mPw2 = document.getElementsByName('mPw2')[0];
-	alert(mId.value);
-	alert(mPw.value);
-	alert(mPw2.value);
 	  
 	if( !document.joinInfo.mId.value) {
 	      alert("ID를 입력하세요");
@@ -61,7 +58,7 @@ function Check(){
    
 	var form = document.createElement('form');
 	form.action = 'Join';
-	form.method = 'post';
+	form.method = 'Post';
 	
 	form.appendChild(mId);
 	form.appendChild(mPw);

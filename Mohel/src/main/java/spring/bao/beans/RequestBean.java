@@ -1,6 +1,8 @@
 package spring.bao.beans;
 
+
 import lombok.Data;
+
 
 @Data
 public class RequestBean {
@@ -18,4 +20,7 @@ public class RequestBean {
 	private String rqStatus;
 	private String rdCode;
 	private String rdComment;
+	private String rqBest;
+	
+	private BidBean bidBean;
 }

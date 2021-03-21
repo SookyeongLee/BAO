@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
+import spring.bao.beans.BidBean;
 import spring.bao.beans.ReviewBean;
 import spring.bao.mapper.ReviewIF;
 
@@ -32,17 +33,17 @@ public class Review {
 	@Autowired
 	private PlatformTransactionManager tran;
 	
-	
-	
-	public ModelAndView entrance(ReviewBean rev) {
+
+	public ModelAndView entrance(ReviewBean rev, BidBean bid) {
 		ModelAndView mav = new ModelAndView();
 		switch(rev.getSCode()) {
 		
 		case "WriteReview":
-			mav = this.writeReviewFormCtl();
+			mav = this.WriteReviewCtl(rev);
+			
 			break;
-		case "ViewReview":
-			mav = this.reviewCtl(rev);
+		case "WirteReviewForm":
+			mav = this.writeReviewFormCtl(rev, bid);
 			break;
 		case "ShowReview":
 			mav = this.showReviewCtl(rev);
@@ -55,15 +56,16 @@ public class Review {
 	// 리뷰 보기 
 	private ModelAndView showReviewCtl(ReviewBean rev) {
 		ModelAndView mav = new ModelAndView();
+		
 		rev.setRvHelper("JUN");
 		rev.setRvWirqCode("6000210305090301");
-
-//			System.out.println(this.getReview(rev));
-			mav.addObject("info",this.getReview(rev));
-			String jsonData = gson.toJson(this.getReview(rev));
-			mav.addObject("info",jsonData);	
-			mav.setViewName("Review/viewReview");
-		
+		rev.setRvStar("1");
+			 System.out.println("보여주기완료");
+			 String jsonData = gson.toJson(this.getReview(rev));
+			 mav.addObject("info",jsonData);	
+			 mav.setViewName("Review/viewReview");
+			
+		 
 		return mav;
 	}
 
@@ -72,11 +74,21 @@ public class Review {
 
 
 	
-//리뷰 쓰기
-	private ModelAndView writeReviewFormCtl() {
+
+
+
+	private ModelAndView writeReviewFormCtl(ReviewBean rev, BidBean bid) {
 		ModelAndView mav = new ModelAndView();
 		
+		bid.setWiHelper("JUN");
+		bid.setWiRqCode("6000210305090301");
 		
+		System.out.println(bid.getWiRqCode());
+		
+		String jsonData = gson.toJson(this.getCH(bid));
+		System.out.println(jsonData);
+		 mav.addObject("info",jsonData);
+		 System.out.println();
 		mav.setViewName("Review/writeReview");
 		
 		return mav;
@@ -84,28 +96,29 @@ public class Review {
 	}
 
 
-	private ModelAndView reviewCtl(ReviewBean rev) {
+	private ModelAndView WriteReviewCtl(ReviewBean rev) {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		//쓰기
-		try{
-			if(this.insReview(rev)) {
-			mav.setViewName("Review/writeReview");
-			this.getReview(rev);
-			
-            tran.commit(status);
-		}
-	}catch(Exception e){
-		mav.setViewName("Review/writeReview");
-        tran.rollback(status);
 		
-	}
+		rev.setRvStar("1");
+		if(this.isReview(rev)) { 
+			 System.out.println("리뷰 존재"); 
+			 mav.setViewName("Review/write-after-view");
+		}else if(this.insReview(rev)) {
+			System.out.println("ins");
+            tran.commit(status);
+            mav.setViewName("Review/write-after-view");
+			}
 		return mav;
 }	
 
 
 	private ArrayList<ReviewBean> getReview(ReviewBean rev) {
 		return mapper.getReview(rev);
+	}
+	private ArrayList<BidBean> getCH(BidBean bid) {
+		return mapper.getCH(bid);
 	}
 	private boolean convetToBoolean(int data) {
 		return data ==1 ? true : false;
@@ -114,9 +127,14 @@ public class Review {
 	private boolean insReview(ReviewBean rev) {
 		return this.convetToBoolean(mapper.insReview(rev));
 	}
+	private boolean isReview(ReviewBean rev) {
+		return this.convetToBoolean(mapper.isReview(rev));
+	}
+		
+	}
 
 	
 	
 	
 	
-}
+
