@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="home__right">
-                <img src="/resources/imgs/main/back.jpg" class="home__img">
+                <img src="/resources/imgs/main/background.jpg" class="home__img">
             </div>
         </div>
     </header>
