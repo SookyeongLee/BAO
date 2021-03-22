@@ -38,25 +38,24 @@
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title"><label for="pw">비밀번호</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="password" id="mPw" name="mPw"><input type = "hidden" id = "mPwz"> </td>
+                        <td class="profile__contents"><input class="profile__input" type="password" id="mPw" name="mPw"/></td>
                     </tr>
-                    <input type="hidden" name ="mPw3">
                     <tr class="profile__list">
                         <th class="profile__title"><label for="pw-check">비밀번호 확인</label></th>
-                        <td class="profile__contents"> <input class="profile__input" type="password" id="mPw2" name="mPw2"></td>
+                        <td class="profile__contents"> <input class="profile__input" type="password" id="mPwCk" name="mPwCk"/></td>
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title"><label for="pw-change">새 비밀번호</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="password" id="mPwC" name="mPwC"></td>
+                        <td class="profile__contents"><input class="profile__input" type="password" id="newMPw" name="newMPw"/></td>
                     </tr>
                     <tr class="profile__list">
                         <th class="profile__title"><label for="email">E-mail</label></th>
-                        <td class="profile__contents"><input class="profile__input" type="email" id="mEmail" name="mEmail"><input type = "hidden" id="mEmailz"></td>
+                        <td class="profile__contents"><input class="profile__input" type="email" id="mEmail" name="mEmail"/></td>
                     </tr>
                    <tr class="profile__list">
                         <th class="profile__title"><label for="region">사는곳</label></th>
                         <td class="profile__contents">
-                            <select name="mRcCode" id="mRcCodez" class="profile__input">
+                            <select name="mRcCode" id="mRcCode" class="profile__input">
                                 <option value="99">Select</option>
                                 <option value="01">서울</option>
                                 <option value="02">인천</option>
@@ -94,99 +93,69 @@
         </div>
 </body>
 <script>
-
 function init(){
    
    let json = JSON.parse('${getProfile}');
+  let mId = json[0].mId;
+  $("#mId").append(mId);
+  
+  let mEmail = json[0].mEmail; 
+  $("#mEmail").val(mEmail);
+  
+  let mRcCode =  json[0].mRcCode; 
+  $("#mRcCode").val(mRcCode);
+  
+  let mDivision = json[0].mDivision; 
+  $("#mDivision").val(mDivision);
+  
+  let mCareer = json[0].mCareer; 
+  $("#mCareer").val(mCareer);
+  
+  let mPw = json[0].mPw; 
+  $("#mPw").val(mPw);
       
-    let proInfomId = document.getElementById("mId"); 
-    let mId = document.createElement('Div');              
-    mId.textContent = json[0].mId;  
-    proInfomId.appendChild(mId);
-    
-    
-    let proInfomEmail = document.getElementById("mEmailz");        
-    let mEmail = document.createElement('hidden');               
-    mEmail.textContent = json[0].mEmail;                       
-    proInfomEmail.appendChild(mEmail);                             
-    
-    
-    let proInfommRcCode = document.getElementById("mRcCodez");
-    let mRcCode = document.createElement('hidden');
-    mRcCode.textContent = json[0].mRcCode; 
-    proInfommRcCode.appendChild(mRcCode);
-    
-    
-    let proInfomDivision = document.getElementById("mDivisionz");
-    let mDivision = document.createElement('hidden');
-    mDivision.textContent = json[0].mDivision; 
-    proInfomDivision.appendChild(mDivision);
-   
-
-    let proInfommPw = document.getElementById("mPwz");
-    let mPw = document.createElement('hidden');
-    mPw.textContent = json[0].mPw; 
-    proInfommPw.appendChild(mPw);
-    
-    
-    let a = document.getElementById("mEmailz");
-    $('input[name=mEmail]').attr('value',a.innerText);
-    
-    let b = document.getElementById("mRcCodez");     
-    $('select[name=mRcCode]').attr('value',b.innerText);
-    
-    let c = document.getElementById("mDivisionz");     
-    $('input[name=mDivision]').attr('value',c.innerText);
-    
-    
-    let d = document.getElementById("mPwz");     
-    $('input[name=mPw]').attr('value',d.innerText);
-    
-    
-    let mCareer = json[0].mCareer;
-    $('#mCareer').append(mCareer);
-   
     
 }
-
-
-
-
 function UpdateProfile(){
-   let json = JSON.parse('${getProfile}');
-   
-     let jsonmPw = json[0].mPw;
+	 let json = JSON.parse('${getProfile}');
+	  
+    let mEmail = document.getElementById("mEmail");
+    $('input[name=mEmail]').attr('value',mEmail.innerText);
+    
+    let mRcCode = document.getElementById("mRcCode");     
+    $('select[name=mRcCode]').attr('value',mRcCode.innerText);
+    
+    let mDivision = document.getElementById("mDivision");     
+    $('input[name=mDivision]').attr('value',mDivision.innerText);
+    
+    let mCareer = document.getElementById("mCareer");     
+    $('input[name=mCareer]').attr('value',mCareer.innerText);
+    
+    let newMPw = document.getElementById("newMPw");     
+    $('input[name=newMPw]').attr('value',newMPw.innerText);
+       
    
      let mPw =document.getElementsByName("mPw")[0];
-     let mPw2 =document.getElementsByName("mPw2")[0];
-     let mPw3 = document.getElementsByName("mPw")[0];
-     let mPwC =document.getElementsByName("mPwC")[0];         
-     let mEmail =document.getElementsByName("mEmail")[0]; 
-     let mDivision = document.getElementsByName("mDivision")[0];
-     let mCareer = document.getElementsByName("mCareer")[0];
-     let mRcCode = document.getElementsByName("mRcCode")[0];
+     let mPwCk =document.getElementsByName("mPwCk")[0];
      
      
- var form = document.createElement("form");
-  form.action ="UpdateProfile";
-  form.method ="POST"; 
+ 	let form = document.createElement("form");
+ 	 form.action ="UpdateProfile";
+ 	 form.method ="POST"; 
   
    
   
-  if(mPw.value == jsonmPw){
-     if(mPw.value == mPw2.value){
-              alert("비밀번호 변경 완료");
-        form.appendChild(mPwC);
-        form.appendChild(mEmail);
+  if(mPw.value == json[0].mPw){
+		form.appendChild(mEmail)
+        form.appendChild(mRcCode);
         form.appendChild(mDivision);
         form.appendChild(mCareer);
-        form.appendChild(mRcCode);
+        form.appendChild(mPw);
+        
+        form.appendChild(mPwCk);
+        form.appendChild(newMPw);
         document.body.appendChild(form);
         form.submit();
-     }else {
-        alert("기존비밀번호와 확인비밀번호가 일치하지 않습니다.");
-        return form;
-     }
   
  
    }else{
@@ -195,6 +164,5 @@ function UpdateProfile(){
       
    }
 }
-
 </script>
 </html>

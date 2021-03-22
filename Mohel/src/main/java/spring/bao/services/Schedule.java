@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import spring.bao.beans.MessageBean;
 import spring.bao.beans.ScheduleBean;
 import spring.bao.mapper.ScheduleIf;
+import spring.bao.utils.ProjectUtils;
 
 @Service
 public class Schedule {
@@ -38,8 +39,10 @@ public class Schedule {
 	private Gson gson;
 	@Autowired
 	private PlatformTransactionManager tran;
+	@Autowired
+	private ProjectUtils pu;
 
-	public ModelAndView entrance(ScheduleBean scheduleBean, MessageBean messageBean) throws IOException {
+	public ModelAndView entrance(ScheduleBean scheduleBean, MessageBean messageBean) throws Exception {
 
 		ModelAndView mav = null;
 
@@ -54,7 +57,7 @@ public class Schedule {
 			mav = this.acceptCtl(scheduleBean, messageBean);
 			break;
 		case "RejectSchedule":
-			mav=this.rejectCtl(messageBean);
+			mav=this.rejectCtl(scheduleBean,messageBean);
 			break;
 		case "OkClick":
 			mav=this.okCtl(scheduleBean,messageBean);
@@ -104,12 +107,13 @@ public class Schedule {
 		return mav;
 	}
 
-	private ModelAndView rejectCtl(MessageBean messageBean){
+	private ModelAndView rejectCtl(ScheduleBean scheduleBean,MessageBean messageBean) throws Exception{
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
-		messageBean.setMsRecipient("PPP");
-		messageBean.setMsSender("DOYOUNG");
+		
+		messageBean.setMsRecipient(scheduleBean.getScHelper());
+		messageBean.setMsSender((String)pu.getAttribute("mId"));
 
 		try {
 			if (this.insRejectMessage(messageBean)) {
@@ -124,13 +128,14 @@ public class Schedule {
 		return mav;
 	}
 
-	private ModelAndView acceptCtl(ScheduleBean scheduleBean, MessageBean messageBean) {
+	private ModelAndView acceptCtl(ScheduleBean scheduleBean, MessageBean messageBean) throws Exception {
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 
 		ModelAndView mav = new ModelAndView();
-		scheduleBean.setScCode("4000210305090348");
-		messageBean.setMsRecipient("PPP");
-		messageBean.setMsSender("DOYOUNG");
+		messageBean.setMsRecipient(scheduleBean.getScHelper());
+		messageBean.setMsSender((String)pu.getAttribute("mId"));
+		
+		
 		try {
 			if (this.insFixSchedule(scheduleBean)) {
 				if (this.insMessage(messageBean)) {
@@ -150,7 +155,6 @@ public class Schedule {
 	private ModelAndView moveUserCtl(ScheduleBean scheduleBean) {
 		String scInfo = gson.toJson(this.getSchedule(scheduleBean));
 		String bidInfo = gson.toJson(this.getBidInfo(scheduleBean));
-
 		ModelAndView mav = new ModelAndView();
 
 		if (!scInfo.equals("[]")) {
@@ -178,6 +182,7 @@ public class Schedule {
 		scheduleBean.setScCode(jsondata.get(0).get("scCode").toString());
 		scheduleBean.setScHelper(jsondata.get(0).get("scHelper").toString());
 		scheduleBean.setScStatus("S");
+		
 		
 		try {
 			if (this.insSchedule(scheduleBean)) {

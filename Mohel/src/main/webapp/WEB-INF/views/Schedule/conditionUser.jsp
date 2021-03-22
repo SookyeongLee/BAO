@@ -78,7 +78,6 @@ function init(){
 // 	//날짜 포맷  
 	let sdPeriod = schedule[0].sdPeriod;
 	if(sdPeriod){
-
 	 $("#schedule_date1").val(sdPeriod);
 	}
     
@@ -89,13 +88,11 @@ function init(){
 	 $("#schedule-wisher").append(scWisher);
 	 $("#schedule-helper").append(scHelper);
 	 $("#schedule-contents1").append(sdComment);
-
 	 if(sdComment){
 	 for(let index=1;index<schedule.length;index++){
 		 
 		//날짜 포맷  
 			let sdPeriod = schedule[index].sdPeriod;
-
 			
 			let sdComment = schedule[index].sdComment;
 			
@@ -200,7 +197,6 @@ function init(){
                  sdStep.name = "sdStep";
                  sdStep.value = schedule[0].sdStep;
                  form.appendChild(sdStep);   
-
 		         document.body.appendChild(form);
 		         
 		         form.submit();
@@ -209,7 +205,6 @@ function init(){
 	});
 	 $(function() {
 			$('#checkClick2').click(function(){
-
 		         let form = document.createElement('form');
 		         form.action = 'OkClick';
 		         form.method = 'post';
@@ -237,7 +232,6 @@ function init(){
                 sdStep.name = "sdStep";
                 sdStep.value = schedule[1].sdStep;
                 form.appendChild(sdStep);   
-
 		         document.body.appendChild(form);
 		         
 		         form.submit();
@@ -246,7 +240,6 @@ function init(){
 	});
 	 $(function() {
 			$('#checkClic3').click(function(){
-
 		         let form = document.createElement('form');
 		         form.action = 'OkClick';
 		         form.method = 'post';
@@ -274,7 +267,6 @@ function init(){
                 sdStep.name = "sdStep";
                 sdStep.value = schedule[2].sdStep;
                 form.appendChild(sdStep);   
-
 		         document.body.appendChild(form);
 		         
 		         form.submit();
@@ -283,7 +275,6 @@ function init(){
 	});
 	 $(function() {
 			$('#checkClick4').click(function(){
-
 		         let form = document.createElement('form');
 		         form.action = 'OkClick';
 		         form.method = 'post';
@@ -311,7 +302,6 @@ function init(){
                 sdStep.name = "sdStep";
                 sdStep.value = schedule[3].sdStep;
                 form.appendChild(sdStep);   
-
 		         document.body.appendChild(form);
 		         
 		         form.submit();
@@ -320,7 +310,6 @@ function init(){
 	});
 	 $(function() {
 			$('#checkClick5').click(function(){
-
 		         let form = document.createElement('form');
 		         form.action = 'OkClick';
 		         form.method = 'post';
@@ -348,7 +337,6 @@ function init(){
                 sdStep.name = "sdStep";
                 sdStep.value = schedule[4].sdStep;
                 form.appendChild(sdStep);   
-
 		         document.body.appendChild(form);
 		         
 		         form.submit();
@@ -358,6 +346,5 @@ function init(){
 	 
 			
 }		
-
 </script>
 </html>

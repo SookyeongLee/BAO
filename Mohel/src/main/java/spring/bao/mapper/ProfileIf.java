@@ -10,10 +10,15 @@ public interface ProfileIf {
 
 	public ArrayList<MemberBean> getProfile(MemberBean memberbean);
 	
+	public ArrayList<MemberBean> getRgProfile(MemberBean memberbean);
+	
 	public ArrayList<MemberBean> getClickProfile(MemberBean memberbean);
 
-	public int isRgNameCheck(MemberBean memberbean);
+	public int isRcCodeCheck(MemberBean memberbean);
+	
+	public int insRg(MemberBean memberbean);
 
+	public int updateRg(MemberBean memberbean);
 
 
 }

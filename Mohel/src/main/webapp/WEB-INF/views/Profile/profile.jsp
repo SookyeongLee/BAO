@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/resources/css/common.css">
     <script src="/resources/src/navbar.js" defer></script>
     <script src="/resources/src/navbar2.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="init()">
     
@@ -47,13 +48,11 @@
                 </tr>
                 <tr class="profile__list">
                     <th class="profile__title">경력</th>
-                    <td class="profile__contents" id="mCareer">
-                        
-                    </td>
+                    <td class="profile__contents" id="mCareer"></td>
                 </tr>
             </table>
             <div class="mypage__bottom">
-                <button type="button" class="mypage__btn" onClick="ModifyProfile()">수정하기</button>
+                <button type="button" class="mypage__btn" onClick="modifyForm()">수정하기</button>
             </div>
         </div>
     </section>
@@ -62,45 +61,28 @@
 <script>
 function init(){
 	
-	
 	let json = JSON.parse('${getProfile}');
+	if( json[0].mRcName==null){
+		 json[0].mRcName="없음";
+	}
+    let mId = json[0].mId;
+    $("#mId").append(mId);
     
-
-    let proInfomId = document.getElementById("mId"); 
-    let mId = document.createElement('Div');              
-    mId.textContent = json[0].mId;
-    proInfomId.append(mId);
+    let mEmail = json[0].mEmail; 
+    $("#mEmail").append(mEmail);
     
+    let mRcName =  json[0].mRcName; 
+    $("#mRcName").append(mRcName);
     
+    let mDivision = json[0].mDivision; 
+    $("#mDivision").append(mDivision);
     
+    let mCareer = json[0].mCareer; 
+    $("#mCareer").append(mCareer);
     
-    let proInfomEmail = document.getElementById("mEmail");
-    let mEmail = document.createElement('Div');
-    mEmail.textContent = json[0].mEmail; 
-    proInfomEmail.appendChild(mEmail);
-    
-    
-    let proInfomRcName = document.getElementById("mRcName");
-    let mRcName = document.createElement('Div');
-    mRcName.textContent = json[0].mRcName; 
-    proInfomRcName.appendChild(mRcName);
-    
-    
-    let proInfomDivision = document.getElementById("mDivision");
-    let mDivision = document.createElement('Div');
-    mDivision.textContent = json[0].mDivision; 
-    proInfomDivision.appendChild(mDivision);
-   
-    
-    let proInfomCareer = document.getElementById("mCareer");
-    let mCareer = document.createElement('Div');
-    mCareer.textContent = json[0].mCareer; 
-    proInfomCareer.appendChild(mCareer);
-    
-	
+ 
 }
-
-function ModifyProfile(){
+function modifyForm(){
 	
 	var form = document.createElement("form");
 	 form.action = "ModifyProfile";
@@ -109,7 +91,5 @@ function ModifyProfile(){
 	  form.submit();
 	  
 }
-
-
 </script>
 </html>

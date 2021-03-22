@@ -10,8 +10,6 @@
 </body>
 <script>
 let json = JSON.parse('${getbiRqCode}');
-
-alert('${getbiRqCode}');
    
    
    let rqCode = json[0].biCode;   

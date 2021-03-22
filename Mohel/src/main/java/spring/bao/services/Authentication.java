@@ -78,11 +78,8 @@ public class Authentication {
                 if(this.isAccess(member)) {
                    member.setMStCode("1");
                    if(this.insAccess(member)) {
-                   pu.setAttribute("mId",member.getMId());
-                   
-                   
+                   pu.setAttribute("mId",member.getMId());                
                    member.setMId(pu.getSessionId());
-                   
                    mav.setViewName("Authentication/goMain");
                    tran.commit(status);
                    }
@@ -202,7 +199,7 @@ public class Authentication {
 
       private ModelAndView loginFormCtl(MemberBean member) {
          ModelAndView mav = new ModelAndView();
-         //System.out.println("loginFormCtl");
+
          mav.setViewName("Authentication/login");
          return mav;         
       }

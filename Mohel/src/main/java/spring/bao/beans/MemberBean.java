@@ -15,12 +15,12 @@ public class MemberBean {
 	private String mAccess;
 	private String mRgRcCode;
 	private String mRegionName;
-
-	
 	
 	//추가
 	private String mRcName;
 	private String mRcCode;
 	private String mPwC;
 	private String alMmid;
+	private String NewMPw;
+	private String MPwCk;
 }

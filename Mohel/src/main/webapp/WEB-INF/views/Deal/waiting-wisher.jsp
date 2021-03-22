@@ -1,49 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>모헬: 모두의 헬퍼 - 진행전</title>
-    <meta name="description" content="낙찰 페이지">
-    <link rel="icon" type="image/png" href="/resources/imgs/common/logo-m.png">
-    <script src="https://kit.fontawesome.com/301043e4a8.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/common.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/resources/src/navbar.js" defer></script>
-    <script src="/resources/src/navbar2.js" defer></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모헬: 모두의 헬퍼 - 진행전</title>
+<meta name="description" content="낙찰 페이지">
+<link rel="icon" type="image/png"
+	href="/resources/imgs/common/logo-m.png">
+<script src="https://kit.fontawesome.com/301043e4a8.js"
+	crossorigin="anonymous"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="/resources/css/common.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/resources/src/navbar.js" defer></script>
+<script src="/resources/src/navbar2.js" defer></script>
 </head>
 <body onLoad="wWisherScreen()">
-    
-    <!-- Navbar -->
-    <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
 
-    <!--Mypage Navbar -->
-	<%@ include file="/WEB-INF/views/common/navbar2.jsp" %>
-    
-     <!-- waiting-helper -->
-    <section class="dealList mypage">
-        <h2 class="mypage__title">진행전</h2>
-        <div class="dealList__container">
-            <ul class="dealList__account">
-                <li class="dealList__account__member"><button type="button" class="dealList__account__btn" onClick="waitingHelperClick()">helper</button></li>
-                <li class="dealList__account__member"><button type="button" class="dealList__account__btn" onClick="waitingWisherClick()">wisher</button></li>
-            </ul>
-            <div class="dealList__list__container">
-                <div class="dealList__member">wisher</div>
-                
-                <ul id="wWisherList" class="list__items"></ul>  
-                
-                <div class="dealList__more__button">
-                    <button type="button" class="dealList__more__btn" onClick="plus()">더보기</button>
-                </div>
-                
-            </div>
-        </div>
-    </section>
+	<!-- Navbar -->
+	<%@ include file="/WEB-INF/views/common/navbar.jsp"%>
+
+	<!--Mypage Navbar -->
+	<%@ include file="/WEB-INF/views/common/navbar2.jsp"%>
+
+	<!-- waiting-helper -->
+	<section class="dealList mypage">
+		<h2 class="mypage__title">진행전</h2>
+		<div class="dealList__container">
+			<ul class="dealList__account">
+				<li class="dealList__account__member"><button type="button"
+						class="dealList__account__btn" onClick="waitingHelperClick()">helper</button></li>
+				<li class="dealList__account__member"><button type="button"
+						class="dealList__account__btn" onClick="waitingWisherClick()">wisher</button></li>
+			</ul>
+			<div class="dealList__list__container">
+				<div class="dealList__member">wisher</div>
+
+				<ul id="wWisherList" class="list__items"></ul>
+
+				<div class="dealList__more__button">
+					<button type="button" class="dealList__more__btn" onClick="plus()">더보기</button>
+				</div>
+
+			</div>
+		</div>
+	</section>
 </body>
 <script>
 function waitingHelperClick(){
@@ -69,9 +76,18 @@ function plus(){
    wWisherScreen();
 }
 
+function periodUpdate(){
+	let form = document.createElement("form");
+	form.action = "";
+	form.method = "";
+	
+	document.body.appendChild(form);
+	form.submit();
+}
+
 function wWisherScreen(){
 let requestList = JSON.parse('${wWisherList}');
-alert('${wWisherList}');
+
 for(let index=(0+k) ; index<(3+k) ; index++){
    
 if(index >= requestList.length)break;

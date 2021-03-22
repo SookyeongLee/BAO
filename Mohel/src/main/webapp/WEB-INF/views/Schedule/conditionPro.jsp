@@ -56,7 +56,7 @@
             </div>
                    <input type="hidden" id="schedule-code" /><input type="hidden" id="schedule-status" />
             <div class="mypage__bottom">
-                <button  type="button" class="mypage__btn" id="sendMsg">등록</button>
+                <button  type="button" class="mypage__btn" id="sendSchedule">등록</button>
             </div>
         </form>
     </section>
@@ -78,7 +78,6 @@ function init(){
 // 	//날짜 포맷  
 	let sdPeriod = schedule[0].sdPeriod;
 	if(sdPeriod){
-
 	 $("#schedule_date1").val(sdPeriod);
 	}
     
@@ -89,12 +88,10 @@ function init(){
 	 $("#schedule-wisher").append(scWisher);
 	 $("#schedule-helper").append(scHelper);
 	 $("#schedule-contents1").append(sdComment);
-
 	 if(sdComment){
 	 for(let index=1;index<schedule.length;index++){
 		//날짜 포맷  
 			let sdPeriod = schedule[index].sdPeriod;
-
 			
 			let sdComment = schedule[index].sdComment;
 		 
@@ -115,7 +112,6 @@ function init(){
 	 $(function() {
 				$('#plus').click(function(){
 						if (maxAppend >= 5) return; // 5번째부터는 append 안되고 return 시키기
-
 						 let plusArea = " ";
 						 plusArea += "<div>STEP"+(maxAppend+1)+" 기간 : <input type='date' id= 'schedule_date"+(maxAppend+1)+"' name='tag' ></div>";
 			       	     plusArea += "<textarea id='schedule-contents"+(maxAppend+1)+"' name='schedule-contents' cols='120' rows='10'></textarea>";     
@@ -127,9 +123,7 @@ function init(){
 	 $(function() {
 			$('#minus').click(function(){
 				if (maxAppend <= 1) return; // 1번째부터는 append 안되고 return 시키기
-
 				if(maxAppend != 2){
-
 					$("#schedule-contents"+area.tag.length+":last-child").prev().remove();
 					$("#schedule-contents"+(area.tag.length+1)+":last-child").remove();
 				}else{
@@ -142,7 +136,7 @@ function init(){
 	});	
 	 
 	 $(function() {
-			$('#sendMsg').click(function(){
+			$('#sendSchedule').click(function(){
 				let maxAppend = area.tag.length?area.tag.length:1;
 			    
 				let sdPeriod= new Array();
@@ -151,7 +145,6 @@ function init(){
 				
 				
 				for(i=0;i<maxAppend;i++){
-
 					
 					let data ={
 							scCode: $('#schedule-code').val(),
@@ -179,14 +172,12 @@ function init(){
 	                    success     :   alert("데이터 넘김 성공6v6")
 	                  
 	                });
-
 			});
 			
 			
 			
 	});	
 	 
-
 }
 	
 </script>
