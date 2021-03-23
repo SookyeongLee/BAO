@@ -256,14 +256,13 @@
       SELECT
             RQ.RQ_TITLE AS rqTitle,  
             RQ.RQ_CODE AS rqCode,
-            RQ.RQ_MMID AS RqId,
+            RQ.RQ_MMID AS rqId,
             MG.MG_IMG AS rqImage,
             TO_CHAR(RQ_SYSDATE, 'YYYY-MM-DD') AS rqDate,
          RQ.RQ_PERIOD AS  rqPeriod,
          SG.SG_SUBNAME AS rqSubName,
             RC.RC_NAME AS rqRcName,
             RQ.RQ_COMMENT AS rqComment,
-            
          ST.ST_CODE AS rqStatus
    FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
             

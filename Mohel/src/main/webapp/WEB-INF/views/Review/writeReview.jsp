@@ -121,12 +121,6 @@ span.star-prototype > * {
    let rvStar = document.getElementsByName("rvStar")[0];
    let rvComment = document.getElementsByName("rvComment")[0];
 
-   
-   alert(rvComment.value);
-   alert(rvWirqCode.value);
-   alert(rvHelper.value);
-   alert(rvStar.value);
-
    let form = document.createElement("form");
    form.action = "WriteReview";
    form.method = "Post";   
@@ -142,7 +136,7 @@ span.star-prototype > * {
 
 let json = JSON.parse('${info}');
    
-   alert('${info}');
+
    
    let wiRqCode = json[0].wiRqCode
    $('#rvWirqCode').val(wiRqCode);

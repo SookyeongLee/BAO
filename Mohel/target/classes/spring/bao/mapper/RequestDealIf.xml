@@ -39,7 +39,7 @@
 							RQ_COMMENT AS RQCOMMENT
 					FROM RQ INNER JOIN MG ON RQ.RQ_FILTERCODE = MG.MG_FILTERCODE
 					        INNER JOIN SG SG ON RQ.RQ_SUBCODE = SG.SG_SUBCODE
-					WHERE RQ_CODE = #{rqCode} AND RQ_MMID = #{rqId}
+					WHERE RQ_CODE = #{rqCode} AND RQ_MMID = #{biMmHelper}
 			]]> 
 	</select>
 	
@@ -49,12 +49,16 @@
    RQ_PERIOD = #{rqPeriod},
    RQ_TITLE = #{rqTitle},
    RQ_COMMENT = #{rqComment} 
-WHERE RQ_MMID = #{rqId} AND RQ_CODE = #{rqCode}
+WHERE RQ_MMID = #{biMmHelper} AND RQ_CODE = #{rqCode}
 
 	</update>
 	
 	<delete id="deleteReqDetail">
-		DELETE FROM RQ  WHERE RQ_CODE = #{rqCode} AND RQ_MMID = #{rqId}
+		DELETE FROM RQ  WHERE RQ_CODE = #{rqCode} AND RQ_MMID = #{biMmHelper}
 	</delete>
+	
+	<delete id="deleteBitable">
+		DELETE FROM BI  WHERE BI_RQCODE = #{rqCode} 
+	</delete>	
 		
 </mapper>

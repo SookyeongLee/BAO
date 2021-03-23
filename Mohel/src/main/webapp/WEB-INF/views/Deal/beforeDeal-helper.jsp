@@ -54,7 +54,7 @@
             <input type="hidden" name="rqId" id="rqId">   
             <input type="hidden" name="rqImage" id="rqImage"> 
 <div class="deal__button">
-                    <button type="button" class="deal__btn2 bidding__btn">입찰하기</button>
+                    <button type="button" class="deal__btn1 bidding__btn">입찰하기</button>
                 </div>
 
                 <!-- 입찰 모달 시작 -->
@@ -158,18 +158,19 @@
    }        
   }
    function prClick(obj){
-           
-      let input  = document.createElement("input");
-      input.type = "hidden";
-      input.name = "mId";
-      input.value = obj;
-           
-      let form = document.createElement("form");
-      form.action = "ClickProfile";
-      form.method = "post";
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();      
+	 
+	   let input  = document.createElement("input");
+	   input.type = "hidden";
+	   input.name = "biHelper";
+	   input.value = obj;
+	
+	   
+	   let form = document.createElement("form");
+	   form.action = "ClickProfile";
+	   form.method = "post";
+	   form.appendChild(input);
+	   document.body.appendChild(form);
+	   form.submit();
    }
    
 function bid(){

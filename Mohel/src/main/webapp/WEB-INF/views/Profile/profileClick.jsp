@@ -210,8 +210,7 @@
 <script>
 function init(){
 	let profileInfo =JSON.parse('${clickPro}');
-	alert('${clickPro}');
-	
+
 	let insertTr="";
 	insertTr += "<tr class='profile__list'>";
 	insertTr += "<th class='profile__title'>아이디</th>";

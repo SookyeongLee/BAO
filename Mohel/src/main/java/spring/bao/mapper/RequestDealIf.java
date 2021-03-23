@@ -11,5 +11,6 @@ public interface RequestDealIf {
 	public int insReqSend(RequestBean request);
 	public int updateReqDetail(RequestBean request);
 	public int deleteReqDetail(RequestBean request);
+	public int deleteBitable(RequestBean requestBean);
 	
 }

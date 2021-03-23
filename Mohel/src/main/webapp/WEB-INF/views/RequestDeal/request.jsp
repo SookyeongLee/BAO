@@ -32,7 +32,7 @@
                     <div class="list-label"><label for="request-region">지역</label></div>
                     <div class="list-value">
                         <select name='rqRcCode' id="list-region">
-                            <option value="select">Select</option>
+                            <option value="00">Select</option>
                             <option value="01">서울</option>
                             <option value="02">인천</option>
                             <option value="03">부산</option>
@@ -58,7 +58,7 @@
                     <div class="list-value">
                    <form name=rqFilter method=post>
                    <select name='rqFilterCode' onchange="change(this.selectedIndex);" id="list-mainCtg">
-                     		<option value="select">Select</option>
+                     		<option value="00">Select</option>
                             <option value="1000">레슨</option>
                             <option value="2000">홈/리빙</option>
                             <option value="3000">비즈니스</option>
@@ -129,7 +129,22 @@
       
       
        
-        
+		var a = rqRcCode.value;
+		var b = rqPeriod.value;
+		var c = rqFilterCode.value;
+		var d = rqTitle.value;
+		var e = rqComment.value;
+        if(a == "00"){
+        	alert("지역을 선택해주세요");
+        }else if(b == ""){
+        		alert("날짜를 선택해주세요");
+        	}else if(c == "00"){
+        		alert("분야를 선택해주세요");
+        	}else if(d == ""){
+        		alert("제목을 작성해주세요");
+        	}else if(e == ""){
+        		alert("내용을 작성해주세요");
+        	}else{
         var form = document.createElement("form");
         form.action="ReqSend";
         form.post="post";
@@ -144,6 +159,7 @@
         
         form.submit();
     }
+}
 
 </script>
 </html>

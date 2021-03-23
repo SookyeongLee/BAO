@@ -23,4 +23,6 @@ public class MemberBean {
 	private String alMmid;
 	private String NewMPw;
 	private String MPwCk;
+	private String biHelper;
+	private String biMmHelperview;
 }

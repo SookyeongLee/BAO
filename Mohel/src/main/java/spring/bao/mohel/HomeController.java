@@ -117,12 +117,12 @@ public class HomeController {
 
 	@RequestMapping(value = { "/MovePro", "/UpdateSchedule", "/MoveUser", "/AcceptSchedule", "/RejectSchedule",
 			"/OkClick" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean, MessageBean messageBean)
+	public ModelAndView Schedule(@ModelAttribute ScheduleBean scheduleBean, MessageBean messageBean,RequestBean requestBean)
 			throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav = schedule.entrance(scheduleBean, messageBean);
+		mav = schedule.entrance(scheduleBean, messageBean,requestBean);
 
 		return mav;
 	}

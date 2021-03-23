@@ -61,6 +61,21 @@
 		
 	 </select>
 	 
+	 <select id = "getClickProfile" resultType="spring.bao.beans.MemberBean">
+	 <![CDATA[
+    	SELECT MM_ID AS mId, 
+		NVL( MM_EMAIL,'없음') AS mEmail, 
+        NVL(MM_RCCODE,'없음') as mRcCode,
+        RC_NAME as mRcName,
+		NVL( MM_DIVISION,'없음') AS mDivision, 
+		 NVL(MM_CAREER, '없음') AS mCareer , 
+		 MM_PW as mPw		 
+		FROM MM  INNER JOIN RC ON MM_RCCODE = RC_CODE
+		WHERE MM_ID=#{biHelper}	
+		  ]]>
+		
+	 </select>
+	 
 	
 	 
 	 

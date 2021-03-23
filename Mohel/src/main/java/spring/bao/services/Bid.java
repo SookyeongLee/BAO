@@ -97,14 +97,23 @@ public class Bid {
 	
 	 private ModelAndView acceptCtl(RequestBean requestbean, MessageBean message) { // 수락 누릅니다
 	      ModelAndView mav = new ModelAndView();
-	      TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());	      
+	      TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());	  
+	      System.out.println(requestbean.getWinHelper());
+	      System.out.println(requestbean.getWinPrice());
+	      System.out.println(requestbean.getRqCode());
+	      System.out.println(requestbean.getWinRqCode());
+	      System.out.println(message.getWinHelper());
+   	   	System.out.println(message.getRqId());
 	      try {
 	         if (this.insBidInfo(requestbean)) {
 	            if (this.updateAcceptStatus(requestbean)) { // 상태값 업데이트
-	               // 유찰 포문
+	            	System.out.println("낙찰 상태값 변경");
+	            	// 유찰 포문
 	               ArrayList<RequestBean> reject = new ArrayList<RequestBean>();
 	               reject = this.rejectMInfo(requestbean); // 중복 id 제거 AA BBB CC  = A B C
 	               if(reject.size() == 0) {   
+	            	   System.out.println(message.getWinHelper());
+	            	   System.out.println(message.getRqId());
 	            	   this.insAcceptMsg(message);
 	            	   System.out.println("낙찰 성공");
 	               }else {
@@ -117,10 +126,12 @@ public class Bid {
 	                  // 유찰메세지 포문
 	                  ArrayList<RequestBean> rejectMsg = new ArrayList<RequestBean>();
 	                  rejectMsg = this.rejectMInfoMsg(requestbean);
+	                  System.out.println(rejectMsg);
 	                  for (int i = 0; i < rejectMsg.size(); i++) {
 	                	  
 	                     message.setBiMmHelper(rejectMsg.get(i).getBiMmHelperview());
 	                     if (this.insRejectMsg(message)) {
+	                    	 System.out.println(message.getBiMmHelper());
 	                        System.out.println("유찰 메세지 인서트 ");
 	                     }
 	                  }

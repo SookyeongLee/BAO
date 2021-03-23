@@ -70,7 +70,18 @@ public class RequestDeal {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		
-		if(this.deleteReqDetail(requestBean)) {
+		if(!this.deleteBitable(requestBean)) {
+			this.deleteReqDetail(requestBean);
+			System.out.println("삭제완료");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('삭제가 완료되었습니다.'); </script>");
+			out.flush();
+			mav.setViewName("Authentication/goMain");
+			tran.commit(status);
+		}
+		else if(this.deleteBitable(requestBean)) {
+			this.deleteReqDetail(requestBean);
 			System.out.println("삭제완료");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -307,5 +318,8 @@ public class RequestDeal {
 	}
 	private boolean deleteReqDetail(RequestBean requestBean) {
 		return this.convetToBoolean(dealIf.deleteReqDetail(requestBean));
+	}
+	private boolean deleteBitable(RequestBean requestBean) {
+		return this.convetToBoolean(dealIf.deleteBitable(requestBean));
 	}
 }

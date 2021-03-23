@@ -63,7 +63,6 @@
 function viewreview(){
    let json = JSON.parse('${info}');
    
-   alert('${info}');
    
    
     let rvWirqCode = json[0].rvWirqCode

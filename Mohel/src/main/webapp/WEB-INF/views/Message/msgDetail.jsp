@@ -55,7 +55,7 @@ function msgReply(){
 	let msg = JSON.parse('${dataList}');
 	
 		let sendData = "msRecipient="+msg[0].msRecipient+"&msSender="+msg[0].msSender+"&msDate="+msg[0].msDate+"&msTitle="+msg[0].msTitle+"&msComment="+msg[0].msComment+"&msStatus="+msg[0].msStatus;
-		alert(sendData);
+	
 		
 		let form = document.createElement("form");
 		form.action="MsgReplyForm?"+sendData;

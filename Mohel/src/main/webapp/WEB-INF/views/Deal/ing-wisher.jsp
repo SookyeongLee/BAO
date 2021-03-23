@@ -72,7 +72,7 @@ function iWisherScreen(){
 	insertTr +=  "<li class='dealList__list__item'>"
 	insertTr += "<div class='delList__img'  onClick='DetailClick("+ rqCode +")'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
 	insertTr += "<ul class='dealList__description'>";
-	insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='moveUser()'>스케줄 관리</button></li>";
+	insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='moveUser("+rqCode+")'>스케줄 관리</button></li>";
 	insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
 	insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
 	insertTr += "</ul>";
@@ -82,9 +82,9 @@ function iWisherScreen(){
 	}
 }
 
-function moveUser(){
+function moveUser(rqCode){
    let form = document.createElement("form");
-   form.action = "MoveUser";
+   form.action = "MoveUser?scCode="+rqCode;
    form.method = "Post";
    form.target = "_blank";
    

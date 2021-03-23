@@ -64,7 +64,6 @@
 <script>
 function init(){
 	let schedule = JSON.parse('${scInfo}');
-	alert('${scInfo}');
 	
 	let scCode = schedule[0].scCode;
 	let scFilter = schedule[0].scFilterName;
@@ -131,7 +130,6 @@ function init(){
 					$("#schedule-contents2:last-child").remove();
 				};
 					 maxAppend--;
-					 alert(maxAppend);
 			});
 	});	
 	 
@@ -161,7 +159,7 @@ function init(){
 					param.push(data);
 				}
 				let jsondata = JSON.stringify(param);
-				alert(jsondata);
+				
 				
 				 $.ajax({
 	                    url         :   "/InsSchedule",
@@ -169,7 +167,7 @@ function init(){
 	                    contentType :   "application/json",
 	                    type        :   "post",
 	                    data        :   jsondata,
-	                    success     :   alert("데이터 넘김 성공6v6")
+	                    success     :   alert("스케줄이 등록되었습니다.")
 	                  
 	                });
 			});

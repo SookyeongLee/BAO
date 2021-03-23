@@ -55,13 +55,14 @@
             <input type="hidden" name="rqImage" id="rqImage">
                 <div class="deal__button">
                     <button type="button" class="deal__btn1" onclick="modify()">수정하기</button>
-                    <button type="button" class="deal__btn2" onclick="deletez()">삭제하기</button>           
+                    <button type="button" class="deal__btn2" onclick="deletez()">삭제하기</button> 
+                    <button type="button" class="deal__btn3" id ="rejectMsg"  onClick = "rejectMsg()">모든 입찰 거절하기</button>          
               </div>
                   </div>
             </div>
             <table class="bidding" id="best"> 
             <caption class="bidding__title">입찰기록내역</caption> 
-            <button type="button" id ="rejectMsg"  onClick = "rejectMsg()">모든 입찰 거절하기</button>
+            
           
             <colgroup>
                 <col style="width: 45%;">
@@ -242,12 +243,13 @@ function accept(obj , onj){
 function prClick(obj){
    
    
-   alert(obj);//
+ 
    
    let input  = document.createElement("input");
    input.type = "hidden";
-   input.name = "mId";
+   input.name = "biHelper";
    input.value = obj;
+  
    
    let form = document.createElement("form");
    form.action = "ClickProfile";
@@ -269,7 +271,7 @@ function  rejectMsg(){
 
    
    
-	var a = confirm("삭제하시겠습니까?");   
+	var a = confirm("모든 입찰을 거절하시겠습니까 ?");   
    
 	if(a == true){
 	let form = document.createElement("form");
@@ -293,14 +295,15 @@ function modify(){
      
     var rqCode = document.getElementsByName("rqCode")[0];
     
-    var rqId = document.getElementsByName("rqId")[0];
+    var biMmHelper = document.getElementsByName("biMmHelper")[0];
         
     var form = document.createElement("form");
      form.action="ModifyForm";
      form.post="post";
      
+    	alert(biMmHelper.value);
      form.appendChild(rqCode);
-     form.appendChild(rqId);
+     form.appendChild(biMmHelper);
      
      document.body.appendChild(form);
        
@@ -317,14 +320,14 @@ var yn = prompt("삭제 하시려먼 '삭제' 라고 적어주세요");
     
     if(yn == "삭제"){
        var rqCode = document.getElementsByName("rqCode")[0];
-       var rqId = document.getElementsByName("rqId")[0];
+       var biMmHelper = document.getElementsByName("biMmHelper")[0];
 
     var form = document.createElement("form");
      form.action="Delete";
      form.post="post";
      
      form.appendChild(rqCode);
-     form.appendChild(rqId);
+     form.appendChild(biMmHelper);
      
      document.body.appendChild(form);
        

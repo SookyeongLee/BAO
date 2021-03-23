@@ -9,29 +9,11 @@
 <body>
 
 </body>
-<script>
-// let json = JSON.parse('${getbiRqCode}');
-
-// alert('${getbiRqCode}');
-   
-   
-//    let rqCode = json[0].biCode;   
-   
-//     let input  = document.createElement("input");
-//      input.type = "hidden";
-//      input.name = "rqCode";
-//      input.value = rqCode;
-     
-//      let input2 = document.createElement("input");
-//       input2.type = "hidden";
-//       input2.name = "rqDetailSelect";
-//       input2.value = "bh";
-     
+<script>     
      let form = document.createElement("form");
      form.action = "Main";
      form.method = "post";
-//      form.appendChild(input);
-//       form.appendChild(input2);
+
      document.body.appendChild(form);
      form.submit();
 

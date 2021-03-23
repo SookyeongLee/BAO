@@ -61,13 +61,24 @@ public class Profiles {
 		case "UpdateProfile":// 수정기능구현
 			mav = this.updateProfileCtl(memberbean);
 			break;
-
+		case "ClickProfile":
+			mav = this.clickProfileCtl(memberbean);
+			break;
 		}
 
 		return mav;
 
 	}
 
+	private ModelAndView clickProfileCtl(MemberBean memberbean) {
+		System.out.println(memberbean.getBiHelper() + "이걸 봤다고? 진짜 ㅋㅋㅋ 선넘네;");
+		ModelAndView mav = new ModelAndView();
+		String json = gson.toJson(this.getClickProfile(memberbean));
+		mav.addObject("clickPro",json);
+		mav.setViewName("Profile/profileClick");
+		return mav;
+	}
+	
 	private ModelAndView updateProfileCtl(MemberBean memberbean) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
@@ -79,7 +90,7 @@ public class Profiles {
 					//지역코드가 있으면 업데이트 
 					if(memberbean.getMRcCode()!=null) {
 						if(this.updateRg(memberbean)) {
-							tran.commit(status);
+							
 							response.setContentType("text/html; charset=UTF-8"); 
 				             PrintWriter out = response.getWriter();  
 				             out.println("<script>alert('회원정보가 수정되었습니다.'); </script>"); 
@@ -141,7 +152,7 @@ public class Profiles {
  			}
 		}
 	
-
+		tran.commit(status);
 		return mav;
 	}
 
@@ -217,5 +228,7 @@ public class Profiles {
 	private ArrayList<MemberBean> getRgProfile(MemberBean memberbean) {
 		return mapper.getRgProfile(memberbean);
 	}
-
+	private ArrayList<MemberBean> getClickProfile(MemberBean memberbean) {
+		return mapper.getClickProfile(memberbean);
+	}
 }

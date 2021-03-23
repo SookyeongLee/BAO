@@ -377,7 +377,7 @@ function searchScreen(){
    }
 //로그인 클릭 
 function login(){
-   alert('넘어가는가?');
+
    var form = document.createElement("form");
    
    form.action = 'LogInForm';

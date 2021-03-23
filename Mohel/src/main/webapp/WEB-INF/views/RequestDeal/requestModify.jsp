@@ -97,15 +97,19 @@
             </div>
        <input type="hidden" name ="rqCode" id="rqCode">
        <input type="hidden" name ="rqId" id="rqId">
+       <input type="hidden" name="biMmHelper" id="biMmHelper"/>
     </section>
 </body>
 <script>
+
+let biMmHelper = '${mId}';
+$('#biMmHelper').val(biMmHelper);
 	function send(){
 		
 		
 		
 		var rqCode = document.getElementsByName("rqCode")[0];
-    	var rqId = document.getElementsByName("rqId")[0];
+    	var biMmHelper = document.getElementsByName("biMmHelper")[0];
 		var rqRcCode = document.getElementsByName("rqRcCode")[0];
 		var rqPeriod = document.getElementsByName("rqPeriod")[0];
 		var rqTitle = document.getElementsByName("rqTitle")[0];
@@ -116,20 +120,26 @@
       
         
        
-        var b = rqRcCode.value;
-        if(b == "00"){
+		var a = rqRcCode.value;
+		var b = rqPeriod.value;
+		var d = rqTitle.value;
+		var e = rqComment.value;
+        if(a == "00"){
         	alert("지역을 선택해주세요");
-        	
-        }else{
-        	
-        
+        }else if(b == ""){
+        		alert("날짜를 선택해주세요");
+        	}else if(d == ""){
+        		alert("제목을 작성해주세요");
+        	}else if(e == ""){
+        		alert("내용을 작성해주세요");
+        	}else{
         var form = document.createElement("form");
         form.action="Modify";
         form.post="post";
         
         
         form.appendChild(rqCode);
-        form.appendChild(rqId);
+        form.appendChild(biMmHelper);
         form.appendChild(rqRcCode);
         form.appendChild(rqPeriod);
         form.appendChild(rqTitle);
@@ -148,7 +158,7 @@
     function list(){
    	 
  	let json = JSON.parse('${rqd}');
- 	alert('${rqd}');
+
  	
  	
  	
@@ -174,21 +184,6 @@
 	
 	$('input[name="rqPeriod"]').attr('value',getDate.innerText);
 	
-// let rqPeriod = json[0].rqPeriod;
- 	
-//  	alert(rqPeriod);
-//  	$('#rqPeriod').append(rqPeriod);
- 	
-//------------------------------------------------------------------------------
-// 	let getRegion = document.getElementById("rqRccodez"); 	
-    
-// 	let rqRccode = document.createElement("hidden");
-// 	rqRccode.textContent = json[0].rqRccode;
-// 	getRegion.appendChild(rqRccode);
- 	
-	   
-// 	$('select[name="rqRccode"]').attr('value',getRegion.innerText);
-	
 	let rqFilterName = json[0].rqFilterName;
 	
 	
@@ -201,7 +196,7 @@
     
  	let rqCode = json[0].rqCode;
  	$('#rqCode').val(rqCode);
- 	alert(rqCode);
+
  	
  	let rqId = json[0].rqId;
  	$('#rqId').val(rqId);;

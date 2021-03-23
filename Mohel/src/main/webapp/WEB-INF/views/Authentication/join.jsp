@@ -42,16 +42,16 @@
          let mPw = document.getElementsByName('mPw')[0].value;
          let mPw2 = document.getElementsByName('mPw2')[0].value;   
          
-         alert(mId);
+     
          
            if(mPw != mPw2){
-             alert("비밀번호가 서로 다릅니다.");
+             alert("비밀번호가 일치하지 않습니다.");
             }
            
            if(mId){
               if(mPw){
                  if(mPw===mPw2){
-                    alert("check ok");
+                 
                     let form = document.createElement('form');
                     form.action = 'Join';
                           form.method = 'Post'; 

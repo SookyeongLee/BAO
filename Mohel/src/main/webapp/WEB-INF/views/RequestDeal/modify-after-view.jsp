@@ -12,7 +12,7 @@
 <script>
 let json = JSON.parse('${rqCode}');
 let rqCode = json[0].rqCode;
-alert(rqCode);
+
 
 let form = document.createElement("form");
 form.action = "Detail";

@@ -64,7 +64,6 @@
 function init(){
 	
 	let schedule = JSON.parse('${scInfo}');
-	alert('${scInfo}');
 	
 	let scCode = schedule[0].scCode;
 	let scFilter = schedule[0].scFilterName;

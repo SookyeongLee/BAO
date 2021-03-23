@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/resources/css/common.css">
     <script src="/resources/src/navbar.js" defer></script>
     <script src="/resources/src/navbar2.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onLoad="IHelperScreen()">
     
@@ -62,26 +63,26 @@ function plus(){
 function IHelperScreen(){
 	  let requestList = JSON.parse('${ingHelperList}');
 
+
 	   for(let index=(0+k) ; index<(3+k) ; index++){
 	      if(index >= requestList.length)break;
 	   let rqCode = requestList[index].rqCode;
 	   let insertTr = " ";
-
-	   insertTr +=  "<li class='dealList__list__item' onClick='DetailClick("+ rqCode +")'>"
-	   insertTr += "<div class='delList__img' onClick='DetailClick("+rqCode+")'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
+	   insertTr +=  "<li class='dealList__list__item'>"
+	   insertTr += "<div class='delList__img'  onClick='DetailClick("+ rqCode +")'><img class='list__item__img' src='../../resources/imgs/common/"+requestList[index].rqImage+"'></div>";
 	   insertTr += "<ul class='dealList__description'>";
-	   insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='movePro()'>스케줄 관리</button></li>";
+	   insertTr += "<li><button type='button' class='dealList-btn dealList-schedule' onClick='movePro("+rqCode+")'>스케줄 관리</button></li>";
 	   insertTr += "<li class='dealList-subCtg'>"+requestList[index].rqSubName+"</li>";
 	   insertTr += "<li class='dealList-title'>"+requestList[index].rqTitle+"</li>";
 	   insertTr += "</ul>";
 	   insertTr += "</li>";
 
-	   $("#ingHelperList").append(insertTr)
+	   $("#ingHelperList").append(insertTr);
 	   }
 }
-function movePro(){
+function movePro(rqCode){
 	   let form = document.createElement("form");
-	   form.action = "MovePro";
+	   form.action = "MovePro?scCode="+rqCode;
 	   form.method = "Post";
 	   form.target = "_blank";
 	   

@@ -20,5 +20,4 @@ public interface ProfileIf {
 
 	public int updateRg(MemberBean memberbean);
 
-
 }

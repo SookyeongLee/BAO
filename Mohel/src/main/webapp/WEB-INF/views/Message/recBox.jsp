@@ -150,8 +150,7 @@ function msgDetail(i){
 	//서버전송 
 	let rec = JSON.parse('${recList}');
 	let sendData = "msRecipient="+rec[i].msRecipient+"&msSender="+rec[i].msSender+"&msDate="+rec[i].msDate+"&msTitle="+rec[i].msTitle+"&msComment="+rec[i].msComment+"&msStatus="+rec[i].msStatus;
-	alert(sendData);
-	
+
 	let form = document.createElement("form");
 	form.action="Title?"+sendData;
 	form.method="POST";

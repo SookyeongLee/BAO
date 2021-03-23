@@ -21,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import spring.bao.beans.MessageBean;
+import spring.bao.beans.RequestBean;
 import spring.bao.beans.ScheduleBean;
+import spring.bao.mapper.DealIf;
 import spring.bao.mapper.ScheduleIf;
 import spring.bao.utils.ProjectUtils;
 
@@ -41,8 +43,12 @@ public class Schedule {
 	private PlatformTransactionManager tran;
 	@Autowired
 	private ProjectUtils pu;
+	@Autowired
+	private HttpServletResponse response;
+	@Autowired
+    private DealIf dealMapper;
 
-	public ModelAndView entrance(ScheduleBean scheduleBean, MessageBean messageBean) throws Exception {
+	public ModelAndView entrance(ScheduleBean scheduleBean, MessageBean messageBean,RequestBean requestBean) throws Exception {
 
 		ModelAndView mav = null;
 
@@ -51,7 +57,7 @@ public class Schedule {
 			mav = this.moveProCtl(scheduleBean);
 			break;
 		case "MoveUser":
-			mav = this.moveUserCtl(scheduleBean);
+			mav = this.moveUserCtl(scheduleBean,requestBean);
 			break;
 		case "AcceptSchedule":
 			mav = this.acceptCtl(scheduleBean, messageBean);
@@ -74,9 +80,9 @@ public class Schedule {
 		case "InsSchedule":
 			mav = this.insScheduleCtl(jsondata,scheduleBean);
 			break;
-		case "UpdateSchedule":
-			this.updateScheduleCtl();
-			break;
+//		case "UpdateSchedule":
+//			this.updateScheduleCtl();
+//			break;
 		}
 		return mav;
 	}
@@ -152,9 +158,9 @@ public class Schedule {
 		return mav;
 	}
 
-	private ModelAndView moveUserCtl(ScheduleBean scheduleBean) {
+	private ModelAndView moveUserCtl(ScheduleBean scheduleBean,RequestBean requestBean) throws Exception {
 		String scInfo = gson.toJson(this.getSchedule(scheduleBean));
-		String bidInfo = gson.toJson(this.getBidInfo(scheduleBean));
+//		String bidInfo = gson.toJson(this.getBidInfo(scheduleBean));
 		ModelAndView mav = new ModelAndView();
 
 		if (!scInfo.equals("[]")) {
@@ -162,18 +168,27 @@ public class Schedule {
 			mav.setViewName("Schedule/conditionUser");
 
 		} else {
-			mav.addObject("scInfo", bidInfo);
-			mav.setViewName("Deal/ing-wisher");
+//			mav.addObject("scInfo", bidInfo);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('등록된 스케쥴이 없습니다.');</script>");
+			out.flush();
+			
+			  requestBean.setRqId((String)pu.getAttribute("mId"));
+		      String json = gson.toJson(this.getIngWisherList(requestBean));
+		      mav.addObject("ingWisherList", json);
+		      mav.setViewName("Deal/ing-wisher");
+
 		}
 		
 		return mav;
 	}
 
-	private ModelAndView updateScheduleCtl() {
-		ModelAndView mav = new ModelAndView();
-//		this.updateSchedule();
-		return mav;
-	}
+//	private ModelAndView updateScheduleCtl() {
+//		ModelAndView mav = new ModelAndView();
+////		this.updateSchedule();
+//		return mav;
+//	}
 
 	private ModelAndView insScheduleCtl(List<HashMap<String,Object>> jsondata,ScheduleBean scheduleBean) {
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
@@ -192,17 +207,24 @@ public class Schedule {
 						break;
 					}
 				}
+				
 				tran.commit(status);
-				mav.setViewName("Authentication/main");
+				String scInfo = gson.toJson(this.getSchedule(scheduleBean));
+				String bidInfo = gson.toJson(this.getBidInfo(scheduleBean));
+				
+				if (!scInfo.equals("[]")) {
+					mav.addObject("scInfo", scInfo);
+				} else {
+					mav.addObject("scInfo", bidInfo);
+				}
 			}
 		} catch (Exception e) {
 			tran.rollback(status);
 			e.getMessage();
 			e.printStackTrace();
 			System.out.println(e);
-			mav.setViewName("Schedule/conditionPro");
 		}
-
+		mav.setViewName("Schedule/conditionPro");
 		return mav;
 	}
 
@@ -256,6 +278,10 @@ public class Schedule {
 	private ArrayList<ScheduleBean> getSchedule(ScheduleBean scheduleBean) {
 		return mapper.getSchedule(scheduleBean);
 	}
+	//
+	private ArrayList<RequestBean> getIngWisherList(RequestBean requestBean) {
+	      return dealMapper.getIngWisherList(requestBean);
+	   }
 	
 
 }
