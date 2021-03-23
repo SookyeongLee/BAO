@@ -210,7 +210,7 @@ function accept(obj , onj){
       let winHelper = document.createElement("input");
       winHelper.type = "hidden";
       winHelper.name = "winHelper"; 
-      winHelper.value = onj;
+      winHelper.value = onj;//x
 
       var a = confirm("정말로 낙찰 하시겠습니까?");
       
